@@ -1,0 +1,34 @@
+{
+  "name": "youtuber-spy",
+  "version": "1.0.0",
+  "description": "Collect youtuber's info",
+  "author": "DumDumGeniuss",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint pages reducers constants components store actions",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "es6-promise": "^4.1.0",
+    "firebase": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "beta",
+    "next-redux-wrapper": "^1.1.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
+    "styled-jsx": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1"
+  }
+}
