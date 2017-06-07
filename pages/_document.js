@@ -15,9 +15,20 @@ export default class MyDocument extends Document {
           <title>YoutuberSpy</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <style>{`
-            body {
-              margin: 0
-            }`}</style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-size: 100%;
+              font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
+            }
+            @media (max-width: 800px) {
+              * {
+                font-size: 80%;
+              }
+            }
+          `}</style>
+          <script src="https://apis.google.com/js/platform.js"></script>
         </Head>
         <body className="custom_class">
           {this.props.customValue}

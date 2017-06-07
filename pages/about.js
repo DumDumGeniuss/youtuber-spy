@@ -22,7 +22,7 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.getChannelsAsync();
+    // this.props.getChannelsAsync('subscriberCount');
   }
 
   componentWillUnmount() {

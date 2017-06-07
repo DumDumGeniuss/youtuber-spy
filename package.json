@@ -4,7 +4,7 @@
   "description": "Collect youtuber's info",
   "author": "DumDumGeniuss",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint pages reducers constants components store actions",
+    "eslint": "./node_modules/.bin/eslint pages reducers constants components store actions libs",
     "dev": "next",
     "build": "next build",
     "start": "next start"
