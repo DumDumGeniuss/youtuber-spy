@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import youtube from './youtube';
+import channel from './channel';
+import video from './video';
 
 const reducers = combineReducers({
-  youtube,
+  channel,
+  video,
 });
 
 export default reducers;

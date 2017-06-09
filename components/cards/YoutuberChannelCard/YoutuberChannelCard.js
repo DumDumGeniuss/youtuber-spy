@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 class YoutuberChannelCard extends React.Component {
   static getInitialProps({ isServer }) {
@@ -14,8 +15,12 @@ class YoutuberChannelCard extends React.Component {
   componentWillUnmount() {
   }
 
+            // <div className={'g-ytsubscribe'} data-layout={'full'} data-channelid={channelInfo._id}></div>
   render() {
     const channelInfo = this.props.channelInfo;
+    const publishedAt = new Date(this.props.channelInfo.publishedAt);
+    const month = moment().diff(publishedAt, 'months');
+
     return (
       <div className={'zone'}>
         <style jsx>{`
@@ -23,7 +28,7 @@ class YoutuberChannelCard extends React.Component {
             position: relative;
             display: inline-block;
             width: 200px;
-            height: 300px;
+            height: 250px;
             border: 1px solid #e9ebee;
             margin-bottom: -6px;
             overflow: hidden;
@@ -66,6 +71,12 @@ class YoutuberChannelCard extends React.Component {
             cursor: pointer;
           }
 
+          .hiddenZone > .description {
+            height: 60%;
+            overflow: scroll;
+            border-bottom: 1px solid #e9ebee;
+          }
+
           .frontZone {
             width: 50%;
             height: 100%;
@@ -80,13 +91,8 @@ class YoutuberChannelCard extends React.Component {
             white-space: nowrap;
           }
 
-          .frontZone > .rank {
-            height: 14%;
-            font-size: 1.2em;
-          }
-
           .frontZone > .img {
-            height: 30%;
+            height: 44%;
           }
 
           .frontZone > .img > img {
@@ -94,7 +100,11 @@ class YoutuberChannelCard extends React.Component {
           }
 
           .frontZone > .data {
-            height: 14%;
+            height: 11%;
+          }
+
+          .frontZone > .data > small {
+            font-size: 0.8em;
           }
 
           @media (max-width: 800px) {
@@ -106,16 +116,17 @@ class YoutuberChannelCard extends React.Component {
         `}</style>
         <div className={'contentZone'}>
           <div className={'hiddenZone'}>
-            <div className={'g-ytsubscribe'} data-layout={'full'} data-channelid={channelInfo.id}></div>
+            <span>介紹</span>
+            <div className={'description'}>{channelInfo.description || '沒有介紹'}</div>
             <span className={'seeDetail'}>看更多</span>
           </div>
           <div className={'frontZone'}>
-            <div className={'rank'}><b>{this.props.rank}</b></div>
-            <div className={'data'}>{channelInfo.title}</div>
             <div className={'img'}><img src={channelInfo.defaultThumbnails}/></div>
-            <div className={'data'}>訂閱 {channelInfo.subscriberCount}</div>
-            <div className={'data'}>影片 {channelInfo.videoCount}</div>
-            <div className={'data'}>觀看 {channelInfo.viewCount}</div>
+            <div className={'data'}>{channelInfo.title}</div>
+            <div className={'data'}><small>訂閱 {channelInfo.subscriberCount}</small></div>
+            <div className={'data'}><small>影片 {channelInfo.videoCount}</small></div>
+            <div className={'data'}><small>觀看 {channelInfo.viewCount}</small></div>
+            <div className={'data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '月'}</small></div>
           </div>
         </div>
       </div>

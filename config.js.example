@@ -1,3 +1,4 @@
 export default {
   youtube_app_key: 'XXXXXX',
+  serverless_url: 'http://dsafds',
 };

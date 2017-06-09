@@ -8,9 +8,9 @@ export function getChannels(channels) {
   };
 }
 
-export const getChannelsAsync = function (orderValue) {
+export const getChannelsAsync = function (sort, order) {
   return function (dispatch) {
-    channelApi.getAllChannels(orderValue)
+    channelApi.getAllChannels(sort, order)
       .then((channels) => {
         dispatch(getChannels(channels));
       });

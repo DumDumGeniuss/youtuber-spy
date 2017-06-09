@@ -1,8 +1,9 @@
 const initState = {
   channels: [],
+  channel: {},
 };
 
-const youtube = (state = initState, action) => {
+const channel = (state = initState, action) => {
   switch (action.type) {
     case 'GET_CHANNELS':
       return { ...state, channels: action.channels };
@@ -11,4 +12,4 @@ const youtube = (state = initState, action) => {
   }
 };
 
-export default youtube;
+export default channel;

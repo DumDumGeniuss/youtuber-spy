@@ -2,18 +2,18 @@ import React from 'react';
 import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import moment from 'moment';
 
 import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
+import YoutubeVideoCard from '../components/cards/YoutubeVideoCard/YoutubeVideoCard';
 import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
-import * as channelAction from '../actions/channel';
-import * as channelApi from '../apis/channel';
+import * as videoAction from '../actions/video';
+import * as videoApi from '../apis/video';
 
 class Index extends React.Component {
   static async getInitialProps({ query, store }) {
-    const channels = await channelApi.getAllChannels('subscriberCount');
-    store.dispatch(channelAction.getChannels(channels));
-
+    const videos = await videoApi.getAllVideos(null, null, moment().utc().add(-7, 'days').format(), null);
+    store.dispatch(videoAction.getVideos(videos));
     return {
       query,
     };
@@ -21,6 +21,7 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props);
+    this.daysAgo = 7;
   }
 
   componentDidMount() {
@@ -30,14 +31,14 @@ class Index extends React.Component {
   componentWillUnmount() {
   }
 
-  changeOrder(event) {
-    const sort = event.target.value;
-    const order = sort === 'publishedAt' ? 'asc' : 'desc';
-    this.props.getChannelsAsync(sort, order);
+  changeQuery(event) {
+    this.daysAgo = event.target.value;
+    const startTime = moment().utc().add(-this.daysAgo, 'days').format();
+    this.props.getVideosAsync(null, null, startTime);
   }
 
   render() {
-    const channels = this.props.state.channel.channels;
+    const videos = this.props.state.video.videos;
 
     return (
       <div>
@@ -52,13 +53,6 @@ class Index extends React.Component {
 
           .contentZone {
             background-color: white;
-            // border: 1px solid #cccccc;
-          }
-
-          .title {
-            padding: 3px 0;
-            text-align: center;
-            font-size: 1.5em;
           }
 
           .functionBar {
@@ -86,22 +80,20 @@ class Index extends React.Component {
             <div className={'functionBar'}>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)}>
-                  <option value={'subscriberCount'}>訂閱</option>
-                  <option value={'viewCount'}>觀看</option>
-                  <option value={'videoCount'}>影片</option>
-                  <option value={'publishedAt'}>成立時間</option>
+                <select onChange={this.changeQuery.bind(this)} defaultValue={7}>
+                  <option value={1}>本日新片</option>
+                  <option value={7}>本週新片</option>
+                  <option value={30}>本月新片</option>
                 </select>
               </div>
             </div>
             <div className={'contentZone'}>
               {
-                channels.map((item, index) => {
+                videos.map((item) => {
                   return (
-                    <YoutuberChannelCard 
+                    <YoutubeVideoCard
                       key={item._id}
-                      channelInfo={item}
-                      rank={index + 1}
+                      videoInfo={item}
                     />
                   );
                 })
@@ -122,7 +114,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getChannelsAsync: bindActionCreators(channelAction.getChannelsAsync, dispatch),
+    getVideosAsync: bindActionCreators(videoAction.getVideosAsync, dispatch),
   }
 }
 
