@@ -1,0 +1,32 @@
+@import 'normalize.css';
+
+$primary-color: black;
+
+.Index-zone {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.Index-contentZone {
+  background-color: white;
+  // border: 1px solid #cccccc;
+}
+
+.Index-functionBar {
+  position: relative;
+  height: 40px;
+}
+
+.Index-functionBar > div {
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  right: 10px;
+}
+
+.Index-functionBar select {
+  height: 30px;
+}

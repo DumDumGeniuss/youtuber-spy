@@ -9,6 +9,8 @@ import { initStore, startClock, addCount, serverRenderClock } from '../store/ini
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
 
+import stylesheet from './index.scss';
+
 class Index extends React.Component {
   static async getInitialProps({ query, store }) {
     const channels = await channelApi.getAllChannels('subscriberCount');
@@ -41,49 +43,13 @@ class Index extends React.Component {
 
     return (
       <div>
-        <style jsx>{`
-          .zone {
-            width: 100%;
-            max-width: 800px;
-            min-height: 100vh;
-            margin-left: 50%;
-            transform: translate(-50%, 0%);
-          }
-
-          .contentZone {
-            background-color: white;
-            // border: 1px solid #cccccc;
-          }
-
-          .title {
-            padding: 3px 0;
-            text-align: center;
-            font-size: 1.5em;
-          }
-
-          .functionBar {
-            position: relative;
-            height: 40px;
-          }
-
-          .functionBar > div {
-            position: absolute;
-            display: inline-block;
-            top: 5px;
-            right: 10px;
-          }
-
-          .functionBar select {
-            height: 30px;
-          }
-
-        `}</style>
+        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <meta name="og:title" content="youtuber spy" />
         </Head>
         <MainLayout>
-          <div className={'zone'}>
-            <div className={'functionBar'}>
+          <div className={'Index-zone'}>
+            <div className={'Index-functionBar'}>
               <div>
                 <span>排序：</span>
                 <select onChange={this.changeOrder.bind(this)}>
@@ -94,7 +60,7 @@ class Index extends React.Component {
                 </select>
               </div>
             </div>
-            <div className={'contentZone'}>
+            <div className={'Index-contentZone'}>
               {
                 channels.map((item, index) => {
                   return (

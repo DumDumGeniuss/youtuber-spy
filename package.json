@@ -10,18 +10,28 @@
     "start": "next start"
   },
   "dependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-wrap-in-js": "^1.1.1",
     "es6-promise": "^4.1.0",
     "firebase": "^4.1.1",
+    "glob": "^7.1.2",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
     "next": "beta",
     "next-redux-wrapper": "^1.1.2",
+    "node-sass": "^4.5.3",
+    "normalize.css": "^7.0.0",
+    "postcss-easy-import": "^2.1.0",
+    "postcss-loader": "^2.0.5",
+    "raw-loader": "^0.5.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.5",
     "styled-jsx": "^1.0.3"
   },
   "devDependencies": {

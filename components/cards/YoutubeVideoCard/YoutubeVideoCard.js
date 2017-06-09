@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import stylesheet from './YoutubeVideoCard.scss';
+
 class YoutubeVideoCard extends React.Component {
   static getInitialProps({ isServer }) {
     return {
@@ -20,64 +22,19 @@ class YoutubeVideoCard extends React.Component {
     const publishedAt = moment(new Date(videoInfo.publishedAt)).format('YYYY-MM-DD HH:mm');
 
     return (
-      <div className={'zone'}>
+      <div className={'YoutubeVideoCard-zone'}>
+        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <style jsx>{`
-          .zone {
-            position: relative;
-            width: 100%;
-            height: 150px;
-            border: 1px solid #e9ebee;
-          }
-
-          .imgDiv {
-            display: inline-flex;
-            width: 35%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            vertical-align: text-top;
-          }
-
-          .imgDiv > img {
-            height: 90%;
-          }
-
-          .infoDiv {
-            padding: 10px;
-            display: inline-block;
-            width: 65%;
-            height: 100%;
-            vertical-align: text-top;
-          }
-
-          @media (max-width: 800px) {
-            .zone {
-              height: 120px;
-            }
-
-            .imgDiv {
-              width: 30%;
-            }
-
-            .infoDiv {
-              width: 60%;
-            }
-
-            .infoDiv > .description {
-              display: none;
-            }
-          }
         `}</style>
-        <div className={'imgDiv'}>
+        <div className={'YoutubeVideoCard-imgDiv'}>
           <img src={videoInfo.mediumThumbnails} />
         </div>
-        <div className={'infoDiv'}>
-          <h1><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h1>
+        <div className={'YoutubeVideoCard-infoDiv'}>
+          <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>
           <div><a target="_blank" href={`https://www.youtube.com/channel/${videoInfo.channelId}`}>{videoInfo.channelTitle}</a></div>
           <div>觀看 {videoInfo.viewCount}</div>
           <div>時間 {publishedAt}</div>
-          <div className={'description'}>{videoInfo.description.substring(0, 50) + '...'}</div>
+          <div className={'YoutubeVideoCard-description'}>{videoInfo.description.substring(0, 50) + '...'}</div>
         </div>
       </div>
     );

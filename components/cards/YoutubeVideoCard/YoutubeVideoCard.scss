@@ -1,0 +1,50 @@
+@import 'normalize.css';
+
+$primary-color: black;
+
+.YoutubeVideoCard-zone {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border: 1px solid #e9ebee;
+}
+
+.YoutubeVideoCard-imgDiv {
+  display: inline-flex;
+  width: 35%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  vertical-align: text-top;
+}
+
+.YoutubeVideoCard-imgDiv > img {
+  height: 90%;
+}
+
+.YoutubeVideoCard-infoDiv {
+  padding: 10px;
+  display: inline-block;
+  width: 65%;
+  height: 100%;
+  vertical-align: text-top;
+}
+
+@media (max-width: 800px) {
+  .YoutubeVideoCard-zone {
+    height: 120px;
+  }
+
+  .YoutubeVideoCard-imgDiv {
+    width: 30%;
+  }
+
+  .YoutubeVideoCard-infoDiv {
+    width: 60%;
+  }
+
+  .YoutubeVideoCard-infoDiv > .YoutubeVideoCard-description {
+    display: none;
+  }
+}

@@ -10,7 +10,9 @@ import { initStore, startClock, addCount, serverRenderClock } from '../store/ini
 import * as videoAction from '../actions/video';
 import * as videoApi from '../apis/video';
 
-class Index extends React.Component {
+import stylesheet from './videos.scss';
+
+class Videos extends React.Component {
   static async getInitialProps({ query, store }) {
     const videos = await videoApi.getAllVideos(null, null, moment().utc().add(-7, 'days').format(), null);
     store.dispatch(videoAction.getVideos(videos));
@@ -42,42 +44,13 @@ class Index extends React.Component {
 
     return (
       <div>
-        <style jsx>{`
-          .zone {
-            width: 100%;
-            max-width: 800px;
-            min-height: 100vh;
-            margin-left: 50%;
-            transform: translate(-50%, 0%);
-          }
-
-          .contentZone {
-            background-color: white;
-          }
-
-          .functionBar {
-            position: relative;
-            height: 40px;
-          }
-
-          .functionBar > div {
-            position: absolute;
-            display: inline-block;
-            top: 5px;
-            right: 10px;
-          }
-
-          .functionBar select {
-            height: 30px;
-          }
-
-        `}</style>
+        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <meta name="og:title" content="youtuber spy" />
         </Head>
         <MainLayout>
-          <div className={'zone'}>
-            <div className={'functionBar'}>
+          <div className={'Videos-zone'}>
+            <div className={'Videos-functionBar'}>
               <div>
                 <span>排序：</span>
                 <select onChange={this.changeQuery.bind(this)} defaultValue={7}>
@@ -87,7 +60,7 @@ class Index extends React.Component {
                 </select>
               </div>
             </div>
-            <div className={'contentZone'}>
+            <div className={'Videos-contentZone'}>
               {
                 videos.map((item) => {
                   return (
@@ -118,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Videos)

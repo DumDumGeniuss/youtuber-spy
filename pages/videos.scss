@@ -1,0 +1,31 @@
+@import 'normalize.css';
+
+$primary-color: black;
+
+.Videos-zone {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.Videos-contentZone {
+  background-color: white;
+}
+
+.Videos-functionBar {
+  position: relative;
+  height: 40px;
+}
+
+.Videos-functionBar > div {
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  right: 10px;
+}
+
+.Videos-functionBar select {
+  height: 30px;
+}

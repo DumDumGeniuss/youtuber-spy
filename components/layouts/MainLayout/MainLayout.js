@@ -1,6 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 
+import stylesheet from './MainLayout.scss';
+
 class MainLayout extends React.Component {
   static getInitialProps({ query }) {
     return {
@@ -17,21 +19,10 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-      <div className={'zone'}>
-        <style jsx>{`
-          .zone {
-            background-color: #e9ebee;
-            width: 100%;
-          }
-          .navbar {
-            display: block;
-            width: 100%;
-            height: 50px;
-            background-color: #e62117;
-          }
-        `}</style>
+      <div className={'MainLayout-zone'}>
+        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head />
-        <navbar className={'navbar'} />
+        <navbar className={'MainLayout-navbar'} />
         <div>
           {this.props.children}
         </div>
