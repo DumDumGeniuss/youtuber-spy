@@ -21,6 +21,7 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
               font-size: 100%;
               font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
+              text-decoration: none;
             }
             @media (max-width: 800px) {
               * {

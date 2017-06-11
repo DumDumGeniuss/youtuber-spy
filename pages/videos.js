@@ -113,6 +113,7 @@ class Videos extends React.Component {
     });
   }
 
+  /* remember to reset tha page */
   changeKeyword(event) {
     const keyword = event.target.value;
 
@@ -130,6 +131,7 @@ class Videos extends React.Component {
     }, 1000);
   }
 
+  /* remember to reset tha page */
   changeOrder(event) {
     this.query.page = 1;
     this.toDatasLimit = false;
@@ -140,6 +142,7 @@ class Videos extends React.Component {
     });
   }
 
+  /* remember to reset tha page */
   changeQuery(event) {
     this.query.page = 1;
     this.toDatasLimit = false;
@@ -180,7 +183,7 @@ class Videos extends React.Component {
                 <select onChange={this.changeOrder.bind(this)} defaultValue={'randomNumber'}>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'publishedAt'}>時間</option>
-                  <option value={'randomNumber'}>亂數排序</option>
+                  <option value={'randomNumber'}>亂數(每小時更新)</option>
                 </select>
               </div>
               <div>

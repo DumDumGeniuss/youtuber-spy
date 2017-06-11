@@ -107,6 +107,7 @@ class Index extends React.Component {
     });
   }
 
+  /* remember to reset tha page */
   changeKeyword(event) {
     const keyword = event.target.value;
 
@@ -115,7 +116,7 @@ class Index extends React.Component {
     }
     this.searchKeyword = setTimeout(() => {
       this.toDatasLimit = false;
-      this.query.page = this.query.page + 1;
+      this.query.page = 1;
       this.query.keyword = keyword;
       this.props.getChannelsAsync([], this.query);
       this.setState({
@@ -124,6 +125,7 @@ class Index extends React.Component {
     }, 1000);
   }
 
+  /* remember to reset tha page */
   changeOrder(event) {
     this.toDatasLimit = false;
     this.query.page = 1;
