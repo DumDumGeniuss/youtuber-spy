@@ -7,7 +7,7 @@
     "eslint": "./node_modules/.bin/eslint pages reducers constants components store actions libs",
     "dev": "next",
     "build": "next build",
-    "start": "next build && next start"
+    "start": "next start"
   },
   "dependencies": {
     "autoprefixer": "^7.1.1",

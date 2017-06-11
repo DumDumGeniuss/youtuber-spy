@@ -12,3 +12,5 @@ RUN npm install yarn -g
 RUN yarn install
 
 COPY . .
+
+RUN yarn run build
