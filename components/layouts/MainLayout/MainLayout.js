@@ -24,18 +24,20 @@ class MainLayout extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head />
         <nav className={'MainLayout-navbar'}>
-          <div className={'MainLayout-logo'}>
-            <Link href='/'><a>
-              <img src={'/static/logo.png'}/>
-              <span>Youtuber Spy</span>
-            </a></Link>
-          </div>
-          <div className={'MainLayout-itemsZone'}>
-            <div>
-              <Link href='/'><a>頻道</a></Link>
+          <div className={'MainLayout-content'}>
+            <div className={'MainLayout-logo'}>
+              <Link href='/'><a>
+                <img src={'/static/logo.png'}/>
+                <span>Youtuber Spy</span>
+              </a></Link>
             </div>
-            <div>
-              <Link href='/videos'><a>影片</a></Link>
+            <div className={'MainLayout-itemsZone'}>
+              <div>
+                <Link href='/'><a>頻道</a></Link>
+              </div>
+              <div>
+                <Link href='/videos'><a>影片</a></Link>
+              </div>
             </div>
           </div>
         </nav>

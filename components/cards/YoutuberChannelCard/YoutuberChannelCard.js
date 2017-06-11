@@ -26,7 +26,6 @@ class YoutuberChannelCard extends React.Component {
     return (
       <div className={'YoutuberChannelCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <style jsx>{``}</style>
         <div className={'YoutuberChannelCard-contentZone'}>
           <div className={'YoutuberChannelCard-hiddenZone'}>
             <span>介紹</span>

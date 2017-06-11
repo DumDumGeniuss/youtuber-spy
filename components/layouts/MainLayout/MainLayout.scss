@@ -18,44 +18,51 @@ $primary-color: black;
   background-color: #141b69;
   z-index: 5;
 
-  .MainLayout-logo {
-    position: absolute;
-  	left: 10px;
-    height: 50px;
-
-  	img {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-  	}
-
-    span {
-      display: inline-block;
-      color: white;
-      font-size: 1.2em;
-      line-height: 50px;
-      vertical-align: middle;
-      padding: 0 10px;
-    }
-  }
-
-  .MainLayout-itemsZone {
-    position: absolute;
-    left: 50%;
-    height: 50px;
+  .MainLayout-content {
+    width: 100%;
+    max-width: 800px;
+    margin-left: 50%;
     transform: translate(-50%, 0%);
 
-    div {
-      display: inline-block;
-      height: 100%;
-      padding: 0 10px;
-      a {
-        color: white;
-        font-size: 1em;
-        line-height: 50px; 
+    .MainLayout-logo {
+      position: absolute;
+      left: 10px;
+      height: 50px;
+  
+      img {
+        margin-top: 5px;
+        display: inline-block;
+        height: 40px;
+        vertical-align: middle;
       }
-      a:hover {
-        color: yellow;
+  
+      span {
+        display: inline-block;
+        color: white;
+        font-size: 1.2em;
+        line-height: 50px;
+        vertical-align: middle;
+        padding: 0 10px;
+      }
+    }
+  
+    .MainLayout-itemsZone {
+      position: absolute;
+      right: 10px;
+      height: 50px;
+  
+      div {
+        display: inline-block;
+        height: 100%;
+        padding: 0 10px;
+        a {
+          color: white;
+          font-size: 1em;
+          line-height: 50px; 
+        }
+        a:hover {
+          color: yellow;
+        }
       }
     }
   }
