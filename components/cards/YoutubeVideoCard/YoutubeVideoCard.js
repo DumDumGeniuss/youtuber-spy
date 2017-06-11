@@ -27,7 +27,7 @@ class YoutubeVideoCard extends React.Component {
         <style jsx>{`
         `}</style>
         <div className={'YoutubeVideoCard-imgDiv'}>
-          <img src={videoInfo.mediumThumbnails} />
+            <img src={videoInfo.mediumThumbnails} />
         </div>
         <div className={'YoutubeVideoCard-infoDiv'}>
           <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>

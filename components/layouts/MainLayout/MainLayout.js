@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link'
 
 import stylesheet from './MainLayout.scss';
 
@@ -22,7 +23,10 @@ class MainLayout extends React.Component {
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head />
-        <navbar className={'MainLayout-navbar'} />
+        <navbar className={'MainLayout-navbar'}>
+          <Link href='/'><a>Home</a></Link>
+          <Link href='/videos'><a>Videos</a></Link>
+        </navbar>
         <div>
           {this.props.children}
         </div>

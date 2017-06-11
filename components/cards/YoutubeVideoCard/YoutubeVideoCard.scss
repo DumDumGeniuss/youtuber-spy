@@ -19,8 +19,10 @@ $primary-color: black;
   vertical-align: text-top;
 }
 
-.YoutubeVideoCard-imgDiv > img {
-  height: 90%;
+.YoutubeVideoCard-imgDiv {
+  img {
+    height: 90%;
+  }
 }
 
 .YoutubeVideoCard-infoDiv {

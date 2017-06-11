@@ -12,21 +12,56 @@ $primary-color: black;
 
 .Index-contentZone {
   background-color: white;
-  // border: 1px solid #cccccc;
+
+  .Index-loadingButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    svg {
+      height: 30px;
+      width: 30px;
+      color: #ff8a8a;
+      animation: spin 1s linear infinite;
+    }
+  }
 }
 
 .Index-functionBar {
   position: relative;
-  height: 40px;
+  min-height: 40px;
+  padding: 5px 10px;
+  div {
+    display: inline-block;
+    padding-right: 10px;
+
+    svg {
+      height: 30px;
+      width: 30px;
+      color: #ff8a8a;
+      animation: spin 1s linear infinite;
+    }
+
+    input {
+      height: 30px;
+      width: 100px;
+      padding: 0;
+      border-radius: 3px;
+    }
+
+    select {
+      height: 30px;
+      width: 100px;
+    }
+  }
 }
 
-.Index-functionBar > div {
-  position: absolute;
-  display: inline-block;
-  top: 5px;
-  right: 10px;
-}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
 
-.Index-functionBar select {
-  height: 30px;
-}

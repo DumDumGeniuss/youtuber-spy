@@ -5,16 +5,19 @@ import * as tinyHelper from '../libs/tinyHelper';
 
 const apiUrl = config.serverless_url + 'channels';
 
-export const getAllChannels = async function (sort, order) {
-  const query = {
-    sort: sort || '',
-    order: order || '',
+export const getAllChannels = async function (query) {
+  const finalQuery = {
+    sort: query.sort || '',
+    order: query.order || '',
+    keyword: query.keyword || '',
+    page: query.page || '',
+    count: query.count || '',
   };
-  const queryString = tinyHelper.getQueryString(query);
+  const queryString = tinyHelper.getQueryString(finalQuery);
   const result = await fetch(apiUrl + queryString, {
     method: 'GET',
   });
-  const channels = await result.json();
+  const resultJson = await result.json();
 
-  return channels;
+  return resultJson;
 };

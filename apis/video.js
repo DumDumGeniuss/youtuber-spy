@@ -5,18 +5,21 @@ import * as tinyHelper from '../libs/tinyHelper';
 
 const apiUrl = config.serverless_url + 'videos';
 
-export const getAllVideos = async function (sort, order, startTime, endTime) {
-  const query = {
-    sort: sort || '',
-    order: order || '',
-    startTime: startTime || '',
-    endTime: endTime || '',
+export const getAllVideos = async function (query) {
+  const finalQuery = {
+    sort: query.sort || '',
+    order: query.order || '',
+    keyword: query.keyword || '',
+    startTime: query.startTime || '',
+    endTime: query.endTime || '',
+    page: query.page || '',
+    count: query.count || '',
   };
-  const queryString = tinyHelper.getQueryString(query);
+  const queryString = tinyHelper.getQueryString(finalQuery);
   const result = await fetch(apiUrl + queryString, {
     method: 'GET',
   });
-  const videos = await result.json();
+  const resultJson = await result.json();
 
-  return videos;
+  return resultJson;
 };

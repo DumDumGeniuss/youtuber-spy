@@ -39,7 +39,7 @@ class YoutuberChannelCard extends React.Component {
             <div className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount}</small></div>
             <div className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount}</small></div>
             <div className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount}</small></div>
-            <div className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '月'}</small></div>
+            <div className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></div>
           </div>
         </div>
       </div>
