@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link'
+import Link from 'next/link';
 
 import stylesheet from './MainLayout.scss';
 
@@ -25,7 +25,10 @@ class MainLayout extends React.Component {
         <Head />
         <nav className={'MainLayout-navbar'}>
           <div className={'MainLayout-logo'}>
-            <Link href='/'><a><b>Youtuber Spy</b></a></Link>
+            <Link href='/'><a>
+              <img src={'/static/logo.png'}/>
+              <span>Youtuber Spy</span>
+            </a></Link>
           </div>
           <div className={'MainLayout-itemsZone'}>
             <div>

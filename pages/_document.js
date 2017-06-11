@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>YoutuberSpy</title>
+          <link rel="icon" href="static/logo.png" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <style>{`
             * {
@@ -22,11 +23,6 @@ export default class MyDocument extends Document {
               font-size: 100%;
               font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
               text-decoration: none;
-            }
-            @media (max-width: 800px) {
-              * {
-                font-size: 80%;
-              }
             }
           `}</style>
           <script src="https://apis.google.com/js/platform.js"></script>
