@@ -160,7 +160,7 @@ class Index extends React.Component {
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
-          <meta name="og:url" content="https://www.youtuberspy.com/">
+          <meta name="og:url" content="https://www.youtuberspy.com/" />
         </Head>
         <MainLayout>
           <div className={'Index-zone'}>
