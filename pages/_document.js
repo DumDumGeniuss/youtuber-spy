@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html>
-        <Head>
+        <head>
           <script>{`
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
             }
           `}</style>
           <script src="https://apis.google.com/js/platform.js"></script>
-        </Head>
+        </head>
         <body className="custom_class">
           {this.props.customValue}
           <Main />
