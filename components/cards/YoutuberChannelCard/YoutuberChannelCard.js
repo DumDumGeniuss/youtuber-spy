@@ -30,7 +30,11 @@ class YoutuberChannelCard extends React.Component {
           <div className={'YoutuberChannelCard-hiddenZone'}>
             <span>介紹</span>
             <div className={'YoutuberChannelCard-description'}>{channelInfo.description || '沒有介紹'}</div>
-            <span className={'YoutuberChannelCard-seeDetail'}>看更多</span>
+            <span className={'YoutuberChannelCard-seeDetail'}>
+              <a target={'_blank'} href={'https://www.youtube.com/channel/' + channelInfo._id}>
+                前往頻道
+              </a>
+            </span>
           </div>
           <div className={'YoutuberChannelCard-frontZone'}>
             <div className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></div>

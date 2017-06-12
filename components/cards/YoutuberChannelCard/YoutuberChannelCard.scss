@@ -40,8 +40,10 @@ $primary-color: black;
   line-height: 30px;
   text-align: center;
   background-color: #b31217;
-  color: white;
   transition: all 0.2s;
+  a {
+    color: white;
+  }
 }
 
 .YoutuberChannelCard-hiddenZone > .YoutuberChannelCard-seeDetail:hover {
