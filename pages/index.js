@@ -159,7 +159,8 @@ class Index extends React.Component {
             許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
           />
           <meta name="og:type" content="website" />
-          <meta name="og:image" content="/static/logo-large-facebook.png" />
+          <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta name="og:url" content="https://www.youtuberspy.com/">
         </Head>
         <MainLayout>
           <div className={'Index-zone'}>
