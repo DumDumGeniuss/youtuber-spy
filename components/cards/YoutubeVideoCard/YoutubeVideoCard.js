@@ -32,7 +32,7 @@ class YoutubeVideoCard extends React.Component {
         <div className={'YoutubeVideoCard-infoDiv'}>
           <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>
           <div><a target="_blank" href={`https://www.youtube.com/channel/${videoInfo.channelId}`}>{videoInfo.channelTitle}</a></div>
-          <div>觀看 {videoInfo.viewCount}</div>
+          <div>觀看 {videoInfo.viewCount.toLocaleString()}</div>
           <div>時間 {publishedAt}</div>
           <div className={'YoutubeVideoCard-description'}>{videoInfo.description.substring(0, 50) + '...'}</div>
         </div>

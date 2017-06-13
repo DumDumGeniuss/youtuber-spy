@@ -4,6 +4,8 @@ import moment from 'moment';
 
 import stylesheet from './YoutuberChannelCard.scss';
 
+import Search from 'react-icons/lib/fa/search';
+
 class YoutuberChannelCard extends React.Component {
   static getInitialProps({ isServer }) {
     return {
@@ -18,6 +20,7 @@ class YoutuberChannelCard extends React.Component {
   }
 
             // <div className={'g-ytsubscribe'} data-layout={'full'} data-channelid={channelInfo._id}></div>
+              // <a target={'_blank'} href={'https://www.youtube.com/channel/' + channelInfo._id}>
   render() {
     const channelInfo = this.props.channelInfo;
     const publishedAt = new Date(this.props.channelInfo.publishedAt);
@@ -26,25 +29,19 @@ class YoutuberChannelCard extends React.Component {
     return (
       <div className={'YoutuberChannelCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <div className={'YoutuberChannelCard-contentZone'}>
-          <div className={'YoutuberChannelCard-hiddenZone'}>
-            <span>介紹</span>
-            <div className={'YoutuberChannelCard-description'}>{channelInfo.description || '沒有介紹'}</div>
-            <span className={'YoutuberChannelCard-seeDetail'}>
-              <a target={'_blank'} href={'https://www.youtube.com/channel/' + channelInfo._id}>
-                前往頻道
-              </a>
-            </span>
-          </div>
-          <div className={'YoutuberChannelCard-frontZone'}>
-            <div className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></div>
-            <div className={'YoutuberChannelCard-data'}>{channelInfo.title}</div>
-            <div className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount}</small></div>
-            <div className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount}</small></div>
-            <div className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount}</small></div>
-            <div className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></div>
-          </div>
+        <div className={'YoutuberChannelCard-frontZone'}>
+          <div className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></div>
+          <div className={'YoutuberChannelCard-title'}><b>{channelInfo.title}</b></div>
+          <div className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount.toLocaleString()}</small></div>
+          <div className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount.toLocaleString()}</small></div>
+          <div className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount.toLocaleString()}</small></div>
+          <div className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></div>
         </div>
+        <a target={'_blank'} href={'https://www.youtube.com/channel/' + channelInfo._id}>
+          <div className={'YoutuberChannelCard-seeDetailIcon'}>
+            <Search />
+          </div>
+        </a>
       </div>
     );
   }

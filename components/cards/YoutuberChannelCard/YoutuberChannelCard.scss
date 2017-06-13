@@ -1,7 +1,5 @@
 @import 'normalize.css';
 
-$primary-color: black;
-
 .YoutuberChannelCard-zone {
   position: relative;
   display: inline-block;
@@ -10,81 +8,64 @@ $primary-color: black;
   border: 1px solid #e9ebee;
   // margin-bottom: -6px;
   overflow: hidden;
-}
 
-.YoutuberChannelCard-contentZone {
-  display: flex;
-  margin-left: -100%;
-  width: 200%;
-  height: 100%;
-  transition: all 1s;
-}
-
-.YoutuberChannelCard-contentZone:hover {
-  margin-left: 0;
-}
-
-.YoutuberChannelCard-hiddenZone {
-  display: flex;
-  width: 50%;
-  height: 100%;
-  justify-content: space-around;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.YoutuberChannelCard-hiddenZone > .YoutuberChannelCard-seeDetail {
-  display: inline-block;
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  background-color: #b31217;
-  transition: all 0.2s;
-  a {
+  .YoutuberChannelCard-seeDetailIcon {
+    position: absolute;
+    display: inline-flex;
+    bottom: 5px;
+    right: 5px;
     color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    border-color: #e9ebee;
+    background-color: #e22623;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      font-size: 20px;
+    }
   }
-}
 
-.YoutuberChannelCard-hiddenZone > .YoutuberChannelCard-seeDetail:hover {
-  background-color: #e62117;
-  cursor: pointer;
-}
+  .YoutuberChannelCard-seeDetailIcon:hover {
+      color: yellow;
+      cursor: pointer;
+  }
 
-.YoutuberChannelCard-hiddenZone > .YoutuberChannelCard-description {
-  height: 60%;
-  overflow: scroll;
-  // border-bottom: 1px solid #e9ebee;
-}
-
-.YoutuberChannelCard-frontZone {
-  width: 50%;
-  height: 100%;
-  padding: 10px;
-}
-
-.YoutuberChannelCard-frontZone > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.YoutuberChannelCard-frontZone > .YoutuberChannelCard-img {
-  height: 44%;
-}
-
-.YoutuberChannelCard-frontZone > .YoutuberChannelCard-img > img {
-  height: 100%
-}
-
-.YoutuberChannelCard-frontZone > .YoutuberChannelCard-data {
-  height: 11%;
-}
-
-.YoutuberChannelCard-frontZone > .YoutuberChannelCard-data > small {
-  font-size: 0.8em;
+  .YoutuberChannelCard-frontZone {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+  
+    .YoutuberChannelCard-img {
+      height: 44%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      img {
+        height: 100%;
+      }
+    }
+  
+    .YoutuberChannelCard-title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: center;
+      padding-left: 5px;
+      margin-bottom: 10px;
+    }
+  
+    .YoutuberChannelCard-data {
+      height: 11%;
+      padding-left: 5px;
+  
+      small {
+        font-size: 0.8em;
+      }
+    }
+  }
 }
 
 @media (max-width: 800px) {
