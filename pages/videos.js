@@ -14,7 +14,7 @@ import * as videoApi from '../apis/video';
 import stylesheet from './videos.scss';
 
 const defaultQuery = {
-  sort: 'randomNumber',
+  sort: 'publishedAt',
   order: 'desc',
   keyword: '',
   page: 1,
@@ -190,7 +190,7 @@ class Videos extends React.Component {
               </div>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={'randomNumber'}>
+                <select onChange={this.changeOrder.bind(this)} defaultValue={'publishedAt'}>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'publishedAt'}>時間</option>
                   <option value={'randomNumber'}>亂數(每小時更新)</option>
