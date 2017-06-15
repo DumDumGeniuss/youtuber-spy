@@ -38,7 +38,9 @@ class Videos extends React.Component {
       isLoading: false,
     };
     this.daysAgo = 7;
+    /* 判斷是不是已經撈完所有資料 */
     this.toDatasLimit = false;
+    /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: defaultQuery.sort,
       order: defaultQuery.order,
@@ -183,7 +185,7 @@ class Videos extends React.Component {
         <MainLayout>
           <div className={'Videos-zone'}>
             <div className={'Videos-functionBar'}>
-              <div>{this.state.isLoading ? <FaCircleONotch /> : null}</div>
+              {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
@@ -193,7 +195,7 @@ class Videos extends React.Component {
                 <select onChange={this.changeOrder.bind(this)} defaultValue={'publishedAt'}>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'publishedAt'}>時間</option>
-                  <option value={'randomNumber'}>亂數(每小時更新)</option>
+                  <option value={'randomNumber'}>推薦(每小時更新)</option>
                 </select>
               </div>
               <div>

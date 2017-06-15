@@ -8,52 +8,76 @@ $primary-color: black;
   min-height: 100vh;
   margin-left: 50%;
   transform: translate(-50%, 0%);
-}
 
-.Index-contentZone {
-  background-color: white;
+  .Index-addChannelBar {
+    position: relative;
+    height: 40px;
 
-  .Index-loadingButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0px;
-    svg {
+    div {
+      padding: 2px 5px;
+      position: absolute;
+      display: inline-block;
+      top: 5px;
+      right: 5px;
       height: 30px;
-      width: 30px;
-      color: #ff8a8a;
-      animation: spin 1s linear infinite;
+      line-height: 26px;
+      background-color: #e22623;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    div:hover {
+      color: yellow;
     }
   }
-}
 
-.Index-functionBar {
-  position: relative;
-  min-height: 40px;
-  padding: 5px 0;
-  div {
-    display: inline-block;
-    padding-right: 10px;
-
-    svg {
-      height: 30px;
-      width: 30px;
-      color: #ff8a8a;
-      animation: spin 1s linear infinite;
-    }
-
-    input {
-      height: 30px;
-      width: 100px;
-      padding: 0;
-      border-radius: 3px;
-    }
-
-    select {
-      height: 30px;
-      width: 100px;
+  .Index-contentZone {
+    background-color: white;
+  
+    .Index-loadingButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0px;
+      svg {
+        height: 30px;
+        width: 30px;
+        color: #ff8a8a;
+        animation: spin 1s linear infinite;
+      }
     }
   }
+  
+  .Index-functionBar {
+    position: relative;
+    min-height: 40px;
+    padding: 0 5px 0 5px;
+    div {
+      display: inline-block;
+      padding-right: 10px;
+  
+      svg {
+        height: 30px;
+        width: 30px;
+        color: #ff8a8a;
+        animation: spin 1s linear infinite;
+      }
+  
+      input {
+        height: 30px;
+        width: 100px;
+        padding: 0;
+        border-radius: 3px;
+      }
+  
+      select {
+        height: 30px;
+        width: 100px;
+      }
+    }
+  }
+
 }
 
 @keyframes spin {

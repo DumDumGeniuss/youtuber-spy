@@ -4,11 +4,14 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
+import Plus from 'react-icons/lib/fa/plus';
 import MainLayout from '../components/layouts/MainLayout/MainLayout';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
+import ConfirmModal from '../components/modals/ConfirmModal/ConfirmModal';
 import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
+import * as youtubeApi from '../apis/youtube';
 
 import stylesheet from './index.scss';
 
@@ -19,7 +22,7 @@ const defaultQuery = {
   page: 1,
   count: 20,
 };
-
+// localStorage.setItem('state', 'off');
 class Index extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await channelApi.getAllChannels(defaultQuery);
@@ -34,8 +37,11 @@ class Index extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
+      showAddChannelConfirm: false,
     };
+    /* 判斷是不是已經撈完所有資料 */
     this.toDatasLimit = false;
+    /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: defaultQuery.sort,
       order: defaultQuery.order,
@@ -52,6 +58,9 @@ class Index extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
+    /* Handle the callback from addChannel */
+    const callbackParams = youtubeApi.getParamsFromCallback(window.location.href);
+    localStorage.setItem('youtubeToken', callbackParams.access_token);
     this.addScrollHandler();
   }
 
@@ -64,6 +73,28 @@ class Index extends React.Component {
         isLoading: false,
       });
     }
+  }
+
+  showAddChannelConfirm(isOpen) {
+    this.setState({
+      showAddChannelConfirm: isOpen,
+    });
+  }
+
+  addChannel() {
+    this.showAddChannelConfirm(false);
+    const currentToken = localStorage.getItem('youtubeToken');
+    /* Get full site url */
+    youtubeApi.getUserInfo(currentToken)
+      .then((result) => {
+        if (!result) {
+          const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
+          const oauthUrl = youtubeApi.generateOauthUrl(fullSiteUrl);
+          window.open(oauthUrl, "_self");
+          return;
+        }
+        console.log(result);
+      });
   }
 
   addScrollHandler() {
@@ -125,7 +156,7 @@ class Index extends React.Component {
     }, 1000);
   }
 
-  /* remember to reset tha page */
+  /* remember to reset tha page and toDatasLimit */
   changeOrder(event) {
     this.toDatasLimit = false;
     this.query.page = 1;
@@ -164,9 +195,18 @@ class Index extends React.Component {
           <meta property="og:site_name" content="Youtuber Spy - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayout>
+          {this.state.showAddChannelConfirm?
+            <ConfirmModal
+              message={`
+                為避免惡意行為，新增頻道必須以Google或Youtube帳戶登入驗證您的身份，若您已登入將直接跳轉到新增視窗。`}
+              clickYes={this.addChannel.bind(this)}
+              clickNo={this.showAddChannelConfirm.bind(this, false)}/> : null}
           <div className={'Index-zone'}>
+            <div className={'Index-addChannelBar'}>
+              <div onClick={this.showAddChannelConfirm.bind(this, true)}>申請新增頻道<Plus /></div>
+            </div>
             <div className={'Index-functionBar'}>
-              <div>{this.state.isLoading ? <FaCircleONotch /> : null}</div>
+              {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
@@ -178,7 +218,7 @@ class Index extends React.Component {
                   <option value={'viewCount'}>觀看</option>
                   <option value={'videoCount'}>影片</option>
                   <option value={'publishedAt'}>成立時間</option>
-                  <option value={'randomNumber'}>亂數(每小時更新)</option>
+                  <option value={'randomNumber'}>推薦(每小時更新)</option>
                 </select>
               </div>
             </div>

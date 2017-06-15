@@ -1,0 +1,41 @@
+.ConfirmModal-zone {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.3);
+	.ConfirmModal-contentZone {
+		position: absolute;
+		display: inline-block;
+		min-width: 300px;
+		padding: 15px;
+		left: 50%;
+		top: 50%;
+		border-radius: 10px;
+		transform: translate(-50%, -50%);
+		background-color: #475eb3;
+	
+		.ConfirmModal-info {
+			// text-align: center;
+			color: white;
+			margin-bottom: 20px;
+		}
+	
+		.ConfirmModal-func {
+			display: flex;
+			justify-content: space-around;
+			span {
+				border-radius: 5px;
+				border: 1px solid white;
+				padding: 5px;
+				color: white;
+				cursor: pointer;
+			}
+			span:hover {
+				color: yellow;
+			}
+		}
+	}
+}

@@ -72,5 +72,21 @@
   .YoutuberChannelCard-zone {
     width: 50vw;
     height: 50vw;
+
+  .YoutuberChannelCard-seeDetailIcon {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+
+    svg {
+      font-size: 15px;
+    }
+  }
+
+    .YoutuberChannelCard-frontZone {
+      .YoutuberChannelCard-title {
+      margin-bottom: 0;
+      }
+    }
   }
 }
