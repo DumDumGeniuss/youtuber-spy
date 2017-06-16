@@ -68,7 +68,9 @@ class Index extends React.Component {
   componentDidMount() {
     /* Handle the callback from addChannel */
     const callbackParams = youtubeApi.getParamsFromCallback(window.location.href);
-    localStorage.setItem('youtubeToken', callbackParams.access_token);
+    if (callbackParams.access_token) {
+      localStorage.setItem('youtubeToken', callbackParams.access_token);
+    }
     this.addScrollHandler();
   }
 
