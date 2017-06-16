@@ -1,4 +1,4 @@
-.ConfirmModal-zone {
+.ChannelInputModal-zone {
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
@@ -6,7 +6,7 @@
 	top: 0;
 	z-index: 2;
 	background-color: rgba(0, 0, 0, 0.3);
-	.ConfirmModal-contentZone {
+	.ChannelInputModal-contentZone {
 		position: absolute;
 		display: inline-block;
 		min-width: 300px;
@@ -17,13 +17,40 @@
 		transform: translate(-50%, -50%);
 		background-color: #475eb3;
 	
-		.ConfirmModal-info {
+		.ChannelInputModal-info {
 			// text-align: center;
 			color: white;
 			margin-bottom: 20px;
 		}
 	
-		.ConfirmModal-func {
+		.ChannelInputModal-inputZone {
+			// text-align: center;
+			.ChannelInputModal-itemTitle {
+				color: white;
+				text-align: center;
+			}
+			// text-align: center;
+			.ChannelInputModal-errorMessage {
+				color: #ff7878;
+				text-align: center;
+			}
+
+			.ChannelInputModal-itemInput {
+				padding: 5px 0;
+				input {
+					width: 80%;
+					margin-left: 10%;
+					border-radius: 5px;
+				}
+				textarea {
+					width: 80%;
+					margin-left: 10%;
+					border-radius: 5px;
+				}
+			}
+		}
+	
+		.ChannelInputModal-func {
 			display: flex;
 			justify-content: space-around;
 			span {
@@ -56,3 +83,4 @@
 		}
 	}
 }
+

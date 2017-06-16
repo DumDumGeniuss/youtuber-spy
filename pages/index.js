@@ -1,16 +1,20 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
+import Search from 'react-icons/lib/fa/search';
 import Plus from 'react-icons/lib/fa/plus';
 import MainLayout from '../components/layouts/MainLayout/MainLayout';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
 import ConfirmModal from '../components/modals/ConfirmModal/ConfirmModal';
+import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
 import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
+import * as candidateChannelApi from '../apis/candidateChannel';
 import * as youtubeApi from '../apis/youtube';
 
 import stylesheet from './index.scss';
@@ -38,6 +42,10 @@ class Index extends React.Component {
     this.state = {
       isLoading: false,
       showAddChannelConfirm: false,
+      isAddChannelConfirmLoading: false,
+      showAddChannel: false,
+      isAddChannelLoading: false,
+      addChannelErrorMsg: null,
     };
     /* 判斷是不是已經撈完所有資料 */
     this.toDatasLimit = false;
@@ -75,14 +83,39 @@ class Index extends React.Component {
     }
   }
 
+  changeAddChannelErrorMessage(msg) {
+    this.setState({
+      addChannelErrorMsg: msg,
+    });
+
+  }
+
+  isAddChannelConfirmLoading(isLoading) {
+    this.setState({
+      isAddChannelConfirmLoading: isLoading,
+    });
+  }
+
+  isAddChannelLoading(isLoading) {
+    this.setState({
+      isAddChannelLoading: isLoading,
+    });
+  }
+
   showAddChannelConfirm(isOpen) {
     this.setState({
       showAddChannelConfirm: isOpen,
     });
   }
 
+  showAddChannel(isOpen) {
+    this.setState({
+      showAddChannel: isOpen,
+    });
+  }
+
   addChannel() {
-    this.showAddChannelConfirm(false);
+    this.isAddChannelConfirmLoading(true);
     const currentToken = localStorage.getItem('youtubeToken');
     /* Get full site url */
     youtubeApi.getUserInfo(currentToken)
@@ -93,7 +126,39 @@ class Index extends React.Component {
           window.open(oauthUrl, "_self");
           return;
         }
-        console.log(result);
+        this.isAddChannelConfirmLoading(false);
+        this.showAddChannelConfirm(false);
+        this.showAddChannel(true);
+      });
+  }
+
+  sendAddChannel(link, userDescription) {
+    this.changeAddChannelErrorMessage(null);
+    this.isAddChannelLoading(true);
+    const query = {
+      access_token: localStorage.getItem('youtubeToken'),
+    };
+    const data = {
+      link: link,
+      userDescription: userDescription,
+    };
+    candidateChannelApi.addCandidateChannel(query, data)
+      .then((result) => {
+        if (result.status !== 200) {
+          this.isAddChannelLoading(false);
+          if (result.status === 403) {
+            this.changeAddChannelErrorMessage('很抱歉您的登入在操作過程中過期了，請重整頁面重新登入。');
+          }
+          if (result.status === 404) {
+            this.changeAddChannelErrorMessage('您輸入的不是有效的頻道首頁連結。');
+          }
+          if (result.status === 409) {
+            this.changeAddChannelErrorMessage('此頻道已經登入或正在申請了。');
+          }
+        } else {
+          this.showAddChannel(false);
+          this.isAddChannelLoading(false);
+        }
       });
   }
 
@@ -195,15 +260,32 @@ class Index extends React.Component {
           <meta property="og:site_name" content="Youtuber Spy - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayout>
+          {this.state.showAddChannel?
+            <ChannelInputModal
+              errorMessage={this.state.addChannelErrorMsg}
+              message={`
+                請將你想加入的頻道首頁複製貼到連結欄位，並簡短描述一下頻道的特性。
+              `}
+              clickYes={this.sendAddChannel.bind(this)}
+              clickNo={this.showAddChannel.bind(this, false)}
+              isLoading={this.state.isAddChannelLoading}
+            /> : null}
           {this.state.showAddChannelConfirm?
             <ConfirmModal
               message={`
                 為避免惡意行為，新增頻道必須以Google或Youtube帳戶登入驗證您的身份，若您已登入將直接跳轉到新增視窗。`}
               clickYes={this.addChannel.bind(this)}
-              clickNo={this.showAddChannelConfirm.bind(this, false)}/> : null}
+              clickNo={this.showAddChannelConfirm.bind(this, false)}
+              isLoading={this.state.isAddChannelConfirmLoading}
+            /> : null}
           <div className={'Index-zone'}>
             <div className={'Index-addChannelBar'}>
-              <div onClick={this.showAddChannelConfirm.bind(this, true)}>申請新增頻道<Plus /></div>
+              <div className={'Index-add'} onClick={this.showAddChannelConfirm.bind(this, true)}>申請新增頻道<Plus /></div>
+              <Link href='/candidateChannel'><a>
+                <div className={'Index-search'}>
+                  查看申請頻道<Search />
+                </div>
+              </a></Link>
             </div>
             <div className={'Index-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}

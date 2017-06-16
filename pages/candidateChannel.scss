@@ -9,37 +9,6 @@ $primary-color: black;
   margin-left: 50%;
   transform: translate(-50%, 0%);
 
-  .Index-addChannelBar {
-    position: relative;
-    height: 40px;
-    padding: 0px 5px;
-
-    div {
-      padding: 2px 5px;
-      display: inline-block;
-      margin-top: 5px;
-      margin-right: 5px;
-      // right: 5px;
-      height: 30px;
-      line-height: 26px;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-    }
-
-    .Index-add {
-      background-color: #e22623;
-    }
-
-    .Index-search {
-      background-color: green;
-    }
-
-    div:hover {
-      color: yellow;
-    }
-  }
-
   .Index-contentZone {
     background-color: white;
   

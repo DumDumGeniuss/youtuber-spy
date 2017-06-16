@@ -26,6 +26,10 @@ export default class MyDocument extends Document {
               font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
               text-decoration: none;
             }
+
+            @media only screen and (max-width: 600px) {
+              font-size: 80%;
+            }
           `}</style>
           <script dangerouslySetInnerHTML={{__html: `
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
