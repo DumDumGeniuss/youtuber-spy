@@ -42,7 +42,7 @@ class YoutuberChannelCard extends React.Component {
           <div className={'CandidateChannelCard-channelImg'}>
             <img src={candidateChannelInfo.defaultThumbnails} className={'CandidateChannelCard-userPicture'}/>
           </div>
-          <p>{'此頻道沒有介紹...'}</p>
+          <p>{candidateChannelInfo.description || '此頻道沒有介紹...'}</p>
           <div className={'CandidateChannelCard-statisticZone'}>
             <div className={'CandidateChannelCard-statistic'}>
               <div>訂閱數 {candidateChannelInfo.subscriberCount}</div>
