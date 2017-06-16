@@ -2,17 +2,17 @@
 
 $primary-color: black;
 
-.Index-zone {
+.CandidateChannel-zone {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
   margin-left: 50%;
   transform: translate(-50%, 0%);
 
-  .Index-contentZone {
+  .CandidateChannel-contentZone {
     background-color: white;
   
-    .Index-loadingButton {
+    .CandidateChannel-loadingButton {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,10 +26,10 @@ $primary-color: black;
     }
   }
   
-  .Index-functionBar {
+  .CandidateChannel-functionBar {
     position: relative;
     min-height: 40px;
-    padding: 0 5px 0 5px;
+    padding: 5px 5px;
     div {
       display: inline-block;
       padding-right: 10px;

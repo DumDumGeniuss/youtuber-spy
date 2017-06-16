@@ -20,7 +20,7 @@ const defaultQuery = {
   count: 20,
 };
 // localStorage.setItem('state', 'off');
-class Index extends React.Component {
+class CandidateChannel extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await candidateChannelApi.getCandidateChannels(defaultQuery);
     store.dispatch(candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token));
@@ -152,7 +152,7 @@ class Index extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <meta name="og:title" content="Youtuber Spy" />
+          <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
             Youtuber Spy 是一個專門整理Youtubers資訊的網站，
             這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，
@@ -162,11 +162,11 @@ class Index extends React.Component {
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
           <meta name="og:url" content="https://www.youtuberspy.com/" />
-          <meta property="og:site_name" content="Youtuber Spy - 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayout>
-          <div className={'Index-zone'}>
-            <div className={'Index-functionBar'}>
+          <div className={'CandidateChannel-zone'}>
+            <div className={'CandidateChannel-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
@@ -182,7 +182,7 @@ class Index extends React.Component {
                 </select>
               </div>
             </div>
-            <div className={'Index-contentZone'}>
+            <div className={'CandidateChannel-contentZone'}>
               {
                 candidateChannels.map((item, index) => {
                   return (
@@ -193,7 +193,7 @@ class Index extends React.Component {
                   );
                 })
               }
-              {this.state.isLoading ? <div className={'Index-loadingButton'}><FaCircleONotch /></div>: null}
+              {this.state.isLoading ? <div className={'CandidateChannel-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
         </MainLayout>
@@ -214,4 +214,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(CandidateChannel)

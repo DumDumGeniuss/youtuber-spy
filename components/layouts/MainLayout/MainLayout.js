@@ -28,7 +28,7 @@ class MainLayout extends React.Component {
             <div className={'MainLayout-logo'}>
               <Link href='/'><a>
                 <img src={'/static/logo.png'}/>
-                <span>Youtuber Spy</span>
+                <h1>小頻道大世界</h1>
               </a></Link>
             </div>
             <div className={'MainLayout-itemsZone'}>
@@ -41,7 +41,7 @@ class MainLayout extends React.Component {
             </div>
           </div>
         </nav>
-        <div>
+        <div className={'MainLayout-pageContent'}>
           {this.props.children}
         </div>
       </div>

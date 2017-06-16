@@ -8,6 +8,11 @@ $primary-color: black;
   margin-top: 50px;
 }
 
+.MainLayout-pageContent {
+  width: 100%;
+  overflow: hidden;
+}
+
 .MainLayout-navbar {
   position: fixed;
   display: block;
@@ -36,13 +41,14 @@ $primary-color: black;
         vertical-align: middle;
       }
   
-      span {
+      h1 {
         display: inline-block;
         color: white;
-        font-size: 1.2em;
+        font-size: 1em;
         line-height: 50px;
         vertical-align: middle;
         padding: 0 10px;
+        margin: 0;
       }
     }
   

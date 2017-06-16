@@ -247,7 +247,7 @@ class Index extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <meta name="og:title" content="Youtuber Spy" />
+          <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
             Youtuber Spy 是一個專門整理Youtubers資訊的網站，
             這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，
@@ -257,7 +257,7 @@ class Index extends React.Component {
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
           <meta name="og:url" content="https://www.youtuberspy.com/" />
-          <meta property="og:site_name" content="Youtuber Spy - 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayout>
           {this.state.showAddChannel?
