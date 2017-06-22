@@ -18,6 +18,14 @@ class MainLayout extends React.Component {
   componentWillUnmount() {
   }
 
+  onLoginClick() {
+    this.props.doLogin();
+  }
+
+  onLogoutClick() {
+    this.props.doLogout();
+  }
+
   render() {
     return (
       <div className={'MainLayout-zone'}>
@@ -32,12 +40,22 @@ class MainLayout extends React.Component {
               </a></Link>
             </div>
             <div className={'MainLayout-itemsZone'}>
-              <div>
+              <div className={'MainLayout-link'}>
                 <Link href='/'><a>頻道</a></Link>
               </div>
-              <div>
+              <div className={'MainLayout-link'}>
                 <Link href='/videos'><a>影片</a></Link>
               </div>
+              {this.props.userInfo ? 
+                <div onClick={this.onLogoutClick.bind(this)} className={'MainLayout-login'}>
+                  <span>登出</span>
+                </div>
+                :
+                <div onClick={this.onLoginClick.bind(this)}  className={'MainLayout-login'}>
+                  <span>登入</span>
+                </div>
+              }
+              {this.props.userInfo ? <div><img src={this.props.userInfo.picture}/></div> : null}
             </div>
           </div>
         </nav>

@@ -1,4 +1,5 @@
 export default {
   serverless_url: 'http://dsafds',
   client_id: 'dsajkfld214j2k1l4',
+  super_users: 'dsafdsaf',
 };

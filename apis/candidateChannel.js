@@ -43,3 +43,26 @@ export const addCandidateChannel = async function (query, data) {
 
   return resultJson;
 };
+
+export const verifyCandidateChannel = async function (query) {
+  const finalQuery = {
+    access_token: query.access_token,
+    action: 'verified',
+  };
+  const queryString = tinyHelper.getQueryString(finalQuery);
+  const result = await fetch(apiUrl + '/' + query.channelId + queryString, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify({}),
+  });
+
+  const statusCode = result.status;
+  const resultJson = await result.json();
+
+  resultJson.status = statusCode;
+
+  return resultJson;
+};

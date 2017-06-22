@@ -16,6 +16,10 @@ class YoutuberChannelCard extends React.Component {
   componentDidMount() {
   }
 
+  onVerifyClick(channelId) {
+    this.props.clickVerify(channelId);
+  }
+
   componentWillUnmount() {
   }
 
@@ -27,6 +31,14 @@ class YoutuberChannelCard extends React.Component {
     return (
       <div className={'CandidateChannelCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+        <div className={'CandidateChannelCard-authInfoZone'}>
+          {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onVerifyClick.bind(this, candidateChannelInfo._id)}>確認</button> : null}
+          {candidateChannelInfo.isVerified ? 
+            <span className={'CandidateChannelCard-authVerify'}>審核通過</span>
+            :
+            <span className={'CandidateChannelCard-authWait'}>等待審核</span>
+          }
+        </div>
         <div className={'CandidateChannelCard-userZone'}>
           <img src={candidateChannelInfo.userPicture} className={'CandidateChannelCard-userPicture'}/>
           <div className={'CandidateChannelCard-Info'}>

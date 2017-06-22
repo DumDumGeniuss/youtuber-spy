@@ -24,18 +24,27 @@ $primary-color: black;
       line-height: 26px;
       border-radius: 5px;
       color: white;
-      cursor: pointer;
     }
 
     .Index-add {
       background-color: #e22623;
+      cursor: pointer;
+    }
+
+    .Index-add:hover {
+      color: yellow;
+    }
+
+    .Index-pleasLogin {
+      background-color: #ff8482;
     }
 
     .Index-search {
       background-color: green;
+      cursor: pointer;
     }
 
-    div:hover {
+    .Index-search:hover {
       color: yellow;
     }
   }

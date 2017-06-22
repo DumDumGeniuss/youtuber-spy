@@ -22,3 +22,23 @@ export const getCandidateChannelsAsync = function (preCandidateChannels, query) 
       });
   };
 };
+
+export function verifyCandidateChannel(channelId) {
+  return {
+    type: 'VERIFY_CANDIDATE_CHANNEL',
+    channelId,
+  };
+}
+
+export const verifyCandidateChannelAsync = function (query) {
+  return function (dispatch) {
+    candidateChannelApi.verifyCandidateChannel(query)
+      .then((result) => {
+        if (result.status === 200) {
+          dispatch(
+            verifyCandidateChannel(query.channelId)
+          );
+        }
+      });
+  };
+};

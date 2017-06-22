@@ -7,11 +7,12 @@ import withRedux from 'next-redux-wrapper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Search from 'react-icons/lib/fa/search';
 import Plus from 'react-icons/lib/fa/plus';
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
+import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
 import ConfirmModal from '../components/modals/ConfirmModal/ConfirmModal';
 import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
-import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
+import { initStore } from '../store/initStore';
+import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
 import * as candidateChannelApi from '../apis/candidateChannel';
@@ -41,8 +42,6 @@ class Index extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
-      showAddChannelConfirm: false,
-      isAddChannelConfirmLoading: false,
       showAddChannel: false,
       isAddChannelLoading: false,
       addChannelErrorMsg: null,
@@ -66,11 +65,6 @@ class Index extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
-    /* Handle the callback from addChannel */
-    const callbackParams = youtubeApi.getParamsFromCallback(window.location.href);
-    if (callbackParams.access_token) {
-      localStorage.setItem('youtubeToken', callbackParams.access_token);
-    }
     this.addScrollHandler();
   }
 
@@ -85,6 +79,7 @@ class Index extends React.Component {
     }
   }
 
+  /* Show the error message from backend */
   changeAddChannelErrorMessage(msg) {
     this.setState({
       addChannelErrorMsg: msg,
@@ -92,46 +87,18 @@ class Index extends React.Component {
 
   }
 
-  isAddChannelConfirmLoading(isLoading) {
-    this.setState({
-      isAddChannelConfirmLoading: isLoading,
-    });
-  }
-
+  /* Switch the add channel loading icon */
   isAddChannelLoading(isLoading) {
     this.setState({
       isAddChannelLoading: isLoading,
     });
   }
 
-  showAddChannelConfirm(isOpen) {
-    this.setState({
-      showAddChannelConfirm: isOpen,
-    });
-  }
-
+  /* Switch the add channel view */
   showAddChannel(isOpen) {
     this.setState({
       showAddChannel: isOpen,
     });
-  }
-
-  addChannel() {
-    this.isAddChannelConfirmLoading(true);
-    const currentToken = localStorage.getItem('youtubeToken');
-    /* Get full site url */
-    youtubeApi.getUserInfo(currentToken)
-      .then((result) => {
-        if (!result) {
-          const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
-          const oauthUrl = youtubeApi.generateOauthUrl(fullSiteUrl);
-          window.open(oauthUrl, "_self");
-          return;
-        }
-        this.isAddChannelConfirmLoading(false);
-        this.showAddChannelConfirm(false);
-        this.showAddChannel(true);
-      });
   }
 
   sendAddChannel(link, userDescription) {
@@ -149,7 +116,7 @@ class Index extends React.Component {
         if (result.status !== 200) {
           this.isAddChannelLoading(false);
           if (result.status === 403) {
-            this.changeAddChannelErrorMessage('很抱歉您的登入在操作過程中過期了，請重整頁面重新登入。');
+            this.changeAddChannelErrorMessage('很抱歉您的登入已經過期了，請重整頁面重新登入。');
           }
           if (result.status === 404) {
             this.changeAddChannelErrorMessage('您輸入的不是有效的頻道首頁連結。');
@@ -244,6 +211,7 @@ class Index extends React.Component {
 
   render() {
     const channels = this.props.channel.channels;
+    const user = this.props.user;
 
     return (
       <div>
@@ -261,7 +229,7 @@ class Index extends React.Component {
           <meta name="og:url" content="https://www.youtuberspy.com/" />
           <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
-        <MainLayout>
+        <MainLayoutContainer>
           {this.state.showAddChannel?
             <ChannelInputModal
               errorMessage={this.state.addChannelErrorMsg}
@@ -272,17 +240,11 @@ class Index extends React.Component {
               clickNo={this.showAddChannel.bind(this, false)}
               isLoading={this.state.isAddChannelLoading}
             /> : null}
-          {this.state.showAddChannelConfirm?
-            <ConfirmModal
-              message={`
-                為避免惡意行為，新增頻道必須以Google或Youtube帳戶登入驗證您的身份，若您已登入將直接跳轉到新增視窗。`}
-              clickYes={this.addChannel.bind(this)}
-              clickNo={this.showAddChannelConfirm.bind(this, false)}
-              isLoading={this.state.isAddChannelConfirmLoading}
-            /> : null}
           <div className={'Index-zone'}>
             <div className={'Index-addChannelBar'}>
-              <div className={'Index-add'} onClick={this.showAddChannelConfirm.bind(this, true)}>申請新增頻道<Plus /></div>
+              {user.userInfo ? 
+                <div className={'Index-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></div>
+                : <div className={'Index-pleasLogin'}>登入以新增頻道</div>}
               <Link href='/candidateChannel'><a>
                 <div className={'Index-search'}>
                   查看申請頻道<Search />
@@ -321,7 +283,7 @@ class Index extends React.Component {
               {this.state.isLoading ? <div className={'Index-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
-        </MainLayout>
+        </MainLayoutContainer>
       </div>
     );
   }
@@ -329,6 +291,7 @@ class Index extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     channel: state.channel,
   };
 };
@@ -336,7 +299,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getChannelsAsync: bindActionCreators(channelAction.getChannelsAsync, dispatch),
+    getUser: bindActionCreators(userAction.getUser, dispatch),
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index);

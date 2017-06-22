@@ -61,6 +61,19 @@ $primary-color: black;
         display: inline-block;
         height: 100%;
         padding: 0 10px;
+        vertical-align: middle;
+        img {
+          height: 50px;
+        }
+        span {
+          color: white;
+          font-size: 1em;
+          line-height: 50px; 
+          cursor: pointer;
+        }
+        span:hover {
+          color: yellow;
+        }
         a {
           color: white;
           font-size: 1em;
@@ -68,6 +81,29 @@ $primary-color: black;
         }
         a:hover {
           color: yellow;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .MainLayout-zone {
+    margin-top: 100px;
+    .MainLayout-navbar {
+      height: 100px;
+      .MainLayout-content {
+        .MainLayout-logo {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .MainLayout-itemsZone {
+          position: relative;
+          display: flex;
+          justify-content: space-around;
         }
       }
     }

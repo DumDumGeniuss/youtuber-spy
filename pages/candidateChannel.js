@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
+import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import CandidateChannelCard from '../components/cards/CandidateChannelCard/CandidateChannelCard';
 import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
 import * as candidateChannelAction from '../actions/candidateChannel';
@@ -138,6 +138,13 @@ class CandidateChannel extends React.Component {
     });
   }
 
+  verifyChannel(channelId) {
+    this.props.verifyCandidateChannelAsync({
+      channelId,
+      access_token: localStorage.getItem('youtubeToken'),
+    });
+  }
+
   componentWillUnmount() {
     if (this.searchKeyword) {
       clearTimeout(this.searchKeyword);
@@ -147,6 +154,7 @@ class CandidateChannel extends React.Component {
 
   render() {
     const candidateChannels = this.props.candidateChannel.candidateChannels;
+    const user = this.props.user;
 
     return (
       <div>
@@ -164,7 +172,7 @@ class CandidateChannel extends React.Component {
           <meta name="og:url" content="https://www.youtuberspy.com/" />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
-        <MainLayout>
+        <MainLayoutContainer>
           <div className={'CandidateChannel-zone'}>
             <div className={'CandidateChannel-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
@@ -189,6 +197,8 @@ class CandidateChannel extends React.Component {
                     <CandidateChannelCard 
                       key={item._id}
                       candidateChannelInfo={item}
+                      isSuperUser={user.isSuperUser}
+                      clickVerify={this.verifyChannel.bind(this)}
                     />
                   );
                 })
@@ -196,7 +206,7 @@ class CandidateChannel extends React.Component {
               {this.state.isLoading ? <div className={'CandidateChannel-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
-        </MainLayout>
+        </MainLayoutContainer>
       </div>
     );
   }
@@ -205,12 +215,14 @@ class CandidateChannel extends React.Component {
 const mapStateToProps = (state) => {
   return {
     candidateChannel: state.candidateChannel,
+    user: state.user,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getCandidateChannelsAsync: bindActionCreators(candidateChannelAction.getCandidateChannelsAsync, dispatch),
+    verifyCandidateChannelAsync: bindActionCreators(candidateChannelAction.verifyCandidateChannelAsync, dispatch),
   }
 }
 
