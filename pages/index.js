@@ -217,6 +217,7 @@ class Index extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
+          <title>小頻道大世界-頻道精選</title>
           <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
             【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
@@ -243,12 +244,12 @@ class Index extends React.Component {
           <div className={'Index-zone'}>
             <div className={'Index-addChannelBar'}>
               {user.userInfo ? 
-                <div className={'Index-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></div>
-                : <div className={'Index-pleasLogin'}>登入以新增頻道</div>}
+                <span className={'Index-channelFuncButton Index-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
+                : <span className={'Index-channelFuncButton Index-pleasLogin'}>登入以新增頻道</span>}
               <Link href='/candidateChannel'><a>
-                <div className={'Index-search'}>
+                <span className={'Index-channelFuncButton Index-search'}>
                   查看申請頻道<Search />
-                </div>
+                </span>
               </a></Link>
             </div>
             <div className={'Index-functionBar'}>

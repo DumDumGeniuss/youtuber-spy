@@ -170,6 +170,7 @@ class Videos extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
+          <title>小頻道大世界-影片精選</title>
           <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
             【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n

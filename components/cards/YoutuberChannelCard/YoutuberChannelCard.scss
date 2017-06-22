@@ -4,7 +4,7 @@
   position: relative;
   display: inline-block;
   width: 200px;
-  height: 250px;
+  height: 300px;
   border: 1px solid #e9ebee;
   // margin-bottom: -6px;
   overflow: hidden;
@@ -43,6 +43,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0;
+      margin: 0;
   
       img {
         height: 100%;
@@ -71,7 +73,7 @@
 @media (max-width: 800px) {
   .YoutuberChannelCard-zone {
     width: 50vw;
-    height: 50vw;
+    height: 75vw;
 
   .YoutuberChannelCard-seeDetailIcon {
     width: 24px;

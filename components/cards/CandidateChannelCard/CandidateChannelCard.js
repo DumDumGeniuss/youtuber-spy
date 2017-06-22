@@ -41,29 +41,29 @@ class YoutuberChannelCard extends React.Component {
         </div>
         <div className={'CandidateChannelCard-userZone'}>
           <img src={candidateChannelInfo.userPicture} className={'CandidateChannelCard-userPicture'}/>
-          <div className={'CandidateChannelCard-Info'}>
+          <section className={'CandidateChannelCard-Info'}>
             <div>
               <span>{candidateChannelInfo.userName}</span>
               <span> {hours}小時前申請</span>
             </div>
             <p>{candidateChannelInfo.userDescription || '這傢伙似乎沒有留下任何介紹'}</p>
-          </div>
+          </section>
         </div>
         <div className={'CandidateChannelCard-channelZone'}>
           <h3>{candidateChannelInfo.title}</h3>
-          <div className={'CandidateChannelCard-channelImg'}>
+          <figure className={'CandidateChannelCard-channelImg'}>
             <img src={candidateChannelInfo.defaultThumbnails} className={'CandidateChannelCard-userPicture'}/>
-          </div>
+          </figure>
           <p>{candidateChannelInfo.description || '此頻道沒有介紹...'}</p>
           <div className={'CandidateChannelCard-statisticZone'}>
-            <div className={'CandidateChannelCard-statistic'}>
-              <div>訂閱數 {candidateChannelInfo.subscriberCount}</div>
-              <div>觀看數 {candidateChannelInfo.viewCount}</div>
-            </div>
-            <div className={'CandidateChannelCard-statistic'}>
-              <div>影片數 {candidateChannelInfo.videoCount}</div>
-              <div>評論數 {candidateChannelInfo.commentCount}</div>
-            </div>
+            <section className={'CandidateChannelCard-statistic'}>
+              <h3 className={'CandidateChannelCard-statItem'}>訂閱數 {candidateChannelInfo.subscriberCount}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>觀看數 {candidateChannelInfo.viewCount}</h3>
+            </section>
+            <section className={'CandidateChannelCard-statistic'}>
+              <h3 className={'CandidateChannelCard-statItem'}>影片數 {candidateChannelInfo.videoCount}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>評論數 {candidateChannelInfo.commentCount}</h3>
+            </section>
           </div>
         </div>
       </div>

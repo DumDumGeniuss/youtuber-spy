@@ -26,16 +26,16 @@ class YoutubeVideoCard extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <style jsx>{`
         `}</style>
-        <div className={'YoutubeVideoCard-imgDiv'}>
+        <figure className={'YoutubeVideoCard-imgDiv'}>
             <img src={videoInfo.mediumThumbnails} />
-        </div>
-        <div className={'YoutubeVideoCard-infoDiv'}>
+        </figure>
+        <section className={'YoutubeVideoCard-infoDiv'}>
           <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>
-          <div><a target="_blank" href={`https://www.youtube.com/channel/${videoInfo.channelId}`}>{videoInfo.channelTitle}</a></div>
-          <div>觀看 {videoInfo.viewCount.toLocaleString()}</div>
-          <div>時間 {publishedAt}</div>
-          <div className={'YoutubeVideoCard-description'}>{videoInfo.description.substring(0, 50) + '...'}</div>
-        </div>
+          <h4><a target="_blank" href={`https://www.youtube.com/channel/${videoInfo.channelId}`}>{videoInfo.channelTitle}</a></h4>
+          <h4>觀看 {videoInfo.viewCount.toLocaleString()}</h4>
+          <h4>時間 {publishedAt}</h4>
+          <p className={'YoutubeVideoCard-description'}>{videoInfo.description.substring(0, 50) + '...'}</p>
+        </section>
       </div>
     );
   }

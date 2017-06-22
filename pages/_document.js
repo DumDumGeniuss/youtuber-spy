@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Youtuber Spy</title>
           <link rel="icon" href="static/logo.png"/>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="google-site-verification" content="tmsEPlkD5D2xgD2TrX90qpIgqJc1Rmzl5v_2fXW-1GY" />
