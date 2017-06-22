@@ -50,7 +50,9 @@ class YoutuberChannelCard extends React.Component {
           </section>
         </div>
         <div className={'CandidateChannelCard-channelZone'}>
-          <h3>{candidateChannelInfo.title}</h3>
+          <a href={'https://www.youtube.com/channel/' + candidateChannelInfo._id} target={'_blank'}>
+            <h3 className={'CandidateChannelCard-channelZoneTitle'}>{candidateChannelInfo.title}</h3>
+          </a>
           <figure className={'CandidateChannelCard-channelImg'}>
             <img src={candidateChannelInfo.defaultThumbnails} className={'CandidateChannelCard-userPicture'}/>
           </figure>

@@ -67,11 +67,14 @@
 	}
 
 	.CandidateChannelCard-channelZone {
-		h3 {
+		.CandidateChannelCard-channelZoneTitle {
 			text-align: center;
 			font-size: 2em;
 			padding: 5px 0;
-			color: #464646;
+			color: #84afff;
+		}
+		.CandidateChannelCard-channelZoneTitle:hover {
+			color: yellow;
 		}
 		.CandidateChannelCard-channelImg {
 			height: 150px;
