@@ -5,15 +5,15 @@
   display: inline-block;
   width: 200px;
   height: 300px;
-  border: 1px solid #e9ebee;
+  // border: 1px solid #e9ebee;
   // margin-bottom: -6px;
   overflow: hidden;
 
   .YoutuberChannelCard-seeDetailIcon {
     position: absolute;
     display: inline-flex;
-    bottom: 5px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
     color: white;
     width: 36px;
     height: 36px;

@@ -11,6 +11,7 @@ import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutCont
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
 import ConfirmModal from '../components/modals/ConfirmModal/ConfirmModal';
 import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
+import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
 import { initStore } from '../store/initStore';
 import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
@@ -46,8 +47,6 @@ class Index extends React.Component {
       isAddChannelLoading: false,
       addChannelErrorMsg: null,
     };
-    /* 判斷是不是已經撈完所有資料 */
-    this.toDatasLimit = false;
     /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: defaultQuery.sort,
@@ -56,16 +55,12 @@ class Index extends React.Component {
       page: defaultQuery.page,
       count: defaultQuery.count,
     };
-
-    this.scrollHandler = this.scrollHandler.bind(this);
-    this.addScrollHandler = this.addScrollHandler.bind(this);
-    this.removeScrollHander = this.removeScrollHander.bind(this);
   }
 
   componentWillMount() {}
 
   componentDidMount() {
-    this.addScrollHandler();
+    // this.addScrollHandler();
   }
 
   componentWillReceiveProps(newProps) {
@@ -131,42 +126,9 @@ class Index extends React.Component {
       });
   }
 
-  addScrollHandler() {
-    this.scrollListener = window.addEventListener('scroll', () => {
-      this.scrollHandler(
-        window.pageYOffset,
-        window.innerHeight,
-        Math.max(
-          window.innerHeight,
-          document.body.offsetHeight,
-          document.documentElement.clientHeight
-        )
-      );
-    });
-  }
-
-  removeScrollHander() {
-    if (this.scrollListener) {
-      window.removeEventListener('scroll', this.scrollListener);
-    }
-  }
-
-  scrollHandler(scrollTop, windowHeight, realHeight) {
-    /* If not touch bottom, return */
-    if (scrollTop + windowHeight < realHeight || this.toDatasLimit || this.state.isLoading) {
-      return;
-    }
-
-    if ((this.query.page * (this.query.count + 1)) > this.props.channel.totalCount) {
-      this.toDatasLimit = true;
-      /* If the number of datas now eqaul to the total count, then just skip */
-      if (this.props.channel.channels.length === this.props.channel.totalCount) {
-        return;
-      }
-    }
-
-    this.query.page = this.query.page + 1;
-    this.props.getChannelsAsync(this.props.channel.channels, this.query);
+  changePage(page) {
+    this.query.page = page;
+    this.props.getChannelsAsync([], this.query);
     this.setState({
       isLoading: true,
     });
@@ -180,7 +142,6 @@ class Index extends React.Component {
       clearTimeout(this.searchKeyword);
     }
     this.searchKeyword = setTimeout(() => {
-      this.toDatasLimit = false;
       this.query.page = 1;
       this.query.keyword = keyword;
       this.props.getChannelsAsync([], this.query);
@@ -190,9 +151,7 @@ class Index extends React.Component {
     }, 1000);
   }
 
-  /* remember to reset tha page and toDatasLimit */
   changeOrder(event) {
-    this.toDatasLimit = false;
     this.query.page = 1;
     this.query.sort = event.target.value;
     this.query.order = this.query.sort === 'publishedAt' ? 'asc' : 'desc';
@@ -206,12 +165,13 @@ class Index extends React.Component {
     if (this.searchKeyword) {
       clearTimeout(this.searchKeyword);
     }
-    this.removeScrollHander();
   }
 
   render() {
     const channels = this.props.channel.channels;
+    const totalCount = this.props.channel.totalCount;
     const user = this.props.user;
+    const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
 
     return (
       <div>
@@ -270,6 +230,12 @@ class Index extends React.Component {
               </div>
             </div>
             <div className={'Index-contentZone'}>
+              <PaginationBox
+                refreshToken={this.query.sort + this.query.keyword + this.query.order + this.query.count}
+                lockButton={this.state.isLoading}
+                pageNumber={dataPage}
+                onChangePage={this.changePage.bind(this)}
+              />
               {
                 channels.map((item, index) => {
                   return (
@@ -281,7 +247,6 @@ class Index extends React.Component {
                   );
                 })
               }
-              {this.state.isLoading ? <div className={'Index-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
         </MainLayoutContainer>
