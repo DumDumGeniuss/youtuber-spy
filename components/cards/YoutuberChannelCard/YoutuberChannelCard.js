@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import Link from 'next/link';
 
 import stylesheet from './YoutuberChannelCard.scss';
 
@@ -37,11 +38,13 @@ class YoutuberChannelCard extends React.Component {
           <h2 className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount.toLocaleString()}</small></h2>
           <h2 className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></h2>
         </div>
-        <a target={'_blank'} href={'https://www.youtube.com/channel/' + channelInfo._id}>
+        <Link href={'/channel?channelId=' + channelInfo._id}>
+          <a>
           <div className={'YoutuberChannelCard-seeDetailIcon'}>
             <Search />
           </div>
-        </a>
+          </a>
+        </Link>
       </div>
     );
   }

@@ -59,12 +59,12 @@ class YoutuberChannelCard extends React.Component {
           <p>{candidateChannelInfo.description || '此頻道沒有介紹...'}</p>
           <div className={'CandidateChannelCard-statisticZone'}>
             <section className={'CandidateChannelCard-statistic'}>
-              <h3 className={'CandidateChannelCard-statItem'}>訂閱數 {candidateChannelInfo.subscriberCount}</h3>
-              <h3 className={'CandidateChannelCard-statItem'}>觀看數 {candidateChannelInfo.viewCount}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>訂閱數 {candidateChannelInfo.subscriberCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>觀看數 {candidateChannelInfo.viewCount.toLocaleString()}</h3>
             </section>
             <section className={'CandidateChannelCard-statistic'}>
-              <h3 className={'CandidateChannelCard-statItem'}>影片數 {candidateChannelInfo.videoCount}</h3>
-              <h3 className={'CandidateChannelCard-statItem'}>評論數 {candidateChannelInfo.commentCount}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>影片數 {candidateChannelInfo.videoCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>評論數 {candidateChannelInfo.commentCount.toLocaleString()}</h3>
             </section>
           </div>
         </div>

@@ -1,0 +1,121 @@
+@import 'normalize.css';
+
+.Channel-zone {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+
+  .Channel-titleZone {
+  	position: relative;
+    .Channel-subscriber {
+      display: block;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      z-index: 3;
+    }
+  	.Channel-backgroundImage {
+  		display: flex;
+  		width: 100%;
+  		align-items: center;
+  		justify-content: center;
+  		padding: 0;
+  		margin: 0;
+  		img {
+  			width: 100%;
+  		}
+  	}
+  	.Channel-photoImage {
+  		position: absolute;
+  		display: inline-block;
+      left: 0;
+      top: 0;
+      width: 100px;
+      z-index: 3;
+      img {
+        width: 100%;
+      }
+  	}
+    .Channel-decorateZone {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: blue;
+      // opacity: 0.1;
+      background: linear-gradient(rgba(20, 27, 105, 0.5), rgba(20, 27, 105, 0.1), rgba(240, 78, 77, 0.5));
+    }
+  }
+
+  .Channel-title {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(270deg, #ff716f, #f04d4c);
+    color: white;
+  }
+
+  .Channel-description {
+    display: block;
+    // background-color: #ff716f;
+    // background: linear-gradient(270deg, #ff716f, #f04d4c);
+    margin: 20px;
+    word-break: break-all;
+    color: black;
+  }
+
+  .Channel-statisticZone {
+    display: block;
+    padding: 0;
+    background: linear-gradient(270deg, #ff716f, #f04d4c);
+    .Channel-statistic {
+      display: inline-flex;
+      width: 25%;
+      span {
+        display: block;
+        width: 100%;
+        // background: #141b69;
+        padding: 7px;
+        color: white;
+        text-align: center;
+      }
+    }
+  }
+
+  .Channel-videosZoneTitle {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(270deg, #bdde37, #a7cc20);
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 800px) { 
+  .Channel-zone {
+    .Channel-titleZone {
+      .Channel-photoImage {
+        padding: 0;
+        margin: 0;
+        width: 70px;
+      }
+    }
+
+    .Channel-statisticZone {
+      // padding: 0 0 10px 0;
+      .Channel-statistic {
+        width: 50%;
+
+        span {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

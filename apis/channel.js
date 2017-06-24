@@ -21,3 +21,12 @@ export const getAllChannels = async function (query) {
 
   return resultJson;
 };
+
+export const getChannel = async function (channelId) {
+  const result = await fetch(apiUrl + '/' + channelId, {
+    method: 'GET',
+  });
+  const resultJson = await result.json();
+
+  return resultJson;
+};

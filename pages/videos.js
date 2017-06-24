@@ -177,6 +177,16 @@ class Videos extends React.Component {
               </div>
             </div>
             <div className={'Videos-contentZone'}>
+              {
+                videos.map((item) => {
+                  return (
+                    <YoutubeVideoCard
+                      key={item._id}
+                      videoInfo={item}
+                    />
+                  );
+                })
+              }
               <PaginationBox
                 refreshToken={
                   this.query.sort
@@ -190,17 +200,6 @@ class Videos extends React.Component {
                 pageNumber={dataPage}
                 onChangePage={this.changePage.bind(this)}
               />
-              {
-                videos.map((item) => {
-                  return (
-                    <YoutubeVideoCard
-                      key={item._id}
-                      videoInfo={item}
-                    />
-                  );
-                })
-              }
-              {this.state.isLoading ? <div className={'Videos-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
         </MainLayoutContainer>
