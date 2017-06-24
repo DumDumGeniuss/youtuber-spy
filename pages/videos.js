@@ -145,6 +145,13 @@ class Videos extends React.Component {
         </Head>
         <MainLayoutContainer>
           <div className={'Videos-zone'}>
+            <section className={'Videos-titleSection'}>
+              <h1 className={'Videos-title'}>精選影片</h1>
+              <p className={'Videos-text'}>
+                您可以在這邊看到本日發布的影片，也可以瀏覽一週內或一個月內的熱門影片，
+                或許也能順便發現您喜歡的Youtuber並按下訂閱喔～
+              </p>
+            </section>
             <div className={'Videos-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>

@@ -4,9 +4,11 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
+import Plus from 'react-icons/lib/fa/plus';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import CandidateChannelCard from '../components/cards/CandidateChannelCard/CandidateChannelCard';
 import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
+import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
 import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
 import * as candidateChannelAction from '../actions/candidateChannel';
 import * as candidateChannelApi from '../apis/candidateChannel';
@@ -35,6 +37,9 @@ class CandidateChannel extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
+      showAddChannel: false,
+      isAddChannelLoading: false,
+      addChannelErrorMsg: null,
     };
     /* 判斷是不是已經撈完所有資料 */
     // this.toDatasLimit = false;
@@ -67,6 +72,59 @@ class CandidateChannel extends React.Component {
         isLoading: false,
       });
     }
+  }
+
+  changeAddChannelErrorMessage(msg) {
+    this.setState({
+      addChannelErrorMsg: msg,
+    });
+
+  }
+
+  /* Switch the add channel loading icon */
+  isAddChannelLoading(isLoading) {
+    this.setState({
+      isAddChannelLoading: isLoading,
+    });
+  }
+
+  /* Switch the add channel view */
+  showAddChannel(isOpen) {
+    this.setState({
+      showAddChannel: isOpen,
+    });
+  }
+
+  sendAddChannel(link, userDescription) {
+    this.changeAddChannelErrorMessage(null);
+    this.isAddChannelLoading(true);
+    const query = {
+      access_token: localStorage.getItem('youtubeToken'),
+    };
+    const data = {
+      link: link,
+      userDescription: userDescription,
+    };
+    candidateChannelApi.addCandidateChannel(query, data)
+      .then((result) => {
+        if (result.status !== 200) {
+          this.isAddChannelLoading(false);
+          if (result.status === 403) {
+            this.changeAddChannelErrorMessage('很抱歉您的登入已經過期了，請重整頁面重新登入。');
+          }
+          if (result.status === 404) {
+            this.changeAddChannelErrorMessage('您輸入的不是有效的頻道首頁連結。');
+          }
+          if (result.status === 409) {
+            this.changeAddChannelErrorMessage('此頻道已經登入或正在申請了。');
+          }
+        } else {
+          this.showAddChannel(false);
+          this.isAddChannelLoading(false);
+          /* Reload again*/
+          this.changePage(1);
+        }
+      });
   }
 
   // addScrollHandler() {
@@ -184,7 +242,29 @@ class CandidateChannel extends React.Component {
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayoutContainer>
+          {this.state.showAddChannel?
+            <ChannelInputModal
+              errorMessage={this.state.addChannelErrorMsg}
+              message={`
+                請將你想加入的頻道首頁複製貼到連結欄位，並簡短描述一下頻道的特性。
+              `}
+              clickYes={this.sendAddChannel.bind(this)}
+              clickNo={this.showAddChannel.bind(this, false)}
+              isLoading={this.state.isAddChannelLoading}
+            /> : null}
           <div className={'CandidateChannel-zone'}>
+            <section className={'CandidateChannel-titleSection'}>
+              <h1 className={'CandidateChannel-title'}>申請頻道</h1>
+              <p className={'CandidateChannel-text'}>
+                我們歡迎許多各式各樣的頻道加入，剛起步的、還在摸索的、想要獲得更多關注的，
+                只要你是Youtube創作者，隨時歡迎！
+              </p>
+            </section>
+            <div className={'CandidateChannel-addChannelBar'}>
+              {user.userInfo ? 
+                <span className={'CandidateChannel-channelFuncButton CandidateChannel-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
+                : <span className={'CandidateChannel-channelFuncButton CandidateChannel-pleasLogin'}>登入以新增頻道</span>}
+            </div>
             <div className={'CandidateChannel-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>

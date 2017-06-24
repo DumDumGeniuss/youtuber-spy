@@ -34,9 +34,9 @@ class YoutuberChannelCard extends React.Component {
         <div className={'CandidateChannelCard-authInfoZone'}>
           {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onVerifyClick.bind(this, candidateChannelInfo._id)}>確認</button> : null}
           {candidateChannelInfo.isVerified ? 
-            <span className={'CandidateChannelCard-authVerify'}>審核通過</span>
+            <span className={'CandidateChannelCard-authVerify'}>通過</span>
             :
-            <span className={'CandidateChannelCard-authWait'}>等待審核</span>
+            <span className={'CandidateChannelCard-authWait'}>等待</span>
           }
         </div>
         <div className={'CandidateChannelCard-userZone'}>

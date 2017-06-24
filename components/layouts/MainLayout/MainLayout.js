@@ -62,6 +62,11 @@ class MainLayout extends React.Component {
         <div className={'MainLayout-pageContent'}>
           {this.props.children}
         </div>
+        <footer className={'MainLayout-footer'}>
+          <span className={'MainLayout-center'}>
+            copyright©YoutuberSpy
+          </span>
+        </footer>
       </div>
     );
   }

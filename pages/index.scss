@@ -3,11 +3,35 @@
 $primary-color: black;
 
 .Index-zone {
+  position: relative;
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
   margin-left: 50%;
   transform: translate(-50%, 0%);
+
+  .Index-titleSection {
+    display: absolute;
+    // transform: translate(-50%, 0);
+    margin: 15px 0;
+    padding: 15px 0;
+    // background-color: #4490de;
+    background: linear-gradient(#4490de, #4490de);
+    // border: 2px solid #45629e;
+    // border-radius: 10px;
+    .Index-title {
+      margin: 0;
+      // padding: 10px 0;
+      text-align: center;
+      color: white;
+    }
+    .Index-text {
+      padding: 0 50px;
+      // margin-bottom: 10px;
+      // text-align: center;
+      color: white;
+    }
+  }
 
   .Index-addChannelBar {
     position: relative;
@@ -26,21 +50,8 @@ $primary-color: black;
       color: white;
     }
 
-    .Index-add {
-      background-color: #e22623;
-      cursor: pointer;
-    }
-
-    .Index-add:hover {
-      color: yellow;
-    }
-
-    .Index-pleasLogin {
-      background-color: #ff8482;
-    }
-
     .Index-search {
-      background-color: green;
+      background-color: #ff4e4e;
       cursor: pointer;
     }
 

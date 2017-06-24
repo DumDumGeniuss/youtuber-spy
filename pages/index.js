@@ -6,11 +6,8 @@ import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Search from 'react-icons/lib/fa/search';
-import Plus from 'react-icons/lib/fa/plus';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
-import ConfirmModal from '../components/modals/ConfirmModal/ConfirmModal';
-import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
 import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
 import { initStore } from '../store/initStore';
 import * as userAction from '../actions/user';
@@ -43,9 +40,6 @@ class Index extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
-      showAddChannel: false,
-      isAddChannelLoading: false,
-      addChannelErrorMsg: null,
     };
     /* 每次query API時所需要用到的參數 */
     this.query = {
@@ -72,58 +66,6 @@ class Index extends React.Component {
         isLoading: false,
       });
     }
-  }
-
-  /* Show the error message from backend */
-  changeAddChannelErrorMessage(msg) {
-    this.setState({
-      addChannelErrorMsg: msg,
-    });
-
-  }
-
-  /* Switch the add channel loading icon */
-  isAddChannelLoading(isLoading) {
-    this.setState({
-      isAddChannelLoading: isLoading,
-    });
-  }
-
-  /* Switch the add channel view */
-  showAddChannel(isOpen) {
-    this.setState({
-      showAddChannel: isOpen,
-    });
-  }
-
-  sendAddChannel(link, userDescription) {
-    this.changeAddChannelErrorMessage(null);
-    this.isAddChannelLoading(true);
-    const query = {
-      access_token: localStorage.getItem('youtubeToken'),
-    };
-    const data = {
-      link: link,
-      userDescription: userDescription,
-    };
-    candidateChannelApi.addCandidateChannel(query, data)
-      .then((result) => {
-        if (result.status !== 200) {
-          this.isAddChannelLoading(false);
-          if (result.status === 403) {
-            this.changeAddChannelErrorMessage('很抱歉您的登入已經過期了，請重整頁面重新登入。');
-          }
-          if (result.status === 404) {
-            this.changeAddChannelErrorMessage('您輸入的不是有效的頻道首頁連結。');
-          }
-          if (result.status === 409) {
-            this.changeAddChannelErrorMessage('此頻道已經登入或正在申請了。');
-          }
-        } else {
-          this.showAddChannel(false);
-          this.isAddChannelLoading(false);
-        }
-      });
   }
 
   changePage(page) {
@@ -191,21 +133,15 @@ class Index extends React.Component {
           <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayoutContainer>
-          {this.state.showAddChannel?
-            <ChannelInputModal
-              errorMessage={this.state.addChannelErrorMsg}
-              message={`
-                請將你想加入的頻道首頁複製貼到連結欄位，並簡短描述一下頻道的特性。
-              `}
-              clickYes={this.sendAddChannel.bind(this)}
-              clickNo={this.showAddChannel.bind(this, false)}
-              isLoading={this.state.isAddChannelLoading}
-            /> : null}
           <div className={'Index-zone'}>
+            <section className={'Index-titleSection'}>
+              <h1 className={'Index-title'}>精選頻道</h1>
+              <p className={'Index-text'}>
+                你可以在這邊看到許多熱門Youtuber的資訊，也可以在這裡發掘您喜歡的頻道，
+                我們會定時更新推薦的頻道排序，讓更多優質的創作者被發現。
+              </p>
+            </section>
             <div className={'Index-addChannelBar'}>
-              {user.userInfo ? 
-                <span className={'Index-channelFuncButton Index-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
-                : <span className={'Index-channelFuncButton Index-pleasLogin'}>登入以新增頻道</span>}
               <Link href='/candidateChannel'><a>
                 <span className={'Index-channelFuncButton Index-search'}>
                   查看申請頻道<Search />
@@ -230,12 +166,6 @@ class Index extends React.Component {
               </div>
             </div>
             <div className={'Index-contentZone'}>
-              <PaginationBox
-                refreshToken={this.query.sort + this.query.keyword + this.query.order + this.query.count}
-                lockButton={this.state.isLoading}
-                pageNumber={dataPage}
-                onChangePage={this.changePage.bind(this)}
-              />
               {
                 channels.map((item, index) => {
                   return (
@@ -247,6 +177,12 @@ class Index extends React.Component {
                   );
                 })
               }
+              <PaginationBox
+                refreshToken={this.query.sort + this.query.keyword + this.query.order + this.query.count}
+                lockButton={this.state.isLoading}
+                pageNumber={dataPage}
+                onChangePage={this.changePage.bind(this)}
+              />
             </div>
           </div>
         </MainLayoutContainer>

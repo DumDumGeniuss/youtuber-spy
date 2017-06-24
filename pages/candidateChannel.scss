@@ -9,8 +9,62 @@ $primary-color: black;
   margin-left: 50%;
   transform: translate(-50%, 0%);
 
+  .CandidateChannel-titleSection {
+    display: absolute;
+    // transform: translate(-50%, 0);
+    margin: 15px 0;
+    padding: 15px 0;
+    // background-color: #4490de;
+    background: linear-gradient(#4490de, #4490de);
+    // border: 2px solid #45629e;
+    // border-radius: 10px;
+    .CandidateChannel-title {
+      margin: 0;
+      // padding: 10px 0;
+      text-align: center;
+      color: white;
+    }
+    .CandidateChannel-text {
+      padding: 0 50px;
+      // margin-bottom: 10px;
+      // text-align: center;
+      color: white;
+    }
+  }
+
+  .CandidateChannel-addChannelBar {
+    position: relative;
+    height: 40px;
+    padding: 0px 5px;
+
+    .CandidateChannel-channelFuncButton {
+      padding: 2px 5px;
+      display: inline-block;
+      margin-top: 5px;
+      margin-right: 5px;
+      // right: 5px;
+      height: 30px;
+      line-height: 26px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .CandidateChannel-add {
+      background-color: #ff8684;
+      cursor: pointer;
+    }
+
+    .CandidateChannel-add:hover {
+      color: yellow;
+    }
+
+    .CandidateChannel-pleasLogin {
+      background-color: #fb9944;
+    }
+  }
+
   .CandidateChannel-contentZone {
-    // background-color: white;
+    background-color: white;
   
     .CandidateChannel-loadingButton {
       display: flex;
