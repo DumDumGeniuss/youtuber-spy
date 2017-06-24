@@ -3,7 +3,7 @@
 .YoutuberChannelCard-zone {
   position: relative;
   display: inline-block;
-  width: 200px;
+  width: 25%;
   height: 300px;
   // border: 1px solid #e9ebee;
   // margin-bottom: -6px;
@@ -72,7 +72,7 @@
 
 @media (max-width: 800px) {
   .YoutuberChannelCard-zone {
-    width: 50vw;
+    width: 50%;
     height: 75vw;
 
   .YoutuberChannelCard-seeDetailIcon {
