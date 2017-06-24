@@ -44,6 +44,7 @@ class Index extends React.Component {
     return {
       hottestVideos: videoHottestResult.datas,
       newestVideos: videoNewestResult.datas,
+      query, 
     };
   }
 
@@ -57,6 +58,8 @@ class Index extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
+    const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
+    console.log(fullSiteUrl, window.location.href);
     // this.props.getChannelAsync(this.props.query.channelId);
   }
 
@@ -73,18 +76,17 @@ class Index extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>小頻道大世界-頻道精選</title>
-          <meta name="og:title" content="小頻道大世界" />
+          <title>{channelInfo.title}</title>
+          <meta name="description" content={channelInfo.description} />
+          <meta name="og:title" content={'小頻道大世界-' + channelInfo.title} />
           <meta name="og:description" content={`
-            【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
-            這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
-            也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
-            許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
+            【小頻道大世界】${channelInfo.description}`}
           />
           <meta name="og:type" content="website" />
-          <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
-          <meta name="og:url" content="https://www.youtuberspy.com/" />
-          <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
+          <meta name="og:image" content={channelInfo.defaultThumbnails} />
+          <meta name="og:url" content={'https://www.youtuberspy.com/channel?channelId=' + this.props.query.channelId} />
+          <meta property="og:site_name" content={'小頻道大世界- 在這裡發掘您喜歡的Youtubers！'}/>
+          <meta property="fb:admins" content={'1910674529145700'} />
         </Head>
         <MainLayoutContainer>
           <div className={'Channel-zone'}>
