@@ -100,10 +100,10 @@ class Index extends React.Component {
               <div className={'Channel-decorateZone'}>
               </div>
               <div className={'Channel-subscriber'}>
+                <script src="https://apis.google.com/js/platform.js"></script>
                 <div
                   className={'g-ytsubscribe'}
                   data-channelid={channelInfo._id} data-layout="default" data-count="default"></div>
-                <script src="https://apis.google.com/js/platform.js"></script>
               </div>
             </div>
             <h1 className={'Channel-title'}>{channelInfo.title}</h1>
