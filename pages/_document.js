@@ -39,7 +39,6 @@ export default class MyDocument extends Document {
             ga('create', 'UA-82279826-3', 'auto');
             ga('send', 'pageview');
           `}} />
-          <script src="https://apis.google.com/js/platform.js"></script>
         </Head>
         <body className="custom_class">
           {this.props.customValue}
