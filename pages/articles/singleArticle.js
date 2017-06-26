@@ -54,6 +54,7 @@ class SingleArticle extends React.Component {
           <meta name="og:image" content={articleInfo.titleImage} />
           <meta name="og:url" content={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id} />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>
           <div className={'SingleArticle-zone'}>

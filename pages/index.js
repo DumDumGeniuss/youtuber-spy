@@ -132,6 +132,7 @@ class Index extends React.Component {
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
           <meta name="og:url" content="https://www.youtuberspy.com/" />
           <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>
           <div className={'Index-zone'}>

@@ -84,7 +84,7 @@ class SingleChannel extends React.Component {
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content={channelInfo.bannerTvImageUrl} />
-          <meta name="og:url" content={'https://www.youtuberspy.com/channel?channelId=' + this.props.query.channelId} />
+          <meta name="og:url" content={'https://www.youtuberspy.com/channels/singleChannel?channelId=' + this.props.query.channelId} />
           <meta property="og:site_name" content={'小頻道大世界- 在這裡發掘您喜歡的Youtubers！'}/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
