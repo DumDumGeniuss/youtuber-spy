@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import Facebook from 'react-icons/lib/fa/facebook';
 import stylesheet from './MainLayout.scss';
 
 class MainLayout extends React.Component {
@@ -62,6 +63,13 @@ class MainLayout extends React.Component {
             </div>
           </div>
         </nav>
+        <div className={'MainLayout-socialZone'}>
+          <a target={'_blank'} href={'https://www.facebook.com/Youtuber-Spy-%E5%B0%8F%E9%A0%BB%E9%81%93%E5%A4%A7%E4%B8%96%E7%95%8C-1929847743924108/'}>
+            <div className={'MainLayout-socialIcon'}>
+             <Facebook />
+            </div>
+          </a>
+        </div>
         <div className={'MainLayout-fbLikeZone'}>
           <div
             className="fb-like"

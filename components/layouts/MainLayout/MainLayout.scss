@@ -8,6 +8,31 @@ $primary-color: black;
   margin-top: 50px;
 }
 
+.MainLayout-socialZone {
+  position: fixed;
+  display: inline-block;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 3;
+
+  .MainLayout-socialIcon {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #3b5998;
+    color: white;
+  }
+
+  .MainLayout-socialIcon:hover {
+    color: yellow;
+  }
+}
+
 .MainLayout-fbLikeZone {
   padding: 5px 0 0 5px;
 }
