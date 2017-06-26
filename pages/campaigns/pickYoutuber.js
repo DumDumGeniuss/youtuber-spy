@@ -51,7 +51,7 @@ class PickYoutuber extends React.Component {
           <meta property="og:image:type" content="image/jpeg" />
           <meta property="og:image:width" content="400" />
           <meta property="og:image:height" content="400" />
-          <meta property="og:image" content={pickedYoutuber.highThumbnails} />
+          <meta property="og:image" content={pickedYoutuber.mediumThumbnails} />
           <meta property="og:url" content={'https://www.youtuberspy.com/campaigns/pickYoutuber'} />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
