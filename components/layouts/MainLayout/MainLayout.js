@@ -30,9 +30,7 @@ class MainLayout extends React.Component {
     return (
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <script src="https://apis.google.com/js/platform.js"></script>
-        </Head>
+        <Head />
         <nav className={'MainLayout-navbar'}>
           <div className={'MainLayout-content'}>
             <div className={'MainLayout-logo'}>

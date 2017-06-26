@@ -44,6 +44,7 @@ export default class MyDocument extends Document {
           {this.props.customValue}
           <Main />
           <NextScript />
+          <div id="fb-root"></div>
           <script dangerouslySetInnerHTML={{__html: `
             (function(d, s, id) {
               var js, fjs = d.getElementsByTagName(s)[0];
