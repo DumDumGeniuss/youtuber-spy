@@ -230,14 +230,14 @@ class AllCandidateChannels extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <title>小頻道大世界-申請頻道</title>
-          <meta name="og:title" content="【小頻道大世界】申請頻道" />
-          <meta name="og:description" content={`
+          <meta property="og:title" content="【小頻道大世界】申請頻道" />
+          <meta property="og:description" content={`
             【小頻道大世界】不論您是剛起步的Youtuber，知名的Youtuber還是才華不被發現的Youtuber
             小頻道大世界都歡迎您動動手指頭申請頻道，如此我們才能將您的作品分享給更多人知道！`}
           />
-          <meta name="og:type" content="website" />
-          <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
-          <meta name="og:url" content="https://www.youtuberspy.com/candidateChannels/allCandidateChannels" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta property="og:url" content="https://www.youtuberspy.com/candidateChannels/allCandidateChannels" />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>

@@ -44,15 +44,15 @@ class PickYoutuber extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <title>{pickedYoutuber.title}</title>
-          <meta name="og:title" content={pickedYoutuber.title} />
-          <meta name="og:description" content={pickedYoutuber.description}
+          <meta property="og:title" content={pickedYoutuber.title} />
+          <meta property="og:description" content={pickedYoutuber.description}
           />
-          <meta name="og:type" content="website" />
+          <meta property="og:type" content="website" />
           <meta property="og:image:type" content="image/jpeg" />
           <meta property="og:image:width" content="400" />
           <meta property="og:image:height" content="400" />
           <meta property="og:image" content={pickedYoutuber.highThumbnails} />
-          <meta property="og:url" content={'https://www.youtuberspy.com/campaigns/pickYoutuber?channelTitle=' + pickedYoutuber.title} />
+          <meta property="og:url" content={'https://www.youtuberspy.com/campaigns/pickYoutuber?channelId=' + pickedYoutuber._id} />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>

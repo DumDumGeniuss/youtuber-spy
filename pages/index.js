@@ -121,16 +121,16 @@ class Index extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <title>小頻道大世界-頻道精選</title>
-          <meta name="og:title" content="小頻道大世界" />
-          <meta name="og:description" content={`
+          <meta property="og:title" content="小頻道大世界" />
+          <meta property="og:description" content={`
             【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
             這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
             也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
             許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
           />
-          <meta name="og:type" content="website" />
-          <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
-          <meta name="og:url" content="https://www.youtuberspy.com/" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta property="og:url" content="https://www.youtuberspy.com/" />
           <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
