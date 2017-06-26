@@ -46,7 +46,7 @@ class PickYoutuber extends React.Component {
           <meta name="og:description" content={pickedYoutuber.description}
           />
           <meta name="og:type" content="website" />
-          <meta name="og:image" content={pickedYoutuber.defaultThumbnails} />
+          <meta name="og:image" content={pickedYoutuber.highThumbnails} />
           <meta name="og:url" content={'https://www.youtuberspy.com/channel?channelId=' + pickedYoutuber._id} />
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
