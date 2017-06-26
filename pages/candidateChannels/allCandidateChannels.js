@@ -230,12 +230,10 @@ class AllCandidateChannels extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
           <title>小頻道大世界-申請頻道</title>
-          <meta name="og:title" content="小頻道大世界" />
+          <meta name="og:title" content="【小頻道大世界】申請頻道" />
           <meta name="og:description" content={`
-            【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
-            這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
-            也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
-            許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
+            【小頻道大世界】不論您是剛起步的Youtuber，知名的Youtuber還是才華不被發現的Youtuber
+            小頻道大世界都歡迎您動動手指頭申請頻道，如此我們才能將您的作品分享給更多人知道！`}
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
@@ -255,7 +253,7 @@ class AllCandidateChannels extends React.Component {
             /> : null}
           <div className={'AllCandidateChannels-zone'}>
             <TitleSection
-              titleFonts={'申請頻道<'}
+              titleFonts={'申請頻道'}
               contentFonts={`
                 我們歡迎許多各式各樣的頻道加入，剛起步的、還在摸索的、想要獲得更多關注的，
                 只要你是Youtube創作者，隨時歡迎！

@@ -171,10 +171,8 @@ class AllArticles extends React.Component {
           <title>小頻道大世界-新聞</title>
           <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
-            【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
-            這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
-            也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
-            許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
+            【小頻道大世界】我們會將一些近期的有趣數據與新聞張貼在精彩新聞，
+            若您對Youtubers的世界充滿好奇，那麼歡迎你來到這裡！`}
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />

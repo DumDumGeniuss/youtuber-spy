@@ -134,10 +134,8 @@ class AllVideos extends React.Component {
           <title>小頻道大世界-影片精選</title>
           <meta name="og:title" content="小頻道大世界" />
           <meta name="og:description" content={`
-            【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
-            這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
-            也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
-            許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
+            【小頻道大世界】想知道最新的影片資訊嗎？想看看最近大家都在流行什麼樣的影片嗎？
+            小頻道大世界提供您方便的搜尋服務，讓你可以看到本日，本週甚至本月的流行影片！`}
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
