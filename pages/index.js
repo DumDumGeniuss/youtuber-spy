@@ -9,6 +9,7 @@ import Search from 'react-icons/lib/fa/search';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
 import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
+import TitleSection from '../components/sections/TitleSection/TitleSection';
 import { initStore } from '../store/initStore';
 import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
@@ -134,15 +135,15 @@ class Index extends React.Component {
         </Head>
         <MainLayoutContainer>
           <div className={'Index-zone'}>
-            <section className={'Index-titleSection'}>
-              <h1 className={'Index-title'}>精選頻道</h1>
-              <p className={'Index-text'}>
+            <TitleSection
+              titleFonts={'精選頻道'}
+              contentFonts={`
                 你可以在這邊看到許多熱門Youtuber的資訊，也可以在這裡發掘您喜歡的頻道，
                 我們會定時更新推薦的頻道排序，讓更多優質的創作者被發現。
-              </p>
-            </section>
+              `}
+            />
             <div className={'Index-addChannelBar'}>
-              <Link href='/candidateChannel'><a>
+              <Link href='/candidateChannels/allCandidateChannels'><a>
                 <span className={'Index-channelFuncButton Index-search'}>
                   查看申請頻道<Search />
                 </span>

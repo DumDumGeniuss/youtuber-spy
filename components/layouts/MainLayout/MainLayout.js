@@ -44,7 +44,10 @@ class MainLayout extends React.Component {
                 <Link href='/'><a>頻道</a></Link>
               </div>
               <div className={'MainLayout-link'}>
-                <Link href='/videos'><a>影片</a></Link>
+                <Link href='/videos/allVideos'><a>影片</a></Link>
+              </div>
+              <div className={'MainLayout-link'}>
+                <Link href='/articles/allArticles'><a>新聞</a></Link>
               </div>
               {this.props.userInfo ? 
                 <div onClick={this.onLogoutClick.bind(this)} className={'MainLayout-login'}>

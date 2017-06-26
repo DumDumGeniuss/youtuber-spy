@@ -5,15 +5,16 @@ import withRedux from 'next-redux-wrapper';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
-import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
-import CandidateChannelCard from '../components/cards/CandidateChannelCard/CandidateChannelCard';
-import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
-import ChannelInputModal from '../components/modals/ChannelInputModal/ChannelInputModal';
-import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
-import * as candidateChannelAction from '../actions/candidateChannel';
-import * as candidateChannelApi from '../apis/candidateChannel';
+import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
+import CandidateChannelCard from '../../components/cards/CandidateChannelCard/CandidateChannelCard';
+import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
+import ChannelInputModal from '../../components/modals/ChannelInputModal/ChannelInputModal';
+import TitleSection from '../../components/sections/TitleSection/TitleSection';
+import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import * as candidateChannelAction from '../../actions/candidateChannel';
+import * as candidateChannelApi from '../../apis/candidateChannel';
 
-import stylesheet from './candidateChannel.scss';
+import stylesheet from './allCandidateChannels.scss';
 
 const defaultQuery = {
   sort: 'addTime',
@@ -23,7 +24,7 @@ const defaultQuery = {
   count: 10,
 };
 // localStorage.setItem('state', 'off');
-class CandidateChannel extends React.Component {
+class AllCandidateChannels extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await candidateChannelApi.getCandidateChannels(defaultQuery);
     store.dispatch(candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token));
@@ -252,20 +253,20 @@ class CandidateChannel extends React.Component {
               clickNo={this.showAddChannel.bind(this, false)}
               isLoading={this.state.isAddChannelLoading}
             /> : null}
-          <div className={'CandidateChannel-zone'}>
-            <section className={'CandidateChannel-titleSection'}>
-              <h1 className={'CandidateChannel-title'}>申請頻道</h1>
-              <p className={'CandidateChannel-text'}>
+          <div className={'AllCandidateChannels-zone'}>
+            <TitleSection
+              titleFonts={'申請頻道<'}
+              contentFonts={`
                 我們歡迎許多各式各樣的頻道加入，剛起步的、還在摸索的、想要獲得更多關注的，
                 只要你是Youtube創作者，隨時歡迎！
-              </p>
-            </section>
-            <div className={'CandidateChannel-addChannelBar'}>
+              `}
+            />
+            <div className={'AllCandidateChannels-addChannelBar'}>
               {user.userInfo ? 
-                <span className={'CandidateChannel-channelFuncButton CandidateChannel-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
-                : <span className={'CandidateChannel-channelFuncButton CandidateChannel-pleasLogin'}>登入以新增頻道</span>}
+                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
+                : <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>登入以新增頻道</span>}
             </div>
-            <div className={'CandidateChannel-functionBar'}>
+            <div className={'AllCandidateChannels-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
@@ -281,7 +282,7 @@ class CandidateChannel extends React.Component {
                 </select>
               </div>
             </div>
-            <div className={'CandidateChannel-contentZone'}>
+            <div className={'AllCandidateChannels-contentZone'}>
               <PaginationBox
                 refreshToken={
                   this.query.sort
@@ -305,7 +306,7 @@ class CandidateChannel extends React.Component {
                   );
                 })
               }
-              {this.state.isLoading ? <div className={'CandidateChannel-loadingButton'}><FaCircleONotch /></div>: null}
+              {this.state.isLoading ? <div className={'AllCandidateChannels-loadingButton'}><FaCircleONotch /></div>: null}
             </div>
           </div>
         </MainLayoutContainer>
@@ -328,4 +329,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(CandidateChannel)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllCandidateChannels)

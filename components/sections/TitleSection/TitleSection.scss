@@ -1,0 +1,22 @@
+  .TitleSection-titleSection {
+    // display: absolute;
+    // transform: translate(-50%, 0);
+    margin: 15px 0;
+    padding: 15px 0;
+    // background-color: #4490de;
+    background: linear-gradient(#4490de, #4490de);
+    // border: 2px solid #45629e;
+    // border-radius: 10px;
+    .TitleSection-title {
+      margin: 0;
+      // padding: 10px 0;
+      text-align: center;
+      color: white;
+    }
+    .TitleSection-text {
+      padding: 0 50px;
+      // margin-bottom: 10px;
+      // text-align: center;
+      color: white;
+    }
+  }

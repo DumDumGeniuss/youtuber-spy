@@ -2,14 +2,14 @@
 
 $primary-color: black;
 
-.CandidateChannel-zone {
+.AllCandidateChannels-zone {
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
   margin-left: 50%;
   transform: translate(-50%, 0%);
 
-  .CandidateChannel-titleSection {
+  .AllCandidateChannels-titleSection {
     display: absolute;
     // transform: translate(-50%, 0);
     margin: 15px 0;
@@ -18,13 +18,13 @@ $primary-color: black;
     background: linear-gradient(#4490de, #4490de);
     // border: 2px solid #45629e;
     // border-radius: 10px;
-    .CandidateChannel-title {
+    .AllCandidateChannels-title {
       margin: 0;
       // padding: 10px 0;
       text-align: center;
       color: white;
     }
-    .CandidateChannel-text {
+    .AllCandidateChannels-text {
       padding: 0 50px;
       // margin-bottom: 10px;
       // text-align: center;
@@ -32,12 +32,12 @@ $primary-color: black;
     }
   }
 
-  .CandidateChannel-addChannelBar {
+  .AllCandidateChannels-addChannelBar {
     position: relative;
     height: 40px;
     padding: 0px 5px;
 
-    .CandidateChannel-channelFuncButton {
+    .AllCandidateChannels-channelFuncButton {
       padding: 2px 5px;
       display: inline-block;
       margin-top: 5px;
@@ -49,24 +49,24 @@ $primary-color: black;
       color: white;
     }
 
-    .CandidateChannel-add {
+    .AllCandidateChannels-add {
       background-color: #ff8684;
       cursor: pointer;
     }
 
-    .CandidateChannel-add:hover {
+    .AllCandidateChannels-add:hover {
       color: yellow;
     }
 
-    .CandidateChannel-pleasLogin {
+    .AllCandidateChannels-pleasLogin {
       background-color: #fb9944;
     }
   }
 
-  .CandidateChannel-contentZone {
+  .AllCandidateChannels-contentZone {
     background-color: white;
   
-    .CandidateChannel-loadingButton {
+    .AllCandidateChannels-loadingButton {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -80,7 +80,7 @@ $primary-color: black;
     }
   }
   
-  .CandidateChannel-functionBar {
+  .AllCandidateChannels-functionBar {
     position: relative;
     min-height: 40px;
     padding: 5px 5px;

@@ -5,14 +5,15 @@ import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
-import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
-import YoutubeVideoCard from '../components/cards/YoutubeVideoCard/YoutubeVideoCard';
-import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
-import { initStore, startClock, addCount, serverRenderClock } from '../store/initStore';
-import * as videoAction from '../actions/video';
-import * as videoApi from '../apis/video';
+import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
+import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
+import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
+import TitleSection from '../../components/sections/TitleSection/TitleSection';
+import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import * as videoAction from '../../actions/video';
+import * as videoApi from '../../apis/video';
 
-import stylesheet from './videos.scss';
+import stylesheet from './allVideos.scss';
 
 const defaultQuery = {
   sort: 'publishedAt',
@@ -24,7 +25,7 @@ const defaultQuery = {
   endTime: null,
 };
 
-class Videos extends React.Component {
+class AllVideos extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await videoApi.getAllVideos(defaultQuery);
     store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.token));
@@ -144,15 +145,15 @@ class Videos extends React.Component {
           <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayoutContainer>
-          <div className={'Videos-zone'}>
-            <section className={'Videos-titleSection'}>
-              <h1 className={'Videos-title'}>精選影片</h1>
-              <p className={'Videos-text'}>
+          <div className={'AllVideos-zone'}>
+            <TitleSection
+              titleFonts={'精選影片'}
+              contentFonts={`
                 您可以在這邊看到本日發布的影片，也可以瀏覽一週內或一個月內的熱門影片，
                 或許也能順便發現您喜歡的Youtuber並按下訂閱喔～
-              </p>
-            </section>
-            <div className={'Videos-functionBar'}>
+              `}
+            />
+            <div className={'AllVideos-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
@@ -176,7 +177,7 @@ class Videos extends React.Component {
                 </select>
               </div>
             </div>
-            <div className={'Videos-contentZone'}>
+            <div className={'AllVideos-contentZone'}>
               {
                 videos.map((item) => {
                   return (
@@ -220,4 +221,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Videos)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllVideos)

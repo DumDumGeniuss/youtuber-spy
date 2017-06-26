@@ -4,18 +4,18 @@ import Link from 'next/link';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
-import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
-import YoutubeVideoCard from '../components/cards/YoutubeVideoCard/YoutubeVideoCard';
-import { initStore } from '../store/initStore';
-import * as channelAction from '../actions/channel';
-import * as channelApi from '../apis/channel';
-import * as videoApi from '../apis/video';
+import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
+import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
+import { initStore } from '../../store/initStore';
+import * as channelAction from '../../actions/channel';
+import * as channelApi from '../../apis/channel';
+import * as videoApi from '../../apis/video';
 
 
-import stylesheet from './channel.scss';
+import stylesheet from './singleChannel.scss';
 
 // localStorage.setItem('state', 'off');
-class Index extends React.Component {
+class SingleChannel extends React.Component {
   static async getInitialProps({ query, store }) {
     const videoQueryNewest = {
       page: 1,
@@ -89,41 +89,41 @@ class Index extends React.Component {
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>
-          <div className={'Channel-zone'}>
-            <div className={'Channel-titleZone'}>
-              <figure className={'Channel-backgroundImage'}>
+          <div className={'SingleChannel-zone'}>
+            <div className={'SingleChannel-titleZone'}>
+              <figure className={'SingleChannel-backgroundImage'}>
                 <img src={channelInfo.bannerTvImageUrl}/>
               </figure>
-              <figure className={'Channel-photoImage'}>
+              <figure className={'SingleChannel-photoImage'}>
                 <img src={channelInfo.defaultThumbnails}/>
               </figure>
-              <div className={'Channel-decorateZone'}>
+              <div className={'SingleChannel-decorateZone'}>
               </div>
-              <div className={'Channel-subscriber'}>
+              <div className={'SingleChannel-subscriber'}>
                 <script src="https://apis.google.com/js/platform.js"></script>
                 <div
                   className={'g-ytsubscribe'}
                   data-channelid={channelInfo._id} data-layout="default" data-count="default"></div>
               </div>
             </div>
-            <h1 className={'Channel-title'}>{channelInfo.title}</h1>
-            <div className={'Channel-statisticZone'}>
-              <div className={'Channel-statistic'}>
+            <h1 className={'SingleChannel-title'}>{channelInfo.title}</h1>
+            <div className={'SingleChannel-statisticZone'}>
+              <div className={'SingleChannel-statistic'}>
                 <span>訂閱 {channelInfo.subscriberCount.toLocaleString()}</span>
               </div>
-              <div className={'Channel-statistic'}>
+              <div className={'SingleChannel-statistic'}>
                 <span>觀看 {channelInfo.viewCount.toLocaleString()}</span>
               </div>
-              <div className={'Channel-statistic'}>
+              <div className={'SingleChannel-statistic'}>
                 <span>影片 {channelInfo.videoCount.toLocaleString()}</span>
               </div>
-              <div className={'Channel-statistic'}>
+              <div className={'SingleChannel-statistic'}>
                 <span>評論 {channelInfo.commentCount.toLocaleString()}</span>
               </div>
             </div>
-            <p className={'Channel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
-            <h1 className={'Channel-videosZoneTitle'}>最新影片</h1>
-            <div className={'Channel-videosZone'}>
+            <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
+            <h1 className={'SingleChannel-videosZoneTitle'}>最新影片</h1>
+            <div className={'SingleChannel-videosZone'}>
               {
                 newestVideos.map((item) => {
                   return (
@@ -135,8 +135,8 @@ class Index extends React.Component {
                 })
               }
             </div>
-            <h1 className={'Channel-videosZoneTitle'}>熱門影片</h1>
-            <div className={'Channel-videosZone'}>
+            <h1 className={'SingleChannel-videosZoneTitle'}>熱門影片</h1>
+            <div className={'SingleChannel-videosZone'}>
               {
                 hottestVideos.map((item) => {
                   return (
@@ -169,4 +169,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index);
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(SingleChannel);

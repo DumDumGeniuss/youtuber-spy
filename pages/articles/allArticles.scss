@@ -1,0 +1,82 @@
+@import 'normalize.css';
+
+$primary-color: black;
+
+.AllArticles-zone {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+
+  .AllArticles-contentZone {
+    background-color: white;
+  }
+
+  .AllArticles-addArticleBar {
+    position: relative;
+    height: 40px;
+    padding: 0px 5px;
+
+    .AllArticles-articleFuncButton {
+      padding: 2px 5px;
+      display: inline-block;
+      margin-top: 5px;
+      margin-right: 5px;
+      // right: 5px;
+      height: 30px;
+      line-height: 26px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .AllArticles-add {
+      background-color: #ff8684;
+      cursor: pointer;
+    }
+
+    .AllArticles-add:hover {
+      color: yellow;
+    }
+  }
+  
+  .AllArticles-functionBar {
+    position: relative;
+    min-height: 40px;
+    padding: 5px 5px;
+    div {
+      display: inline-block;
+      padding-right: 10px;
+  
+      svg {
+        height: 30px;
+        width: 30px;
+        color: #ff8a8a;
+        animation: spin 1s linear infinite;
+      }
+  
+      input {
+        height: 30px;
+        width: 100px;
+        padding: 0;
+        border-radius: 3px;
+      }
+    }
+  }
+
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+@media (max-width: 800px) {
+  .AllArticles-zone {
+  }
+}
+

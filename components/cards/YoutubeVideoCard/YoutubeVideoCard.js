@@ -33,7 +33,7 @@ class YoutubeVideoCard extends React.Component {
         <section className={'YoutubeVideoCard-infoDiv'}>
           <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>
           <h4>
-            <Link href={'/channel?channelId=' + videoInfo.channelId}>
+            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}>
               <a>{videoInfo.channelTitle}</a>
             </Link>
           </h4>

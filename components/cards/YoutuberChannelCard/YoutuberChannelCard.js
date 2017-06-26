@@ -38,7 +38,7 @@ class YoutuberChannelCard extends React.Component {
           <h2 className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount.toLocaleString()}</small></h2>
           <h2 className={'YoutuberChannelCard-data'}><small>成立時間 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></h2>
         </div>
-        <Link href={'/channel?channelId=' + channelInfo._id}>
+        <Link href={'/channels/singleChannel?channelId=' + channelInfo._id}>
           <a>
           <div className={'YoutuberChannelCard-seeDetailIcon'}>
             <Search />
