@@ -13,18 +13,8 @@ import stylesheet from './pickYoutuber.scss';
 
 class PickYoutuber extends React.Component {
   static async getInitialProps({ query, store }) {
-    const firstResult = await channelApi.getAllChannels({
-      page: 1,
-      count: 1,
-    });
-    const totalChannelsNumber = parseInt(firstResult.totalCount, 10);
-    const randomPick = parseInt(Math.random() * totalChannelsNumber, 10);
-
-    const finalResult = await channelApi.getAllChannels({
-      page: randomPick,
-      count: 1,
-    });
-    const pickedYoutuber = finalResult.datas[0];
+    const randomResult = await channelApi.getRandomChannel();
+    const pickedYoutuber = randomResult.data;
     return {
       query,
       pickedYoutuber,

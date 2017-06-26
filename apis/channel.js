@@ -30,3 +30,12 @@ export const getChannel = async function (channelId) {
 
   return resultJson;
 };
+
+export const getRandomChannel = async function () {
+  const result = await fetch(apiUrl + '/xxx?random=true', {
+    method: 'GET',
+  });
+  const resultJson = await result.json();
+
+  return resultJson;
+};
