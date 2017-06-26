@@ -30,7 +30,18 @@ class MainLayout extends React.Component {
     return (
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head />
+        <Head>
+          <script src="https://apis.google.com/js/platform.js"></script>
+          <script dangerouslySetInnerHTML={{__html: `
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=158925374651334";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          `}} />
+        </Head>
         <nav className={'MainLayout-navbar'}>
           <div className={'MainLayout-content'}>
             <div className={'MainLayout-logo'}>
