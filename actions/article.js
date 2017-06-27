@@ -16,7 +16,7 @@ export const getArticlesAsync = function (query) {
     articleApi.getAllArticles(query)
       .then((result) => {
         dispatch(
-          getArticles(result.data, result.totalCount, result.token)
+          getArticles(result.datas, result.totalCount, result.token)
         );
       });
   };
