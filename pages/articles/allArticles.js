@@ -118,7 +118,7 @@ class AllArticles extends React.Component {
 
   changePage(page) {
     this.query.page = page;
-    this.props.getArticlesAsync([], this.query);
+    this.props.getArticlesAsync(this.query);
     this.setState({
       isLoading: true,
     });
@@ -135,7 +135,7 @@ class AllArticles extends React.Component {
       // this.toDatasLimit = false;
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.props.getArticlesAsync([], this.query);
+      this.props.getArticlesAsync(this.query);
       this.setState({
         isLoading: true,
       });
@@ -146,7 +146,7 @@ class AllArticles extends React.Component {
     // this.toDatasLimit = false;
     this.query.page = 1;
     this.query.sort = event.target.value;
-    this.props.getArticlesAsync([], this.query);
+    this.props.getArticlesAsync(this.query);
     this.setState({
       isLoading: true,
     });
