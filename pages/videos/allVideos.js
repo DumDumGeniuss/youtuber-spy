@@ -159,7 +159,7 @@ class AllVideos extends React.Component {
               </div>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={'publishedAt'}>
+                <select onChange={this.changeOrder.bind(this)} defaultValue={this.query.sort}>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'publishedAt'}>時間</option>
                   <option value={'randomNumber'}>推薦(每小時更新)</option>

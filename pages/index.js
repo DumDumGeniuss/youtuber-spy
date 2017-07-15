@@ -158,7 +158,7 @@ class Index extends React.Component {
               </div>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={'randomNumber'}>
+                <select onChange={this.changeOrder.bind(this)} defaultValue={this.query.sort}>
                   <option value={'subscriberCount'}>訂閱</option>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'videoCount'}>影片</option>
