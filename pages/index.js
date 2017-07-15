@@ -20,7 +20,7 @@ import * as youtubeApi from '../apis/youtube';
 import stylesheet from './index.scss';
 
 const defaultQuery = {
-  sort: 'randomNumber',
+  sort: 'subscriberCount',
   order: 'desc',
   keyword: '',
   page: 1,

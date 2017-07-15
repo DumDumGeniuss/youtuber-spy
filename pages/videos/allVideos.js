@@ -16,7 +16,7 @@ import * as videoApi from '../../apis/video';
 import stylesheet from './allVideos.scss';
 
 const defaultQuery = {
-  sort: 'publishedAt',
+  sort: 'viewCount',
   order: 'desc',
   keyword: '',
   page: 1,
