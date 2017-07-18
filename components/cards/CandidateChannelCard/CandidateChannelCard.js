@@ -39,16 +39,6 @@ class YoutuberChannelCard extends React.Component {
             <span className={'CandidateChannelCard-authWait'}>等待</span>
           }
         </div>
-        <div className={'CandidateChannelCard-userZone'}>
-          <img src={candidateChannelInfo.userPicture} className={'CandidateChannelCard-userPicture'}/>
-          <section className={'CandidateChannelCard-Info'}>
-            <div>
-              <span>{candidateChannelInfo.userName}</span>
-              <span> {hours}小時前申請</span>
-            </div>
-            <p>{candidateChannelInfo.userDescription || '這傢伙似乎沒有留下任何介紹'}</p>
-          </section>
-        </div>
         <div className={'CandidateChannelCard-channelZone'}>
           <a href={'https://www.youtube.com/channel/' + candidateChannelInfo._id} target={'_blank'}>
             <h3 className={'CandidateChannelCard-channelZoneTitle'}>{candidateChannelInfo.title}</h3>

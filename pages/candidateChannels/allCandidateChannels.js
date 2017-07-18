@@ -96,7 +96,7 @@ class AllCandidateChannels extends React.Component {
     });
   }
 
-  sendAddChannel(link, userDescription) {
+  sendAddChannel(link) {
     this.changeAddChannelErrorMessage(null);
     this.isAddChannelLoading(true);
     const query = {
@@ -104,7 +104,6 @@ class AllCandidateChannels extends React.Component {
     };
     const data = {
       link: link,
-      userDescription: userDescription,
     };
     candidateChannelApi.addCandidateChannel(query, data)
       .then((result) => {

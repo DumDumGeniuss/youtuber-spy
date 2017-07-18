@@ -12,7 +12,6 @@ class ChannelInputModal extends React.Component {
   constructor(props) {
     super(props);
     this.link = '';
-    this.userDescription = '';
   }
 
   componentDidMount() {
@@ -26,15 +25,11 @@ class ChannelInputModal extends React.Component {
     this.link = event.target.value;
   }
 
-  handleDescriptionChange(event) {
-    this.userDescription = event.target.value;
-  }
-
   _onClickYes() {
     if (this.props.isLoading) {
       return;
     }
-    this.props.clickYes(this.link, this.userDescription);
+    this.props.clickYes(this.link);
   }
 
   _onClickNo() {
@@ -58,10 +53,6 @@ class ChannelInputModal extends React.Component {
               <div className={'ChannelInputModal-errorMessage'}>{this.props.errorMessage}</div> : null}
             <div className={'ChannelInputModal-itemInput'}>
               <input onChange={this.handleLinkChange.bind(this)}/>
-            </div>
-            <div className={'ChannelInputModal-itemTitle'}>描述</div>
-            <div className={'ChannelInputModal-itemInput'}>
-              <textarea onChange={this.handleDescriptionChange.bind(this)} rows={'3'}/>
             </div>
           </div>
           <div className={'ChannelInputModal-func'}>
