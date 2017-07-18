@@ -168,9 +168,9 @@ class AllVideos extends React.Component {
               <div>
                 <span>時間：</span>
                 <select onChange={this.changeQuery.bind(this)} defaultValue={1}>
-                  <option value={1}>本日新片</option>
-                  <option value={7}>本週新片</option>
-                  <option value={30}>本月新片</option>
+                  <option value={1}>最近一天</option>
+                  <option value={7}>最近一週</option>
+                  <option value={30}>最近一月</option>
                   <option value={9000}>無限制</option>
                 </select>
               </div>
