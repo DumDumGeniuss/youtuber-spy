@@ -231,8 +231,7 @@ class AllCandidateChannels extends React.Component {
           <title>小頻道大世界-申請頻道</title>
           <meta property="og:title" content="【小頻道大世界】申請頻道" />
           <meta property="og:description" content={`
-            【小頻道大世界】不論您是剛起步的Youtuber，知名的Youtuber還是才華不被發現的Youtuber
-            小頻道大世界都歡迎您動動手指頭申請頻道，如此我們才能將您的作品分享給更多人知道！`}
+            【小頻道大世界】不論您是剛起步的Youtuber，知名的Youtuber還是才華不被發現的Youtuber，小頻道大世界都歡迎您動動手指頭申請頻道，如此我們才能將您的作品分享給更多人知道！`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
@@ -245,7 +244,7 @@ class AllCandidateChannels extends React.Component {
             <ChannelInputModal
               errorMessage={this.state.addChannelErrorMsg}
               message={`
-                請將你想加入的頻道首頁複製貼到連結欄位，並簡短描述一下頻道的特性。
+                請將你想加入的頻道首頁或任一影片連結複製貼到連結欄位讓我們取得頻道資訊。
               `}
               clickYes={this.sendAddChannel.bind(this)}
               clickNo={this.showAddChannel.bind(this, false)}
@@ -255,13 +254,13 @@ class AllCandidateChannels extends React.Component {
             <TitleSection
               titleFonts={'申請頻道'}
               contentFonts={`
-                我們歡迎許多各式各樣的頻道加入，剛起步的、還在摸索的、想要獲得更多關注的，
-                只要你是Youtube創作者，隨時歡迎！
+                我們致力於收集所有Youtuber的頻道，
+                若您喜愛的頻道未出現在清單中，歡迎登入並動手新增頻道！
               `}
             />
             <div className={'AllCandidateChannels-addChannelBar'}>
               {user.userInfo ? 
-                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'} onClick={this.showAddChannel.bind(this, true)}>申請新增頻道<Plus /></span>
+                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'} onClick={this.showAddChannel.bind(this, true)}>新增頻道<Plus /></span>
                 : <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>登入以新增頻道</span>}
             </div>
             <div className={'AllCandidateChannels-functionBar'}>
