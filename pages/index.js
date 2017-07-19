@@ -146,7 +146,7 @@ class Index extends React.Component {
             <div className={'Index-addChannelBar'}>
               <Link href='/candidateChannels/allCandidateChannels'><a>
                 <span className={'Index-channelFuncButton Index-search'}>
-                  查看申請頻道<Search />
+                  查看新增頻道<Search />
                 </span>
               </a></Link>
             </div>

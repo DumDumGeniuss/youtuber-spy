@@ -252,7 +252,7 @@ class AllCandidateChannels extends React.Component {
             /> : null}
           <div className={'AllCandidateChannels-zone'}>
             <TitleSection
-              titleFonts={'申請頻道'}
+              titleFonts={'新增頻道'}
               contentFonts={`
                 我們致力於收集所有Youtuber的頻道，
                 若您喜愛的頻道未出現在清單中，歡迎登入並動手新增頻道！
