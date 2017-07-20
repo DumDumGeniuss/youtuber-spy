@@ -176,9 +176,6 @@ class SingleChannel extends React.Component {
                   config={subscriberCountsChartConfig}
                 />
             }
-            <ReactHighcharts
-              config={subscriberCountsChartConfig}
-            />
             <h1 className={'SingleChannel-zoneTitle'}>最新影片</h1>
             <div className={'SingleChannel-videosZone'}>
               {
