@@ -21,7 +21,7 @@ const defaultQuery = {
   keyword: '',
   page: 1,
   count: 30,
-  startTime: moment().utc().add(-1, 'days').format(),
+  startTime: moment().utc().add(-7, 'days').format(),
   endTime: null,
 };
 
