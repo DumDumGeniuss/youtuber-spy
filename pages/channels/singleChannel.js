@@ -6,11 +6,13 @@ import withRedux from 'next-redux-wrapper';
 
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
+import ReactHighcharts from 'react-highcharts';
 import { initStore } from '../../store/initStore';
 import * as channelAction from '../../actions/channel';
+import * as channelStatisticAction from '../../actions/channelStatistic';
 import * as channelApi from '../../apis/channel';
 import * as videoApi from '../../apis/video';
-
+import * as channelStatisticApi from '../../apis/channelStatistic';
 
 import stylesheet from './singleChannel.scss';
 
@@ -44,7 +46,7 @@ class SingleChannel extends React.Component {
     return {
       hottestVideos: videoHottestResult.datas,
       newestVideos: videoNewestResult.datas,
-      query, 
+      query,
     };
   }
 
@@ -53,17 +55,51 @@ class SingleChannel extends React.Component {
     this.state = {
       isLoading: false,
     };
+    this.generateDailyChartConfig = this.generateDailyChartConfig.bind(this);
   }
 
   componentWillMount() {}
 
   componentDidMount() {
     const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
-    console.log(fullSiteUrl, window.location.href);
-    // this.props.getChannelAsync(this.props.query.channelId);
+    // console.log(fullSiteUrl, window.location.href);
+    this.props.getChannelStatisticsAsync({
+      page: 1,
+      count: 30,
+      sort: 'createdAt',
+      channelId: this.props.query.channelId,
+    });
   }
 
   componentWillReceiveProps(newProps) {
+  }
+
+  /* Get the data differences, if you want 7 result, you need 8 datas */
+  generateDailyChartConfig(datas, title, xAxisParams, yAxisParams, count) {
+    const targetDatas = datas.slice(0, count + 1);
+    const xAxis = [];
+    const yAxis = [];
+    const neededDatasSize = targetDatas.length - 1;
+
+    for (let i = 0; i < neededDatasSize; i++) {
+      xAxis.unshift(targetDatas[i + 1][xAxisParams]);
+      yAxis.unshift(targetDatas[i][yAxisParams] - targetDatas[i + 1][yAxisParams]);
+    }
+
+    return {
+      title: {
+        text: title,
+      },
+      xAxis: {
+        categories: xAxis,
+      },
+      series: [
+        {
+          name: title,
+          data: yAxis,
+        }
+      ]
+    };
   }
 
 // <div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>
@@ -71,6 +107,10 @@ class SingleChannel extends React.Component {
     const channelInfo = this.props.channel.channel;
     const hottestVideos = this.props.hottestVideos;
     const newestVideos = this.props.newestVideos;
+    const channelStatistics = this.props.channelStatistic.channelStatistics;
+    const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '觀看數量', 'date', 'viewCount', 7);
+    const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '訂閱數量', 'date', 'subscriberCount', 7);
+
 
     return (
       <div>
@@ -121,6 +161,13 @@ class SingleChannel extends React.Component {
               </div>
             </div>
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
+            <h1 className={'SingleChannel-videosZoneTitle'}>頻道數據</h1>
+            <ReactHighcharts
+              config={viewCountsChartConfig}
+            />
+            <ReactHighcharts
+              config={subscriberCountsChartConfig}
+            />
             <h1 className={'SingleChannel-videosZoneTitle'}>最新影片</h1>
             <div className={'SingleChannel-videosZone'}>
               {
@@ -157,6 +204,7 @@ class SingleChannel extends React.Component {
 const mapStateToProps = (state) => {
   return {
     // video: state.video,
+    channelStatistic: state.channelStatistic,
     channel: state.channel,
   };
 };
@@ -164,6 +212,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getChannelAsync: bindActionCreators(channelAction.getChannelAsync, dispatch),
+    getChannelStatisticsAsync: bindActionCreators(channelStatisticAction.getChannelStatisticsAsync, dispatch),
     // getVideosAsync: bindActionCreators(videoAction.getVideosAsync, dispatch),
   }
 }

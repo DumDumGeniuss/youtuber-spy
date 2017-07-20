@@ -4,6 +4,7 @@ import channel from './channel';
 import video from './video';
 import user from './user';
 import article from './article';
+import channelStatistic from './channelStatistic';
 
 const reducers = combineReducers({
   candidateChannel,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
   video,
   user,
   article,
+  channelStatistic,
 });
 
 export default reducers;
