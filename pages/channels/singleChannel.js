@@ -161,37 +161,54 @@ class SingleChannel extends React.Component {
               </div>
             </div>
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
-            <h1 className={'SingleChannel-videosZoneTitle'}>頻道數據</h1>
-            <ReactHighcharts
-              config={viewCountsChartConfig}
-            />
+            <h1 className={'SingleChannel-zoneTitle'}>頻道數據</h1>
+            {viewCountsChartConfig.series[0].data.length === 0 ?
+                <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有歷史觀看數據</h3>
+                :
+                <ReactHighcharts
+                  config={viewCountsChartConfig}
+                />
+            }
+            {viewCountsChartConfig.series[0].data.length === 0 ?
+                <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有歷史訂閱數據</h3>
+                :
+                <ReactHighcharts
+                  config={subscriberCountsChartConfig}
+                />
+            }
             <ReactHighcharts
               config={subscriberCountsChartConfig}
             />
-            <h1 className={'SingleChannel-videosZoneTitle'}>最新影片</h1>
+            <h1 className={'SingleChannel-zoneTitle'}>最新影片</h1>
             <div className={'SingleChannel-videosZone'}>
               {
-                newestVideos.map((item) => {
-                  return (
-                    <YoutubeVideoCard
-                      key={item._id}
-                      videoInfo={item}
-                    />
-                  );
-                })
+                newestVideos.length === 0 ?
+                  <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有最新影片數據</h3>
+                  :
+                  newestVideos.map((item) => {
+                    return (
+                      <YoutubeVideoCard
+                        key={item._id}
+                        videoInfo={item}
+                      />
+                    );
+                  })
               }
             </div>
-            <h1 className={'SingleChannel-videosZoneTitle'}>熱門影片</h1>
+            <h1 className={'SingleChannel-zoneTitle'}>熱門影片</h1>
             <div className={'SingleChannel-videosZone'}>
               {
-                hottestVideos.map((item) => {
-                  return (
-                    <YoutubeVideoCard
-                      key={item._id}
-                      videoInfo={item}
-                    />
-                  );
-                })
+                hottestVideos.length === 0 ?
+                  <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有熱門影片數據</h3>
+                  :
+                  hottestVideos.map((item) => {
+                    return (
+                      <YoutubeVideoCard
+                        key={item._id}
+                        videoInfo={item}
+                      />
+                    );
+                  })
               }
             </div>
           </div>

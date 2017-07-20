@@ -89,12 +89,17 @@
     }
   }
 
-  .SingleChannel-videosZoneTitle {
+  .SingleChannel-zoneTitle {
     padding: 10px 0;
     margin: 0;
     text-align: center;
     background: linear-gradient(270deg, #bdde37, #a7cc20);
     color: white;
+  }
+
+  .SingleChannel-noDatasText {
+    padding: 10px 0;
+    text-align: center;
   }
 }
 
