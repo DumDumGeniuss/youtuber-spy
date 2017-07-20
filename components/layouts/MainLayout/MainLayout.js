@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import Facebook from 'react-icons/lib/fa/facebook';
+import GooglePlus from 'react-icons/lib/fa/google-plus';
 import stylesheet from './MainLayout.scss';
 
 class MainLayout extends React.Component {
@@ -56,10 +57,10 @@ class MainLayout extends React.Component {
                 </div>
                 :
                 <div onClick={this.onLoginClick.bind(this)}  className={'MainLayout-login'}>
-                  <span>登入</span>
+                  <GooglePlus />
                 </div>
               }
-              {this.props.userInfo ? <div><img src={this.props.userInfo.picture}/></div> : null}
+              {this.props.userInfo ? <div><img src={this.props.userInfo.picture}/></div> : <div></div>}
             </div>
           </div>
         </nav>

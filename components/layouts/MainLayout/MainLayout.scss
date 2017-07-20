@@ -103,6 +103,7 @@ $primary-color: black;
       height: 50px;
   
       div {
+        position: relative;
         display: inline-block;
         height: 100%;
         padding: 0 10px;
@@ -125,6 +126,15 @@ $primary-color: black;
           line-height: 50px; 
         }
         a:hover {
+          color: yellow;
+        }
+        svg {
+          margin-top: 10px;
+          font-size: 30px;
+          color: #dd4e40;
+          cursor: pointer;
+        }
+        svg:hover {
           color: yellow;
         }
       }
