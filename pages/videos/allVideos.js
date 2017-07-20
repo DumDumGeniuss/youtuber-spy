@@ -147,7 +147,8 @@ class AllVideos extends React.Component {
             <TitleSection
               titleFonts={'精選影片'}
               contentFonts={`
-                您可以在這邊看到本日發布的影片，也可以瀏覽一週內或一個月內的熱門影片，
+                我們每天都會自動收錄最新的影片，
+                您可以在這邊看到最新發布的影片，也可以選擇想搜尋的日期，
                 或許也能順便發現您喜歡的Youtuber並按下訂閱喔～
               `}
             />
@@ -168,10 +169,10 @@ class AllVideos extends React.Component {
               <div>
                 <span>時間：</span>
                 <select onChange={this.changeQuery.bind(this)} defaultValue={1}>
-                  <option value={1}>最近一天</option>
-                  <option value={7}>最近一週</option>
-                  <option value={30}>最近一月</option>
-                  <option value={9000}>無限制</option>
+                  <option value={7}>七天內</option>
+                  <option value={10}>十天內</option>
+                  <option value={10}>十五天內</option>
+                  <option value={30}>三十天內</option>
                 </select>
               </div>
             </div>

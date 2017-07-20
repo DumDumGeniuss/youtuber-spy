@@ -19,13 +19,13 @@ class SingleChannel extends React.Component {
   static async getInitialProps({ query, store }) {
     const videoQueryNewest = {
       page: 1,
-      count: 5,
+      count: 15,
       sort: 'publishedAt',
       channelId: query.channelId,
     };
     const videoQueryHottest = {
       page: 1,
-      count: 5,
+      count: 15,
       sort: 'viewCount',
       channelId: query.channelId,
     };
