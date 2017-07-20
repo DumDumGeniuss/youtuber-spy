@@ -131,16 +131,16 @@ class AllVideos extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>小頻道大世界-影片精選</title>
-          <meta property="og:title" content="【小頻道大世界】精選影片" />
+          <title>【Youtuber看門狗】影片精選</title>
+          <meta property="og:title" content="【Youtuber看門狗】精選影片" />
           <meta property="og:description" content={`
-            【小頻道大世界】想知道最新的影片資訊嗎？想看看最近大家都在流行什麼樣的影片嗎？
-            小頻道大世界提供您方便的搜尋服務，讓你可以看到本日，本週甚至本月的流行影片！`}
+            想知道最新的影片資訊嗎？想看看最近大家都在流行什麼樣的影片嗎？
+            Youtuber看門狗提供您方便的搜尋服務，讓你可以看到本日，本週甚至本月的流行影片！`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/videos/allVideos" />
-          <meta property="og:site_name" content="小頻道大世界 - 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
         </Head>
         <MainLayoutContainer>
           <div className={'AllVideos-zone'}>

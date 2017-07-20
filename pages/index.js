@@ -120,18 +120,18 @@ class Index extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>小頻道大世界-頻道精選</title>
-          <meta property="og:title" content="小頻道大世界" />
+          <title>【Youtuber看門狗】頻道精選</title>
+          <meta property="og:title" content="【Youtuber看門狗】" />
           <meta property="og:description" content={`
-            【小頻道大世界】是一個專門整理Youtubers資訊的網站，\n
-            這裡搜集並整理了華語地區Youtubers的各項資料，你可以在這邊挖掘您沒聽過的Youtubers，\n
-            也可以比較一下熱門Youtubers的數據，還可以在本日影片中看看有哪些新的作品出現，\n
+            Youtuber看門狗是一個專門整理中文Youtuber資訊的網站，\n
+            這裡搜集並整理了華語地區的Youtuber，您將可以在這邊發掘各式Youtuber資訊，\n
+            也可以比較一下熱門Youtuber的數據，還可以在近期影片中看看有哪些新的作品出現，\n
             許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/" />
-          <meta property="og:site_name" content="小頻道大世界- 在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>

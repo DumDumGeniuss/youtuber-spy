@@ -116,15 +116,15 @@ class SingleChannel extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>{channelInfo.title}</title>
-          <meta property="og:title" content={'小頻道大世界-' + channelInfo.title} />
+          <title>{'【Youtuber看門狗】' + channelInfo.title}</title>
+          <meta property="og:title" content={'【Youtuber看門狗】' + channelInfo.title} />
           <meta property="og:description" content={`
-            【小頻道大世界】${channelInfo.description}`}
+            ${channelInfo.description}`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:image" content={channelInfo.bannerTvImageUrl} />
           <meta property="og:url" content={'https://www.youtuberspy.com/channels/singleChannel?channelId=' + this.props.query.channelId} />
-          <meta property="og:site_name" content={'小頻道大世界- 在這裡發掘您喜歡的Youtubers！'}/>
+          <meta property="og:site_name" content={'【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！'}/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>
