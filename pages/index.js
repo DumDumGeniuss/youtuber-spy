@@ -129,7 +129,7 @@ class Index extends React.Component {
             許多功能會在未來陸續推出，若有想法也可以透過我的聯絡方式向我們提出建議。`}
           />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/" />
           <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />

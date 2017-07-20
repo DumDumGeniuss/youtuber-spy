@@ -175,7 +175,7 @@ class AllArticles extends React.Component {
             若您對Youtubers的世界充滿好奇，那麼歡迎你來到這裡！`}
           />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/articles/allArticles" />
           <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />

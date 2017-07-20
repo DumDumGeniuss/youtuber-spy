@@ -138,7 +138,7 @@ class AllVideos extends React.Component {
             Youtuber看門狗提供您方便的搜尋服務，讓你可以看到本日，本週甚至本月的流行影片！`}
           />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-large-facebook.png" />
+          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/videos/allVideos" />
           <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
         </Head>
