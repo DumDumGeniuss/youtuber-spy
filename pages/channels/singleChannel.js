@@ -170,8 +170,10 @@ class SingleChannel extends React.Component {
                   channelInfo.socialInfos.map((socialInfo, index) => {
                     return (
                       <div key={index} className={'SingleChannel-socialList'}>
-                        <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
-                        <a target="_blank" className={'SingleChannel-socialTitle'} href={socialInfo.href}>{socialInfo.title}</a>
+                        <a target="_blank" href={socialInfo.href}>
+                          <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
+                          <span className={'SingleChannel-socialTitle'}>{socialInfo.title}</span>
+                        </a>
                       </div>
                     );
                   })
