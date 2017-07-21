@@ -111,7 +111,6 @@ class SingleChannel extends React.Component {
     const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '觀看數量', 'date', 'viewCount', 7);
     const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '訂閱數量', 'date', 'subscriberCount', 7);
 
-
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -138,8 +137,10 @@ class SingleChannel extends React.Component {
               </figure>
               <div className={'SingleChannel-decorateZone'}>
               </div>
+              <span className={'SingleChannel-countryName'}>
+                {channelInfo.country}
+              </span>
               <div className={'SingleChannel-subscriber'}>
-                <script src="https://apis.google.com/js/platform.js"></script>
                 <div
                   className={'g-ytsubscribe'}
                   data-channelid={channelInfo._id} data-layout="default" data-count="default"></div>
@@ -161,6 +162,21 @@ class SingleChannel extends React.Component {
               </div>
             </div>
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
+            <div className={'SingleChannel-socialListZone'}>
+              {
+                channelInfo.socialInfos.length === 0 ?
+                  null
+                  :
+                  channelInfo.socialInfos.map((socialInfo, index) => {
+                    return (
+                      <div key={index} className={'SingleChannel-socialList'}>
+                        <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
+                        <a className={'SingleChannel-socialTitle'} href={socialInfo.href}>{socialInfo.title}</a>
+                      </div>
+                    );
+                  })
+              }
+            </div>
             <h1 className={'SingleChannel-zoneTitle'}>頻道數據</h1>
             {viewCountsChartConfig.series[0].data.length === 0 ?
                 <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有歷史觀看數據</h3>

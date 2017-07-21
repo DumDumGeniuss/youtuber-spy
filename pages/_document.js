@@ -54,6 +54,7 @@ export default class MyDocument extends Document {
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
           `}} />
+          <script src="https://apis.google.com/js/platform.js"></script>
         </body>
       </html>
     );

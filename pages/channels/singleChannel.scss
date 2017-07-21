@@ -11,6 +11,15 @@
 
   .SingleChannel-titleZone {
   	position: relative;
+    .SingleChannel-countryName {
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      z-index: 3;
+      color: white;
+      font-size: 1.5em;
+    }
     .SingleChannel-subscriber {
       display: block;
       position: absolute;
@@ -66,9 +75,34 @@
     display: block;
     // background-color: #ff716f;
     // background: linear-gradient(270deg, #ff716f, #f04d4c);
-    margin: 20px;
+    padding: 5px 15px;
     word-break: break-all;
     color: black;
+  }
+
+  .SingleChannel-socialListZone {
+    padding: 5px 15px;
+
+    .SingleChannel-socialList {
+      display: inline-block;
+      width: 50%;
+      height: 20px;
+      // padding: 2px;
+
+      .SingleChannel-socialIcon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 16px;
+        height: 16px;
+      }
+      .SingleChannel-socialTitle {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 16px;
+        color: #167ac6;
+        margin-left: 3px;
+      }
+    }
   }
 
   .SingleChannel-statisticZone {
