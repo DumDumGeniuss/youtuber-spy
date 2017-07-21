@@ -171,7 +171,7 @@ class SingleChannel extends React.Component {
                     return (
                       <div key={index} className={'SingleChannel-socialList'}>
                         <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
-                        <a className={'SingleChannel-socialTitle'} href={socialInfo.href}>{socialInfo.title}</a>
+                        <a target="_blank" className={'SingleChannel-socialTitle'} href={socialInfo.href}>{socialInfo.title}</a>
                       </div>
                     );
                   })
