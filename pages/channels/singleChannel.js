@@ -108,8 +108,8 @@ class SingleChannel extends React.Component {
     const hottestVideos = this.props.hottestVideos;
     const newestVideos = this.props.newestVideos;
     const channelStatistics = this.props.channelStatistic.channelStatistics;
-    const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '觀看數量', 'date', 'viewCount', 7);
-    const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '訂閱數量', 'date', 'subscriberCount', 7);
+    const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 7);
+    const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 7);
 
     return (
       <div>
