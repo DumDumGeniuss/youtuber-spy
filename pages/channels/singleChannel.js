@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import moment from 'moment';
 
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
@@ -75,15 +76,19 @@ class SingleChannel extends React.Component {
   }
 
   /* Get the data differences, if you want 7 result, you need 8 datas */
-  generateDailyChartConfig(datas, title, xAxisParams, yAxisParams, count) {
+  generateDailyChartConfig(datas, title, xAxisParam, yAxisParam, count) {
     const targetDatas = datas.slice(0, count + 1);
     const xAxis = [];
     const yAxis = [];
     const neededDatasSize = targetDatas.length - 1;
 
     for (let i = 0; i < neededDatasSize; i++) {
-      xAxis.unshift(targetDatas[i + 1][xAxisParams]);
-      yAxis.unshift(targetDatas[i][yAxisParams] - targetDatas[i + 1][yAxisParams]);
+      let xAxisValue = targetDatas[i + 1][xAxisParam];
+      if (xAxisParam === 'date') {
+        xAxisValue = moment(new Date(xAxisValue)).format('MM-DD');
+      }
+      xAxis.unshift(xAxisValue);
+      yAxis.unshift(targetDatas[i][yAxisParam] - targetDatas[i + 1][yAxisParam]);
     }
 
     return {
@@ -108,8 +113,8 @@ class SingleChannel extends React.Component {
     const hottestVideos = this.props.hottestVideos;
     const newestVideos = this.props.newestVideos;
     const channelStatistics = this.props.channelStatistic.channelStatistics;
-    const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 7);
-    const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 7);
+    const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 10);
+    const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 10);
     const socialInfos = channelInfo.socialInfos || [];
 
     return (
