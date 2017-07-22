@@ -110,6 +110,7 @@ class SingleChannel extends React.Component {
     const channelStatistics = this.props.channelStatistic.channelStatistics;
     const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 7);
     const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 7);
+    const socialInfos = channelInfo.socialInfos || [];
 
     return (
       <div>
@@ -164,19 +165,16 @@ class SingleChannel extends React.Component {
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
             <div className={'SingleChannel-socialListZone'}>
               {
-                channelInfo.socialInfos.length === 0 ?
-                  null
-                  :
-                  channelInfo.socialInfos.map((socialInfo, index) => {
-                    return (
-                      <div key={index} className={'SingleChannel-socialList'}>
-                        <a target="_blank" href={socialInfo.href}>
-                          <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
-                          <span className={'SingleChannel-socialTitle'}>{socialInfo.title}</span>
-                        </a>
-                      </div>
-                    );
-                  })
+                socialInfos.map((socialInfo, index) => {
+                  return (
+                    <div key={index} className={'SingleChannel-socialList'}>
+                      <a target="_blank" href={socialInfo.href}>
+                        <img className={'SingleChannel-socialIcon'} src={socialInfo.img} />
+                        <span className={'SingleChannel-socialTitle'}>{socialInfo.title}</span>
+                      </a>
+                    </div>
+                  );
+                })
               }
             </div>
             <h1 className={'SingleChannel-zoneTitle'}>頻道數據</h1>
