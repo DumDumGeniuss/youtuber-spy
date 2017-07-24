@@ -24,7 +24,6 @@ class SingleChannel extends React.Component {
       page: 1,
       count: 15,
       sort: 'publishedAt',
-      startTime: moment().utc().add(-30, 'days').format(),
       channelId: query.channelId,
     };
     const videoQueryHottest = {
