@@ -19,6 +19,7 @@ const defaultQuery = {
   sort: 'viewCount',
   order: 'desc',
   keyword: '',
+  category: '',
   page: 1,
   count: 30,
   startTime: moment().utc().add(-7, 'days').format(),
@@ -28,7 +29,7 @@ const defaultQuery = {
 class AllVideos extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await videoApi.getAllVideos(defaultQuery);
-    store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.token));
+    store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.videoCategories, result.token));
     return {
       query,
     };
@@ -45,6 +46,7 @@ class AllVideos extends React.Component {
       sort: defaultQuery.sort,
       order: defaultQuery.order,
       keyword: defaultQuery.keyword,
+      category: defaultQuery.category,
       page: defaultQuery.page,
       count: defaultQuery.count,
       startTime: defaultQuery.startTime,
@@ -104,6 +106,15 @@ class AllVideos extends React.Component {
     });
   }
 
+  changeCategory(event) {
+    this.query.page = 1;
+    this.query.category = event.target.value;
+    this.props.getVideosAsync([], this.query);
+    this.setState({
+      isLoading: true,
+    });
+  }
+
   /* remember to reset tha page */
   changeQuery(event) {
     this.query.page = 1;
@@ -123,6 +134,7 @@ class AllVideos extends React.Component {
 
   render() {
     const videos = this.props.video.videos;
+    const videoCategories = this.props.video.videoCategories;
     const totalCount = this.props.video.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
@@ -157,6 +169,19 @@ class AllVideos extends React.Component {
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
+              </div>
+              <div>
+                <span>分類：</span>
+                <select onChange={this.changeCategory.bind(this)} defaultValue={this.query.category}>
+                  {
+                    videoCategories.map((item) => {
+                      return (
+                        <option key={item} value={item}>{item}</option>
+                      );
+                    })
+                  }
+                  <option value={''}>所有</option>
+                </select>
               </div>
               <div>
                 <span>排序：</span>

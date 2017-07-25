@@ -2,11 +2,13 @@ import * as channelApi from '../apis/channel';
 import * as tinyHelper from '../libs/tinyHelper';
 
 
-export function getChannels(channels, totalCount, token) {
+export function getChannels(channels, totalCount, channelCategories, countryCategories, token) {
   return {
     type: 'GET_CHANNELS',
     channels,
     totalCount,
+    channelCategories,
+    countryCategories,
     token,
   };
 }
@@ -17,7 +19,7 @@ export const getChannelsAsync = function (preChannels, query) {
       .then((result) => {
         const newChannels = tinyHelper.removeDuplicated(preChannels.concat(result.datas));
         dispatch(
-          getChannels(newChannels, result.totalCount, result.token)
+          getChannels(newChannels, result.totalCount, result.channelCategories, result.countryCategories, result.token)
         );
       });
   };

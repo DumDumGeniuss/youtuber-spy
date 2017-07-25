@@ -10,6 +10,8 @@ export const getAllChannels = async function (query) {
     sort: query.sort || '',
     order: query.order || '',
     keyword: query.keyword || '',
+    category: query.category || '',
+    country: query.country || '',
     page: query.page || '',
     count: query.count || '',
   };

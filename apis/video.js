@@ -10,6 +10,7 @@ export const getAllVideos = async function (query) {
     sort: query.sort || '',
     order: query.order || '',
     keyword: query.keyword || '',
+    category: query.category || '',
     startTime: query.startTime || '',
     endTime: query.endTime || '',
     page: query.page || '',

@@ -23,6 +23,8 @@ const defaultQuery = {
   sort: 'subscriberCount',
   order: 'desc',
   keyword: '',
+  category: '',
+  country: '',
   page: 1,
   count: 20,
 };
@@ -30,7 +32,7 @@ const defaultQuery = {
 class Index extends React.Component {
   static async getInitialProps({ query, store }) {
     const result = await channelApi.getAllChannels(defaultQuery);
-    store.dispatch(channelAction.getChannels(result.datas, result.totalCount, result.token));
+    store.dispatch(channelAction.getChannels(result.datas, result.totalCount, result.channelCategories, result.countryCategories, result.token));
 
     return {
       query,
@@ -47,6 +49,8 @@ class Index extends React.Component {
       sort: defaultQuery.sort,
       order: defaultQuery.order,
       keyword: defaultQuery.keyword,
+      category: defaultQuery.category,
+      country: defaultQuery.country,
       page: defaultQuery.page,
       count: defaultQuery.count,
     };
@@ -104,6 +108,24 @@ class Index extends React.Component {
     });
   }
 
+  changeCategory(event) {
+    this.query.page = 1;
+    this.query.category = event.target.value;
+    this.props.getChannelsAsync([], this.query);
+    this.setState({
+      isLoading: true,
+    });
+  }
+
+  changeCountry(event) {
+    this.query.page = 1;
+    this.query.country = event.target.value;
+    this.props.getChannelsAsync([], this.query);
+    this.setState({
+      isLoading: true,
+    });
+  }
+
   componentWillUnmount() {
     if (this.searchKeyword) {
       clearTimeout(this.searchKeyword);
@@ -112,6 +134,8 @@ class Index extends React.Component {
 
   render() {
     const channels = this.props.channel.channels;
+    const channelCategories = this.props.channel.channelCategories;
+    const countryCategories = this.props.channel.countryCategories;
     const totalCount = this.props.channel.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
@@ -155,6 +179,32 @@ class Index extends React.Component {
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+              </div>
+              <div>
+                <span>分類：</span>
+                <select onChange={this.changeCategory.bind(this)} defaultValue={this.query.category}>
+                  {
+                    channelCategories.map((item) => {
+                      return (
+                        <option key={item} value={item}>{item}</option>
+                      );
+                    })
+                  }
+                  <option value={''}>所有</option>
+                </select>
+              </div>
+              <div>
+                <span>國家：</span>
+                <select onChange={this.changeCountry.bind(this)} defaultValue={this.query.country}>
+                  {
+                    countryCategories.map((item) => {
+                      return (
+                        <option key={item} value={item}>{item}</option>
+                      );
+                    })
+                  }
+                  <option value={''}>所有</option>
+                </select>
               </div>
               <div>
                 <span>排序：</span>
