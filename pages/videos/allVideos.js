@@ -138,6 +138,7 @@ class AllVideos extends React.Component {
     const totalCount = this.props.video.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -176,7 +177,7 @@ class AllVideos extends React.Component {
                   {
                     videoCategories.map((item) => {
                       return (
-                        <option key={item} value={item}>{item}</option>
+                        <option key={item} value={item}>{i18nWords.videoCategory[item]}</option>
                       );
                     })
                   }
@@ -236,6 +237,7 @@ class AllVideos extends React.Component {
 const mapStateToProps = (state) => {
   return {
     video: state.video,
+    i18n: state.i18n,
   };
 };
 

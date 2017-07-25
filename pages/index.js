@@ -139,6 +139,7 @@ class Index extends React.Component {
     const totalCount = this.props.channel.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -186,7 +187,7 @@ class Index extends React.Component {
                   {
                     channelCategories.map((item) => {
                       return (
-                        <option key={item} value={item}>{item}</option>
+                        <option key={item} value={item}>{i18nWords.channelCategory[item]}</option>
                       );
                     })
                   }
@@ -199,7 +200,7 @@ class Index extends React.Component {
                   {
                     countryCategories.map((item) => {
                       return (
-                        <option key={item} value={item}>{item}</option>
+                        <option key={item} value={item}>{i18nWords.country[item]}</option>
                       );
                     })
                   }
@@ -220,10 +221,20 @@ class Index extends React.Component {
             <div className={'Index-contentZone'}>
               {
                 channels.map((item, index) => {
+                  let channelInfo = {
+                    defaultThumbnails: item.defaultThumbnails,
+                    title: item.title,
+                    subscriberCount: item.subscriberCount,
+                    videoCount: item.videoCount,
+                    viewCount: item.viewCount,
+                    category: i18nWords.channelCategory[item.category],
+                    country: i18nWords.country[item.country],
+                    publishedAt: item.publishedAt,
+                  }
                   return (
                     <YoutuberChannelCard 
                       key={item._id}
-                      channelInfo={item}
+                      channelInfo={channelInfo}
                       rank={index + 1}
                     />
                   );
@@ -247,6 +258,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     channel: state.channel,
+    i18n: state.i18n,
   };
 };
 
