@@ -28,6 +28,9 @@ class MainLayout extends React.Component {
     this.props.doLogout();
   }
 
+              // <div className={'MainLayout-link'}>
+              //   <Link href='/articles/allArticles'><a>新聞</a></Link>
+              // </div>
   render() {
     return (
       <div className={'MainLayout-zone'}>
@@ -47,9 +50,6 @@ class MainLayout extends React.Component {
               </div>
               <div className={'MainLayout-link'}>
                 <Link href='/videos/allVideos'><a>影片</a></Link>
-              </div>
-              <div className={'MainLayout-link'}>
-                <Link href='/articles/allArticles'><a>新聞</a></Link>
               </div>
               {this.props.userInfo ? 
                 <div onClick={this.onLogoutClick.bind(this)} className={'MainLayout-login'}>
