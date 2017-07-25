@@ -37,6 +37,7 @@ export default {
     'HongKong': '香港',
     'Japan': '日本',
     'UnitedStates': '美國',
+    'Macao': '澳門',
     'China': '中國',
   }
 };
