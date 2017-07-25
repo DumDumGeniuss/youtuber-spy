@@ -211,6 +211,13 @@ class AllCandidateChannels extends React.Component {
     });
   }
 
+  deleteChannel(channelId) {
+    this.props.deleteCandidateChannelAsync(
+      channelId,
+      localStorage.getItem('youtubeToken')
+    );
+  }
+
   componentWillUnmount() {
     if (this.searchKeyword) {
       clearTimeout(this.searchKeyword);
@@ -299,6 +306,7 @@ class AllCandidateChannels extends React.Component {
                       candidateChannelInfo={item}
                       isSuperUser={user.isSuperUser}
                       clickVerify={this.verifyChannel.bind(this)}
+                      clickDelete={this.deleteChannel.bind(this)}
                     />
                   );
                 })
@@ -323,6 +331,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCandidateChannelsAsync: bindActionCreators(candidateChannelAction.getCandidateChannelsAsync, dispatch),
     verifyCandidateChannelAsync: bindActionCreators(candidateChannelAction.verifyCandidateChannelAsync, dispatch),
+    deleteCandidateChannelAsync: bindActionCreators(candidateChannelAction.deleteCandidateChannelAsync, dispatch),
   }
 }
 

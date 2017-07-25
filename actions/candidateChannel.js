@@ -42,3 +42,23 @@ export const verifyCandidateChannelAsync = function (query) {
       });
   };
 };
+
+export function deleteCandidateChannel(channelId) {
+  return {
+    type: 'DELETE_CANDIDATE_CHANNEL',
+    channelId,
+  };
+}
+
+export function deleteCandidateChannelAsync(channelId, accessToken) {
+  return function (dispatch) {
+    candidateChannelApi.deleteCandidateChannel(channelId, accessToken)
+      .then((result) => {
+        if (result.status === 200) {
+          dispatch(
+            deleteCandidateChannel(channelId)
+          );
+        }
+      });
+  }
+}

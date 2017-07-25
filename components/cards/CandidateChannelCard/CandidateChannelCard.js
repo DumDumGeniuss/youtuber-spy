@@ -20,6 +20,10 @@ class YoutuberChannelCard extends React.Component {
     this.props.clickVerify(channelId);
   }
 
+  onDeleteClick(channelId) {
+    this.props.clickDelete(channelId);
+  }
+
   componentWillUnmount() {
   }
 
@@ -33,6 +37,7 @@ class YoutuberChannelCard extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <div className={'CandidateChannelCard-authInfoZone'}>
           {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onVerifyClick.bind(this, candidateChannelInfo._id)}>確認</button> : null}
+          {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onDeleteClick.bind(this, candidateChannelInfo._id)}>刪除</button> : null}
           {candidateChannelInfo.isVerified ? 
             <span className={'CandidateChannelCard-authVerify'}>通過</span>
             :

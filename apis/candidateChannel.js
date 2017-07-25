@@ -66,3 +66,21 @@ export const verifyCandidateChannel = async function (query) {
 
   return resultJson;
 };
+
+export const deleteCandidateChannel = async function (channelId, access_token) {
+  const finalQuery = {
+    access_token: access_token,
+  };
+  const queryString = tinyHelper.getQueryString(finalQuery);
+  const result = await fetch(apiUrl + '/' + channelId + queryString, {
+    headers: {},
+    method: 'DELETE',
+  });
+
+  const statusCode = result.status;
+  const resultJson = await result.json();
+
+  resultJson.status = statusCode;
+
+  return resultJson;
+};
