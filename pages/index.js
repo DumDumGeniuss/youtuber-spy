@@ -222,6 +222,7 @@ class Index extends React.Component {
               {
                 channels.map((item, index) => {
                   let channelInfo = {
+                    _id: item._id,
                     defaultThumbnails: item.defaultThumbnails,
                     title: item.title,
                     subscriberCount: item.subscriberCount,
