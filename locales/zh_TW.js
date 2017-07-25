@@ -26,13 +26,17 @@ export default {
     "News & Politics": '新聞 & 政治',
     "Pets & Animals": '寵物 & 動物',
     "Science & Technology": '科學 & 技術',
+    'Autos & Vehicles': '汽車',
+    'Sports': '運動',
+    'Nonprofits & Activism': '非營利 & 行動',
   },
   country: {
     'Taiwan': '台灣',
     'Canada': '加拿大',
     'Malaysia': '馬來西亞',
-    'Hong Kong': '香港',
+    'HongKong': '香港',
     'Japan': '日本',
-    'United States': '美國',
+    'UnitedStates': '美國',
+    'China': '中國',
   }
 };
