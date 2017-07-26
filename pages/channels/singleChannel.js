@@ -116,6 +116,7 @@ class SingleChannel extends React.Component {
     const viewCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 10);
     const subscriberCountsChartConfig = this.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 10);
     const socialInfos = channelInfo.socialInfos || [];
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -153,6 +154,7 @@ class SingleChannel extends React.Component {
               </div>
             </div>
             <h1 className={'SingleChannel-title'}>{channelInfo.title}</h1>
+            <h2 className={'SingleChannel-smallTitle'}>{i18nWords.channelCategory[channelInfo.category] || ''}</h2>
             <div className={'SingleChannel-statisticZone'}>
               <div className={'SingleChannel-statistic'}>
                 <span>訂閱 {channelInfo.subscriberCount.toLocaleString()}</span>
@@ -241,6 +243,7 @@ const mapStateToProps = (state) => {
     // video: state.video,
     channelStatistic: state.channelStatistic,
     channel: state.channel,
+    i18n: state.i18n,
   };
 };
 
