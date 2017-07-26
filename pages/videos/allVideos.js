@@ -233,6 +233,7 @@ class AllVideos extends React.Component {
                 refreshToken={
                   this.query.sort
                   + this.query.keyword
+                  + this.query.category
                   + this.query.order
                   + this.query.count
                   + this.query.startTime

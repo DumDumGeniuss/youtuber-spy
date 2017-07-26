@@ -256,7 +256,15 @@ class Index extends React.Component {
                 })
               }
               <PaginationBox
-                refreshToken={this.query.sort + this.query.keyword + this.query.order + this.query.count}
+                refreshToken={
+                  this.query.sort
+                  + this.query.category
+                  + this.query.country
+                  + this.query.keyword
+                  + this.query.keyword
+                  + this.query.order
+                  + this.query.count
+                }
                 pageNumber={dataPage}
                 url={'/' + queryParam}
               />

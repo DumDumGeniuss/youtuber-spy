@@ -299,6 +299,7 @@ class AllCandidateChannels extends React.Component {
                   this.query.sort
                   + this.query.keyword
                   + this.query.order
+                  + this.query.count
                 }
                 pageNumber={dataPage}
                 url={'/candidateChannels/allCandidateChannels' + queryParam}
