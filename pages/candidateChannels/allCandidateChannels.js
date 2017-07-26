@@ -242,15 +242,15 @@ class AllCandidateChannels extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>【Youtuber看門狗】申請頻道</title>
-          <meta property="og:title" content="【Youtuber看門狗】申請頻道" />
+          <title>Youtuber看門狗-頻道新增</title>
+          <meta property="og:title" content="Youtuber看門狗-頻道新增" />
           <meta property="og:description" content={`
             我們致力於搜集所有熱門的中文Youtuber頻道，不論是來自馬來西亞、香港、新加坡、台灣、澳門等等的頻道都歡迎加入！`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/candidateChannels/allCandidateChannels" />
-          <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>

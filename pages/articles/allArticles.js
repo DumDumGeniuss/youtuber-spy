@@ -168,8 +168,8 @@ class AllArticles extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>【Youtuber看門狗】新聞</title>
-          <meta property="og:title" content="【Youtuber看門狗】新聞" />
+          <title>Youtuber看門狗-新聞</title>
+          <meta property="og:title" content="Youtuber看門狗-新聞" />
           <meta property="og:description" content={`
             【Youtuber看門狗】我們會將一些近期的有趣數據與新聞張貼在精彩新聞，
             若您對Youtubers的世界充滿好奇，那麼歡迎你來到這裡！`}
@@ -177,7 +177,7 @@ class AllArticles extends React.Component {
           <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
           <meta property="og:url" content="https://www.youtuberspy.com/articles/allArticles" />
-          <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>

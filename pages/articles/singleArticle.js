@@ -46,14 +46,14 @@ class SingleArticle extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <Head>
-          <title>{'【Youtuber看門狗】' + articleInfo.title}</title>
-          <meta name="og:title" content={'【Youtuber看門狗】' + articleInfo.title} />
+          <title>{'Youtuber看門狗-' + articleInfo.title}</title>
+          <meta name="og:title" content={'Youtuber看門狗-' + articleInfo.title} />
           <meta name="og:description" content={articleInfo.content.substring(0, 300)}
           />
           <meta name="og:type" content="website" />
           <meta name="og:image" content={articleInfo.titleImage} />
           <meta name="og:url" content={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id} />
-          <meta property="og:site_name" content="【Youtuber看門狗】在這裡發掘您喜歡的Youtubers！"/>
+          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
           <meta property="fb:app_id" content={'158925374651334'} />
         </Head>
         <MainLayoutContainer>
