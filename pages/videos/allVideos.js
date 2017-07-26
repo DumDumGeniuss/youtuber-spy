@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
+import Router from 'next/router';
 
 import * as tinyHelper from '../../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
@@ -80,9 +81,12 @@ class AllVideos extends React.Component {
 
   changePage(page) {
     this.query.page = page;
-    this.props.getVideosAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/videos/allVideos',
+      query: this.query,
     });
   }
 
@@ -96,9 +100,12 @@ class AllVideos extends React.Component {
     this.searchKeyword = setTimeout(() => {
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.props.getVideosAsync([], this.query);
       this.setState({
         isLoading: true,
+      });
+      Router.push({
+        pathname: '/videos/allVideos',
+        query: this.query,
       });
     }, 1000);
   }
@@ -107,18 +114,25 @@ class AllVideos extends React.Component {
   changeOrder(event) {
     this.query.page = 1;
     this.query.sort = event.target.value;
-    this.props.getVideosAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/videos/allVideos',
+      query: this.query,
     });
   }
 
   changeCategory(event) {
     this.query.page = 1;
     this.query.category = event.target.value;
-    this.props.getVideosAsync([], this.query);
+    // this.props.getVideosAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/videos/allVideos',
+      query: this.query,
     });
   }
 
@@ -127,9 +141,12 @@ class AllVideos extends React.Component {
     this.query.page = 1;
     this.daysAgo = event.target.value;
     this.query.startTime = moment().utc().add(-this.daysAgo, 'days').format();
-    this.props.getVideosAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/videos/allVideos',
+      query: this.query,
     });
   }
 
@@ -148,7 +165,6 @@ class AllVideos extends React.Component {
     const i18nWords = this.props.i18n.words;
     let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime']);
     queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
-    console.log(queryParam);
 
     return (
       <div>

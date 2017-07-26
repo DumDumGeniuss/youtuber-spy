@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Router from 'next/router';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
@@ -90,9 +91,12 @@ class Index extends React.Component {
     this.searchKeyword = setTimeout(() => {
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.props.getChannelsAsync([], this.query);
       this.setState({
         isLoading: true,
+      });
+      Router.push({
+        pathname: '/',
+        query: this.query,
       });
     }, 1000);
   }
@@ -101,27 +105,36 @@ class Index extends React.Component {
     this.query.page = 1;
     this.query.sort = event.target.value;
     this.query.order = this.query.sort === 'publishedAt' ? 'asc' : 'desc';
-    this.props.getChannelsAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/',
+      query: this.query,
     });
   }
 
   changeCategory(event) {
     this.query.page = 1;
     this.query.category = event.target.value;
-    this.props.getChannelsAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/',
+      query: this.query,
     });
   }
 
   changeCountry(event) {
     this.query.page = 1;
     this.query.country = event.target.value;
-    this.props.getChannelsAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/',
+      query: this.query,
     });
   }
 
@@ -139,7 +152,7 @@ class Index extends React.Component {
     const user = this.props.user;
     const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
-    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime']);
+    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime'], ['count']);
     queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
@@ -265,7 +278,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getChannelsAsync: bindActionCreators(channelAction.getChannelsAsync, dispatch),
+    // getChannelsAsync: bindActionCreators(channelAction.getChannelsAsync, dispatch),
     getUser: bindActionCreators(userAction.getUser, dispatch),
   }
 }

@@ -1,7 +1,14 @@
-export const getQueryString = (query, noEncodeParams) => {
+export const getQueryString = (query, noEncodeParams, noWrapParams) => {
   const theNoEncodeParams = noEncodeParams || [];
-  return '?' + Object.keys(query)
-    .map((key) => {
+  const theNoWrapParams = noWrapParams || [];
+  const keys = Object.keys(query);
+  const keySize = keys.length;
+  for(let i = 0; i < keySize; i++) {
+    if (theNoWrapParams.indexOf(keys[i]) >=0) {
+      keys.splice(i, 1);
+    }
+  }
+  return '?' + keys.map((key) => {
       if (theNoEncodeParams.indexOf(key) >= 0) {
         return encodeURIComponent(key) + "=" + query[key];
       } else {
