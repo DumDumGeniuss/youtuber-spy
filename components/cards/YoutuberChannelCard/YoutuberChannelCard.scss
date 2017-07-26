@@ -58,13 +58,20 @@
       padding-left: 5px;
       margin-bottom: 10px;
     }
-  
-    .YoutuberChannelCard-data {
-      height: 25px;
-      padding-left: 5px;
-  
-      small {
-        font-size: 0.8em;
+
+    .YoutuberChannelCard-dataZone {
+      display: inline-block;
+      min-width: 150px;
+      margin-left: 50%;
+      transform: translate(-50%, 0%);
+      .YoutuberChannelCard-data {
+        height: 25px;
+        line-height: 25px;
+        padding-left: 5px;
+    
+        small {
+          font-size: 0.8em;
+        }
       }
     }
   }
@@ -92,6 +99,7 @@
   
       .YoutuberChannelCard-data {
         height: 20px;
+        line-height: 20px;
       }
     }
   }
