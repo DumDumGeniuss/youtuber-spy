@@ -1,6 +1,13 @@
-export const getQueryString = (query) => {
+export const getQueryString = (query, noEncodeParams) => {
+  const theNoEncodeParams = noEncodeParams || [];
   return '?' + Object.keys(query)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
+    .map((key) => {
+      if (theNoEncodeParams.indexOf(key) >= 0) {
+        return encodeURIComponent(key) + "=" + query[key];
+      } else {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(query[key]);
+      }
+    })
     .join("&")
     .replace(/%20/g, "+");
 };

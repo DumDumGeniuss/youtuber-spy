@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
+import * as tinyHelper from '../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Search from 'react-icons/lib/fa/search';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
@@ -41,7 +42,6 @@ class Index extends React.Component {
     store.dispatch(channelAction.getChannels(result.datas, result.totalCount, result.channelCategories, result.countryCategories, result.token));
 
     return {
-      query,
       newQuery,
     };
   }
@@ -78,14 +78,6 @@ class Index extends React.Component {
         isLoading: false,
       });
     }
-  }
-
-  changePage(page) {
-    this.query.page = page;
-    this.props.getChannelsAsync([], this.query);
-    this.setState({
-      isLoading: true,
-    });
   }
 
   /* remember to reset tha page */
@@ -147,6 +139,8 @@ class Index extends React.Component {
     const user = this.props.user;
     const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
+    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime']);
+    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
       <div>
@@ -250,9 +244,8 @@ class Index extends React.Component {
               }
               <PaginationBox
                 refreshToken={this.query.sort + this.query.keyword + this.query.order + this.query.count}
-                lockButton={this.state.isLoading}
                 pageNumber={dataPage}
-                onChangePage={this.changePage.bind(this)}
+                url={'/' + queryParam}
               />
             </div>
           </div>

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 
+import * as tinyHelper from '../../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
@@ -23,15 +24,20 @@ const defaultQuery = {
   page: 1,
   count: 30,
   startTime: moment().utc().add(-7, 'days').format(),
-  endTime: null,
+  endTime: '',
 };
 
 class AllVideos extends React.Component {
   static async getInitialProps({ query, store }) {
-    const result = await videoApi.getAllVideos(defaultQuery);
+    const newQuery = {};
+    Object.keys(defaultQuery).forEach((key) => {
+      const valueFromQuery = query[key];
+      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+    });
+    const result = await videoApi.getAllVideos(newQuery);
     store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.videoCategories, result.token));
     return {
-      query,
+      newQuery,
     };
   }
 
@@ -40,18 +46,19 @@ class AllVideos extends React.Component {
     this.state = {
       isLoading: false,
     };
-    this.daysAgo = 7;
     /* 每次query API時所需要用到的參數 */
     this.query = {
-      sort: defaultQuery.sort,
-      order: defaultQuery.order,
-      keyword: defaultQuery.keyword,
-      category: defaultQuery.category,
-      page: defaultQuery.page,
-      count: defaultQuery.count,
-      startTime: defaultQuery.startTime,
-      endTime: defaultQuery.endTime,
+      sort: this.props.newQuery.sort,
+      order: this.props.newQuery.order,
+      keyword: this.props.newQuery.keyword,
+      category: this.props.newQuery.category,
+      page: this.props.newQuery.page,
+      count: this.props.newQuery.count,
+      startTime: this.props.newQuery.startTime,
+      endTime: this.props.newQuery.endTime,
     };
+    const now = moment(new Date());
+    this.daysAgo = now.diff(this.query.startTime, 'days');
   }
 
   componentDidMount() {
@@ -137,8 +144,11 @@ class AllVideos extends React.Component {
     const videoCategories = this.props.video.videoCategories;
     const totalCount = this.props.video.totalCount;
     const user = this.props.user;
-    const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
+    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime']);
+    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
+    console.log(queryParam);
 
     return (
       <div>
@@ -194,10 +204,11 @@ class AllVideos extends React.Component {
               </div>
               <div>
                 <span>時間：</span>
-                <select onChange={this.changeQuery.bind(this)} defaultValue={1}>
+                <select onChange={this.changeQuery.bind(this)} defaultValue={this.daysAgo}>
+                  <option value={5}>五天內</option>
                   <option value={7}>七天內</option>
                   <option value={10}>十天內</option>
-                  <option value={10}>十五天內</option>
+                  <option value={15}>十五天內</option>
                   <option value={30}>三十天內</option>
                 </select>
               </div>
@@ -222,9 +233,8 @@ class AllVideos extends React.Component {
                   + this.query.startTime
                   + this.query.endTime
                 }
-                lockButton={this.state.isLoading}
                 pageNumber={dataPage}
-                onChangePage={this.changePage.bind(this)}
+                url={'/videos/allVideos' + queryParam}
               />
             </div>
           </div>

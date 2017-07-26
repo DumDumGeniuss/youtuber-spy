@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import stylesheet from './PaginationBox.scss';
 
@@ -38,23 +39,9 @@ class PaginationBox extends React.Component {
   }
 
   onPageClick(page) {
-    if (this.props.lockButton) {
-      return;
-    }
-    let newPage = page;
-    if (newPage < 1) {
-      newPage = 1;
-    } else if (newPage > this.props.pageNumber) {
-      newPage = this.props.pageNumber;
-    }
-    /* If page equals to newPage , means newPage is fine */
-    if ( newPage === page) {
-      this.setState({
-        pageClicked: newPage,
-      });
-  
-      this.props.onChangePage(newPage);
-    }
+    this.setState({
+      pageClicked: page,
+    });
   }
 
   render() {
@@ -66,28 +53,34 @@ class PaginationBox extends React.Component {
     for (let i = pageStart; i <= pageEnd; i++) {
       pageList.push(i);
     }
+    let url = this.props.url;
 
     return (
       <div className={'PaginationBox-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <div className={'PaginationBox-contentZone'}>
-          <button className={'PaginationBox-button'} onClick={this.onPageClick.bind(this, pageClicked - 1)}>
-            <ChevronLeft/>
-          </button>
+          <Link href={url.replace('$1', pageClicked - 1 || 1)}><a>
+            <button className={'PaginationBox-button'} onClick={this.onPageClick.bind(this, pageClicked - 1 || 1)}>
+              <ChevronLeft/>
+            </button>
+          </a></Link>
           {pageList.map((item) => {
             return (
-              <button
-                key={item}
-                className={item === pageClicked ? 'PaginationBox-buttonClicked' : 'PaginationBox-button'}
-                onClick={this.onPageClick.bind(this, item)}
-              >
-                {item}
-              </button>
+              <Link key={item} href={url.replace('$1', item)}><a>
+                <button
+                  className={item === pageClicked ? 'PaginationBox-buttonClicked' : 'PaginationBox-button'}
+                  onClick={this.onPageClick.bind(this, item)}
+                >
+                  {item}
+                </button>
+              </a></Link>
             );
           })}
-          <button className={'PaginationBox-button'} onClick={this.onPageClick.bind(this, pageClicked + 1)}>
-            <ChevronRight/>
-          </button>
+          <Link href={url.replace('$1', pageClicked + 1 > pageNumber ? pageNumber : pageClicked + 1)}><a>
+            <button className={'PaginationBox-button'} onClick={this.onPageClick.bind(this, pageClicked + 1 > pageNumber ? pageNumber : pageClicked + 1)}>
+              <ChevronRight/>
+            </button>
+          </a></Link>
         </div>
       </div>
     );
