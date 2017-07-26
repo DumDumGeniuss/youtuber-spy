@@ -26,16 +26,23 @@ const defaultQuery = {
   category: '',
   country: '',
   page: 1,
-  count: 20,
+  count: 40,
 };
 // localStorage.setItem('state', 'off');
 class Index extends React.Component {
   static async getInitialProps({ query, store }) {
-    const result = await channelApi.getAllChannels(defaultQuery);
+    const newQuery = {};
+    Object.keys(defaultQuery).forEach((key) => {
+      const valueFromQuery = query[key];
+      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+    });
+
+    const result = await channelApi.getAllChannels(newQuery);
     store.dispatch(channelAction.getChannels(result.datas, result.totalCount, result.channelCategories, result.countryCategories, result.token));
 
     return {
       query,
+      newQuery,
     };
   }
 
@@ -46,13 +53,13 @@ class Index extends React.Component {
     };
     /* 每次query API時所需要用到的參數 */
     this.query = {
-      sort: defaultQuery.sort,
-      order: defaultQuery.order,
-      keyword: defaultQuery.keyword,
-      category: defaultQuery.category,
-      country: defaultQuery.country,
-      page: defaultQuery.page,
-      count: defaultQuery.count,
+      sort: this.props.newQuery.sort,
+      order: this.props.newQuery.order,
+      keyword: this.props.newQuery.keyword,
+      category: this.props.newQuery.category,
+      country: this.props.newQuery.country,
+      page: this.props.newQuery.page,
+      count: this.props.newQuery.count,
     };
   }
 
@@ -138,7 +145,7 @@ class Index extends React.Component {
     const countryCategories = this.props.channel.countryCategories;
     const totalCount = this.props.channel.totalCount;
     const user = this.props.user;
-    const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
 
     return (
