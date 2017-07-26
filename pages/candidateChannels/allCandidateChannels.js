@@ -2,7 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 
+import * as tinyHelper from '../../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
@@ -26,11 +28,16 @@ const defaultQuery = {
 // localStorage.setItem('state', 'off');
 class AllCandidateChannels extends React.Component {
   static async getInitialProps({ query, store }) {
-    const result = await candidateChannelApi.getCandidateChannels(defaultQuery);
+    const newQuery = {};
+    Object.keys(defaultQuery).forEach((key) => {
+      const valueFromQuery = query[key];
+      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+    });
+    const result = await candidateChannelApi.getCandidateChannels(newQuery);
     store.dispatch(candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token));
 
     return {
-      query,
+      newQuery,
     };
   }
 
@@ -46,11 +53,11 @@ class AllCandidateChannels extends React.Component {
     // this.toDatasLimit = false;
     /* 每次query API時所需要用到的參數 */
     this.query = {
-      sort: defaultQuery.sort,
-      order: defaultQuery.order,
-      keyword: defaultQuery.keyword,
-      page: defaultQuery.page,
-      count: defaultQuery.count,
+      sort: this.props.newQuery.sort,
+      order: this.props.newQuery.order,
+      keyword: this.props.newQuery.keyword,
+      page: this.props.newQuery.page,
+      count: this.props.newQuery.count,
     };
 
     // this.scrollHandler = this.scrollHandler.bind(this);
@@ -168,14 +175,6 @@ class AllCandidateChannels extends React.Component {
   //   });
   // }
 
-  changePage(page) {
-    this.query.page = page;
-    this.props.getCandidateChannelsAsync([], this.query);
-    this.setState({
-      isLoading: true,
-    });
-  }
-
   /* remember to reset tha page */
   changeKeyword(event) {
     const keyword = event.target.value;
@@ -187,20 +186,26 @@ class AllCandidateChannels extends React.Component {
       // this.toDatasLimit = false;
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.props.getCandidateChannelsAsync([], this.query);
       this.setState({
         isLoading: true,
       });
     }, 1000);
+    Router.push({
+      pathname: '/candidateChannels/allCandidateChannels',
+      query: this.query,
+    });
   }
 
   changeOrder(event) {
     // this.toDatasLimit = false;
     this.query.page = 1;
     this.query.sort = event.target.value;
-    this.props.getCandidateChannelsAsync([], this.query);
     this.setState({
       isLoading: true,
+    });
+    Router.push({
+      pathname: '/candidateChannels/allCandidateChannels',
+      query: this.query,
     });
   }
 
@@ -230,6 +235,8 @@ class AllCandidateChannels extends React.Component {
     const totalCount = this.props.candidateChannel.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    let queryParam = tinyHelper.getQueryString(this.query, []);
+    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
       <div>
@@ -292,11 +299,9 @@ class AllCandidateChannels extends React.Component {
                   this.query.sort
                   + this.query.keyword
                   + this.query.order
-                  + this.query.count
                 }
-                lockButton={this.state.isLoading}
                 pageNumber={dataPage}
-                onChangePage={this.changePage.bind(this)}
+                url={'/candidateChannels/allCandidateChannels' + queryParam}
               />
               {
                 candidateChannels.map((item, index) => {

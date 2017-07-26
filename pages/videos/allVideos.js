@@ -79,17 +79,6 @@ class AllVideos extends React.Component {
   componentWillUnmount() {
   }
 
-  changePage(page) {
-    this.query.page = page;
-    this.setState({
-      isLoading: true,
-    });
-    Router.push({
-      pathname: '/videos/allVideos',
-      query: this.query,
-    });
-  }
-
   /* remember to reset tha page */
   changeKeyword(event) {
     const keyword = event.target.value;
