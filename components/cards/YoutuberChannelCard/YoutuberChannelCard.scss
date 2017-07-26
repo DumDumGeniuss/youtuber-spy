@@ -73,7 +73,7 @@
 @media (max-width: 800px) {
   .YoutuberChannelCard-zone {
     width: 50%;
-    height: 75vw;
+    height: 275px;
 
   .YoutuberChannelCard-seeDetailIcon {
     width: 24px;
@@ -88,6 +88,10 @@
     .YoutuberChannelCard-frontZone {
       .YoutuberChannelCard-title {
       margin-bottom: 0;
+      }
+  
+      .YoutuberChannelCard-data {
+        height: 20px;
       }
     }
   }
