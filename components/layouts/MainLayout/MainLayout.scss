@@ -34,7 +34,9 @@ $primary-color: black;
 }
 
 .MainLayout-fbLikeZone {
-  padding: 5px;
+  display: inline-block;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .MainLayout-pageContent {

@@ -129,7 +129,10 @@ class AllCandidateChannels extends React.Component {
           this.showAddChannel(false);
           this.isAddChannelLoading(false);
           /* Reload again*/
-          this.changePage(1);
+          Router.push({
+            pathname: '/candidateChannels/allCandidateChannels',
+            query: this.query,
+          });
         }
       });
   }
