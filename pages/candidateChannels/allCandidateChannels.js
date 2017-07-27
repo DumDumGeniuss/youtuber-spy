@@ -23,7 +23,7 @@ const defaultQuery = {
   order: 'desc',
   keyword: '',
   page: 1,
-  count: 10,
+  count: 20,
 };
 // localStorage.setItem('state', 'off');
 class AllCandidateChannels extends React.Component {
@@ -238,7 +238,7 @@ class AllCandidateChannels extends React.Component {
     const totalCount = this.props.candidateChannel.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
-    let queryParam = tinyHelper.getQueryString(this.query, []);
+    let queryParam = tinyHelper.getQueryString(this.query, [], ['count']);
     queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
@@ -284,7 +284,7 @@ class AllCandidateChannels extends React.Component {
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
               </div>
               <div>
                 <span>排序：</span>

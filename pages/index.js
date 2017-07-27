@@ -193,7 +193,7 @@ class Index extends React.Component {
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
               </div>
               <div>
                 <span>分類：</span>

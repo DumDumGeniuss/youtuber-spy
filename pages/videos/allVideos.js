@@ -152,7 +152,7 @@ class AllVideos extends React.Component {
     const user = this.props.user;
     const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
-    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime']);
+    let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime'], ['count']);
     queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
@@ -184,7 +184,7 @@ class AllVideos extends React.Component {
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
               </div>
               <div>
                 <span>分類：</span>
