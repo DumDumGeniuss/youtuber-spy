@@ -28,16 +28,6 @@ class MainLayout extends React.Component {
     this.props.doLogout();
   }
 
-        // <div className={'MainLayout-fbLikeZone'}>
-        //   <div className={'fb-page'}
-        //     data-href={'https://www.facebook.com/U2berSpy/'}
-        //     data-small-header={false}
-        //     data-adapt-container-width={false}
-        //     data-hide-cover={false}
-        //     data-show-facepile={true}
-        //   >
-        //   </div>
-        // </div>
               // <div className={'MainLayout-link'}>
               //   <Link href='/articles/allArticles'><a>新聞</a></Link>
               // </div>
@@ -45,7 +35,8 @@ class MainLayout extends React.Component {
     return (
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head />
+        <Head>
+        </Head>
         <nav className={'MainLayout-navbar'}>
           <div className={'MainLayout-content'}>
             <div className={'MainLayout-logo'}>

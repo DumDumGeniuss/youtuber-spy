@@ -132,6 +132,7 @@ class SingleChannel extends React.Component {
           <meta property="og:url" content={'https://www.youtuberspy.com/channels/singleChannel?channelId=' + this.props.query.channelId} />
           <meta property="og:site_name" content={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}/>
           <meta property="fb:app_id" content={'158925374651334'} />
+          <script src='https://apis.google.com/js/platform.js'></script>
         </Head>
         <MainLayoutContainer>
           <div className={'SingleChannel-zone'}>
@@ -147,11 +148,13 @@ class SingleChannel extends React.Component {
               <span className={'SingleChannel-countryName'}>
                 {channelInfo.country}
               </span>
-              <div className={'SingleChannel-subscriber'}>
-                <div
-                  className={'g-ytsubscribe'}
-                  data-channelid={channelInfo._id} data-layout="default" data-count="default"></div>
-              </div>
+              <div className={'SingleChannel-subscriber'} dangerouslySetInnerHTML={{__html: `
+                  <div
+                    class='g-ytsubscribe'
+                    data-channelid=${channelInfo._id} data-layout='default' data-count='default'>
+                  </div>
+                `}}
+              />
             </div>
             <h1 className={'SingleChannel-title'}>{channelInfo.title}</h1>
             <h2 className={'SingleChannel-smallTitle'}>{i18nWords.channelCategory[channelInfo.category] || ''}</h2>

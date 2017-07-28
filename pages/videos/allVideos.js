@@ -10,7 +10,6 @@ import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
 import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
-import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
 import * as videoAction from '../../actions/video';
 import * as videoApi from '../../apis/video';
@@ -172,13 +171,17 @@ class AllVideos extends React.Component {
         </Head>
         <MainLayoutContainer>
           <div className={'AllVideos-zone'}>
-            <TitleSection
-              titleFonts={'精選影片'}
-              contentFonts={`
-                我們每天都會自動收錄最新的影片，
-                您可以在這邊看到最新發布的影片，也可以選擇想搜尋的日期，
-                或許也能順便發現您喜歡的Youtuber並按下訂閱喔～
-              `}
+            <div className={'AllVideos-fbLikeZone'} dangerouslySetInnerHTML={{__html: `
+                <div class='fb-page'
+                  data-href='https://www.facebook.com/U2berSpy/'
+                  data-small-header=false
+                  data-adapt-container-width=false
+                  data-hide-cover=false
+                  data-show-facepile=true
+                  data-width='320'
+                >
+                </div>
+              `}}
             />
             <div className={'AllVideos-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}

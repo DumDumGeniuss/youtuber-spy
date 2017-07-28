@@ -11,7 +11,6 @@ import Search from 'react-icons/lib/fa/search';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
 import PaginationBox from '../components/boxes/PaginationBox/PaginationBox';
-import TitleSection from '../components/sections/TitleSection/TitleSection';
 import { initStore } from '../store/initStore';
 import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
@@ -175,12 +174,17 @@ class Index extends React.Component {
         </Head>
         <MainLayoutContainer>
           <div className={'Index-zone'}>
-            <TitleSection
-              titleFonts={'精選頻道'}
-              contentFonts={`
-                你可以在這邊看到許多熱門Youtuber的資訊，也可以在這裡發掘您喜歡的頻道，
-                我們會定時更新推薦的頻道排序，讓更多優質的創作者被發現。
-              `}
+            <div className={'Index-fbLikeZone'} dangerouslySetInnerHTML={{__html: `
+                <div class='fb-page'
+                  data-href='https://www.facebook.com/U2berSpy/'
+                  data-small-header=false
+                  data-adapt-container-width=false
+                  data-hide-cover=false
+                  data-show-facepile=true
+                  data-width='320'
+                >
+                </div>
+              `}}
             />
             <div className={'Index-addChannelBar'}>
               <Link href='/candidateChannels/allCandidateChannels'><a>
