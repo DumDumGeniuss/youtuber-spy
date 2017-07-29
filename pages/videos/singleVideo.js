@@ -21,20 +21,18 @@ class SingleVideo extends React.Component {
     store.dispatch(videoAction.getVideo(video));
 
 
-    const newSameCategoryVideosQuery = {
-      sort: 'publishedAt',
-      order: 'desc',
+    const randomSameCategoryVideosQuery = {
       category: video.category,
-      page: 1,
       count: 5,
+      random: true,
     };
 
-    const newSameCategoryVideosResult = await videoApi.getAllVideos(newSameCategoryVideosQuery);
-    const newSameCategoryVideos = newSameCategoryVideosResult.datas;
+    const randomSameCategoryVideosResult = await videoApi.getAllVideos(randomSameCategoryVideosQuery);
+    const randomSameCategoryVideos = randomSameCategoryVideosResult.datas;
 
 
     return {
-      newSameCategoryVideos,
+      randomSameCategoryVideos,
       query,
     };
   }
@@ -56,7 +54,7 @@ class SingleVideo extends React.Component {
     const videoInfo = this.props.video.video;
     const browserAttribute = this.props.browserAttribute;
     const i18nWords = this.props.i18n.words;
-    const newSameCategoryVideos = this.props.newSameCategoryVideos;
+    const randomSameCategoryVideos = this.props.randomSameCategoryVideos;
 
     return (
       <div>
@@ -100,13 +98,13 @@ class SingleVideo extends React.Component {
               </div>
             </div>
             <p className={'SingleVideo-description'}>{videoInfo.description || '這個影片沒有任何的介紹'}</p>
-            <h1 className={'SingleVideo-zoneTitle'}>最新相同類型影片</h1>
+            <h1 className={'SingleVideo-zoneTitle'}>相同類型影片</h1>
             <div className={'SingleVideo-videosZone'}>
               {
-                newSameCategoryVideos.length === 0 ?
+                randomSameCategoryVideos.length === 0 ?
                   <h3 className={'SingleVideo-noDatasText'}>由於此頻道最近新增，目前沒有熱門影片數據</h3>
                   :
-                  newSameCategoryVideos.map((item) => {
+                  randomSameCategoryVideos.map((item) => {
                     return (
                       <YoutubeVideoCard
                         key={item._id}

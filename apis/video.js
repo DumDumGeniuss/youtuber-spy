@@ -16,6 +16,7 @@ export const getAllVideos = async function (query) {
     page: query.page || '',
     count: query.count || '',
     channelId: query.channelId || '',
+    random: query.random || '',
   };
   const queryString = tinyHelper.getQueryString(finalQuery);
   const result = await fetch(apiUrl + queryString, {
