@@ -31,11 +31,15 @@ class YoutubeVideoCard extends React.Component {
             <img src={videoInfo.mediumThumbnails} />
         </figure>
         <section className={'YoutubeVideoCard-infoDiv'}>
-          <h3><a target="_blank" href={`https://www.youtube.com/watch?v=${videoInfo._id}`}>{videoInfo.title}</a></h3>
+          <h3>
+            <Link href={'/videos/singleVideo?videoId=' + videoInfo._id}><a>
+              {videoInfo.title}
+            </a></Link>
+          </h3>
           <h4>
-            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}>
-              <a>{videoInfo.channelTitle}</a>
-            </Link>
+            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}><a>
+              {videoInfo.channelTitle}
+            </a></Link>
           </h4>
           <h4>觀看 {videoInfo.viewCount.toLocaleString()}</h4>
           <h4>時間 {publishedAt}</h4>

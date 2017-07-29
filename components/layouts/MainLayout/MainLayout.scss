@@ -6,36 +6,36 @@ $primary-color: black;
   background-color: #e9ebee;
   width: 100%;
   margin-top: 50px;
-}
 
-.MainLayout-socialZone {
-  position: fixed;
-  display: inline-block;
-  left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  z-index: 3;
-
-  .MainLayout-socialIcon {
-    display: flex;
-    width: 30px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #3b5998;
-    color: white;
+  .MainLayout-socialZone {
+    position: fixed;
+    display: inline-block;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 3;
+  
+    .MainLayout-socialIcon {
+      display: flex;
+      width: 35px;
+      height: 35px;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #3b5998;
+      color: white;
+    }
+  
+    .MainLayout-socialIcon:hover {
+      color: yellow;
+    }
   }
 
-  .MainLayout-socialIcon:hover {
-    color: yellow;
+  .MainLayout-pageContent {
+    width: 100%;
+    overflow: hidden;
   }
-}
-
-.MainLayout-pageContent {
-  width: 100%;
-  overflow: hidden;
 }
 
 .MainLayout-footer {
@@ -75,14 +75,14 @@ $primary-color: black;
       left: 10px;
       height: 50px;
   
-      img {
+      .MainLayout-logoImg {
         margin-top: 5px;
         display: inline-block;
         height: 40px;
         vertical-align: middle;
       }
   
-      h1 {
+      .MainLayout-logoTitle {
         display: inline-block;
         color: white;
         font-size: 1em;

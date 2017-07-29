@@ -41,8 +41,8 @@ class MainLayout extends React.Component {
           <div className={'MainLayout-content'}>
             <div className={'MainLayout-logo'}>
               <Link href='/'><a>
-                <img src={'/static/logo.png'}/>
-                <h1>Youtuber看門狗</h1>
+                <img className={'MainLayout-logoImg'} src={'/static/logo.png'}/>
+                <h1 className={'MainLayout-logoTitle'}>Youtuber看門狗</h1>
               </a></Link>
             </div>
             <div className={'MainLayout-itemsZone'}>

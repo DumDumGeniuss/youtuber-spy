@@ -22,3 +22,10 @@ export const getVideosAsync = function (preVideos, query) {
       });
   };
 };
+
+export function getVideo(video) {
+  return {
+    type: 'GET_VIDEO',
+    video,
+  };
+}

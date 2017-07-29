@@ -25,3 +25,12 @@ export const getAllVideos = async function (query) {
 
   return resultJson;
 };
+
+export const getVideo = async function (videoId) {
+  const result = await fetch(apiUrl + '/' + videoId, {
+    method: 'GET',
+  });
+  const resultJson = await result.json();
+
+  return resultJson;
+};

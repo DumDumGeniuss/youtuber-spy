@@ -6,6 +6,7 @@ import { initStore } from '../../../store/initStore';
 import MainLayout from '../../../components/layouts/MainLayout/MainLayout';
 
 import * as userAction from '../../../actions/user';
+import * as browserAttributeAction from '../../../actions/browserAttribute';
 import * as youtubeApi from '../../../apis/youtube';
 
 class MainLayoutContainer extends React.Component {
@@ -19,6 +20,7 @@ class MainLayoutContainer extends React.Component {
     this.state = {
       isLogining: false,
     };
+    this.doSetBrowserSize = this.doSetBrowserSize.bind(this);
   }
 
   componentDidMount() {
@@ -28,9 +30,19 @@ class MainLayoutContainer extends React.Component {
       localStorage.setItem('youtubeToken', callbackParams.access_token);
     }
     this.props.getUserAsync(localStorage.getItem('youtubeToken'));
+
+    this.doSetBrowserSize();
+    this.windowSizeChangeListener = window.addEventListener('resize', this.doSetBrowserSize);
   }
 
-  componentWillUnmount() {
+  doSetBrowserSize() {
+    const w = window;
+    const d = document;
+    const e = d.documentElement;
+    const g = d.getElementsByTagName('body')[0];
+    const x = w.innerWidth || e.clientWidth || g.clientWidth;
+    const y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    this.props.setBrowserSize(x, y);
   }
 
   login() {
@@ -52,8 +64,13 @@ class MainLayoutContainer extends React.Component {
     window.open('/', "_self");
   }
 
+  componentWillUnmount() {
+    if (this.windowSizeChangeListener) {
+      window.removeEventListener(this.doSetBrowserSize);
+    }
+  }
+
   render() {
-    // console.log(this.props.user);
     return (
       <MainLayout
         userInfo={this.props.user.userInfo}
@@ -68,6 +85,7 @@ class MainLayoutContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    browserAttribute: state.browserAttribute,
   };
 };
 
@@ -75,6 +93,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserAsync: bindActionCreators(userAction.getUserAsync, dispatch),
     getUser: bindActionCreators(userAction.getUser, dispatch),
+    setBrowserSize: bindActionCreators(browserAttributeAction.setBrowserSize, dispatch),
   }
 }
 
