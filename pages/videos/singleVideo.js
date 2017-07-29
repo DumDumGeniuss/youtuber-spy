@@ -83,6 +83,8 @@ class SingleVideo extends React.Component {
               </iframe>
             </div>
             <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
+            <h2 className={'SingleVideo-smallTitle'}>{videoInfo.category}</h2>
+            <h2 className={'SingleVideo-smallTitle'}>{videoInfo.channelTitle}</h2>
             <div className={'SingleVideo-statisticZone'}>
               <div className={'SingleVideo-statistic'}>
                 <span>觀看 {videoInfo.viewCount.toLocaleString()}</span>
