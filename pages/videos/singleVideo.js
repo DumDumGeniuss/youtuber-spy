@@ -53,8 +53,8 @@ class SingleVideo extends React.Component {
   render() {
     const videoInfo = this.props.video.video;
     const browserAttribute = this.props.browserAttribute;
-    const i18nWords = this.props.i18n.words;
     const randomSameCategoryVideos = this.props.randomSameCategoryVideos;
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -83,8 +83,14 @@ class SingleVideo extends React.Component {
               </iframe>
             </div>
             <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
-            <h2 className={'SingleVideo-smallTitle'}>{videoInfo.category}</h2>
-            <h2 className={'SingleVideo-smallTitle'}>{videoInfo.channelTitle}</h2>
+            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}><a>
+              <h2 className={'SingleVideo-smallTitle'}>
+                {videoInfo.channelTitle}
+              </h2>
+            </a></Link>
+            <h2 className={'SingleVideo-smallTitle'}>
+              {i18nWords.videoCategory[videoInfo.category] || videoInfo.category}
+            </h2>
             <div className={'SingleVideo-statisticZone'}>
               <div className={'SingleVideo-statistic'}>
                 <span>觀看 {videoInfo.viewCount.toLocaleString()}</span>
