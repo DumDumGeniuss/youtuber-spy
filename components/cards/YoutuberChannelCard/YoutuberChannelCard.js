@@ -30,25 +30,20 @@ class YoutuberChannelCard extends React.Component {
     return (
       <div className={'YoutuberChannelCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <div className={'YoutuberChannelCard-frontZone'}>
-          <figure className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></figure>
-          <h2 className={'YoutuberChannelCard-title'}><b>{channelInfo.title}</b></h2>
-          <div className={'YoutuberChannelCard-dataZone'}>
-            <h2 className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount.toLocaleString()}</small></h2>
-            <h2 className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount.toLocaleString()}</small></h2>
-            <h2 className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount.toLocaleString()}</small></h2>
-            <h2 className={'YoutuberChannelCard-data'}><small>種類 {channelInfo.category || '無'}</small></h2>
-            <h2 className={'YoutuberChannelCard-data'}><small>地區 {channelInfo.country || '無'}</small></h2>
-            <h2 className={'YoutuberChannelCard-data'}><small>成立 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></h2>
+        <Link href={'/channels/singleChannel?channelId=' + channelInfo._id}><a>
+          <div className={'YoutuberChannelCard-frontZone'}>
+            <figure className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></figure>
+            <h2 className={'YoutuberChannelCard-title'}><b>{channelInfo.title}</b></h2>
+            <div className={'YoutuberChannelCard-dataZone'}>
+              <h2 className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount.toLocaleString()}</small></h2>
+              <h2 className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount.toLocaleString()}</small></h2>
+              <h2 className={'YoutuberChannelCard-data'}><small>觀看 {channelInfo.viewCount.toLocaleString()}</small></h2>
+              <h2 className={'YoutuberChannelCard-data'}><small>種類 {channelInfo.category || '無'}</small></h2>
+              <h2 className={'YoutuberChannelCard-data'}><small>地區 {channelInfo.country || '無'}</small></h2>
+              <h2 className={'YoutuberChannelCard-data'}><small>成立 {parseInt(month/12, 10) + '年' + month%12 + '個月'}</small></h2>
+            </div>
           </div>
-        </div>
-        <Link href={'/channels/singleChannel?channelId=' + channelInfo._id}>
-          <a>
-          <div className={'YoutuberChannelCard-seeDetailIcon'}>
-            <Search />
-          </div>
-          </a>
-        </Link>
+        </a></Link>
       </div>
     );
   }
