@@ -65,6 +65,7 @@ class MainLayout extends React.Component {
             </div>
           </div>
         </nav>
+        { this.props.isRouterChanging ? <div className={'MainLayout-loadingZone'}></div> : null }
         <div className={'MainLayout-socialZone'}>
           <a target={'_blank'} href={'https://www.facebook.com/Youtuber-Spy-%E5%B0%8F%E9%A0%BB%E9%81%93%E5%A4%A7%E4%B8%96%E7%95%8C-1929847743924108/'}>
             <div className={'MainLayout-socialIcon'}>

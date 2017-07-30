@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 import { initStore } from '../../../store/initStore';
 
 import MainLayout from '../../../components/layouts/MainLayout/MainLayout';
@@ -10,11 +11,6 @@ import * as browserAttributeAction from '../../../actions/browserAttribute';
 import * as youtubeApi from '../../../apis/youtube';
 
 class MainLayoutContainer extends React.Component {
-  static getInitialProps({ query }) {
-    return {
-      query,
-    };
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -31,8 +27,17 @@ class MainLayoutContainer extends React.Component {
     }
     this.props.getUserAsync(localStorage.getItem('youtubeToken'));
 
+    /* Get the current window size */
     this.doSetBrowserSize();
     this.windowSizeChangeListener = window.addEventListener('resize', this.doSetBrowserSize);
+
+    Router.onRouteChangeStart = (url) => {
+      this.props.setRouterChangingStatus(true);
+    }; 
+    Router.onRouteChangeComplete = (url) => {
+      this.props.setRouterChangingStatus(false);
+    }; 
+
   }
 
   doSetBrowserSize() {
@@ -77,6 +82,7 @@ class MainLayoutContainer extends React.Component {
         children={this.props.children}
         doLogin={this.login.bind(this)}
         doLogout={this.logout.bind(this)}
+        isRouterChanging={this.props.browserAttribute.isRouterChanging}
       />
     );
   }
@@ -94,6 +100,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserAsync: bindActionCreators(userAction.getUserAsync, dispatch),
     getUser: bindActionCreators(userAction.getUser, dispatch),
     setBrowserSize: bindActionCreators(browserAttributeAction.setBrowserSize, dispatch),
+    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
   }
 }
 

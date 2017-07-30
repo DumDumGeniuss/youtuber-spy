@@ -13,6 +13,7 @@ import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
 import * as videoAction from '../../actions/video';
 import * as videoApi from '../../apis/video';
+import * as browserAttributeAction from '../../actions/browserAttribute';
 
 import stylesheet from './allVideos.scss';
 
@@ -43,9 +44,6 @@ class AllVideos extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-    };
     /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: this.props.newQuery.sort,
@@ -69,13 +67,8 @@ class AllVideos extends React.Component {
     const oldVideo = this.props.video;
     /* If loading successfully, set isLoading to false */
     if (newVideo.token !== oldVideo.token) {
-      this.setState({
-        isLoading: false,
-      });
+      this.props.setRouterChangingStatus(false);
     }
-  }
-
-  componentWillUnmount() {
   }
 
   /* remember to reset tha page */
@@ -88,9 +81,7 @@ class AllVideos extends React.Component {
     this.searchKeyword = setTimeout(() => {
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.setState({
-        isLoading: true,
-      });
+      this.props.setRouterChangingStatus(true);
       Router.push({
         pathname: '/videos/allVideos',
         query: this.query,
@@ -102,9 +93,7 @@ class AllVideos extends React.Component {
   changeOrder(event) {
     this.query.page = 1;
     this.query.sort = event.target.value;
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/videos/allVideos',
       query: this.query,
@@ -115,9 +104,7 @@ class AllVideos extends React.Component {
     this.query.page = 1;
     this.query.category = event.target.value;
     // this.props.getVideosAsync([], this.query);
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/videos/allVideos',
       query: this.query,
@@ -129,9 +116,7 @@ class AllVideos extends React.Component {
     this.query.page = 1;
     this.daysAgo = event.target.value;
     this.query.startTime = moment().utc().add(-this.daysAgo, 'days').format();
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/videos/allVideos',
       query: this.query,
@@ -184,7 +169,6 @@ class AllVideos extends React.Component {
               `}}
             />
             <div className={'AllVideos-functionBar'}>
-              {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
@@ -262,6 +246,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
     getVideosAsync: bindActionCreators(videoAction.getVideosAsync, dispatch),
   }
 }

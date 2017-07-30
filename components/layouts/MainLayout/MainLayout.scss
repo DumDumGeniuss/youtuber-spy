@@ -38,6 +38,30 @@ $primary-color: black;
   }
 }
 
+.MainLayout-loadingZone {
+  position: fixed;
+  display: block;
+  top: 50px;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  z-index: 5;
+  box-shadow: 10px 0 3px grey;
+  animation: loading 3s  linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-color: #eca400;
+  }
+  50% {
+    background-color: #d00000;
+  }
+  100% {
+    background-color: #eca400;
+  }
+}
+
 .MainLayout-footer {
   position: relative;
   background-color: #141b69;
@@ -142,6 +166,9 @@ $primary-color: black;
 
   .MainLayout-zone {
     margin-top: 100px;
+    .MainLayout-loadingZone  {
+      top: 100px;
+    }
     .MainLayout-navbar {
       height: 100px;
       .MainLayout-content {

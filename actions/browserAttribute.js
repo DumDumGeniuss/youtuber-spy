@@ -5,3 +5,10 @@ export function setBrowserSize(windowWidth, windowHeight) {
     windowHeight,
   };
 }
+
+export function setRouterChangingStatus(isChanging) {
+  return {
+    type: 'CHANGE_ROUTER_STATUS',
+    isChanging,
+  };
+}

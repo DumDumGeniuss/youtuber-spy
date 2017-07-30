@@ -17,6 +17,7 @@ import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
 import * as candidateChannelApi from '../apis/candidateChannel';
 import * as youtubeApi from '../apis/youtube';
+import * as browserAttributeAction from '../actions/browserAttribute';
 
 import stylesheet from './index.scss';
 
@@ -48,9 +49,6 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-    };
     /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: this.props.newQuery.sort,
@@ -66,7 +64,6 @@ class Index extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
-    // this.addScrollHandler();
   }
 
   componentWillReceiveProps(newProps) {
@@ -74,9 +71,7 @@ class Index extends React.Component {
     const oldChannel = this.props.channel;
     /* If loading successfully, set isLoading to false */
     if (newChannel.token !== oldChannel.token) {
-      this.setState({
-        isLoading: false,
-      });
+      this.props.setRouterChangingStatus(false);
     }
   }
 
@@ -90,9 +85,7 @@ class Index extends React.Component {
     this.searchKeyword = setTimeout(() => {
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.setState({
-        isLoading: true,
-      });
+      this.props.setRouterChangingStatus(true);
       Router.push({
         pathname: '/',
         query: this.query,
@@ -104,9 +97,7 @@ class Index extends React.Component {
     this.query.page = 1;
     this.query.sort = event.target.value;
     this.query.order = this.query.sort === 'publishedAt' ? 'asc' : 'desc';
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/',
       query: this.query,
@@ -116,9 +107,7 @@ class Index extends React.Component {
   changeCategory(event) {
     this.query.page = 1;
     this.query.category = event.target.value;
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/',
       query: this.query,
@@ -128,9 +117,7 @@ class Index extends React.Component {
   changeCountry(event) {
     this.query.page = 1;
     this.query.country = event.target.value;
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/',
       query: this.query,
@@ -194,7 +181,6 @@ class Index extends React.Component {
               </a></Link>
             </div>
             <div className={'Index-functionBar'}>
-              {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
@@ -290,7 +276,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getChannelsAsync: bindActionCreators(channelAction.getChannelsAsync, dispatch),
+    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
     getUser: bindActionCreators(userAction.getUser, dispatch),
   }
 }

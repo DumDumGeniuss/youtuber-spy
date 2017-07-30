@@ -15,6 +15,7 @@ import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
 import * as candidateChannelAction from '../../actions/candidateChannel';
 import * as candidateChannelApi from '../../apis/candidateChannel';
+import * as browserAttributeAction from '../../actions/browserAttribute';
 
 import stylesheet from './allCandidateChannels.scss';
 
@@ -76,9 +77,7 @@ class AllCandidateChannels extends React.Component {
     const oldChannel = this.props.candidateChannel;
     /* If loading successfully, set isLoading to false */
     if (newChannel.token !== oldChannel.token) {
-      this.setState({
-        isLoading: false,
-      });
+      this.props.setRouterChangingStatus(false);
     }
   }
 
@@ -189,23 +188,19 @@ class AllCandidateChannels extends React.Component {
       // this.toDatasLimit = false;
       this.query.page = 1;
       this.query.keyword = keyword;
-      this.setState({
-        isLoading: true,
+      this.props.setRouterChangingStatus(true);
+      Router.push({
+        pathname: '/candidateChannels/allCandidateChannels',
+        query: this.query,
       });
     }, 1000);
-    Router.push({
-      pathname: '/candidateChannels/allCandidateChannels',
-      query: this.query,
-    });
   }
 
   changeOrder(event) {
     // this.toDatasLimit = false;
     this.query.page = 1;
     this.query.sort = event.target.value;
-    this.setState({
-      isLoading: true,
-    });
+    this.props.setRouterChangingStatus(true);
     Router.push({
       pathname: '/candidateChannels/allCandidateChannels',
       query: this.query,
@@ -338,6 +333,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
     getCandidateChannelsAsync: bindActionCreators(candidateChannelAction.getCandidateChannelsAsync, dispatch),
     verifyCandidateChannelAsync: bindActionCreators(candidateChannelAction.verifyCandidateChannelAsync, dispatch),
     deleteCandidateChannelAsync: bindActionCreators(candidateChannelAction.deleteCandidateChannelAsync, dispatch),
