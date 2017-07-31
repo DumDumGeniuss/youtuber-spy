@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
 import ReactHighcharts from 'react-highcharts';
@@ -121,17 +122,16 @@ class SingleChannel extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+        <HeadWrapper
+          title={'Youtuber看門狗-' + channelInfo.title}
+          description={channelInfo.description}
+          type={'website'}
+          image={channelInfo.bannerTvImageUrl}
+          url={'https://www.youtuberspy.com/channels/singleChannel?channelId=' + this.props.query.channelId}
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <Head>
-          <title>{'Youtuber看門狗-' + channelInfo.title}</title>
-          <meta property="og:title" content={'Youtuber看門狗-' + channelInfo.title} />
-          <meta property="og:description" content={`
-            ${channelInfo.description}`}
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content={channelInfo.bannerTvImageUrl} />
-          <meta property="og:url" content={'https://www.youtuberspy.com/channels/singleChannel?channelId=' + this.props.query.channelId} />
-          <meta property="og:site_name" content={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}/>
-          <meta property="fb:app_id" content={'158925374651334'} />
           <script src='https://apis.google.com/js/platform.js'></script>
         </Head>
         <MainLayoutContainer>

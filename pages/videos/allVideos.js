@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 import Router from 'next/router';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import * as tinyHelper from '../../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
@@ -142,18 +143,17 @@ class AllVideos extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <title>Youtuber看門狗-近期影片</title>
-          <meta property="og:title" content="Youtuber看門狗-近期影片" />
-          <meta property="og:description" content={`
+        <HeadWrapper
+          title={'Youtuber看門狗-近期影片'}
+          description={`
             想知道最新的影片資訊嗎？想看看最近大家都在流行什麼樣的影片嗎？
             Youtuber看門狗提供您方便的搜尋服務，讓你可以看到本日，本週甚至本月的流行影片！`}
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
-          <meta property="og:url" content="https://www.youtuberspy.com/videos/allVideos" />
-          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
-        </Head>
+          type={'website'}
+          image={'https://www.youtuberspy.com/static/logo-facebook.png'}
+          url={'https://www.youtuberspy.com/videos/allVideos'} 
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <MainLayoutContainer>
           <div className={'AllVideos-zone'}>
             <div className={'AllVideos-fbLikeZone'} dangerouslySetInnerHTML={{__html: `

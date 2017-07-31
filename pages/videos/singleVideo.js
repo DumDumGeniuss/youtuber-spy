@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
 import { initStore } from '../../store/initStore';
@@ -59,19 +60,15 @@ class SingleVideo extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <title>{'Youtuber看門狗-' + videoInfo.title}</title>
-          <meta property="og:title" content={'Youtuber看門狗-' + videoInfo.title} />
-          <meta property="og:description" content={`
-            ${videoInfo.description}`}
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content={videoInfo.highThumbnails} />
-          <meta property="og:url" content={'https://www.youtuberspy.com/videos/singleVideo?videoId=' + this.props.query.videoId} />
-          <meta property="og:site_name" content={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}/>
-          <meta property="fb:app_id" content={'158925374651334'} />
-          <script src='https://apis.google.com/js/platform.js'></script>
-        </Head>
+        <HeadWrapper
+          title={'Youtuber看門狗-' + videoInfo.title}
+          description={videoInfo.description}
+          type={'website'}
+          image={videoInfo.highThumbnails}
+          url={'https://www.youtuberspy.com/videos/singleVideo?videoId=' + this.props.query.videoId} 
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <MainLayoutContainer>
           <div className={'SingleVideo-zone'}>
             <div className={'SingleVideo-playVideo'}>

@@ -5,6 +5,7 @@ import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
 import ReactMarkdown from 'react-markdown';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
 
@@ -45,17 +46,15 @@ class SingleArticle extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <title>{'Youtuber看門狗-' + articleInfo.title}</title>
-          <meta name="og:title" content={'Youtuber看門狗-' + articleInfo.title} />
-          <meta name="og:description" content={articleInfo.content.substring(0, 300)}
-          />
-          <meta name="og:type" content="website" />
-          <meta name="og:image" content={articleInfo.titleImage} />
-          <meta name="og:url" content={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id} />
-          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
-          <meta property="fb:app_id" content={'158925374651334'} />
-        </Head>
+        <HeadWrapper
+          title={'Youtuber看門狗-' + articleInfo.title}
+          description={articleInfo.content.substring(0, 300)}
+          type={'website'}
+          image={articleInfo.titleImage} 
+          url={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id}
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <MainLayoutContainer>
           <div className={'SingleArticle-zone'}>
             <div className={'SingleArticle-markdownZone'}>

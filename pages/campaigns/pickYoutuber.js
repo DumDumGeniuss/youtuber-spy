@@ -5,6 +5,7 @@ import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
@@ -42,20 +43,15 @@ class PickYoutuber extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <title>{'Youtuber看門狗-' + pickedYoutuber.title}</title>
-          <meta property="og:title" content={'Youtuber看門狗-' + pickedYoutuber.title} />
-          <meta property="og:description" content={pickedYoutuber.description}
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image:type" content="image/jpeg" />
-          <meta property="og:image:width" content="400" />
-          <meta property="og:image:height" content="400" />
-          <meta property="og:image" content={pickedYoutuber.mediumThumbnails} />
-          <meta property="og:url" content={'https://www.youtuberspy.com/campaigns/pickYoutuber'} />
-          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
-          <meta property="fb:app_id" content={'158925374651334'} />
-        </Head>
+        <HeadWrapper
+          title={'Youtuber看門狗-' + pickedYoutuber.title}
+          description={pickedYoutuber.description}
+          type={'website'}
+          image={pickedYoutuber.mediumThumbnails} 
+          url={'https://www.youtuberspy.com/campaigns/pickYoutuber'}
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <MainLayoutContainer>
           <div className={'PickYoutuber-zone'}>
             <TitleSection

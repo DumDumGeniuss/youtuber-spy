@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
 
+import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import * as tinyHelper from '../../libs/tinyHelper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
@@ -239,18 +240,15 @@ class AllCandidateChannels extends React.Component {
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-          <title>Youtuber看門狗-頻道新增</title>
-          <meta property="og:title" content="Youtuber看門狗-頻道新增" />
-          <meta property="og:description" content={`
-            我們致力於搜集所有熱門的中文Youtuber頻道，不論是來自馬來西亞、香港、新加坡、台灣、澳門等等的頻道都歡迎加入！`}
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.youtuberspy.com/static/logo-facebook.png" />
-          <meta property="og:url" content="https://www.youtuberspy.com/candidateChannels/allCandidateChannels" />
-          <meta property="og:site_name" content="Youtuber看門狗-在這裡發掘您喜歡的Youtubers！"/>
-          <meta property="fb:app_id" content={'158925374651334'} />
-        </Head>
+        <HeadWrapper
+          title={'Youtuber看門狗-頻道新增'}
+          description={`我們致力於搜集所有熱門的中文Youtuber頻道，不論是來自馬來西亞、香港、新加坡、台灣、澳門等等的頻道都歡迎加入！`}
+          type={'website'}
+          image={'https://www.youtuberspy.com/static/logo-facebook.png'}
+          url={'https://www.youtuberspy.com/candidateChannels/allCandidateChannels'} 
+          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fb_app_id={'158925374651334'}
+        />
         <MainLayoutContainer>
           {this.state.showAddChannel?
             <ChannelInputModal
