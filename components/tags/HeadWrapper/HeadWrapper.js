@@ -10,7 +10,7 @@ class HeadWrapper extends React.Component {
     const { title, description, type, image, url, site_name, fb_app_id } = this.props;
     return (
       <Head>
-        <title>title</title>
+        <title>{title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description}/>
         <meta property="og:type" content={type} />
