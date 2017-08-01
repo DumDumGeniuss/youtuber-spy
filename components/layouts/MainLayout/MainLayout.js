@@ -14,7 +14,7 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    if (FB) {
+    if (typeof FB !== undefined) {
       FB.XFBML.parse();
     }
   }
