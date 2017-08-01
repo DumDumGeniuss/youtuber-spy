@@ -33,7 +33,7 @@ class YoutuberChannelCard extends React.Component {
         <Link href={'/channels/singleChannel?channelId=' + channelInfo._id}><a>
           <div className={'YoutuberChannelCard-frontZone'}>
             <figure className={'YoutuberChannelCard-img'}><img src={channelInfo.defaultThumbnails}/></figure>
-            <h2 className={'YoutuberChannelCard-title'}><b>{channelInfo.title}</b></h2>
+            <h2 className={'YoutuberChannelCard-title'}><b>{channelInfo.rank + '.' + channelInfo.title}</b></h2>
             <div className={'YoutuberChannelCard-dataZone'}>
               <h2 className={'YoutuberChannelCard-data'}><small>訂閱 {channelInfo.subscriberCount.toLocaleString()}</small></h2>
               <h2 className={'YoutuberChannelCard-data'}><small>影片 {channelInfo.videoCount.toLocaleString()}</small></h2>
@@ -51,7 +51,6 @@ class YoutuberChannelCard extends React.Component {
 
 YoutuberChannelCard.PropTypes = {
   channelInfo: PropTypes.object,
-  rank: PropTypes.number,
 };
 
 export default YoutuberChannelCard;

@@ -29,7 +29,7 @@ const defaultQuery = {
   category: '',
   country: '',
   page: 1,
-  count: 40,
+  count: 1,
 };
 // localStorage.setItem('state', 'off');
 class Index extends React.Component {
@@ -37,7 +37,11 @@ class Index extends React.Component {
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
-      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      if (key === 'count') {
+        newQuery[key] = defaultQuery[key];
+      } else {
+        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      }
     });
 
     const result = await channelApi.getAllChannels(newQuery);
@@ -45,6 +49,7 @@ class Index extends React.Component {
 
     return {
       newQuery,
+      query,
     };
   }
 
@@ -74,6 +79,12 @@ class Index extends React.Component {
     if (newChannel.token !== oldChannel.token) {
       this.props.setRouterChangingStatus(false);
     }
+    /* Refresh the query parameters */
+    Object.keys(newProps.query).forEach((key) => {
+      if (key !== 'count') {
+        this.query[key] = newProps.query[key];
+      }
+    });
   }
 
   /* remember to reset tha page */
@@ -223,12 +234,12 @@ class Index extends React.Component {
                     category: i18nWords.channelCategory[item.category],
                     country: i18nWords.country[item.country],
                     publishedAt: item.publishedAt,
+                    rank: this.query.count * (this.query.page - 1) + index + 1,
                   }
                   return (
                     <YoutuberChannelCard 
                       key={item._id}
                       channelInfo={channelInfo}
-                      rank={index + 1}
                     />
                   );
                 })
