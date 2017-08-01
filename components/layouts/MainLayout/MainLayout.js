@@ -14,7 +14,15 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    if (typeof FB !== undefined) {
+    // if (typeof FB !== undefined) {
+    //   FB.XFBML.parse();
+    // }
+
+    if (!IS_FB_API_LOADED) {
+      document.addEventListener('fb-api-loaded', () => {
+        FB.XFBML.parse();
+      });
+    } else {
       FB.XFBML.parse();
     }
   }

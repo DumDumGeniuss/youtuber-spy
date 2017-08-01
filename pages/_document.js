@@ -43,13 +43,28 @@ export default class MyDocument extends Document {
         <body className="custom_class">
           <div dangerouslySetInnerHTML={{__html: `
             <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=158925374651334";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+            <script>
+              var IS_FB_API_LOADED = false;
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId      : '${process.env.FACEBOOK_API_ID}',
+                  cookie     : true,  // enable cookies to allow the server to access
+                                      // the session
+                  xfbml      : true,  // parse social plugins on this page
+                  version    : 'v2.8' // use graph api version 2.8
+                });
+                IS_FB_API_LOADED = true;
+                var event = new CustomEvent('fb-api-loaded', { 'detail': 'FB api loaded!!' });
+                document.dispatchEvent(event);
+              };
+              (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=158925374651334";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            </script>
           `}}/>
           {this.props.customValue}
           <Main />
