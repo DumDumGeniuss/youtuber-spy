@@ -44,6 +44,7 @@ class AllVideos extends React.Component {
     store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.videoCategories, result.token));
     return {
       newQuery,
+      query,
     };
   }
 

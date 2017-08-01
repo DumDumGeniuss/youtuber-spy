@@ -44,6 +44,7 @@ class AllCandidateChannels extends React.Component {
 
     return {
       newQuery,
+      query,
     };
   }
 
