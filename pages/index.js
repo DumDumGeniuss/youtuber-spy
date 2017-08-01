@@ -161,18 +161,6 @@ class Index extends React.Component {
         />
         <MainLayoutContainer>
           <div className={'Index-zone'}>
-            <div className={'Index-fbLikeZone'} dangerouslySetInnerHTML={{__html: `
-                <div class='fb-page'
-                  data-href='https://www.facebook.com/U2berSpy/'
-                  data-small-header=false
-                  data-adapt-container-width=false
-                  data-hide-cover=false
-                  data-show-facepile=true
-                  data-width='320'
-                >
-                </div>
-              `}}
-            />
             <div className={'Index-addChannelBar'}>
               <Link href='/candidateChannels/allCandidateChannels'><a>
                 <span className={'Index-channelFuncButton Index-search'}>

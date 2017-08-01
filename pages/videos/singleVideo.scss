@@ -3,13 +3,11 @@
 .SingleVideo-zone {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  min-height: 100vh;
-  margin-left: 50%;
-  transform: translate(-50%, 0%);
   background-color: white;
 
   .SingleVideo-playVideoZone {
+  	min-height: 200px;
+  	background-color: black;
   }
 
   .SingleVideo-title {
@@ -18,6 +16,7 @@
     text-align: center;
     background: linear-gradient(270deg, #ff716f, #f04d4c);
     color: white;
+    font-size: 1.4em;
   }
 
   .SingleVideo-smallTitle {
@@ -33,6 +32,7 @@
     text-align: center;
     background: linear-gradient(270deg, #767fe4, #4149a0);
     color: white;
+    font-size: 1.2em;
   }
 
   .SingleVideo-statisticZone {
@@ -59,8 +59,6 @@
     padding: 5px 15px;
     white-space: pre-line;
     color: black;
-    max-height: 50vh;
-    overflow: auto;
   }
   .SingleChannel-noDatasText {
     padding: 10px 0;

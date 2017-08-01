@@ -14,7 +14,9 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.query);
+    if (FB) {
+      FB.XFBML.parse();
+    }
   }
 
   componentWillUnmount() {
@@ -72,6 +74,17 @@ class MainLayout extends React.Component {
              <Facebook />
             </div>
           </a>
+        </div>
+        <div className={'MainLayout-fbLikeZone'}>
+            <div className='fb-page'
+              data-href='https://www.facebook.com/U2berSpy/'
+              data-small-header={false}
+              data-adapt-container-width={false}
+              data-hide-cover={false}
+              data-show-facepile={true}
+              data-adapt-container-width={true}
+            >
+            </div>
         </div>
         <div className={'MainLayout-pageContent'}>
           {this.props.children}

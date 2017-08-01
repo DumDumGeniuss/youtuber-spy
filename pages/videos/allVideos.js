@@ -156,18 +156,6 @@ class AllVideos extends React.Component {
         />
         <MainLayoutContainer>
           <div className={'AllVideos-zone'}>
-            <div className={'AllVideos-fbLikeZone'} dangerouslySetInnerHTML={{__html: `
-                <div class='fb-page'
-                  data-href='https://www.facebook.com/U2berSpy/'
-                  data-small-header=false
-                  data-adapt-container-width=false
-                  data-hide-cover=false
-                  data-show-facepile=true
-                  data-width='320'
-                >
-                </div>
-              `}}
-            />
             <div className={'AllVideos-functionBar'}>
               <div>
                 <span>關鍵字：</span>

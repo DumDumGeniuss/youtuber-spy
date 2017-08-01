@@ -19,6 +19,15 @@ class MainLayoutContainer extends React.Component {
     this.doSetBrowserSize = this.doSetBrowserSize.bind(this);
   }
 
+  componentWillMount() {
+    Router.onRouteChangeStart = (url) => {
+      this.props.setRouterChangingStatus(true);
+    }; 
+    Router.onRouteChangeComplete = (url) => {
+      this.props.setRouterChangingStatus(false);
+    };
+  }
+
   componentDidMount() {
     /* Handle the callback from addChannel */
     const callbackParams = youtubeApi.getParamsFromCallback(window.location.href);
@@ -30,14 +39,6 @@ class MainLayoutContainer extends React.Component {
     /* Get the current window size */
     this.doSetBrowserSize();
     this.windowSizeChangeListener = window.addEventListener('resize', this.doSetBrowserSize);
-
-    Router.onRouteChangeStart = (url) => {
-      this.props.setRouterChangingStatus(true);
-    }; 
-    Router.onRouteChangeComplete = (url) => {
-      this.props.setRouterChangingStatus(false);
-    }; 
-
   }
 
   doSetBrowserSize() {
@@ -73,6 +74,12 @@ class MainLayoutContainer extends React.Component {
     if (this.windowSizeChangeListener) {
       window.removeEventListener(this.doSetBrowserSize);
     }
+    if (Router.onRouteChangeStart) {
+      Router.onRouteChangeStart = null;
+    }
+    if (Router.onRouteChangeComplete) {
+      Router.onRouteChangeComplete = null;
+    }
   }
 
   render() {
@@ -83,6 +90,8 @@ class MainLayoutContainer extends React.Component {
         doLogin={this.login.bind(this)}
         doLogout={this.logout.bind(this)}
         isRouterChanging={this.props.browserAttribute.isRouterChanging}
+        windowWidth={this.props.browserAttribute.windowWidth}
+        windowHeight={this.props.browserAttribute.windowHeight}
       />
     );
   }

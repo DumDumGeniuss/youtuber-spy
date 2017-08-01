@@ -50,8 +50,7 @@ export default class MyDocument extends Document {
               js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=158925374651334";
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
-            `}}
-          />
+          `}}/>
           {this.props.customValue}
           <Main />
           <NextScript />

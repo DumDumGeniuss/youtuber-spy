@@ -4,17 +4,7 @@ $primary-color: black;
 
 .AllVideos-zone {
   width: 100%;
-  max-width: 800px;
-  min-height: 100vh;
-  margin-left: 50%;
-  transform: translate(-50%, 0%);
 
-  .AllVideos-fbLikeZone {
-    display: inline-block;
-    margin-left: 50%;
-    transform: translate(-50%, 0);
-    margin-top: 10px;
-  }
 
   .AllVideos-titleSection {
     display: absolute;

@@ -71,7 +71,8 @@ class SingleVideo extends React.Component {
         />
         <MainLayoutContainer>
           <div className={'SingleVideo-zone'}>
-            <div className={'SingleVideo-playVideo'}>
+            <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
+            <div className={'SingleVideo-playVideoZone'}>
               <iframe
                 frameBorder="0" allowFullScreen
                 width={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth : 800}
@@ -79,7 +80,6 @@ class SingleVideo extends React.Component {
                 src={'https://www.youtube.com/embed/' + videoInfo._id}>
               </iframe>
             </div>
-            <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
             <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}><a>
               <h2 className={'SingleVideo-smallTitle'}>
                 {videoInfo.channelTitle}

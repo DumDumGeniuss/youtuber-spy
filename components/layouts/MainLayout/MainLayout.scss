@@ -32,132 +32,144 @@ $primary-color: black;
     }
   }
 
-  .MainLayout-pageContent {
+  .MainLayout-loadingZone {
+    position: fixed;
+    display: block;
+    top: 50px;
+    left: 0;
+    height: 5px;
     width: 100%;
-    overflow: hidden;
+    z-index: 5;
+    box-shadow: 10px 0 3px grey;
+    animation: loading 3s  linear infinite;
   }
-}
 
-.MainLayout-loadingZone {
-  position: fixed;
-  display: block;
-  top: 50px;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  z-index: 5;
-  box-shadow: 10px 0 3px grey;
-  animation: loading 3s  linear infinite;
-}
-
-@keyframes loading {
-  0% {
-    background-color: #eca400;
+  @keyframes loading {
+    0% {
+      background-color: #eca400;
+    }
+    50% {
+      background-color: #d00000;
+    }
+    100% {
+      background-color: #eca400;
+    }
   }
-  50% {
-    background-color: #d00000;
-  }
-  100% {
-    background-color: #eca400;
-  }
-}
 
-.MainLayout-footer {
-  position: relative;
-  background-color: #141b69;
-  width: 100%;
-  height: 50px;
-
-  .MainLayout-center {
-    position: absolute;
-    display: inline-block;
-    color: white;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.MainLayout-navbar {
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #141b69;
-  z-index: 5;
-
-  .MainLayout-content {
+  .MainLayout-navbar {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1000px;
-    margin-left: 50%;
-    transform: translate(-50%, 0%);
-
-    .MainLayout-logo {
-      position: absolute;
-      left: 10px;
-      height: 50px;
+    height: 50px;
+    background-color: #141b69;
+    z-index: 5;
   
-      .MainLayout-logoImg {
-        margin-top: 5px;
-        display: inline-block;
-        height: 40px;
-        vertical-align: middle;
+    .MainLayout-content {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 50%;
+      transform: translate(-50%, 0%);
+  
+      .MainLayout-logo {
+        position: absolute;
+        left: 10px;
+        height: 50px;
+    
+        .MainLayout-logoImg {
+          margin-top: 5px;
+          display: inline-block;
+          height: 40px;
+          vertical-align: middle;
+        }
+    
+        .MainLayout-logoTitle {
+          display: inline-block;
+          color: white;
+          font-size: 1em;
+          line-height: 50px;
+          vertical-align: middle;
+          padding: 0 10px;
+          margin: 0;
+        }
       }
-  
-      .MainLayout-logoTitle {
-        display: inline-block;
-        color: white;
-        font-size: 1em;
-        line-height: 50px;
-        vertical-align: middle;
-        padding: 0 10px;
-        margin: 0;
+    
+      .MainLayout-itemsZone {
+        position: absolute;
+        right: 10px;
+        height: 50px;
+    
+        div {
+          position: relative;
+          display: inline-block;
+          height: 100%;
+          padding: 0 10px;
+          vertical-align: middle;
+          img {
+            height: 50px;
+          }
+          span {
+            color: white;
+            font-size: 1em;
+            line-height: 50px; 
+            cursor: pointer;
+          }
+          span:hover {
+            color: yellow;
+          }
+          a {
+            color: white;
+            font-size: 1em;
+            line-height: 50px; 
+          }
+          a:hover {
+            color: yellow;
+          }
+          svg {
+            margin-top: 10px;
+            font-size: 30px;
+            color: #dd4e40;
+            cursor: pointer;
+          }
+          svg:hover {
+            color: yellow;
+          }
+        }
       }
     }
+  }
+
+  .MainLayout-fbLikeZone {
+    display: inline-block;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .MainLayout-pageContent {
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    margin-left: 50%;
+    transform: translate(-50%, 0%);
+    overflow: hidden;
+  }
+
+  .MainLayout-footer {
+    position: relative;
+    background-color: #141b69;
+    width: 100%;
+    height: 50px;
   
-    .MainLayout-itemsZone {
+    .MainLayout-center {
       position: absolute;
-      right: 10px;
-      height: 50px;
-  
-      div {
-        position: relative;
-        display: inline-block;
-        height: 100%;
-        padding: 0 10px;
-        vertical-align: middle;
-        img {
-          height: 50px;
-        }
-        span {
-          color: white;
-          font-size: 1em;
-          line-height: 50px; 
-          cursor: pointer;
-        }
-        span:hover {
-          color: yellow;
-        }
-        a {
-          color: white;
-          font-size: 1em;
-          line-height: 50px; 
-        }
-        a:hover {
-          color: yellow;
-        }
-        svg {
-          margin-top: 10px;
-          font-size: 30px;
-          color: #dd4e40;
-          cursor: pointer;
-        }
-        svg:hover {
-          color: yellow;
-        }
-      }
+      display: inline-block;
+      color: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
