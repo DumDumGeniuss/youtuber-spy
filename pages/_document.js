@@ -47,11 +47,11 @@ export default class MyDocument extends Document {
               var IS_FB_API_LOADED = false;
               window.fbAsyncInit = function() {
                 FB.init({
-                  appId      : '${process.env.FACEBOOK_API_ID}',
+                  appId      : '158925374651334',
                   cookie     : true,  // enable cookies to allow the server to access
                                       // the session
                   xfbml      : true,  // parse social plugins on this page
-                  version    : 'v2.8' // use graph api version 2.8
+                  version    : 'v2.9' // use graph api version 2.8
                 });
                 IS_FB_API_LOADED = true;
                 var event = new CustomEvent('fb-api-loaded', { 'detail': 'FB api loaded!!' });
