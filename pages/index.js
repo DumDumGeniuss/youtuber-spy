@@ -29,7 +29,7 @@ const defaultQuery = {
   category: '',
   country: '',
   page: 1,
-  count: 1,
+  count: 40,
 };
 // localStorage.setItem('state', 'off');
 class Index extends React.Component {

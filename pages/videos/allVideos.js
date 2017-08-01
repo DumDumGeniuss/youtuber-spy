@@ -34,7 +34,11 @@ class AllVideos extends React.Component {
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
-      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      if (key === 'count') {
+        newQuery[key] = defaultQuery[key];
+      } else {
+        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      }
     });
     const result = await videoApi.getAllVideos(newQuery);
     store.dispatch(videoAction.getVideos(result.datas, result.totalCount, result.videoCategories, result.token));
@@ -70,6 +74,12 @@ class AllVideos extends React.Component {
     if (newVideo.token !== oldVideo.token) {
       this.props.setRouterChangingStatus(false);
     }
+    /* Refresh the query parameters */
+    Object.keys(newProps.query).forEach((key) => {
+      if (key !== 'count') {
+        this.query[key] = newProps.query[key];
+      }
+    });
   }
 
   /* remember to reset tha page */

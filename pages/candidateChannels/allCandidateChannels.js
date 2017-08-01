@@ -33,7 +33,11 @@ class AllCandidateChannels extends React.Component {
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
-      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      if (key === 'count') {
+        newQuery[key] = defaultQuery[key];
+      } else {
+        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      }
     });
     const result = await candidateChannelApi.getCandidateChannels(newQuery);
     store.dispatch(candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token));
@@ -80,6 +84,12 @@ class AllCandidateChannels extends React.Component {
     if (newChannel.token !== oldChannel.token) {
       this.props.setRouterChangingStatus(false);
     }
+    /* Refresh the query parameters */
+    Object.keys(newProps.query).forEach((key) => {
+      if (key !== 'count') {
+        this.query[key] = newProps.query[key];
+      }
+    });
   }
 
   changeAddChannelErrorMessage(msg) {

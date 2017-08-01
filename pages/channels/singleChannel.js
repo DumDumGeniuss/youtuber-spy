@@ -74,6 +74,7 @@ class SingleChannel extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
+
   }
 
   /* Get the data differences, if you want 7 result, you need 8 datas */
