@@ -4,12 +4,19 @@ import Link from 'next/link';
 
 import Facebook from 'react-icons/lib/fa/facebook';
 import GooglePlus from 'react-icons/lib/fa/google-plus';
+import Bars from 'react-icons/lib/fa/bars';
 import stylesheet from './MainLayout.scss';
 
 class MainLayout extends React.Component {
   static getInitialProps({ query }) {
     return {
       query,
+    };
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMobileZone: false,
     };
   }
 
@@ -30,6 +37,12 @@ class MainLayout extends React.Component {
     this.props.doLogout();
   }
 
+  changeMoibleZoneShow() {
+    this.setState({
+      showMobileZone: !this.state.showMobileZone,
+    });
+  }
+
               // <div className={'MainLayout-link'}>
               //   <Link href='/articles/allArticles'><a>新聞</a></Link>
               // </div>
@@ -47,26 +60,54 @@ class MainLayout extends React.Component {
                 <h1 className={'MainLayout-logoTitle'}>Youtuber看門狗</h1>
               </a></Link>
             </div>
-            <div className={'MainLayout-itemsZone'}>
-              <div className={'MainLayout-link'}>
-                <Link href='/'><a>頻道</a></Link>
-              </div>
-              <div className={'MainLayout-link'}>
-                <Link href='/videos/allVideos'><a>影片</a></Link>
-              </div>
-              {this.props.userInfo ? 
-                <div onClick={this.onLogoutClick.bind(this)} className={'MainLayout-login'}>
-                  <span>登出</span>
-                </div>
-                :
-                <div onClick={this.onLoginClick.bind(this)}  className={'MainLayout-login'}>
-                  <GooglePlus />
-                </div>
+            <div className={'MainLayout-linksZone'}>
+              <Link href='/'><a>
+                <span className={'MainLayout-link'}>頻道</span>
+              </a></Link>
+              <Link href='/videos/allVideos'><a>
+                <span className={'MainLayout-link'}>影片</span>
+              </a></Link>
+            </div>
+            <div className={'MainLayout-functionZone'}>
+              {
+                this.props.userInfo ? <img src={this.props.userInfo.picture} className={'MainLayout-image'}/> : null
               }
-              {this.props.userInfo ? <div><img src={this.props.userInfo.picture}/></div> : <div></div>}
+              {
+                this.props.userInfo ? 
+                  <span onClick={this.onLogoutClick.bind(this)} className={'MainLayout-item'}>登出</span>
+                  :
+                  <span onClick={this.onLoginClick.bind(this)}  className={'MainLayout-item'}>
+                    <GooglePlus/>
+                    登入
+                  </span>
+              }
+            </div>
+            <div className={'MainLayout-mobileFunctionZone'}>
+              {
+                this.props.userInfo ? <img src={this.props.userInfo.picture} className={'MainLayout-image'}/>  : null
+              }
+              <Bars onClick={this.changeMoibleZoneShow.bind(this)} className={'MainLayout-bars'}/>
             </div>
           </div>
         </nav>
+        <div className={this.state.showMobileZone ? 'MainLayout-mobileZone' : 'MainLayout-invisible'}>
+          <Link href='/'><a>
+            <span className={'MainLayout-mobileLink'}>頻道</span>
+          </a></Link>
+          <Link href='/videos/allVideos'><a>
+            <span className={'MainLayout-mobileLink'}>影片</span>
+          </a></Link>
+          {
+            this.props.userInfo ? 
+              <span onClick={this.onLogoutClick.bind(this)} className={'MainLayout-mobileLink'}>登出</span>
+              :
+
+              <span onClick={this.onLoginClick.bind(this)}  className={'MainLayout-mobileLink'}>
+                <GooglePlus/>
+                登入
+              </span>
+          }
+        </div>
         { this.props.isRouterChanging ? <div className={'MainLayout-loadingZone'}></div> : null }
         <div className={'MainLayout-socialZone'}>
           <a target={'_blank'} href={'https://www.facebook.com/Youtuber-Spy-%E5%B0%8F%E9%A0%BB%E9%81%93%E5%A4%A7%E4%B8%96%E7%95%8C-1929847743924108/'}>
