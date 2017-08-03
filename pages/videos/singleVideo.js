@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
+import Router from 'next/router';
 
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
@@ -21,6 +22,14 @@ class SingleVideo extends React.Component {
     const video = videoResult.data;
     store.dispatch(videoAction.getVideo(video));
 
+    if (!video) {
+      return {
+        error: {
+          status: 404,
+          message: 'No resource found',
+        },
+      }
+    }    
 
     const randomSameCategoryVideosQuery = {
       category: video.category,
@@ -31,7 +40,7 @@ class SingleVideo extends React.Component {
     const randomSameCategoryVideosResult = await videoApi.getAllVideos(randomSameCategoryVideosQuery);
     const randomSameCategoryVideos = randomSameCategoryVideosResult.datas;
 
-
+    /* Success */
     return {
       randomSameCategoryVideos,
       query,
@@ -56,6 +65,12 @@ class SingleVideo extends React.Component {
     const browserAttribute = this.props.browserAttribute;
     const randomSameCategoryVideos = this.props.randomSameCategoryVideos;
     const i18nWords = this.props.i18n.words;
+
+    if (this.props.error) {
+      return (
+        <p>{ this.props.error.status + ', ' + this.props.error.message }</p>
+      );
+    }
 
     return (
       <div>

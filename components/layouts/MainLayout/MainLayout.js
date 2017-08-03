@@ -46,6 +46,12 @@ class MainLayout extends React.Component {
               // <div className={'MainLayout-link'}>
               //   <Link href='/articles/allArticles'><a>新聞</a></Link>
               // </div>
+          //     <Link href='/articles/allArticles'><a>
+          //       <span className={'MainLayout-link'}>討論區</span>
+          //     </a></Link>
+          // <Link href='/articles/allArticles'><a>
+          //   <span className={'MainLayout-mobileLink'}>討論區</span>
+          // </a></Link>
   render() {
     return (
       <div className={'MainLayout-zone'}>
@@ -66,9 +72,6 @@ class MainLayout extends React.Component {
               </a></Link>
               <Link href='/videos/allVideos'><a>
                 <span className={'MainLayout-link'}>影片</span>
-              </a></Link>
-              <Link href='/articles/allArticles'><a>
-                <span className={'MainLayout-link'}>討論區</span>
               </a></Link>
             </div>
             <div className={'MainLayout-functionZone'}>
@@ -99,9 +102,6 @@ class MainLayout extends React.Component {
           </a></Link>
           <Link href='/videos/allVideos'><a>
             <span className={'MainLayout-mobileLink'}>影片</span>
-          </a></Link>
-          <Link href='/articles/allArticles'><a>
-            <span className={'MainLayout-mobileLink'}>討論區</span>
           </a></Link>
           {
             this.props.userInfo ? 
