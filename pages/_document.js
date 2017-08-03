@@ -39,6 +39,8 @@ export default class MyDocument extends Document {
             ga('create', 'UA-82279826-3', 'auto');
             ga('send', 'pageview');
           `}} />
+          <link href="https://cdn.quilljs.com/1.3.0/quill.snow.css" rel="stylesheet"/>
+          <script src={'//cdn.quilljs.com/1.3.0/quill.min.js'}></script>
         </Head>
         <body className="custom_class">
           <div dangerouslySetInnerHTML={{__html: `

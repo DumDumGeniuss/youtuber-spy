@@ -16,9 +16,10 @@
     margin: 3px;
     cursor: pointer;
     background-color: white;
+    border-radius: 5px;
   }
   .PaginationBox-button:hover {
-    background-color: #f8f8f8;
+    background-color: #ececec;
   }
   .PaginationBox-buttonClicked {
     display: inline-block;

@@ -48,3 +48,21 @@ export const addArticle = async function (query, data) {
 
   return resultJson;
 };
+
+export const updateArticle = async function (articleId, query, data) {
+  const finalQuery = {
+    access_token: query.access_token,
+  };
+  const queryString = tinyHelper.getQueryString(finalQuery);
+  const result = await fetch(apiUrl + '/' + articleId + queryString, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+  const resultJson = await result.json();
+
+  return resultJson;
+};

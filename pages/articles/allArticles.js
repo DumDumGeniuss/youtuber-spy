@@ -2,7 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
+import Link from 'next/link';
+import Router from 'next/router';
 
+import * as tinyHelper from '../../libs/tinyHelper';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
@@ -12,6 +15,7 @@ import ArticleInputModal from '../../components/modals/ArticleInputModal/Article
 import ArticleCard from '../../components/cards/ArticleCard/ArticleCard';
 import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import * as browserAttributeAction from '../../actions/browserAttribute';
 
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
@@ -28,9 +32,19 @@ const defaultQuery = {
 // localStorage.setItem('state', 'off');
 class AllArticles extends React.Component {
   static async getInitialProps({ query, store }) {
-    const result = await articleApi.getAllArticles(defaultQuery);
+    const newQuery = {};
+    Object.keys(defaultQuery).forEach((key) => {
+      const valueFromQuery = query[key];
+      if (key === 'count') {
+        newQuery[key] = defaultQuery[key];
+      } else {
+        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      }
+    });
+    const result = await articleApi.getAllArticles(newQuery);
     store.dispatch(articleAction.getArticles(result.datas, result.totalCount, result.token));
     return {
+      newQuery,
       query,
     };
   }
@@ -45,11 +59,11 @@ class AllArticles extends React.Component {
     };
     /* 每次query API時所需要用到的參數 */
     this.query = {
-      sort: defaultQuery.sort,
-      order: defaultQuery.order,
-      keyword: defaultQuery.keyword,
-      page: defaultQuery.page,
-      count: defaultQuery.count,
+      sort: this.props.newQuery.sort,
+      order: this.props.newQuery.order,
+      keyword: this.props.newQuery.keyword,
+      page: this.props.newQuery.page,
+      count: this.props.newQuery.count,
     };
   }
 
@@ -63,65 +77,23 @@ class AllArticles extends React.Component {
     const oldArticle = this.props.article;
     /* If loading successfully, set isLoading to false */
     if (newArticle.token !== oldArticle.token) {
-      this.setState({
-        isLoading: false,
-      });
+      this.props.setRouterChangingStatus(false);
     }
-  }
-
-  changeAddArticleErrorMessage(msg) {
-    this.setState({
-      addArticleErrorMsg: msg,
+    /* Refresh the query parameters */
+    Object.keys(newProps.query).forEach((key) => {
+      if (key !== 'count') {
+        this.query[key] = newProps.query[key];
+      }
     });
-
-  }
-
-  /* Switch the add article loading icon */
-  isAddArticleLoading(isLoading) {
-    this.setState({
-      isAddArticleLoading: isLoading,
-    });
-  }
-
-  /* Switch the add article view */
-  showAddArticle(isOpen) {
-    this.setState({
-      showAddArticle: isOpen,
-    });
-  }
-
-  sendAddArticle(title, titleImage, content) {
-    this.changeAddArticleErrorMessage(null);
-    this.isAddArticleLoading(true);
-    const query = {
-      access_token: localStorage.getItem('youtubeToken'),
-    };
-    const data = {
-      title,
-      titleImage,
-      content,
-    };
-    articleApi.addArticle(query, data)
-      .then((result) => {
-        if (result.status !== 200) {
-          this.isAddArticleLoading(false);
-          if (result.status === 403) {
-            this.changeAddArticleErrorMessage('很抱歉您的登入已經過期了，請重整頁面重新登入。');
-          }
-        } else {
-          this.showAddArticle(false);
-          this.isAddArticleLoading(false);
-          /* Reload again*/
-          this.changePage(1);
-        }
-      });
   }
 
   changePage(page) {
     this.query.page = page;
     this.props.getArticlesAsync(this.query);
-    this.setState({
-      isLoading: true,
+    this.props.setRouterChangingStatus(true);
+    Router.push({
+      pathname: '/articles/allArticles',
+      query: this.query,
     });
   }
 
@@ -137,8 +109,10 @@ class AllArticles extends React.Component {
       this.query.page = 1;
       this.query.keyword = keyword;
       this.props.getArticlesAsync(this.query);
-      this.setState({
-        isLoading: true,
+      this.props.setRouterChangingStatus(true);
+      Router.push({
+        pathname: '/articles/allArticles',
+        query: this.query,
       });
     }, 1000);
   }
@@ -148,8 +122,10 @@ class AllArticles extends React.Component {
     this.query.page = 1;
     this.query.sort = event.target.value;
     this.props.getArticlesAsync(this.query);
-    this.setState({
-      isLoading: true,
+    this.props.setRouterChangingStatus(true);
+    Router.push({
+      pathname: '/articles/allArticles',
+      query: this.query,
     });
   }
 
@@ -164,15 +140,17 @@ class AllArticles extends React.Component {
     const totalCount = this.props.article.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
+    let queryParam = tinyHelper.getQueryString(this.query, ['createdAt', 'updatedAt'], ['count']);
+    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
 
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
-          title={'Youtuber看門狗-新聞'}
+          title={'Youtuber看門狗-討論區'}
           description={`
-            【Youtuber看門狗】我們會將一些近期的有趣數據與新聞張貼在精彩新聞，
-            若您對Youtubers的世界充滿好奇，那麼歡迎你來到這裡！`}
+            全台第一個專屬Youtuber的討論平台「Youtuber看門狗」正式上線，想知道大家在紅什麼嗎？想知道更多你不知道的Youtuber嗎？快來加入討論吧！
+          `}
           type={'website'}
           image={'https://www.youtuberspy.com/static/logo-facebook.png'} 
           url={'https://www.youtuberspy.com/articles/allArticles'}
@@ -180,33 +158,29 @@ class AllArticles extends React.Component {
           fb_app_id={'158925374651334'}
         />
         <MainLayoutContainer>
-          {this.state.showAddArticle?
-            <ArticleInputModal
-              errorMessage={this.state.addArticleErrorMsg}
-              message={`
-                請將你想加入的頻道首頁複製貼到連結欄位，並簡短描述一下頻道的特性。
-              `}
-              clickYes={this.sendAddArticle.bind(this)}
-              clickNo={this.showAddArticle.bind(this, false)}
-              isLoading={this.state.isAddArticleLoading}
-            /> : null}
           <div className={'AllArticles-zone'}>
-            <TitleSection
-              titleFonts={'精彩新聞'}
-              contentFonts={`
-                我們會將一些近期的有趣數據與新聞張貼在精彩新聞，
-                若您對Youtubers的世界充滿好奇，那麼歡迎你來到這裡！
-              `}
-            />
-            {user.isSuperUser ? 
-              <div className={'AllArticles-addArticleBar'}>
-                <span className={'AllArticles-articleFuncButton AllArticles-add'} onClick={this.showAddArticle.bind(this, true)}>新增文章<Plus /></span>
-              </div> : null}
+            <div className={'AllArticles-addArticleBar'}>
+              {
+                user.userInfo ? 
+                  <Link href='/articles/addArticle'><a>
+                    <span className={'AllArticles-articleFuncButton AllArticles-add'}>新增文章<Plus /></span>
+                  </a></Link>
+                  :
+                  <span className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}>登入以新增文章</span>
+              }
+            </div>
             <div className={'AllArticles-functionBar'}>
-              {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
                 <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+              </div>
+              <div>
+                <span>排序：</span>
+                <select onChange={this.changeOrder.bind(this)} defaultValue={this.query.sort}>
+                  <option value={'viewCount'}>觀看</option>
+                  <option value={'publishedAt'}>時間</option>
+                  <option value={'randomNumber'}>推薦(每小時更新)</option>
+                </select>
               </div>
             </div>
             <div className={'AllArticles-contentZone'}>
@@ -225,9 +199,8 @@ class AllArticles extends React.Component {
                   + this.query.order
                   + this.query.count
                 }
-                lockButton={this.state.isLoading}
                 pageNumber={dataPage}
-                onChangePage={this.changePage.bind(this)}
+                url={'/articles/allArticles' + queryParam}
               />
             </div>
           </div>
@@ -246,6 +219,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
     getArticlesAsync: bindActionCreators(articleAction.getArticlesAsync, dispatch),
   }
 }

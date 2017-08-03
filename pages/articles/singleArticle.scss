@@ -5,32 +5,80 @@ $primary-color: black;
 .SingleArticle-zone {
   width: 100%;
 
-  .SingleArticle-markdownZone {
-  	background-color: white;
-  	padding: 15px;
+  .SingleArticle-infoZone {
+    position: relative;
+    padding: 10px;
+    background-color: #e45050;
+    border: 1px solid #ccc;
 
-  	h1 {
-  		padding: 10px 0;
-  		margin: 0;
-  	}
+    .SingleArticle-userPicture {
+      display: inline-block;
+      height: 50px;
+      vertical-align: middle;
+    }
 
-  	h2 {
-  		padding: 10px 0;
-  		margin: 0;
-  	}
+    .SingleArticle-userName {
+      display: inline-block;
+      line-height: 50px;
+      vertical-align: middle;
+      padding: 0 10px;
+      color: white;
+    }
 
-  	h3 {
-  		padding: 10px 0;
-  		margin: 0;
-  	}
-  	img {
-  		max-width: 100%;
-  	}
-  	ul {
-  		margin-left: 20px;
-  	}
-  	p {
-  		margin: 15px 0;
-  	}
+    .SingleArticle-date {
+      position: absolute;
+      bottom: 3px;
+      right: 3px;
+      color: white;
+      font-size: 0.6em;
+    }
+  }
+
+  .SingleArticle-title {
+    padding:10px;
+    margin: 0;
+    font-size: 3em;
+    background-color: white;
+    border: 1px solid #ccc;
+    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+  }
+
+  .SingleArticle-editor {
+
+  }
+
+  .SingleArticle-functionZone {
+    position: relative;
+    padding: 10px 0;
+    height: 60px;
+    .SingleArticle-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: inline-block;
+      padding: 10px;
+      height: 40px;
+      color: white;
+      background-color: #ff8684;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        color: yellow;
+      }
+
+      .SingleArticle-spin {
+        transform: rotate(0deg);
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 }

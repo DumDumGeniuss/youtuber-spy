@@ -36,7 +36,7 @@ class ArticleCard extends React.Component {
             <h2 className={'ArticleCard-title'}>{articleInfo.title}</h2>
           </a></Link>
           <h6 className={'ArticleCard-content'}>{timeString}</h6>
-          <p className={'ArticleCard-content'}>{articleInfo.content.substring(0, 120)}</p>
+          <p className={'ArticleCard-content'}>{articleInfo.content}</p>
         </section>
       </div>
     );

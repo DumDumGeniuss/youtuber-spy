@@ -260,17 +260,17 @@ class AllCandidateChannels extends React.Component {
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
         />
+        {this.state.showAddChannel?
+          <ChannelInputModal
+            errorMessage={this.state.addChannelErrorMsg}
+            message={`
+              請將你想加入的頻道首頁或任一影片連結複製貼到連結欄位讓我們取得頻道資訊。
+            `}
+            clickYes={this.sendAddChannel.bind(this)}
+            clickNo={this.showAddChannel.bind(this, false)}
+            isLoading={this.state.isAddChannelLoading}
+          /> : null}
         <MainLayoutContainer>
-          {this.state.showAddChannel?
-            <ChannelInputModal
-              errorMessage={this.state.addChannelErrorMsg}
-              message={`
-                請將你想加入的頻道首頁或任一影片連結複製貼到連結欄位讓我們取得頻道資訊。
-              `}
-              clickYes={this.sendAddChannel.bind(this)}
-              clickNo={this.showAddChannel.bind(this, false)}
-              isLoading={this.state.isAddChannelLoading}
-            /> : null}
           <div className={'AllCandidateChannels-zone'}>
             <TitleSection
               titleFonts={'新增頻道'}
