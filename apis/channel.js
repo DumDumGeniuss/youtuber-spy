@@ -29,6 +29,12 @@ export const getChannel = async function (channelId) {
     method: 'GET',
   });
   const resultJson = await result.json();
+  if (result.status !== 200) {
+    throw {
+      status: result.status,
+      message: resultJson.message, 
+    }
+  }
 
   return resultJson;
 };

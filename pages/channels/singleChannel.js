@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 
+import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
@@ -34,31 +35,28 @@ class SingleChannel extends React.Component {
       channelId: query.channelId,
     };
 
-    const results = await Promise.all([
-      channelApi.getChannel(query.channelId),
-      videoApi.getAllVideos(videoQueryNewest),
-      videoApi.getAllVideos(videoQueryHottest)
-    ]);
-    const channelResult = results[0];
-    store.dispatch(channelAction.getChannel(channelResult.data, channelResult.token));
-
-    if (!channelResult.data) {
+    try {
+      const results = await Promise.all([
+        channelApi.getChannel(query.channelId),
+        videoApi.getAllVideos(videoQueryNewest),
+        videoApi.getAllVideos(videoQueryHottest)
+      ]);
+      const channelResult = results[0];
+      store.dispatch(channelAction.getChannel(channelResult.data, channelResult.token));
+  
+      const videoNewestResult = results[1];
+      const videoHottestResult = results[2];
+  
       return {
-        error: {
-          status: 404,
-          message: 'No resource found',
-        },
+        hottestVideos: videoHottestResult.datas,
+        newestVideos: videoNewestResult.datas,
+        query,
+      };
+    } catch (e) {
+      return {
+        error: e,
       }
     }
-
-    const videoNewestResult = results[1];
-    const videoHottestResult = results[2];
-
-    return {
-      hottestVideos: videoHottestResult.datas,
-      newestVideos: videoNewestResult.datas,
-      query,
-    };
   }
 
   constructor(props) {
@@ -125,7 +123,12 @@ class SingleChannel extends React.Component {
   render() {
     if (this.props.error) {
       return (
-        <p>{ this.props.error.status + ', ' + this.props.error.message }</p>
+        <MainLayoutContainer>
+          <ErrorBox
+            status={this.props.error.status}
+            message={this.props.error.message}
+          />
+        </MainLayoutContainer>
       );
     }
 

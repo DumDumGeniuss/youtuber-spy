@@ -1,4 +1,7 @@
 import React from 'react'
+import ErrorBox from '../components/boxes/ErrorBox/ErrorBox';
+import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
+
 export default class Error extends React.Component {
   static getInitialProps ({ res, jsonPageRes }) {
     const statusCode = res ? res.statusCode : (jsonPageRes ? jsonPageRes.status : null)
@@ -7,13 +10,12 @@ export default class Error extends React.Component {
 
   render () {
     return (
-      <p>
-        {
-          this.props.statusCode
-          ? `An error ${this.props.statusCode} occurred on server`
-          : 'An error occurred on client'
-        }
-      </p>
+      <MainLayoutContainer>
+        <ErrorBox
+          status={this.props.statusCode}
+          message={'An error occurred on client'}
+        />
+      </MainLayoutContainer>
     )
   }
 }

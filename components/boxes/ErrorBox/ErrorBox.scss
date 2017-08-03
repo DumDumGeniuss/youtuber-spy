@@ -1,0 +1,23 @@
+
+.ErrorBox-zone {
+  width: 100%;
+
+  .ErrorBox-message {
+    text-align: center;
+  }
+
+  .ErrorBox-backToHome {
+    display: inline-block;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    padding: 10px 0;
+  }
+
+  .ErrorBox-logoZone {
+    width: 100%;
+    .ErrorBox-logo {
+      margin-left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+}

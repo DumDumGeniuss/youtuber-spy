@@ -6,6 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
 import Router from 'next/router';
 
+import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVideoCard';
@@ -18,33 +19,44 @@ import stylesheet from './singleVideo.scss';
 // localStorage.setItem('state', 'off');
 class SingleVideo extends React.Component {
   static async getInitialProps({ query, store }) {
-    const videoResult = await videoApi.getVideo(query.videoId);
-    const video = videoResult.data;
-    store.dispatch(videoAction.getVideo(video));
+    let video;
 
-    if (!video) {
+    try {
+      const videoResult = await videoApi.getVideo(query.videoId);
+      video = videoResult.data;
+      store.dispatch(videoAction.getVideo(video));
+    } catch (e) {
       return {
         error: {
           status: 404,
-          message: 'No resource found',
+          message: e.message,
         },
       }
-    }    
+    }
 
-    const randomSameCategoryVideosQuery = {
-      category: video.category,
-      count: 5,
-      random: true,
-    };
+    try {
+      const randomSameCategoryVideosQuery = {
+        category: video.category,
+        count: 5,
+        random: true,
+      };
+  
+      const randomSameCategoryVideosResult = await videoApi.getAllVideos(randomSameCategoryVideosQuery);
+      const randomSameCategoryVideos = randomSameCategoryVideosResult.datas;
 
-    const randomSameCategoryVideosResult = await videoApi.getAllVideos(randomSameCategoryVideosQuery);
-    const randomSameCategoryVideos = randomSameCategoryVideosResult.datas;
-
-    /* Success */
-    return {
-      randomSameCategoryVideos,
-      query,
-    };
+      /* Success */
+      return {
+        randomSameCategoryVideos,
+        query,
+      };
+    } catch (e) {
+      return {
+        error: {
+          status: 500,
+          message: 'server error',
+        },
+      }
+    }
   }
 
   constructor(props) {
@@ -63,7 +75,12 @@ class SingleVideo extends React.Component {
   render() {
     if (this.props.error) {
       return (
-        <p>{ this.props.error.status + ', ' + this.props.error.message }</p>
+        <MainLayoutContainer>
+          <ErrorBox
+            status={this.props.error.status}
+            message={this.props.error.message}
+          />
+        </MainLayoutContainer>
       );
     }
 
