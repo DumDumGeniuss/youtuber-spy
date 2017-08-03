@@ -42,6 +42,15 @@ class SingleChannel extends React.Component {
     const channelResult = results[0];
     store.dispatch(channelAction.getChannel(channelResult.data, channelResult.token));
 
+    if (!channelResult.data) {
+      return {
+        error: {
+          status: 404,
+          message: 'No resource found',
+        },
+      }
+    }
+
     const videoNewestResult = results[1];
     const videoHottestResult = results[2];
 
@@ -63,6 +72,9 @@ class SingleChannel extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
+    if (this.props.error) {
+      return;
+    }
     const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
     // console.log(fullSiteUrl, window.location.href);
     this.props.getChannelStatisticsAsync({
@@ -111,6 +123,12 @@ class SingleChannel extends React.Component {
 
 // <div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>
   render() {
+    if (this.props.error) {
+      return (
+        <p>{ this.props.error.status + ', ' + this.props.error.message }</p>
+      );
+    }
+
     const channelInfo = this.props.channel.channel;
     const hottestVideos = this.props.hottestVideos;
     const newestVideos = this.props.newestVideos;

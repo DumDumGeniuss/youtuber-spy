@@ -61,16 +61,16 @@ class SingleVideo extends React.Component {
 
 // <div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>
   render() {
-    const videoInfo = this.props.video.video;
-    const browserAttribute = this.props.browserAttribute;
-    const randomSameCategoryVideos = this.props.randomSameCategoryVideos;
-    const i18nWords = this.props.i18n.words;
-
     if (this.props.error) {
       return (
         <p>{ this.props.error.status + ', ' + this.props.error.message }</p>
       );
     }
+
+    const videoInfo = this.props.video.video;
+    const browserAttribute = this.props.browserAttribute;
+    const randomSameCategoryVideos = this.props.randomSameCategoryVideos;
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
