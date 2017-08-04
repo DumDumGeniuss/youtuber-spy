@@ -63,8 +63,6 @@ class SingleArticle extends React.Component {
 
   constructor(props) {
     super(props);
-    this.newestCommentCreatedDate = props.newestCommentCreatedDate;
-    this.isNoMoreData = false;
     this.commentQuery = {
       order: this.props.commentDefaultQuery.order,
       sort: this.props.commentDefaultQuery.sort,
@@ -77,6 +75,9 @@ class SingleArticle extends React.Component {
       comment: '',
       errorMessage: '',
     };
+    this.newestCommentCreatedDate = this.props.newestCommentCreatedDate;
+    this.isNoMoreData = false;
+    this.lockLoading = false;
   }
 
   componentWillMount() {}
@@ -97,6 +98,8 @@ class SingleArticle extends React.Component {
     const oldComment = this.props.comment;
     /* If loading successfully, set isLoading to false */
     if (newComment.token !== oldComment.token) {
+      /* unlock loading */
+      this.lockLoading = false;
       this.setState({
         isLoading: false,
       });
@@ -107,7 +110,11 @@ class SingleArticle extends React.Component {
         this.isNoMoreData = true;
         return;
       }
-      this.newestCommentCreatedDate = newComments[newComments.length - 1].createdAt;
+      if (newComments.length !== 0) {
+        this.newestCommentCreatedDate = newComments[newComments.length - 1].createdAt;
+      } else {
+        this.newestCommentCreatedDate = '';
+      }
     }
   }
 
@@ -160,13 +167,15 @@ class SingleArticle extends React.Component {
   }
 
   doTouchBottom() {
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.lockLoading) {
       return;
     }
     if (this.isNoMoreData) {
       return;
     }
-    console.log('hey');
+
+    /* lock loading */
+    this.lockLoading = true;
     this.setState({
       isLoading: true,
     });
@@ -250,27 +259,34 @@ class SingleArticle extends React.Component {
                   </div>
                 </div>
                 :
+                <div className={'SingleArticle-pleaseLoginZone'}>
+                  <span className={'SingleArticle-pleaseLogin'}>請登入以留言</span>
+                </div>
+            }
+            {
+              comments.length !== 0 ?
+                <div className={'SingleArticle-commentsZone'}>
+                  {
+                    comments.map((item) => {
+                      const newComment = {
+                        userId: item.userId,
+                        userName: item.userName,
+                        userPicture: item.userPicture,
+                        content: item.content,
+                        createdAt: item.createdAt,
+                      }
+                      return (
+                        <CommentCard
+                          key={item._id}
+                          comment={newComment}
+                        />
+                      );
+                    })
+                  }
+                </div>
+                :
                 null
             }
-            <div className={'SingleArticle-commentsZone'}>
-              {
-                comments.map((item) => {
-                  const newComment = {
-                    userId: item.userId,
-                    userName: item.userName,
-                    userPicture: item.userPicture,
-                    content: item.content,
-                    createdAt: item.createdAt,
-                  }
-                  return (
-                    <CommentCard
-                      key={item._id}
-                      comment={newComment}
-                    />
-                  );
-                })
-              }
-            </div>
             {
               this.state.isLoading ?
                 <div className={'SingleArticle-loadingZone'}>

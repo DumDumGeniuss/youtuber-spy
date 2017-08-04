@@ -161,8 +161,24 @@ $primary-color: black;
     }
   }
 
+  .SingleArticle-pleaseLoginZone {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+
+    .SingleArticle-pleaseLogin {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #fb9944;
+      color: white;
+    }
+  }
+
   .SingleArticle-commentsZone {
-    margin-top: 15px;
+    margin: 15px 0;
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;

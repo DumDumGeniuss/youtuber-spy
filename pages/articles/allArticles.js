@@ -57,8 +57,6 @@ class AllArticles extends React.Component {
 
   constructor(props) {
     super(props);
-    this.oldestArticleCreatedDate = props.oldestArticleCreatedDate;
-    this.isNoMoreData = false;
     /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: this.props.newQuery.sort,
@@ -70,6 +68,9 @@ class AllArticles extends React.Component {
     this.state = {
       isLoading: false,
     };
+    this.oldestArticleCreatedDate = this.props.oldestArticleCreatedDate;
+    this.isNoMoreData = false;
+    this.lockLoading = false;
   }
 
   componentWillMount() {}
@@ -82,6 +83,8 @@ class AllArticles extends React.Component {
     const oldArticle = this.props.article;
     /* If loading successfully, set isLoading to false */
     if (newArticle.token !== oldArticle.token) {
+      /* unlock loading */
+      this.lockLoading = false;
       this.setState({
         isLoading: false,
       });
@@ -93,7 +96,11 @@ class AllArticles extends React.Component {
         this.isNoMoreData = true;
         return;
       }
-      this.oldestArticleCreatedDate = newArticles[newArticles.length - 1].createdAt;
+      if (newArticles.length !== 0) {
+        this.oldestArticleCreatedDate = newArticles[newArticles.length - 1].createdAt;
+      } else {
+        this.oldestArticleCreatedDate = new Date();
+      }
     }
   }
 
@@ -113,12 +120,14 @@ class AllArticles extends React.Component {
   }
 
   doTouchBottom() {
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.lockLoading) {
       return;
     }
     if (this.isNoMoreData) {
       return;
     }
+    /* lock loading */
+    this.lockLoading = true;
     this.setState({
       isLoading: true,
     });

@@ -6,6 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
 
 import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
+import ConfirmModal from '../../components/modals/ConfirmModal/ConfirmModal';
 import Plus from 'react-icons/lib/fa/plus';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
@@ -46,7 +47,10 @@ class UpdateArticle extends React.Component {
       isUpdating: false,
       errorMessage: '',
       articleUserId: articleInfo.userId,
+      isDoDelete: false,
+      isDoUpdate: false,
     };
+    this.switchModal = this.switchModal.bind(this);
   }
 
   componentWillMount() {}
@@ -74,12 +78,14 @@ class UpdateArticle extends React.Component {
   handleTitleChange(event) {
     this.setState({
       title: event.target.value,
+      errorMessage: '',
     });
   }
   deleteArticle() {
     if (this.state.isUpdating) {
       return;
     }
+    this.switchModal('isDoDelete');
     const articleId = this.props.query.articleId;
     this.setState({
       isUpdating: true,
@@ -97,7 +103,8 @@ class UpdateArticle extends React.Component {
           pathname: '/articles/allArticles',
         });
       })
-      .then((error) => {
+      .catch((error) => {
+        this.setState({ isUpdating: false });
         if (error.status === 403) {
           this.setState({
             errorMessage: '很抱歉您的登入已經過期或你無權做此操作。'
@@ -115,6 +122,7 @@ class UpdateArticle extends React.Component {
     if (this.state.isUpdating) {
       return;
     }
+    this.switchModal('isDoUpdate');
     const articleId = this.props.query.articleId;
     this.setState({
       isUpdating: true,
@@ -131,29 +139,40 @@ class UpdateArticle extends React.Component {
     };
     articleApi.updateArticle(articleId, query, data)
       .then((result) => {
-        console.log(result);
-        if (result.status !== 200) {
-          this.setState({ isUpdating: false });
-          if (result.status === 403) {
-            this.setState({
-              errorMessage: '很抱歉您的登入已經過期了，請重整頁面重新登入。'
-            });
-          }
-          if (result.status === 404) {
-            this.setState({
-              errorMessage: '您所要修改的文章不存在'
-            });
-          }
-        } else {
-          /* Jump back to single article page */
-          Router.push({
-            pathname: '/articles/singleArticle',
-            query: {
-              articleId,
-            },
+        Router.push({
+          pathname: '/articles/singleArticle',
+          query: {
+            articleId,
+          },
+        });
+      })
+      .catch((error) => {
+        this.setState({ isUpdating: false });
+        if (error.status === 403) {
+          this.setState({
+            errorMessage: '很抱歉您的登入已經過期或你無權做此操作。'
+          });
+        }
+        if (error.status === 404) {
+          this.setState({
+            errorMessage: '您所要修改的文章不存在'
+          });
+        }
+        if (error.status === 411) {
+          this.setState({
+            errorMessage: '輸入為空或者太長或太短，請修正'
           });
         }
       });
+  }
+
+  switchModal(params) {
+    console.log({
+      [params]: !this.state[params],
+    });
+    this.setState({
+      [params]: !this.state[params],
+    });
   }
 
   componentWillUnmount() {
@@ -176,6 +195,21 @@ class UpdateArticle extends React.Component {
 
     return (
       <div>
+        <ConfirmModal
+          show={this.state.isDoDelete}
+          clickYes={this.deleteArticle.bind(this)}
+          clickNo={this.switchModal.bind(this, 'isDoDelete')}
+          message={'確定要刪除？'}
+          isLoading={this.state.isUpdating}
+        />
+        <ConfirmModal
+          show={this.state.isDoUpdate}
+          clickYes={this.updateArticle.bind(this)}
+          clickNo={this.switchModal.bind(this, 'isDoUpdate')}
+          message={'確定要修改？'}
+          isLoading={this.state.isUpdating}
+        />
+        <ConfirmModal />
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
           title={'Youtuber看門狗-' + articleInfo.title}
@@ -189,10 +223,10 @@ class UpdateArticle extends React.Component {
         <MainLayoutContainer>
           <div className={'UpdateArticle-zone'}>
             <div className={'UpdateArticle-functionZone'}>
-              <span className={'UpdateArticle-button UpdateArticle-deleteButton'} onClick={this.deleteArticle.bind(this)}>
+              <span className={'UpdateArticle-button UpdateArticle-deleteButton'} onClick={this.switchModal.bind(this, 'isDoDelete')}>
                 {this.state.isUpdating ? <FaCircleONotch className={'UpdateArticle-spin'}/> : <Plus/>}刪除
               </span>
-              <span className={'UpdateArticle-button UpdateArticle-updateButton'} onClick={this.updateArticle.bind(this)}>
+              <span className={'UpdateArticle-button UpdateArticle-updateButton'} onClick={this.switchModal.bind(this, 'isDoUpdate')}>
                 {this.state.isUpdating ? <FaCircleONotch className={'UpdateArticle-spin'}/> : <Plus/>}確認修改
               </span>
             </div>

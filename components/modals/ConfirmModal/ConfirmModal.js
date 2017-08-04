@@ -32,7 +32,7 @@ class ConfirmModal extends React.Component {
 
   render() {
     return (
-      <div className={'ConfirmModal-zone'}>
+      <div className={this.props.show ? 'ConfirmModal-zone' : 'ConfirmModal-invisible'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <div className={'ConfirmModal-contentZone'}>
           <div className={'ConfirmModal-info'}>

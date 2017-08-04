@@ -78,6 +78,13 @@ export const updateArticle = async function (articleId, query, data) {
   });
   const resultJson = await result.json();
 
+  if (result.status !== 200) {
+    throw {
+      status: result.status,
+      message: resultJson.message, 
+    }
+  }
+
   return resultJson;
 };
 
