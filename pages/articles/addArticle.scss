@@ -4,11 +4,26 @@
   width: 100%;
 
   .AddArticle-editor {
+    margin-bottom: 15px;
+  }
+
+  .AddArticle-lengthRestrictionError {
+    display: block;
+    text-align: right;
+    color: #ff7878;
+    padding: 5px;
+  }
+
+  .AddArticle-lengthRestriction {
+    display: block;
+    text-align: right;
+    color: #666;
+    padding: 5px;
   }
 
   .AddArticle-titleZone {
     // border: 1px solid #46aaff;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
 
     .AddArticle-titleLabel {
       display: inline-block;

@@ -132,6 +132,13 @@ $primary-color: black;
       }
     }
 
+    .SingleArticle-lengthRestriction {
+      position: absolute;
+      display: inline-block;
+      right: 70px;
+      bottom: 15px;
+    }
+
     .SingleArticle-addCommentButton {
       position: absolute;
       display: inline-block;

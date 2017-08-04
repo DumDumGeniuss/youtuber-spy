@@ -120,9 +120,12 @@ class SingleArticle extends React.Component {
 
   handleCommentChange(event) {
     this.setState({
-      comment: event.target.value,
+      comment: event.target.value.substring(0, 100),
       errorMessage: '',
     });
+    if (event.target.value.length > 100) {
+      this.refs.commentInput.value = event.target.value.substring(0, 100);
+    }
   }
 
   addComment() {
@@ -251,8 +254,9 @@ class SingleArticle extends React.Component {
                   </div>
                   <span className={'SingleArticle-userName'}>{userInfo.name}</span>
                   <div className={'SingleArticle-textAreaZone'}>
-                    <textarea onChange={this.handleCommentChange.bind(this)} rows={6} className={'SingleArticle-textArea'}/>
+                    <textarea ref={'commentInput'} onChange={this.handleCommentChange.bind(this)} rows={6} className={'SingleArticle-textArea'}/>
                   </div>
+                  <span className={'SingleArticle-lengthRestriction'}>{this.state.comment.length + '/100'}</span>
                   <div className={'SingleArticle-addCommentButton'}>
                     {this.state.isAdding ? <FaCircleONotch/> : null}
                     <span onClick={this.addComment.bind(this)} className={'SingleArticle-addCommentButtonText'}>送出</span>

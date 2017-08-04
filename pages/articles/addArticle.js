@@ -32,6 +32,7 @@ class AddArticle extends React.Component {
       deltaContent: { ops: [] },
       isAdding: false,
       errorMessage: '',
+
     };
   }
 
@@ -54,8 +55,12 @@ class AddArticle extends React.Component {
 
   handleTitleChange(event) {
     this.setState({
-      title: event.target.value,
+      title: event.target.value.substring(0, 20),
+      errorMessage: '',
     });
+    if (event.target.value.length > 20) {
+      this.refs.titleInput.value = event.target.value.substring(0, 20);
+    }
   }
 
   addArticle() {
@@ -126,10 +131,12 @@ class AddArticle extends React.Component {
               </span>
             </div>
             {this.state.errorMessage ? <span className={'AddArticle-errorMessage'}>{this.state.errorMessage}</span> : null}
+            <span className={'AddArticle-lengthRestriction'}>{this.state.title.length + '/20'}</span>
             <div className={'AddArticle-titleZone'}>
               <label className={'AddArticle-titleLabel'}>標題</label>
-              <input className={'AddArticle-titleInput'} onChange={this.handleTitleChange.bind(this)}/>
+              <input ref={'titleInput'} className={'AddArticle-titleInput'} onChange={this.handleTitleChange.bind(this)}/>
             </div>
+            <span className={this.state.rawContent.length < 30 || this.state.rawContent.length > 1000 ? 'AddArticle-lengthRestrictionError' : 'AddArticle-lengthRestriction'}>{ '30/' + this.state.rawContent.length } { this.state.rawContent.length + '/1000' }</span>
             <div className={'AddArticle-editor'} dangerouslySetInnerHTML={{__html: `
               <div id="toolbar" style='background-color: #bfbfbf; border-top-left-radius: 10px; border-top-right-radius: 10px;'>
                 <button class="ql-bold"></button>
