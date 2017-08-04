@@ -18,15 +18,36 @@ class MainLayout extends React.Component {
     this.state = {
       showMobileZone: false,
     };
+    this.scrollHandler = this.scrollHandler.bind(this);
+    this.addScrollHandler = this.addScrollHandler.bind(this);
   }
 
   componentDidMount() {
-    // if (typeof FB !== undefined) {
-    //   FB.XFBML.parse();
-    // }
+    this.addScrollHandler();
   }
 
-  componentWillUnmount() {
+  addScrollHandler() {
+    this.scrollListener = window.addEventListener('scroll', () => {
+      this.scrollHandler(
+        window.pageYOffset,
+        window.innerHeight,
+        Math.max(
+          window.innerHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight
+        )
+      );
+    });
+  }
+
+  scrollHandler(scrollTop, windowHeight, realHeight) {
+    /* If not touch bottom, return */
+    if (scrollTop + windowHeight !== realHeight) {
+      return;
+    }
+    if (this.props.doTouchBottom) {
+      this.props.doTouchBottom();
+    }
   }
 
   onLoginClick() {
@@ -41,6 +62,12 @@ class MainLayout extends React.Component {
     this.setState({
       showMobileZone: !this.state.showMobileZone,
     });
+  }
+
+  componentWillUnmount() {
+    if (this.scrollListener) {
+      window.removeEventListener('scroll', this.scrollListener);
+    }
   }
 
               // <div className={'MainLayout-link'}>
@@ -73,6 +100,9 @@ class MainLayout extends React.Component {
               <Link href='/videos/allVideos'><a>
                 <span className={'MainLayout-link'}>影片</span>
               </a></Link>
+              <Link href='/articles/allArticles'><a>
+                <span className={'MainLayout-link'}>討論區</span>
+              </a></Link>
             </div>
             <div className={'MainLayout-functionZone'}>
               {
@@ -102,6 +132,9 @@ class MainLayout extends React.Component {
           </a></Link>
           <Link href='/videos/allVideos'><a>
             <span className={'MainLayout-mobileLink'}>影片</span>
+          </a></Link>
+          <Link href='/articles/allArticles'><a>
+            <span className={'MainLayout-mobileLink'}>討論區</span>
           </a></Link>
           {
             this.props.userInfo ? 

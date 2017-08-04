@@ -3,7 +3,9 @@ import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 
+import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
 import Plus from 'react-icons/lib/fa/plus';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
@@ -17,12 +19,21 @@ import stylesheet from './updateArticle.scss';
 
 class UpdateArticle extends React.Component {
   static async getInitialProps({ query, store }) {
-    const articleId = query.articleId;
-    const result = await articleApi.getArticle(articleId);
-    store.dispatch(articleAction.getArticle(result.data, result.token));
-    return {
-      query,
-    };
+    try {
+      const articleId = query.articleId;
+      const result = await articleApi.getArticle(articleId);
+      store.dispatch(articleAction.getArticle(result.data, result.token));
+      return {
+        query,
+      };
+    } catch (e) {
+      return {
+        error: {
+          status: 404,
+          message: e.message,
+        },
+      }
+    }
   }
 
   constructor(props) {
@@ -41,21 +52,23 @@ class UpdateArticle extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
-    var editor = new Quill('#editor', {
-      modules: { toolbar: '#toolbar' },
-      theme: 'snow',
-    });
-    editor.on('text-change', (delta, oldDelta, source) => {
-      this.setState({
-        deltaContent: editor.getContents(),
-        rawContent: editor.getText(),
-        errorMessage: '',
+    if (!this.props.error) {
+      var editor = new Quill('#editor', {
+        modules: { toolbar: '#toolbar' },
+        theme: 'snow',
       });
-    });
-    editor.setContents(this.state.deltaContent.ops);
-
-    /* set initial input value */
-    this.refs['title-input'].value = this.state.title;
+      editor.on('text-change', (delta, oldDelta, source) => {
+        this.setState({
+          deltaContent: editor.getContents(),
+          rawContent: editor.getText(),
+          errorMessage: '',
+        });
+      });
+      editor.setContents(this.state.deltaContent.ops);
+  
+      /* set initial input value */
+      this.refs['title-input'].value = this.state.title;
+    }
   }
 
   handleTitleChange(event) {
@@ -63,8 +76,46 @@ class UpdateArticle extends React.Component {
       title: event.target.value,
     });
   }
+  deleteArticle() {
+    if (this.state.isUpdating) {
+      return;
+    }
+    const articleId = this.props.query.articleId;
+    this.setState({
+      isUpdating: true,
+      errorMessage: '',
+    });
+
+    const query = {
+      access_token: localStorage.getItem('youtubeToken'),
+    };
+
+    articleApi.deleteArticle(query, articleId)
+      .then((result) => {
+        /* Jump back to single article page */
+        Router.push({
+          pathname: '/articles/allArticles',
+        });
+      })
+      .then((error) => {
+        if (error.status === 403) {
+          this.setState({
+            errorMessage: '很抱歉您的登入已經過期或你無權做此操作。'
+          });
+        }
+        if (result.status === 404) {
+          this.setState({
+            errorMessage: '您所要刪除的文章不存在'
+          });
+        }
+      });
+  }
 
   updateArticle() {
+    if (this.state.isUpdating) {
+      return;
+    }
+    const articleId = this.props.query.articleId;
     this.setState({
       isUpdating: true,
       errorMessage: '',
@@ -78,8 +129,9 @@ class UpdateArticle extends React.Component {
       rawContent: this.state.rawContent,
       deltaContent: this.state.deltaContent,
     };
-    articleApi.updateArticle(this.props.query.articleId, query, data)
+    articleApi.updateArticle(articleId, query, data)
       .then((result) => {
+        console.log(result);
         if (result.status !== 200) {
           this.setState({ isUpdating: false });
           if (result.status === 403) {
@@ -93,12 +145,13 @@ class UpdateArticle extends React.Component {
             });
           }
         } else {
-          this.setState({ isUpdating: false });
-          /* Reload again*/
-          // Router.push({
-          //   pathname: '/candidateChannels/allCandidateChannels',
-          //   query: this.query,
-          // });
+          /* Jump back to single article page */
+          Router.push({
+            pathname: '/articles/singleArticle',
+            query: {
+              articleId,
+            },
+          });
         }
       });
   }
@@ -109,6 +162,17 @@ class UpdateArticle extends React.Component {
   render() {
     const articleInfo = this.props.article.article;
     const userInfo = this.props.user.userInfo || {};
+
+    if (this.props.error) {
+      return (
+        <MainLayoutContainer>
+          <ErrorBox
+            status={this.props.error.status}
+            message={this.props.error.message}
+          />
+        </MainLayoutContainer>
+      );
+    }
 
     return (
       <div>
@@ -125,7 +189,10 @@ class UpdateArticle extends React.Component {
         <MainLayoutContainer>
           <div className={'UpdateArticle-zone'}>
             <div className={'UpdateArticle-functionZone'}>
-              <span className={'UpdateArticle-button'} onClick={this.updateArticle.bind(this)}>
+              <span className={'UpdateArticle-button UpdateArticle-deleteButton'} onClick={this.deleteArticle.bind(this)}>
+                {this.state.isUpdating ? <FaCircleONotch className={'UpdateArticle-spin'}/> : <Plus/>}刪除
+              </span>
+              <span className={'UpdateArticle-button UpdateArticle-updateButton'} onClick={this.updateArticle.bind(this)}>
                 {this.state.isUpdating ? <FaCircleONotch className={'UpdateArticle-spin'}/> : <Plus/>}確認修改
               </span>
             </div>

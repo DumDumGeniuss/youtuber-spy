@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
+import moment from 'moment';
 import Router from 'next/router';
 
 import * as tinyHelper from '../../libs/tinyHelper';
@@ -23,10 +24,9 @@ import * as articleAction from '../../actions/article';
 import stylesheet from './allArticles.scss';
 
 const defaultQuery = {
-  sort: 'addTime',
+  sort: 'createdAt',
   order: 'desc',
   keyword: '',
-  page: 1,
   count: 10,
 };
 // localStorage.setItem('state', 'off');
@@ -35,28 +35,30 @@ class AllArticles extends React.Component {
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
-      if (key === 'count') {
-        newQuery[key] = defaultQuery[key];
-      } else {
-        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
-      }
+      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
     });
     const result = await articleApi.getAllArticles(newQuery);
     store.dispatch(articleAction.getArticles(result.datas, result.totalCount, result.token));
+
+    let oldestArticleCreatedDate;
+    const articles = result.datas;
+    if (articles.length === 0) {
+      oldestArticleCreatedDate = moment().format();
+    } else {
+      oldestArticleCreatedDate = articles[articles.length - 1].createdAt;
+    }
+
     return {
       newQuery,
       query,
+      oldestArticleCreatedDate,
     };
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-      showAddArticle: false,
-      isAddArticleLoading: false,
-      addArticleErrorMsg: null,
-    };
+    this.oldestArticleCreatedDate = props.oldestArticleCreatedDate;
+    this.isNoMoreData = false;
     /* 每次query API時所需要用到的參數 */
     this.query = {
       sort: this.props.newQuery.sort,
@@ -64,6 +66,9 @@ class AllArticles extends React.Component {
       keyword: this.props.newQuery.keyword,
       page: this.props.newQuery.page,
       count: this.props.newQuery.count,
+    };
+    this.state = {
+      isLoading: false,
     };
   }
 
@@ -77,24 +82,19 @@ class AllArticles extends React.Component {
     const oldArticle = this.props.article;
     /* If loading successfully, set isLoading to false */
     if (newArticle.token !== oldArticle.token) {
+      this.setState({
+        isLoading: false,
+      });
       this.props.setRouterChangingStatus(false);
-    }
-    /* Refresh the query parameters */
-    Object.keys(newProps.query).forEach((key) => {
-      if (key !== 'count') {
-        this.query[key] = newProps.query[key];
+      const newArticles = newArticle.articles;
+      const oldArticles = oldArticle.articles;
+      /* If no more datas, means they are equal to each other */
+      if (newArticles.length === oldArticles.length) {
+        this.isNoMoreData = true;
+        return;
       }
-    });
-  }
-
-  changePage(page) {
-    this.query.page = page;
-    this.props.getArticlesAsync(this.query);
-    this.props.setRouterChangingStatus(true);
-    Router.push({
-      pathname: '/articles/allArticles',
-      query: this.query,
-    });
+      this.oldestArticleCreatedDate = newArticles[newArticles.length - 1].createdAt;
+    }
   }
 
   /* remember to reset tha page */
@@ -106,27 +106,24 @@ class AllArticles extends React.Component {
     }
     this.searchKeyword = setTimeout(() => {
       // this.toDatasLimit = false;
-      this.query.page = 1;
+      this.query.endTime = moment().format();
       this.query.keyword = keyword;
-      this.props.getArticlesAsync(this.query);
-      this.props.setRouterChangingStatus(true);
-      Router.push({
-        pathname: '/articles/allArticles',
-        query: this.query,
-      });
+      this.props.getArticlesAsync([], this.query);
     }, 1000);
   }
 
-  changeOrder(event) {
-    // this.toDatasLimit = false;
-    this.query.page = 1;
-    this.query.sort = event.target.value;
-    this.props.getArticlesAsync(this.query);
-    this.props.setRouterChangingStatus(true);
-    Router.push({
-      pathname: '/articles/allArticles',
-      query: this.query,
+  doTouchBottom() {
+    if (this.state.isLoading) {
+      return;
+    }
+    if (this.isNoMoreData) {
+      return;
+    }
+    this.setState({
+      isLoading: true,
     });
+    this.query.endTime = this.oldestArticleCreatedDate;
+    this.props.getArticlesAsync(this.props.article.articles, this.query);
   }
 
   componentWillUnmount() {
@@ -157,7 +154,7 @@ class AllArticles extends React.Component {
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer doTouchBottom={this.doTouchBottom.bind(this)}>
           <div className={'AllArticles-zone'}>
             <div className={'AllArticles-addArticleBar'}>
               {
@@ -172,37 +169,42 @@ class AllArticles extends React.Component {
             <div className={'AllArticles-functionBar'}>
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={'輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
-              </div>
-              <div>
-                <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={this.query.sort}>
-                  <option value={'viewCount'}>觀看</option>
-                  <option value={'publishedAt'}>時間</option>
-                  <option value={'randomNumber'}>推薦(每小時更新)</option>
-                </select>
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
               </div>
             </div>
             <div className={'AllArticles-contentZone'}>
               {articles.map((item) => {
+                const article = {
+                  _id: item._id,
+                  title: item.title,
+                  rawContent: item.rawContent,
+                  commentCount: item.commentCount,
+                  createdAt: item.createdAt,
+                  updatedAt: item.updatedAt,
+                  userId: item.userId,
+                  userName: item.userName,
+                  userPicture: item.userPicture,
+                };
                 return (
-                  <ArticleCard
-                    key={item._id}
-                    article={item}
-                  />
+                  <Link
+                    key={article._id}
+                    href={'/articles/singleArticle?articleId=' + article._id}
+                  ><a>
+                    <ArticleCard
+                      article={article}
+                    />
+                  </a></Link>
                 );
               })}
-              <PaginationBox
-                refreshToken={
-                  this.query.sort
-                  + this.query.keyword
-                  + this.query.order
-                  + this.query.count
-                }
-                pageNumber={dataPage}
-                url={'/articles/allArticles' + queryParam}
-              />
             </div>
+            {
+              this.state.isLoading ?
+                <div className={'AllArticles-loadingZone'}>
+                  <FaCircleONotch />
+                </div>
+                :
+                null
+            }
           </div>
         </MainLayoutContainer>
       </div>

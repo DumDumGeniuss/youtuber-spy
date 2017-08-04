@@ -9,7 +9,7 @@ $primary-color: black;
 .MainLayout-zone {
   background-color: #e9ebee;
   width: 100%;
-  margin-top: 50px;
+  padding-top: 50px;
   overflow: hidden;
 
   .MainLayout-socialZone {
@@ -178,7 +178,7 @@ $primary-color: black;
   .MainLayout-mobileZone {
     position: fixed;
     top: 50px;
-    display: block;
+    display: none;
     z-index: 5;
     background-color: #213684;
     width: 100%;
@@ -232,6 +232,10 @@ $primary-color: black;
 @media only screen and (max-width: 800px) {
 
   .MainLayout-zone {
+
+    .MainLayout-mobileZone {
+      display: block;
+    }
 
     .MainLayout-navbar {
       height: 50px;

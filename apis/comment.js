@@ -3,16 +3,16 @@ require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 import * as tinyHelper from '../libs/tinyHelper';
 
-const apiUrl = config.serverless_url + 'articles';
+const apiUrl = config.serverless_url + 'comments';
 
-export const getAllArticles = async function (query) {
+export const getAllComments = async function (query) {
   const finalQuery = {
     sort: query.sort || 'createdAt',
     order: query.order || '',
-    keyword: query.keyword || '',
     count: query.count || '',
     startTime: query.startTime || '',
     endTime: query.endTime || '',
+    articleId: query.articleId || '',
   };
   const queryString = tinyHelper.getQueryString(finalQuery);
   const result = await fetch(apiUrl + queryString, {
@@ -20,14 +20,6 @@ export const getAllArticles = async function (query) {
   });
   const resultJson = await result.json();
 
-  return resultJson;
-};
-
-export const getArticle = async function (articleId) {
-  const result = await fetch(apiUrl + '/' + articleId, {
-    method: 'GET',
-  });
-  const resultJson = await result.json();
   if (result.status !== 200) {
     throw {
       status: result.status,
@@ -38,7 +30,7 @@ export const getArticle = async function (articleId) {
   return resultJson;
 };
 
-export const addArticle = async function (query, data) {
+export const addComment = async function (query, data) {
   const finalQuery = {
     access_token: query.access_token,
   };
@@ -54,7 +46,7 @@ export const addArticle = async function (query, data) {
   const resultJson = await result.json();
 
   if (result.status !== 200) {
-    return {
+    throw {
       status: result.status,
       message: resultJson.message, 
     }
@@ -63,30 +55,12 @@ export const addArticle = async function (query, data) {
   return resultJson;
 };
 
-export const updateArticle = async function (articleId, query, data) {
+export const deleteComment = async function (query, commentId) {
   const finalQuery = {
     access_token: query.access_token,
   };
   const queryString = tinyHelper.getQueryString(finalQuery);
-  const result = await fetch(apiUrl + '/' + articleId + queryString, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'PUT',
-    body: JSON.stringify(data),
-  });
-  const resultJson = await result.json();
-
-  return resultJson;
-};
-
-export const deleteArticle = async function (query, articleId) {
-  const finalQuery = {
-    access_token: query.access_token,
-  };
-  const queryString = tinyHelper.getQueryString(finalQuery);
-  const result = await fetch(apiUrl + '/' + articleId + queryString, {
+  const result = await fetch(apiUrl + '/' + commentId + queryString, {
     method: 'DELETE',
   });
   const resultJson = await result.json();

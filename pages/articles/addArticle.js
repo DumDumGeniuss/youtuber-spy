@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 
 import Plus from 'react-icons/lib/fa/plus';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
@@ -58,6 +59,10 @@ class AddArticle extends React.Component {
   }
 
   addArticle() {
+    if (this.state.isAdding) {
+      return;
+    }
+
     this.setState({ isAdding: true });
 
     const query = {
@@ -77,13 +82,16 @@ class AddArticle extends React.Component {
               errorMessage: '很抱歉您的登入已經過期了，請重整頁面重新登入。'
             });
           }
+          if (result.status === 411) {
+            this.setState({
+              errorMessage: '您的內容過短或是過長，請修正後再新增'
+            });
+          }
         } else {
-          this.setState({ isAdding: false });
-          /* Reload again*/
-          // Router.push({
-          //   pathname: '/candidateChannels/allCandidateChannels',
-          //   query: this.query,
-          // });
+          /* Jump to all articles page */
+          Router.push({
+            pathname: '/articles/allArticles',
+          });
         }
       });
   }
@@ -117,7 +125,7 @@ class AddArticle extends React.Component {
                 {this.state.isAdding ? <FaCircleONotch className={'AddArticle-spin'}/> : <Plus/>}發表文章
               </span>
             </div>
-            {this.state.errorMessage ? <span className={'AddArticle-errorMessage'}>errors</span> : null}
+            {this.state.errorMessage ? <span className={'AddArticle-errorMessage'}>{this.state.errorMessage}</span> : null}
             <div className={'AddArticle-titleZone'}>
               <label className={'AddArticle-titleLabel'}>標題</label>
               <input className={'AddArticle-titleInput'} onChange={this.handleTitleChange.bind(this)}/>

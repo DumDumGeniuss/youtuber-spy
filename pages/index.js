@@ -254,6 +254,7 @@ class Index extends React.Component {
                   + this.query.order
                   + this.query.count
                 }
+                initPage={this.query.page}
                 pageNumber={dataPage}
                 url={'/' + queryParam}
               />

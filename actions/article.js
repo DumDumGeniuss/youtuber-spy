@@ -11,12 +11,12 @@ export function getArticles(articles, totalCount, token) {
   };
 }
 
-export const getArticlesAsync = function (query) {
+export const getArticlesAsync = function (oldArticles, query) {
   return function (dispatch) {
     articleApi.getAllArticles(query)
       .then((result) => {
         dispatch(
-          getArticles(result.datas, result.totalCount, result.token)
+          getArticles(oldArticles.concat(result.datas), result.totalCount, result.token)
         );
       });
   };

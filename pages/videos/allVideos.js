@@ -225,6 +225,7 @@ class AllVideos extends React.Component {
                   + this.query.startTime
                   + this.query.endTime
                 }
+                initPage={this.query.page}
                 pageNumber={dataPage}
                 url={'/videos/allVideos' + queryParam}
               />

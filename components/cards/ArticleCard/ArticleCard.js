@@ -28,16 +28,25 @@ class ArticleCard extends React.Component {
     return (
       <div className={'ArticleCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <figure className={'ArticleCard-titleImage'}>
-          <img src={articleInfo.titleImage}/>
-        </figure>
-        <section className={'ArticleCard-contentZone'}>
-          <Link href={'/articles/singleArticle?articleId=' + articleInfo._id}><a>
-            <h2 className={'ArticleCard-title'}>{articleInfo.title}</h2>
-          </a></Link>
-          <h6 className={'ArticleCard-content'}>{timeString}</h6>
-          <p className={'ArticleCard-content'}>{articleInfo.content}</p>
-        </section>
+        <div className={'ArticleCard-commentCountZone'}>
+          <span className={'ArticleCard-commentCount'}>
+            {articleInfo.commentCount}
+          </span>
+        </div>
+        <div className={'ArticleCard-imageZone'}>
+          <img className={'ArticleCard-image'} src={articleInfo.userPicture}/>
+        </div>
+        <div className={'ArticleCard-contentZone'}>
+          <span className={'ArticleCard-userName'}>
+            {articleInfo.userName}
+          </span>
+          <h2 className={'ArticleCard-title'}>
+            {articleInfo.title}
+          </h2>
+          <span className={'ArticleCard-date'}>
+            {moment(articleInfo.createdAt).format('YYYY-MM-DD HH:mm')}
+          </span>
+        </div>
       </div>
     );
   }

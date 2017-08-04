@@ -5,6 +5,20 @@ $primary-color: black;
 .AllArticles-zone {
   width: 100%;
 
+  .AllArticles-loadingZone {
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+
+    svg {
+      color: #777;
+      font-size: 2em;
+      animation: spin 1s linear infinite;
+    }
+  }
+
   .AllArticles-contentZone {
     background-color: white;
   }

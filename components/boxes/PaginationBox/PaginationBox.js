@@ -33,6 +33,9 @@ class PaginationBox extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      pageClicked: parseInt(this.props.initPage, 10) || 1,
+    });
   }
 
   componentWillUnmount() {

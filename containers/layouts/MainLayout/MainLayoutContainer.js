@@ -100,6 +100,7 @@ class MainLayoutContainer extends React.Component {
         isRouterChanging={this.props.browserAttribute.isRouterChanging}
         windowWidth={this.props.browserAttribute.windowWidth}
         windowHeight={this.props.browserAttribute.windowHeight}
+        doTouchBottom={this.props.doTouchBottom}
       />
     );
   }

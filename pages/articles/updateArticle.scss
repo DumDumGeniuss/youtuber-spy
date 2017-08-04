@@ -12,7 +12,6 @@ $primary-color: black;
     .UpdateArticle-button {
       position: absolute;
       top: 10px;
-      right: 10px;
       display: inline-block;
       padding: 10px;
       height: 40px;
@@ -37,6 +36,12 @@ $primary-color: black;
           transform: rotate(360deg);
         }
       }
+    }
+    .UpdateArticle-updateButton {
+      right: 10px;
+    }
+    .UpdateArticle-deleteButton {
+      right: 120px;
     }
   }
 
@@ -117,40 +122,5 @@ $primary-color: black;
 
   .UpdateArticle-editor {
 
-  }
-
-  .UpdateArticle-functionZone {
-    position: relative;
-    padding: 10px 0;
-    height: 60px;
-    .UpdateArticle-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: inline-block;
-      padding: 10px;
-      height: 40px;
-      color: white;
-      background-color: #ff8684;
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        color: yellow;
-      }
-
-      .UpdateArticle-spin {
-        transform: rotate(0deg);
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
   }
 }
