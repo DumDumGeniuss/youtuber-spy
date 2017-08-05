@@ -17,6 +17,7 @@
     cursor: pointer;
     background-color: white;
     border-radius: 5px;
+    border: 1px solid #ccc;
   }
   .PaginationBox-button:hover {
     background-color: #ececec;
@@ -26,6 +27,7 @@
     padding: 3px;
     margin: 3px;
     cursor: pointer;
-    background-color: #c8c8c8;
+    background-color: #cad5ff;
+    border: 1px solid #ccc;
   }
 }

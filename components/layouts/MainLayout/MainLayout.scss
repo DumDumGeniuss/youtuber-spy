@@ -205,7 +205,7 @@ $primary-color: black;
 
   .MainLayout-pageContent {
     width: 100%;
-    max-width: 800px;
+    max-width: 680px;
     min-height: 100vh;
     margin-left: 50%;
     transform: translate(-50%, 0%);
@@ -238,7 +238,6 @@ $primary-color: black;
     }
 
     .MainLayout-navbar {
-      height: 50px;
 
       .MainLayout-content {
 
