@@ -213,6 +213,7 @@ class SingleArticle extends React.Component {
     const userInfo = this.props.user.userInfo || {};
     const isArtilceOwner = articleInfo.userId === userInfo.id;
     const comments = this.props.comment.comments;
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -241,7 +242,7 @@ class SingleArticle extends React.Component {
             <h1 className={'SingleArticle-title'}>{articleInfo.title}</h1>
             <div className={'SingleArticle-infoZone'}>
               <img className={'SingleArticle-userPicture'} src={articleInfo.userPicture} />
-              <span className={'SingleArticle-userName'}>{articleInfo.userName}</span>
+              <span className={'SingleArticle-userName'}>{ articleInfo.anonymous ? i18nWords.anonymous : articleInfo.userName}</span>
               <span className={'SingleArticle-date'}>發佈於 {moment(articleInfo.createdAt).format('YYYY-MM-DD')}</span>
             </div>
             <div className={'SingleArticle-editor'} dangerouslySetInnerHTML={{__html: `
@@ -261,7 +262,7 @@ class SingleArticle extends React.Component {
                   <div className={'SingleArticle-pictureZone'}>
                     <img className={'SingleArticle-picture'} src={ this.state.anonymous ? '/static/logo.png' : userInfo.picture }/>
                   </div>
-                  <span className={'SingleArticle-userName'}>{ this.state.anonymous ? 'anonymous' : userInfo.name }</span>
+                  <span className={'SingleArticle-userName'}>{ this.state.anonymous ? i18nWords.anonymous : userInfo.name }</span>
                   <div className={'SingleArticle-textAreaZone'}>
                     <textarea ref={'commentInput'} onChange={this.handleCommentChange.bind(this)} rows={6} className={'SingleArticle-textArea'}/>
                   </div>
@@ -290,7 +291,7 @@ class SingleArticle extends React.Component {
                     comments.map((item) => {
                       const newComment = {
                         userId: item.userId,
-                        userName: item.userName,
+                        userName: item.anonymous ? i18nWords.anonymous : item.userName,
                         userPicture: item.userPicture,
                         content: item.content,
                         createdAt: item.createdAt,
@@ -327,6 +328,7 @@ const mapStateToProps = (state) => {
     article: state.article,
     user: state.user,
     comment: state.comment,
+    i18n: state.i18n,
   };
 };
 

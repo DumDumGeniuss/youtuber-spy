@@ -114,6 +114,7 @@ class AddArticle extends React.Component {
   }
 
   render() {
+    const i18nWords = this.props.i18n.words;
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -200,6 +201,7 @@ const mapStateToProps = (state) => {
   return {
     article: state.article,
     user: state.user,
+    i18n: state.i18n,
   };
 };
 

@@ -148,6 +148,7 @@ class AllArticles extends React.Component {
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
     let queryParam = tinyHelper.getQueryString(this.query, ['createdAt', 'updatedAt'], ['count']);
     queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -183,6 +184,7 @@ class AllArticles extends React.Component {
             </div>
             <div className={'AllArticles-contentZone'}>
               {articles.map((item) => {
+                console.log(item);
                 const article = {
                   _id: item._id,
                   title: item.title,
@@ -191,7 +193,7 @@ class AllArticles extends React.Component {
                   createdAt: item.createdAt,
                   updatedAt: item.updatedAt,
                   userId: item.userId,
-                  userName: item.userName,
+                  userName: item.anonymous ? i18nWords.anonymous : item.userName,
                   userPicture: item.userPicture,
                 };
                 return (
@@ -225,6 +227,7 @@ const mapStateToProps = (state) => {
   return {
     article: state.article,
     user: state.user,
+    i18n: state.i18n,
   };
 };
 

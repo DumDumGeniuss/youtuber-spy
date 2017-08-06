@@ -181,6 +181,7 @@ class UpdateArticle extends React.Component {
   render() {
     const articleInfo = this.props.article.article;
     const userInfo = this.props.user.userInfo || {};
+    const i18nWords = this.props.i18n.words;
 
     if (this.props.error) {
       return (
@@ -289,6 +290,7 @@ const mapStateToProps = (state) => {
   return {
     article: state.article,
     user: state.user,
+    i18n: state.i18n,
   };
 };
 

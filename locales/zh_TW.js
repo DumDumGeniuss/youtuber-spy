@@ -1,4 +1,5 @@
 export default {
+  anonymous: '匿名',
   channelCategory: {
     "People & Blogs": '人物 & 網誌',
     "Comedy": '喜劇',
