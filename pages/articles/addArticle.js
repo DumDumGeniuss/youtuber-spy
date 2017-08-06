@@ -7,6 +7,7 @@ import Router from 'next/router';
 
 import Plus from 'react-icons/lib/fa/plus';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
+import SwitchButton from '../../components/buttons/SwitchButton/SwitchButton';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import TitleSection from '../../components/sections/TitleSection/TitleSection';
@@ -32,7 +33,7 @@ class AddArticle extends React.Component {
       deltaContent: { ops: [] },
       isAdding: false,
       errorMessage: '',
-
+      anonymous: false,
     };
   }
 
@@ -51,6 +52,12 @@ class AddArticle extends React.Component {
       });
     });
     editor.setContents([{"insert":""}])
+  }
+
+  changeIsAnonymous() {
+    this.setState({
+      anonymous: !this.state.anonymous,
+    });
   }
 
   handleTitleChange(event) {
@@ -77,7 +84,9 @@ class AddArticle extends React.Component {
       title: this.state.title,
       rawContent: this.state.rawContent,
       deltaContent: this.state.deltaContent,
+      anonymous: this.state.anonymous,
     };
+    console.log(data);
     articleApi.addArticle(query, data)
       .then((result) => {
         if (result.status !== 200) {
@@ -126,6 +135,11 @@ class AddArticle extends React.Component {
               `}
             />
             <div className={'AddArticle-functionZone'}>
+              <SwitchButton className={'AddArticle-SwitchButton'}
+                isOn={this.state.anonymous}
+                text={this.state.anonymous ? '匿名' : '實名'}
+                onClick={this.changeIsAnonymous.bind(this)}
+              />
               <span className={'AddArticle-button'} onClick={this.addArticle.bind(this)}>
                 {this.state.isAdding ? <FaCircleONotch className={'AddArticle-spin'}/> : <Plus/>}發表文章
               </span>

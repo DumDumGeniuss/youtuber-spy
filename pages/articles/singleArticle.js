@@ -6,7 +6,8 @@ import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
 import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox'
-import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';;
+import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
+import SwitchButton from '../../components/buttons/SwitchButton/SwitchButton';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import CommentCard from '../../components/cards/CommentCard/CommentCard';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
@@ -74,6 +75,7 @@ class SingleArticle extends React.Component {
       isLoading: false,
       comment: '',
       errorMessage: '',
+      anonymous: false,
     };
     this.newestCommentCreatedDate = this.props.newestCommentCreatedDate;
     this.isNoMoreData = false;
@@ -141,6 +143,7 @@ class SingleArticle extends React.Component {
     const data = {
       content: this.state.comment,
       articleId: this.props.query.articleId,
+      anonymous: this.state.anonymous,
     };
     commentApi.addComment(query, data)
       .then((result) => {
@@ -184,6 +187,12 @@ class SingleArticle extends React.Component {
     });
     this.commentQuery.startTime = this.newestCommentCreatedDate;
     this.props.getCommentsAsync(this.props.comment.comments, this.commentQuery);
+  }
+
+  changeIsAnonymous() {
+    this.setState({
+      anonymous: !this.state.anonymous,
+    });
   }
 
   componentWillUnmount() {
@@ -250,9 +259,9 @@ class SingleArticle extends React.Component {
               userInfo.id ?
                 <div className={'SingleArticle-addCommentZone'}>
                   <div className={'SingleArticle-pictureZone'}>
-                    <img className={'SingleArticle-picture'} src={userInfo.picture}/>
+                    <img className={'SingleArticle-picture'} src={ this.state.anonymous ? '/static/logo.png' : userInfo.picture }/>
                   </div>
-                  <span className={'SingleArticle-userName'}>{userInfo.name}</span>
+                  <span className={'SingleArticle-userName'}>{ this.state.anonymous ? 'anonymous' : userInfo.name }</span>
                   <div className={'SingleArticle-textAreaZone'}>
                     <textarea ref={'commentInput'} onChange={this.handleCommentChange.bind(this)} rows={6} className={'SingleArticle-textArea'}/>
                   </div>
@@ -260,6 +269,13 @@ class SingleArticle extends React.Component {
                   <div className={'SingleArticle-addCommentButton'}>
                     {this.state.isAdding ? <FaCircleONotch/> : null}
                     <span onClick={this.addComment.bind(this)} className={'SingleArticle-addCommentButtonText'}>送出</span>
+                  </div>
+                  <div className={'SingleArticle-anonymousButton'}>
+                    <SwitchButton
+                      isOn={this.state.anonymous}
+                      text={this.state.anonymous ? '匿名' : '實名'}
+                      onClick={this.changeIsAnonymous.bind(this)}
+                    />
                   </div>
                 </div>
                 :

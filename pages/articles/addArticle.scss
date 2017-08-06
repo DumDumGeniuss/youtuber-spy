@@ -60,6 +60,14 @@
     position: relative;
     padding: 10px 0;
     height: 60px;
+
+    .AddArticle-switchButton {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: inline-block;
+    }
+
     .AddArticle-button {
       position: absolute;
       top: 10px;
