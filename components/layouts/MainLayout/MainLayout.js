@@ -155,7 +155,11 @@ class MainLayout extends React.Component {
             </div>
           </a>
         </div>
-        <div className={'MainLayout-fbLikeZone'}>
+        <div className={'MainLayout-pageContent'}>
+          {this.props.children}
+        </div>
+        <div className={'MainLayout-rightSideZone'}>
+          <div className={'MainLayout-fbLikeZone'}>
             <div className='fb-page'
               data-href='https://www.facebook.com/U2berSpy/'
               data-small-header={false}
@@ -165,9 +169,7 @@ class MainLayout extends React.Component {
               data-adapt-container-width={true}
             >
             </div>
-        </div>
-        <div className={'MainLayout-pageContent'}>
-          {this.props.children}
+          </div>
         </div>
         <footer className={'MainLayout-footer'}>
           <span className={'MainLayout-center'}>

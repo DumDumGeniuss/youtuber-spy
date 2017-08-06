@@ -195,20 +195,24 @@ $primary-color: black;
     }
   }
 
-  .MainLayout-fbLikeZone {
+  .MainLayout-rightSideZone {
     display: inline-block;
-    margin-left: 50%;
-    transform: translate(-50%, 0);
-    margin-top: 10px;
-    overflow: hidden;
+    width: 340px;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-top: 20px;
+    .MainLayout-fbLikeZone {
+      display: block;
+      overflow: hidden;
+    }
   }
 
   .MainLayout-pageContent {
-    width: 100%;
-    max-width: 680px;
+    display: inline-block;
+    vertical-align: top;
+    width: 640px;
     min-height: 100vh;
-    margin-left: 50%;
-    transform: translate(-50%, 0%);
+    margin-left: calc(50% - 500px);
     overflow: hidden;
   }
 
@@ -229,12 +233,26 @@ $primary-color: black;
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
 
   .MainLayout-zone {
 
     .MainLayout-mobileZone {
       display: block;
+    }
+
+    .MainLayout-pageContent {
+      display: block;
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .MainLayout-rightSideZone {
+      display: block;
+      width: 340px;
+      margin-left: calc(50% - 170px);
+      .MainLayout-fbLikeZone {
+      }
     }
 
     .MainLayout-navbar {
