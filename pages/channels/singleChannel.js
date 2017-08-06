@@ -24,13 +24,13 @@ class SingleChannel extends React.Component {
   static async getInitialProps({ query, store }) {
     const videoQueryNewest = {
       page: 1,
-      count: 15,
+      count: 5,
       sort: 'publishedAt',
       channelId: query.channelId,
     };
     const videoQueryHottest = {
       page: 1,
-      count: 15,
+      count: 5,
       sort: 'viewCount',
       channelId: query.channelId,
     };
@@ -195,7 +195,7 @@ class SingleChannel extends React.Component {
               </div>
             </div>
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
-            <div className={'SingleChannel-socialListZone'}>
+            <div style={ { display: 'none' } } className={'SingleChannel-socialListZone'}>
               {
                 socialInfos.map((socialInfo, index) => {
                   return (

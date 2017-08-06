@@ -3,7 +3,7 @@
 	display: block;
   width: 100%;
 	background-color: white;
-	height: 80px;
+	// height: 80px;
   cursor: pointer;
   &:hover {
     background-color: #ffc1c1;
@@ -11,11 +11,12 @@
 
 
 	.ArticleCard-imageZone {
-		display: inline-block;
+		display: inline-flex;
     vertical-align: middle;
-		height: 80px;
+    align-items: center;
+    justify-content: center;
+		height: 100%;
     width: 60px;
-    padding: 15px 5px;
 
 		.ArticleCard-image {
 			height: 50px;
@@ -23,11 +24,12 @@
 	}
 
   .ArticleCard-commentCountZone {
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
-    height: 80px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     width: 60px;
-    padding: 15px 5px;
 
     .ArticleCard-commentCount {
       display: inline-block;
@@ -45,9 +47,8 @@
     position: relative;
 		display: inline-block;
 		vertical-align: middle;
-    height: 80px;
     width: calc(100% - 120px);
-    padding: 15px 5px;
+    padding: 5px 5px;
     .ArticleCard-userName {
       padding: 0;
       margin: 0;
@@ -63,12 +64,13 @@
       padding: 0;
       margin: 0;
 			display: block;
-      height: 30px;
+      // height: 30px;
+      margin-bottom: 15px;
       width: 100%;
       line-height: 30px;
 			font-size: 1.6em;
 			color: black;
-      white-space: nowrap;
+      // white-space: nowrap;
 		}
 
     .ArticleCard-date {
@@ -81,3 +83,29 @@
 	}
 }
 
+@media (max-width: 800px) {
+  .ArticleCard-zone {
+    .ArticleCard-imageZone {
+      width: 30px;
+      .ArticleCard-image {
+        height: 25px;
+      }
+    }
+    .ArticleCard-commentCountZone {
+      width: 30px;
+      .ArticleCard-commentCount {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 12.5px;
+        font-size: 0.6em;
+      }
+    }
+    .ArticleCard-contentZone  {
+      width: calc(100% - 60px);
+      .ArticleCard-title {
+        font-size: 1em;
+      }
+    }
+  }
+}
