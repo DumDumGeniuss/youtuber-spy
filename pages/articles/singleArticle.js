@@ -260,7 +260,7 @@ class SingleArticle extends React.Component {
               userInfo.id ?
                 <div className={'SingleArticle-addCommentZone'}>
                   <div className={'SingleArticle-pictureZone'}>
-                    <img className={'SingleArticle-picture'} src={ this.state.anonymous ? '/static/logo.png' : userInfo.picture }/>
+                    <img className={'SingleArticle-picture'} src={ this.state.anonymous ? '/static/anonymous.jpg' : userInfo.picture }/>
                   </div>
                   <span className={'SingleArticle-userName'}>{ this.state.anonymous ? i18nWords.anonymous : userInfo.name }</span>
                   <div className={'SingleArticle-textAreaZone'}>
