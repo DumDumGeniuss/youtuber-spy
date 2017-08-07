@@ -20,7 +20,7 @@ $primary-color: black;
 
   .SingleArticle-functionZone {
     position: relative;
-    padding: 10px 0;
+    margin-top: 10px;
     height: 60px;
     .SingleArticle-button {
       position: absolute;
@@ -71,7 +71,7 @@ $primary-color: black;
 
   .SingleArticle-title {
     padding:10px;
-    margin: 0;
+    margin-top: 10px;
     font-size: 1.8em;
     background-color: #e45050;
     color: white;
