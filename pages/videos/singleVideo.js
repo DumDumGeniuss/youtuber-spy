@@ -107,8 +107,8 @@ class SingleVideo extends React.Component {
             <div className={'SingleVideo-playVideoZone'}>
               <iframe
                 frameBorder="0" allowFullScreen
-                width={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth : 800}
-                height={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth * 4.5 / 8 : 450}
+                width={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth : 640}
+                height={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth * 4.5 / 8 : 360}
                 src={'https://www.youtube.com/embed/' + videoInfo._id}>
               </iframe>
             </div>
