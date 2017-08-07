@@ -57,8 +57,20 @@ class UpdateArticle extends React.Component {
 
   componentDidMount() {
     if (!this.props.error) {
+      function imageHandler() {
+        var range = editor.getSelection();
+        var value = prompt('輸入圖片網址');
+        editor.insertEmbed(range.index, 'image', value, Quill.sources.USER);
+      }
       var editor = new Quill('#editor', {
-        modules: { toolbar: '#toolbar' },
+        modules: {
+          toolbar: {
+            container: '#toolbar',
+            handlers: {
+              image: imageHandler
+            }
+          },
+        },
         theme: 'snow',
       });
       editor.on('text-change', (delta, oldDelta, source) => {
