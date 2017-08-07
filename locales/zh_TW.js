@@ -40,5 +40,8 @@ export default {
     'UnitedStates': '美國',
     'Macao': '澳門',
     'China': '中國',
+    'Germany': '德國',
+    'Singapore': '新加坡',
+    'Spain': '西班牙',
   }
 };
