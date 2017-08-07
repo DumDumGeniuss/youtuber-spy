@@ -122,7 +122,7 @@ class AddArticle extends React.Component {
           title={'Youtuber看門狗-新增文章'}
           description={'新增文章！'}
           type={'website'}
-          image={'https://www.youtuberspy.com/static/logo-facebook.png'} 
+          image={'https://www.youtuberspy.com/static/forum-image.jpg'} 
           url={'https://www.youtuberspy.com/articles/addArticle'}
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}

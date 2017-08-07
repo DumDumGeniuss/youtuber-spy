@@ -159,7 +159,7 @@ class AllArticles extends React.Component {
             全台第一個專屬Youtuber的討論平台「Youtuber看門狗」正式上線，想知道大家在紅什麼嗎？想知道更多你不知道的Youtuber嗎？快來加入討論吧！
           `}
           type={'website'}
-          image={'https://www.youtuberspy.com/static/logo-facebook.png'} 
+          image={'https://www.youtuberspy.com/static/forum-image.jpg'} 
           url={'https://www.youtuberspy.com/articles/allArticles'}
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
