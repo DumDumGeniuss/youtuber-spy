@@ -260,6 +260,7 @@ class UpdateArticle extends React.Component {
                 <button class="ql-underline"></button>
                 <button class="ql-blockquote"></button>
                 <button class="ql-link"></button>
+                <button class="ql-image"></button>
                 <select class="ql-size">
                   <option value="small"></option>
                   <option selected></option>
