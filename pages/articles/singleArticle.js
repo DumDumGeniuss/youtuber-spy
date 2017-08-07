@@ -15,6 +15,7 @@ import { initStore, startClock, addCount, serverRenderClock } from '../../store/
 
 import * as articleApi from '../../apis/article';
 import * as commentApi from '../../apis/comment';
+import * as youtubeApi from '../../apis/youtube';
 import * as articleAction from '../../actions/article';
 import * as commentAction from '../../actions/comment';
 
@@ -195,6 +196,12 @@ class SingleArticle extends React.Component {
     });
   }
 
+  login() {
+    const oauthUrl = youtubeApi.generateOauthUrl(location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') +  '/articles/allArticles');
+    window.open(oauthUrl, "_self");
+    return;
+  }
+
   componentWillUnmount() {
   }
 
@@ -281,7 +288,7 @@ class SingleArticle extends React.Component {
                 </div>
                 :
                 <div className={'SingleArticle-pleaseLoginZone'}>
-                  <span className={'SingleArticle-pleaseLogin'}>請登入以留言</span>
+                  <span onClick={this.login.bind(this)} className={'SingleArticle-pleaseLogin'}>點此登入留言</span>
                 </div>
             }
             {

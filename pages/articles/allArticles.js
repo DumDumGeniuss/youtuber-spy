@@ -20,6 +20,7 @@ import * as browserAttributeAction from '../../actions/browserAttribute';
 
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
+import * as youtubeApi from '../../apis/youtube';
 
 import stylesheet from './allArticles.scss';
 
@@ -135,6 +136,12 @@ class AllArticles extends React.Component {
     this.props.getArticlesAsync(this.props.article.articles, this.query);
   }
 
+  login() {
+    const oauthUrl = youtubeApi.generateOauthUrl(location.href);
+    window.open(oauthUrl, "_self");
+    return;
+  }
+
   componentWillUnmount() {
     if (this.searchKeyword) {
       clearTimeout(this.searchKeyword);
@@ -173,7 +180,9 @@ class AllArticles extends React.Component {
                     <span className={'AllArticles-articleFuncButton AllArticles-add'}>新增文章<Plus /></span>
                   </a></Link>
                   :
-                  <span className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}>登入以新增文章</span>
+                  <span onClick={this.login.bind(this)} className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}>
+                    點此登入
+                  </span>
               }
             </div>
             <div className={'AllArticles-functionBar'}>

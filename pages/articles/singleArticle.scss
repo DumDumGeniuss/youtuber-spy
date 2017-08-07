@@ -185,8 +185,13 @@ $primary-color: black;
       padding: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      background-color: #fb9944;
+      background-color: #ff7600;
       color: white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fb9944;
+      }
     }
   }
 
