@@ -197,7 +197,11 @@ class SingleArticle extends React.Component {
   }
 
   login() {
-    const oauthUrl = youtubeApi.generateOauthUrl(location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') +  '/articles/allArticles');
+    const rootPath = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
+    const pagePath = rootPath + 'articles/singleArticle'
+    const oauthUrl = youtubeApi.generateOauthUrl(
+      rootPath, { pathname: pagePath, query: { articleId: this.props.query.articleId } }
+    );
     window.open(oauthUrl, "_self");
     return;
   }

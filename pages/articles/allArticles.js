@@ -137,7 +137,8 @@ class AllArticles extends React.Component {
   }
 
   login() {
-    const oauthUrl = youtubeApi.generateOauthUrl(location.href);
+    const rootPath = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
+    const oauthUrl = youtubeApi.generateOauthUrl(rootPath, { pathname: location.href });
     window.open(oauthUrl, "_self");
     return;
   }
@@ -193,7 +194,6 @@ class AllArticles extends React.Component {
             </div>
             <div className={'AllArticles-contentZone'}>
               {articles.map((item) => {
-                console.log(item);
                 const article = {
                   _id: item._id,
                   title: item.title,

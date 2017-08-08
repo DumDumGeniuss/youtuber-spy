@@ -10,13 +10,14 @@ const scope = 'https://www.googleapis.com/auth/youtube.readonly https://www.goog
 const response_type = 'token';
 const include_granted_scopes = 'true';
 
-export const generateOauthUrl = (path) => {
+export const generateOauthUrl = (rootUrl, redirectObject) => {
   const queryString = tinyHelper.getQueryString({
     client_id: clientId,
-    redirect_uri: path,
+    redirect_uri: rootUrl,
     scope: scope,
     response_type: response_type,
     include_granted_scopes: include_granted_scopes,
+    state: JSON.stringify(redirectObject),
   });
   return oauthApiurl + queryString;
 };

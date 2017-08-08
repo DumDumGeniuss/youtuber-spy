@@ -37,9 +37,14 @@ class MainLayoutContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.rootPath = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
     /* Handle the callback from addChannel */
     const callbackParams = youtubeApi.getParamsFromCallback(window.location.href);
     if (callbackParams.access_token) {
+      const redirectObject = JSON.parse(decodeURIComponent(callbackParams.state));
+      if (redirectObject.pathname !== this.rootPath) {
+        Router.push(redirectObject);
+      }
       localStorage.setItem('youtubeToken', callbackParams.access_token);
     }
     this.props.getUserAsync(localStorage.getItem('youtubeToken'));
@@ -62,15 +67,14 @@ class MainLayoutContainer extends React.Component {
   login() {
     const currentToken = localStorage.getItem('youtubeToken');
     /* Get full site url */
-    youtubeApi.getUserInfo(currentToken)
-      .then((result) => {
-        if (!result) {
-          const fullSiteUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
-          const oauthUrl = youtubeApi.generateOauthUrl(fullSiteUrl);
+    // youtubeApi.getUserInfo(currentToken)
+    //   .then((result) => {
+    //     if (!result) {
+          const oauthUrl = youtubeApi.generateOauthUrl(this.rootPath, { pathname: this.rootPath, query: {} });
           window.open(oauthUrl, "_self");
           return;
-        }
-      });
+      //   }
+      // });
   }
 
   logout() {
