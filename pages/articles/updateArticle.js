@@ -226,9 +226,9 @@ class UpdateArticle extends React.Component {
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
           title={'Youtuber看門狗-' + articleInfo.title}
-          description={articleInfo.rawContent.substring(0, 300)}
+          description={articleInfo.rawContent}
           type={'website'}
-          image={'https://www.youtuberspy.com/static/logo-facebook.png'} 
+          image={'https://www.youtuberspy.com/static/forum-image.jpg'} 
           url={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id}
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
