@@ -24,6 +24,9 @@ class MainLayoutContainer extends React.Component {
       this.props.setRouterChangingStatus(true);
     }; 
     Router.onRouteChangeComplete = (url) => {
+      /* Update GA */
+      ga('set', 'page', url);
+      ga('send', 'pageview');
       /* Reparse the facebook dom */
       if (!IS_FB_API_LOADED) {
         document.addEventListener('fb-api-loaded', () => {
