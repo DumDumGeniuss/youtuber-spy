@@ -161,6 +161,7 @@ class MainLayout extends React.Component {
         <div className={'MainLayout-rightSideZone'}>
           <div className={'MainLayout-fbLikeZone'}>
             <div className='fb-page'
+              data-height={600}
               data-href='https://www.facebook.com/U2berSpy/'
               data-small-header={false}
               data-adapt-container-width={false}
