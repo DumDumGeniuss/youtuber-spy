@@ -152,6 +152,7 @@ class SingleArticle extends React.Component {
         this.commentQuery.startTime = '';
         this.isNoMoreData = false;
         this.props.getCommentsAsync([], this.commentQuery);
+        this.refs.commentInput.value = '';
       })
       .catch((error) => {
         this.setState({ isAdding: false });
