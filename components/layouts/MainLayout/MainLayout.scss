@@ -196,11 +196,11 @@ $primary-color: black;
   }
 
   .MainLayout-rightSideZone {
+    position: fixed;
     display: inline-block;
     width: 340px;
-    vertical-align: top;
-    margin-left: 20px;
-    margin-top: 20px;
+    left: calc(50% + 150px);
+    top: 60px;
     .MainLayout-fbLikeZone {
       display: block;
       overflow: hidden;
@@ -248,9 +248,13 @@ $primary-color: black;
     }
 
     .MainLayout-rightSideZone {
+      position: relative;
+      left: 0;
+      top: 0;
       display: block;
       width: 340px;
       margin-left: calc(50% - 170px);
+      margin-top: 20px;
       .MainLayout-fbLikeZone {
       }
     }

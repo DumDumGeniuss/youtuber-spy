@@ -167,6 +167,7 @@ class MainLayout extends React.Component {
               data-hide-cover={false}
               data-show-facepile={true}
               data-adapt-container-width={true}
+              data-tabs={'timeline'}
             >
             </div>
           </div>
