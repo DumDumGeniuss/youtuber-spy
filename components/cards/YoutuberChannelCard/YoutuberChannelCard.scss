@@ -1,4 +1,4 @@
-@import 'normalize.css';
+$medium-width: 800px;
 
 .YoutuberChannelCard-zone {
   position: relative;
@@ -9,9 +9,9 @@
   // margin-bottom: -6px;
   overflow: hidden;
 
-  .YoutuberChannelCard-seeDetailIcon:hover {
-      color: yellow;
-      cursor: pointer;
+  @media (max-width: $medium-width) {
+    width: 50%;
+    height: 275px;
   }
 
   .YoutuberChannelCard-frontZone {
@@ -43,6 +43,9 @@
       padding-left: 5px;
       margin-bottom: 10px;
       color: black;
+      @media (max-width: $medium-width) {
+        margin-bottom: 0;
+      }
     }
 
     .YoutuberChannelCard-dataZone {
@@ -59,34 +62,11 @@
         small {
           font-size: 0.8em;
         }
-      }
-    }
-  }
-}
 
-@media (max-width: 800px) {
-  .YoutuberChannelCard-zone {
-    width: 50%;
-    height: 275px;
-
-  .YoutuberChannelCard-seeDetailIcon {
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
-
-    svg {
-      font-size: 15px;
-    }
-  }
-
-    .YoutuberChannelCard-frontZone {
-      .YoutuberChannelCard-title {
-      margin-bottom: 0;
-      }
-  
-      .YoutuberChannelCard-data {
-        height: 20px;
-        line-height: 20px;
+        @media (max-width: $medium-width) {
+          height: 20px;
+          line-height: 20px;
+        }
       }
     }
   }

@@ -1,3 +1,5 @@
+$medium-width: 800px;
+
 .ArticleCard-zone {
 	position: relative;
 	display: block;
@@ -18,8 +20,15 @@
 		height: 100%;
     width: 60px;
 
+    @media (max-width: $medium-width) {
+      width: 30px;
+    }
+
 		.ArticleCard-image {
 			height: 50px;
+      @media (max-width: $medium-width) {
+        width: 30px;
+      }
 		}
 	}
 
@@ -31,6 +40,10 @@
     height: 100%;
     width: 60px;
 
+    @media (max-width: $medium-width) {
+      width: 30px;
+    }
+
     .ArticleCard-commentCount {
       display: inline-block;
       height: 50px;
@@ -40,6 +53,14 @@
       background-color: #6182bd;
       border-radius: 25px;
       color: white;
+
+      @media (max-width: $medium-width) {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 12.5px;
+        font-size: 0.6em;
+      }
     }
   }
 
@@ -49,6 +70,11 @@
 		vertical-align: middle;
     width: calc(100% - 120px);
     padding: 5px 5px;
+
+    @media (max-width: $medium-width) {
+      width: calc(100% - 60px);
+    }
+
     .ArticleCard-userName {
       padding: 0;
       margin: 0;
@@ -71,6 +97,9 @@
 			font-size: 1.6em;
 			color: black;
       // white-space: nowrap;
+      @media (max-width: $medium-width) {
+        font-size: 1em;
+      }
 		}
 
     .ArticleCard-date {
@@ -81,31 +110,4 @@
       color: #888;
     }
 	}
-}
-
-@media (max-width: 800px) {
-  .ArticleCard-zone {
-    .ArticleCard-imageZone {
-      width: 30px;
-      .ArticleCard-image {
-        height: 25px;
-      }
-    }
-    .ArticleCard-commentCountZone {
-      width: 30px;
-      .ArticleCard-commentCount {
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        border-radius: 12.5px;
-        font-size: 0.6em;
-      }
-    }
-    .ArticleCard-contentZone  {
-      width: calc(100% - 60px);
-      .ArticleCard-title {
-        font-size: 1em;
-      }
-    }
-  }
 }

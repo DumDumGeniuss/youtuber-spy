@@ -1,3 +1,5 @@
+$medium-width: 800px;
+
 .CandidateChannelCard-zone {
 	position: relative;
 	display: block;
@@ -71,6 +73,10 @@
 			padding: 10px;
 			color: white;
 			background-color: #84afff;
+
+			@media (max-width: $medium-width) {
+				width: 100%;
+			}
 		}
 	}
 
@@ -82,6 +88,11 @@
 		border: 1px solid #cdcdcd;
 		border-radius: 10px;
 		transform: translate(-50%, 0);
+
+		@media (max-width: $medium-width) {
+			width: 100%;
+		}
+
 		.CandidateChannelCard-statistic {
 			display: inline-flex;
 			width: 50%;
@@ -94,20 +105,6 @@
 				font-size: 1em;
 				text-align: left;
 			}
-		}
-	}
-}
-
-@media (max-width: 600px) {
-	.CandidateChannelCard-zone {
-		.CandidateChannelCard-channelZone {
-			p {
-				width: 100%;
-			}
-		}
-	
-		.CandidateChannelCard-statisticZone {
-			width: 100%;
 		}
 	}
 }

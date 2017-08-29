@@ -1,4 +1,4 @@
-@import 'normalize.css';
+$medium-width: 800px;
 
 .SingleChannel-zone {
   position: relative;
@@ -44,6 +44,12 @@
       z-index: 3;
       img {
         width: 100%;
+      }
+
+      @media (max-width: $medium-width) {
+        padding: 0;
+        margin: 0;
+        width: 70px;
       }
   	}
     .SingleChannel-decorateZone {
@@ -117,6 +123,10 @@
     .SingleChannel-statistic {
       display: inline-flex;
       width: 25%;
+      @media (max-width: $medium-width) {
+        width: 50%;
+      }
+
       span {
         display: block;
         width: 100%;
@@ -124,6 +134,10 @@
         padding: 6px;
         color: white;
         text-align: center;
+
+        @media (max-width: $medium-width) {
+          width: 100%;
+        }
       }
     }
   }
@@ -139,28 +153,5 @@
   .SingleChannel-noDatasText {
     padding: 10px 0;
     text-align: center;
-  }
-}
-
-@media only screen and (max-width: 800px) { 
-  .SingleChannel-zone {
-    .SingleChannel-titleZone {
-      .SingleChannel-photoImage {
-        padding: 0;
-        margin: 0;
-        width: 70px;
-      }
-    }
-
-    .SingleChannel-statisticZone {
-      // padding: 0 0 10px 0;
-      .SingleChannel-statistic {
-        width: 50%;
-
-        span {
-          width: 100%;
-        }
-      }
-    }
   }
 }

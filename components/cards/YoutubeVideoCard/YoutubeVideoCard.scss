@@ -1,6 +1,4 @@
-@import 'normalize.css';
-
-$primary-color: black;
+$medium-width: 800px;
 
 .YoutubeVideoCard-zone {
   position: relative;
@@ -18,8 +16,16 @@ $primary-color: black;
   vertical-align: text-top;
   padding: 0;
   margin: 0;
+
+  @media (max-width: $medium-width) {
+    width: 100%;
+    height: initial; 
+  }
   img {
     height: 90%;
+    @media (max-width: $medium-width) {
+      width: 100%;
+    }
   }
 }
 
@@ -29,21 +35,8 @@ $primary-color: black;
   width: 65%;
   height: 150px;
   vertical-align: text-top;
-}
 
-@media (max-width: 600px) {
-  .YoutubeVideoCard-zone {
-  }
-
-  .YoutubeVideoCard-imgDiv {
-    width: 100%;
-    height: initial;
-    img {
-      width: 100%;
-    }
-  }
-
-  .YoutubeVideoCard-infoDiv {
+  @media (max-width: $medium-width) {
     width: 100%;
     height: initial;
   }

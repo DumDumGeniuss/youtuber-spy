@@ -1,6 +1,4 @@
-@import 'normalize.css';
-
-$primary-color: black;
+$medium-width: 800px;
 
 .MainLayout-invisible {
   display: none;
@@ -83,6 +81,10 @@ $primary-color: black;
         height: 50px;
         display: none;
         padding: 10px;
+
+        @media (max-width: $medium-width) {
+          display: inline-block;
+        }
   
         .MainLayout-bars {
           color: white;
@@ -133,6 +135,10 @@ $primary-color: black;
         transform: translate(-50%, 0);
         height: 50px;
 
+        @media (max-width: $medium-width) {
+          display: none;
+        }
+
         .MainLayout-link {
           display: inline-block;
           font-family: 'Avenir W01';
@@ -151,6 +157,10 @@ $primary-color: black;
         position: absolute;
         height: 50px;
         right: 10px;
+
+        @media (max-width: $medium-width) {
+          display: none;
+        }
 
         .MainLayout-item {
           display: inline-block;
@@ -183,6 +193,10 @@ $primary-color: black;
     background-color: #213684;
     width: 100%;
 
+    @media (max-width: $medium-width) {
+      display: block;
+    }
+
     .MainLayout-mobileLink {
       display: block;
       color: white;
@@ -201,6 +215,17 @@ $primary-color: black;
     width: 340px;
     left: calc(50% + 150px);
     top: 60px;
+
+    @media (max-width: $medium-width) {
+      position: relative;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 340px;
+      margin-left: calc(50% - 170px);
+      margin-top: 20px;
+    }
+
     .MainLayout-fbLikeZone {
       display: block;
       overflow: hidden;
@@ -214,6 +239,12 @@ $primary-color: black;
     min-height: 100vh;
     margin-left: calc(50% - 500px);
     overflow: hidden;
+
+    @media (max-width: $medium-width) {
+      display: block;
+      width: 100%;
+      margin-left: 0;
+    }
   }
 
   .MainLayout-footer {
@@ -233,48 +264,3 @@ $primary-color: black;
   }
 }
 
-@media only screen and (max-width: 1000px) {
-
-  .MainLayout-zone {
-
-    .MainLayout-mobileZone {
-      display: block;
-    }
-
-    .MainLayout-pageContent {
-      display: block;
-      width: 100%;
-      margin-left: 0;
-    }
-
-    .MainLayout-rightSideZone {
-      position: relative;
-      left: 0;
-      top: 0;
-      display: block;
-      width: 340px;
-      margin-left: calc(50% - 170px);
-      margin-top: 20px;
-      .MainLayout-fbLikeZone {
-      }
-    }
-
-    .MainLayout-navbar {
-
-      .MainLayout-content {
-
-        .MainLayout-mobileFunctionZone {
-          display: inline-block;
-        }
-
-        .MainLayout-linksZone {
-          display: none;
-        }
-
-        .MainLayout-functionZone {
-          display: none;
-        }
-      }
-    }
-  }
-}
