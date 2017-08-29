@@ -27,7 +27,7 @@ $medium-width: 800px;
 		.ArticleCard-image {
 			height: 50px;
       @media (max-width: $medium-width) {
-        width: 30px;
+        width: 25px;
       }
 		}
 	}
@@ -98,7 +98,7 @@ $medium-width: 800px;
 			color: black;
       // white-space: nowrap;
       @media (max-width: $medium-width) {
-        font-size: 1em;
+
       }
 		}
 
