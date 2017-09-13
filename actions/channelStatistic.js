@@ -11,12 +11,10 @@ export function getChannelStatistics(channelStatistics, totalCount, token) {
 }
 
 export const getChannelStatisticsAsync = function (query) {
-  return function (dispatch) {
-    channelStatisticApi.getAllChannelStatistics(query)
-      .then((result) => {
-        dispatch(
-          getChannelStatistics(result.datas, result.totalCount, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await channelStatisticApi.getAllChannelStatistics(query);
+    dispatch(
+      getChannelStatistics(result.datas, result.totalCount, result.token)
+    );
   };
 };
