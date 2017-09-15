@@ -12,14 +12,11 @@ export function getVideos(videos, totalCount, videoCategories, token) {
 }
 
 export const getVideosAsync = function (preVideos, query) {
-  return function (dispatch) {
-    videoApi.getAllVideos(query)
-      .then((result) => {
-        const newVideos = tinyHelper.removeDuplicated(preVideos.concat(result.datas));
-        dispatch(
-          getVideos(newVideos, result.totalCount, result.videoCategories, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await videoApi.getAllVideos(query)
+    dispatch(
+      getVideos(result.datas, result.totalCount, result.videoCategories, result.token)
+    );
   };
 };
 

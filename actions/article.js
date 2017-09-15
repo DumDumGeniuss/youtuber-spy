@@ -12,13 +12,11 @@ export function getArticles(articles, totalCount, token) {
 }
 
 export const getArticlesAsync = function (oldArticles, query) {
-  return function (dispatch) {
-    articleApi.getAllArticles(query)
-      .then((result) => {
-        dispatch(
-          getArticles(oldArticles.concat(result.datas), result.totalCount, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await articleApi.getAllArticles(query)
+    dispatch(
+      getArticles(oldArticles.concat(result.datas), result.totalCount, result.token)
+    );
   };
 };
 
@@ -31,12 +29,10 @@ export function getArticle(article, token) {
 }
 
 export const getArticleAsync = function (articleId) {
-  return function (dispatch) {
-    articleApi.getArticle(articleId)
-      .then((result) => {
-        dispatch(
-          getArticle(result.data, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await articleApi.getArticle(articleId)
+    dispatch(
+      getArticle(result.data, result.token)
+    );
   };
 };

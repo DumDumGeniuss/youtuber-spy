@@ -12,12 +12,10 @@ export function getComments(comments, totalCount, token) {
 }
 
 export const getCommentsAsync = function (oldComments, query) {
-  return function (dispatch) {
-    commentApi.getAllComments(query)
-      .then((result) => {
-        dispatch(
-          getComments(oldComments.concat(result.datas), result.totalCount, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await commentApi.getAllComments(query)
+    dispatch(
+      getComments(oldComments.concat(result.datas), result.totalCount, result.token)
+    );
   };
 };

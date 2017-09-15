@@ -12,14 +12,11 @@ export function getCandidateChannels(candidateChannels, totalCount, token) {
 }
 
 export const getCandidateChannelsAsync = function (preCandidateChannels, query) {
-  return function (dispatch) {
-    candidateChannelApi.getCandidateChannels(query)
-      .then((result) => {
-        const newCandidateChannels = tinyHelper.removeDuplicated(preCandidateChannels.concat(result.datas));
-        dispatch(
-          getCandidateChannels(newCandidateChannels, result.totalCount, result.token)
-        );
-      });
+  return async function (dispatch) {
+    const result = await candidateChannelApi.getCandidateChannels(query)
+    dispatch(
+      getCandidateChannels(result.datas, result.totalCount, result.token)
+    );
   };
 };
 
@@ -31,15 +28,13 @@ export function verifyCandidateChannel(channelId) {
 }
 
 export const verifyCandidateChannelAsync = function (query) {
-  return function (dispatch) {
-    candidateChannelApi.verifyCandidateChannel(query)
-      .then((result) => {
-        if (result.status === 200) {
-          dispatch(
-            verifyCandidateChannel(query.channelId)
-          );
-        }
-      });
+  return async function (dispatch) {
+    const result = await candidateChannelApi.verifyCandidateChannel(query)
+    if (result.status === 200) {
+      dispatch(
+        verifyCandidateChannel(query.channelId)
+      );
+    }
   };
 };
 
@@ -51,14 +46,12 @@ export function deleteCandidateChannel(channelId) {
 }
 
 export function deleteCandidateChannelAsync(channelId, accessToken) {
-  return function (dispatch) {
-    candidateChannelApi.deleteCandidateChannel(channelId, accessToken)
-      .then((result) => {
-        if (result.status === 200) {
-          dispatch(
-            deleteCandidateChannel(channelId)
-          );
-        }
-      });
+  return async function (dispatch) {
+    const result = await candidateChannelApi.deleteCandidateChannel(channelId, accessToken)
+    if (result.status === 200) {
+      dispatch(
+        deleteCandidateChannel(channelId)
+      );
+    }
   }
 }
