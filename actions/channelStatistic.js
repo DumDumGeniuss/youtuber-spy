@@ -1,5 +1,4 @@
 import * as channelStatisticApi from '../apis/channelStatistic';
-import * as tinyHelper from '../libs/tinyHelper';
 
 export function getChannelStatistics(channelStatistics, totalCount, token) {
   return {
@@ -14,7 +13,7 @@ export const getChannelStatisticsAsync = function (query) {
   return async function (dispatch) {
     const result = await channelStatisticApi.getAllChannelStatistics(query);
     dispatch(
-      getChannelStatistics(result.datas, result.totalCount, result.token)
+      getChannelStatistics(result.datas, result.totalCount, result.token),
     );
   };
 };

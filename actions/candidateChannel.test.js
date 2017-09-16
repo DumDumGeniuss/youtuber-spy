@@ -1,4 +1,5 @@
 import * as candidateChannelAction from './candidateChannel';
+
 jest.mock('../apis/candidateChannel');
 import * as candidateChannelApi from '../apis/candidateChannel';
 
@@ -76,5 +77,3 @@ test('Test async action DELETE_CANDIDATE_CHANNEL', async () => {
   expect(dispatch.mock.calls[0][0].type).toBe('DELETE_CANDIDATE_CHANNEL');
   expect(dispatch.mock.calls[0][0].channelId).toBe('aaa');
 });
-
-

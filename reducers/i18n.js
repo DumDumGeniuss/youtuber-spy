@@ -8,7 +8,7 @@ const initState = {
 const i18n = (state = initState, action) => {
   switch (action.type) {
     case 'CHANGE_LANGUAGE':
-      return;
+      return state;
     default:
       return state;
   }

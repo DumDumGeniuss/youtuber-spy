@@ -1,4 +1,5 @@
 import * as articleAction from './article';
+
 jest.mock('../apis/article');
 import * as articleApi from '../apis/article';
 
@@ -42,7 +43,7 @@ test('Test async action GET_ARTICLE', async () => {
   const object = articleAction.getArticleAsync('aaaa');
   articleApi.getArticle = async function () {
     return {
-      data: {_id: 'bbbb'},
+      data: { _id: 'bbbb' },
       token: 'abcd',
     };
   };

@@ -1,5 +1,4 @@
 import * as videoApi from '../apis/video';
-import * as tinyHelper from '../libs/tinyHelper';
 
 export function getVideos(videos, totalCount, videoCategories, token) {
   return {
@@ -13,9 +12,9 @@ export function getVideos(videos, totalCount, videoCategories, token) {
 
 export const getVideosAsync = function (preVideos, query) {
   return async function (dispatch) {
-    const result = await videoApi.getAllVideos(query)
+    const result = await videoApi.getAllVideos(query);
     dispatch(
-      getVideos(result.datas, result.totalCount, result.videoCategories, result.token)
+      getVideos(result.datas, result.totalCount, result.videoCategories, result.token),
     );
   };
 };

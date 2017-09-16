@@ -1,4 +1,5 @@
 import * as commentAction from './comment';
+
 jest.mock('../apis/comment');
 import * as commentApi from '../apis/comment';
 

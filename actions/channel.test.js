@@ -1,4 +1,5 @@
 import * as channelAction from './channel';
+
 jest.mock('../apis/channel');
 import * as channelApi from '../apis/channel';
 
@@ -48,7 +49,7 @@ test('Test async action GET_CHANNEL', async () => {
   const object = channelAction.getChannelAsync('aaaa');
   channelApi.getChannel = async function () {
     return {
-      data: {_id: 'bbbb'},
+      data: { _id: 'bbbb' },
       token: 'abcd',
     };
   };

@@ -22,21 +22,18 @@ export const generateOauthUrl = (rootUrl, redirectObject) => {
   return oauthApiurl + queryString;
 };
 
-export const getUserInfo = (token) => {
+export const getUserInfo = async function (token) {
   const queryString = tinyHelper.getQueryString({
     access_token: token,
   });
   const url = getUserInfoApi + queryString;
-  return fetch(url)
-    .then((result) => {
-      return result.json();
-    })
-    .then((result) => {
-      if (result.error) {
-        return null;
-      }
-      return result;
-    });
+  const result = await fetch(url);
+  const resultJson = await result.json();
+
+  if (resultJson.error) {
+    return null;
+  }
+  return resultJson;
 };
 
 export const getParamsFromCallback = (url) => {

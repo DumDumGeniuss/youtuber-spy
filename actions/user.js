@@ -1,6 +1,5 @@
 import * as userApi from '../apis/user';
 import * as youtubeApi from '../apis/youtube';
-import * as tinyHelper from '../libs/tinyHelper';
 import config from '../config';
 
 /* Check if the user is admin */
@@ -16,7 +15,7 @@ export function getUser(user, isSuperUser) {
 
 export const getUserAsync = function (token) {
   return async function (dispatch) {
-    const result = await youtubeApi.getUserInfo(token)
+    const result = await youtubeApi.getUserInfo(token);
     /* If error occurs, put null, means login fail */
     if (!result) {
       dispatch(getUser(null, null));

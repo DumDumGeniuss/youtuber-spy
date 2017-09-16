@@ -3,20 +3,20 @@ export const getQueryString = (query, noEncodeParams, noWrapParams) => {
   const theNoWrapParams = noWrapParams || [];
   const keys = Object.keys(query);
   const keySize = keys.length;
-  for(let i = 0; i < keySize; i++) {
-    if (theNoWrapParams.indexOf(keys[i]) >=0) {
+  for (let i = 0; i < keySize; i += 1) {
+    if (theNoWrapParams.indexOf(keys[i]) >= 0) {
       keys.splice(i, 1);
     }
   }
-  return '?' + keys.map((key) => {
-      if (theNoEncodeParams.indexOf(key) >= 0) {
-        return encodeURIComponent(key) + "=" + query[key];
-      } else {
-        return encodeURIComponent(key) + "=" + encodeURIComponent(query[key]);
-      }
-    })
-    .join("&")
-    .replace(/%20/g, "+");
+  const paramsString = keys.map((key) => {
+    if (theNoEncodeParams.indexOf(key) >= 0) {
+      return encodeURIComponent(key) + '=' + query[key];
+    }
+    return encodeURIComponent(key) + '=' + encodeURIComponent(query[key]);
+  })
+    .join('&')
+    .replace(/%20/g, '+');
+  return '?' + paramsString;
 };
 
 export const removeDuplicated = (array) => {

@@ -1,4 +1,5 @@
 import * as videoAction from './video';
+
 jest.mock('../apis/video');
 import * as videoApi from '../apis/video';
 

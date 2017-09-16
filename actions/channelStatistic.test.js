@@ -1,4 +1,5 @@
 import * as channelStatistic from './channelStatistic';
+
 jest.mock('../apis/channelStatistic');
 import * as channelStatisticApi from '../apis/channelStatistic';
 

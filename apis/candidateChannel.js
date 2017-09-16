@@ -1,4 +1,5 @@
 import config from '../config';
+
 require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 import * as tinyHelper from '../libs/tinyHelper';

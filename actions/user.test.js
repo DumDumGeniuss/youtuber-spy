@@ -1,11 +1,12 @@
 import * as userAction from './user';
+
 jest.mock('../apis/user');
 jest.mock('../apis/youtube');
 import * as userApi from '../apis/user';
 import * as youtubeApi from '../apis/youtube';
 
 test('Test action ADD_USER', () => {
-  const object = userAction.getUser({_id: 'ddd'}, true);
+  const object = userAction.getUser({ _id: 'ddd' }, true);
   expect(object.type).toBe('ADD_USER');
   expect(object.user._id).toBe('ddd');
   expect(object.isSuperUser).toBe(true);
