@@ -1,157 +1,151 @@
-$medium-width: 800px;
+@import 'normalize.css';
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
+@import '../styles/placeholders.scss';
 
 .SingleChannel-zone {
   position: relative;
   width: 100%;
-  background-color: white;
+  background-color: $white;
+}
 
-  .SingleChannel-titleZone {
-  	position: relative;
-    .SingleChannel-countryName {
-      display: inline-block;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      z-index: 3;
-      color: white;
-      font-size: 1.5em;
-    }
-    .SingleChannel-subscriber {
-      display: block;
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      z-index: 3;
-    }
-  	.SingleChannel-backgroundImage {
-  		display: flex;
-  		width: 100%;
-  		align-items: center;
-  		justify-content: center;
-  		padding: 0;
-  		margin: 0;
-      min-height: 200px;
-  		img {
-  			width: 100%;
-  		}
-  	}
-  	.SingleChannel-photoImage {
-  		position: absolute;
-  		display: inline-block;
-      left: 0;
-      top: 0;
-      width: 100px;
-      z-index: 3;
-      img {
-        width: 100%;
-      }
-
-      @media (max-width: $medium-width) {
-        padding: 0;
-        margin: 0;
-        width: 70px;
-      }
-  	}
-    .SingleChannel-decorateZone {
-      position: absolute;
-      left: 0;
-      top: 0;
+.SingleChannel-titleZone {
+	position: relative;
+  .SingleChannel-countryName {
+    @include position(absolute, $top: 10px, $right: 15px);
+    display: inline-block;
+    z-index: 3;
+    color: $white;
+    font-size: 1.5em;
+  }
+  .SingleChannel-subscriber {
+    @include position(absolute, $bottom: 5px, $right: 5px);
+    display: block;
+    z-index: 3;
+  }
+	.SingleChannel-backgroundImage {
+		@extend %flex-center;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+    min-height: 200px;
+		img {
+			width: 100%;
+		}
+	}
+	.SingleChannel-photoImage {
+    @include position(absolute, $left: 0, $top: 0);
+    display: inline-block;
+    top: 0;
+    width: 100px;
+    z-index: 3;
+    img {
       width: 100%;
-      height: 100%;
-      z-index: 2;
-      background-color: blue;
-      // opacity: 0.1;
-      background: linear-gradient(rgba(20, 27, 105, 0.5), rgba(20, 27, 105, 0.1), rgba(240, 78, 77, 0.5));
     }
-  }
 
-  .SingleChannel-title {
-    padding: 6px 0;
-    margin: 0;
-    text-align: center;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    color: white;
-  }
-
-  .SingleChannel-smallTitle {
-    padding: 6px 0;
-    text-align: center;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    color: white;
-  }
-
-  .SingleChannel-description {
+    @media (max-width: $medium-screen) {
+      padding: 0;
+      margin: 0;
+      width: 70px;
+    }
+	}
+  .SingleChannel-decorateZone {
+    @include position(absolute, $left: 0, $top: 0);
     display: block;
-    // background-color: #ff716f;
-    // background: linear-gradient(270deg, #ff716f, #f04d4c);
-    padding: 5px 15px;
-    white-space: pre-line;
-    color: black;
-  }
-
-  .SingleChannel-socialListZone {
-    padding: 5px 15px;
-
-    .SingleChannel-socialList {
-      display: inline-block;
-      width: 50%;
-      height: 20px;
-
-      .SingleChannel-socialIcon {
-        display: inline-block;
-        vertical-align: middle;
-        width: 16px;
-        height: 16px;
-      }
-      .SingleChannel-socialTitle {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 16px;
-        margin-left: 3px;
-        color: #167ac6;
-      }
-      .SingleChannel-socialTitle:hover {
-        color: #2792e4;
-      }
-    }
-  }
-
-  .SingleChannel-statisticZone {
-    display: block;
-    padding: 0;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    .SingleChannel-statistic {
-      display: inline-flex;
-      width: 25%;
-      @media (max-width: $medium-width) {
-        width: 50%;
-      }
-
-      span {
-        display: block;
-        width: 100%;
-        // background: #141b69;
-        padding: 6px;
-        color: white;
-        text-align: center;
-
-        @media (max-width: $medium-width) {
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  .SingleChannel-zoneTitle {
-    padding: 10px 0;
-    margin: 0;
-    text-align: center;
-    background: linear-gradient(270deg, #767fe4, #4149a0);
-    color: white;
-  }
-
-  .SingleChannel-noDatasText {
-    padding: 10px 0;
-    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: blue;
+    // opacity: 0.1;
+    background: linear-gradient(rgba($heavy-blue, 0.5), rgba($white, 0.1), rgba($heavy-red, 0.5));
   }
 }
+
+.SingleChannel-title {
+  padding: 6px 0;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  color: white;
+}
+
+.SingleChannel-smallTitle {
+  padding: 6px 0;
+  text-align: center;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  color: white;
+}
+
+.SingleChannel-description {
+  display: block;
+  padding: 5px 15px;
+  white-space: pre-line;
+  color: black;
+}
+
+.SingleChannel-socialListZone {
+  padding: 5px 15px;
+
+  .SingleChannel-socialList {
+    display: inline-block;
+    width: 50%;
+    height: 20px;
+
+    .SingleChannel-socialIcon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+    }
+    .SingleChannel-socialTitle {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 16px;
+      margin-left: 3px;
+      color: #167ac6;
+    }
+    .SingleChannel-socialTitle:hover {
+      color: #2792e4;
+    }
+  }
+}
+
+.SingleChannel-statisticZone {
+  display: block;
+  padding: 0;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  .SingleChannel-statistic {
+    display: inline-flex;
+    width: 25%;
+    @media (max-width: $medium-screen) {
+      width: 50%;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      // background: #141b69;
+      padding: 6px;
+      color: white;
+      text-align: center;
+
+      @media (max-width: $medium-screen) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.SingleChannel-zoneTitle {
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(270deg, $blue, $heavy-blue);
+  color: white;
+}
+
+.SingleChannel-noDatasText {
+  padding: 10px 0;
+  text-align: center;
+}
+

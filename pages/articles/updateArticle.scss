@@ -4,123 +4,124 @@ $primary-color: black;
 
 .UpdateArticle-zone {
   width: 100%;
+}
 
-  .UpdateArticle-functionZone {
-    position: relative;
-    padding: 10px 0;
-    height: 60px;
-    .UpdateArticle-button {
-      position: absolute;
-      top: 10px;
-      display: inline-block;
-      padding: 10px;
-      height: 40px;
-      color: white;
-      background-color: #ff8684;
-      border-radius: 5px;
-      cursor: pointer;
+.UpdateArticle-functionZone {
+  position: relative;
+  padding: 10px 0;
+  height: 60px;
+  .UpdateArticle-button {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+    padding: 10px;
+    height: 40px;
+    color: white;
+    background-color: #ff8684;
+    border-radius: 5px;
+    cursor: pointer;
 
-      &:hover {
-        color: yellow;
-      }
+    &:hover {
+      color: yellow;
+    }
 
-      .UpdateArticle-spin {
+    .UpdateArticle-spin {
+      transform: rotate(0deg);
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% {
         transform: rotate(0deg);
-        animation: spin 1s linear infinite;
       }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+      100% {
+        transform: rotate(360deg);
       }
     }
-    .UpdateArticle-updateButton {
-      right: 10px;
-    }
-    .UpdateArticle-deleteButton {
-      right: 120px;
-    }
   }
-
-  .UpdateArticle-errorMessage {
-    display: block;
-    text-align: center;
-    color: #ff7878;
-    padding: 10px 0;
+  .UpdateArticle-updateButton {
+    right: 10px;
   }
-
-  .UpdateArticle-titleZone {
-    // border: 1px solid #46aaff;
-    margin-bottom: 10px;
-
-    .UpdateArticle-titleLabel {
-      display: inline-block;
-      vertical-align: middle;
-      width: 70px;
-      text-align: center;
-      line-height: 20px;
-      padding: 10px;
-      background-color: #bfbfbf;
-      color: black;
-      border-radius: 10px;
-      font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
-    }
-    .UpdateArticle-titleInput {
-      display: inline-block;
-      vertical-align: middle;
-      width: calc(100% - 80px);
-      height: 40px;
-      margin-left: 10px;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 10px;
-    }
-  }
-
-  .UpdateArticle-infoZone {
-    position: relative;
-    padding: 10px;
-    background-color: #e45050;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-
-    .UpdateArticle-userPicture {
-      display: inline-block;
-      height: 50px;
-      vertical-align: middle;
-    }
-
-    .UpdateArticle-userName {
-      display: inline-block;
-      line-height: 50px;
-      vertical-align: middle;
-      padding: 0 10px;
-      color: white;
-    }
-
-    .UpdateArticle-date {
-      position: absolute;
-      bottom: 3px;
-      right: 3px;
-      color: white;
-      font-size: 0.6em;
-    }
-  }
-
-  .UpdateArticle-titleInput {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-    font-size: 1em;
-    background-color: white;
-    border: 1px solid #ccc;
-    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
-  }
-
-  .UpdateArticle-editor {
-
+  .UpdateArticle-deleteButton {
+    right: 120px;
   }
 }
+
+.UpdateArticle-errorMessage {
+  display: block;
+  text-align: center;
+  color: #ff7878;
+  padding: 10px 0;
+}
+
+.UpdateArticle-titleZone {
+  // border: 1px solid #46aaff;
+  margin-bottom: 10px;
+
+  .UpdateArticle-titleLabel {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70px;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+    background-color: #bfbfbf;
+    color: black;
+    border-radius: 10px;
+    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+  }
+  .UpdateArticle-titleInput {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 80px);
+    height: 40px;
+    margin-left: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+  }
+}
+
+.UpdateArticle-infoZone {
+  position: relative;
+  padding: 10px;
+  background-color: #e45050;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+
+  .UpdateArticle-userPicture {
+    display: inline-block;
+    height: 50px;
+    vertical-align: middle;
+  }
+
+  .UpdateArticle-userName {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
+    padding: 0 10px;
+    color: white;
+  }
+
+  .UpdateArticle-date {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    color: white;
+    font-size: 0.6em;
+  }
+}
+
+.UpdateArticle-titleInput {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  font-size: 1em;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+}
+
+.UpdateArticle-editor {
+
+}
+

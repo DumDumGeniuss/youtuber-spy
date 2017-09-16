@@ -148,47 +148,6 @@ class AllCandidateChannels extends React.Component {
       });
   }
 
-  // addScrollHandler() {
-  //   this.scrollListener = window.addEventListener('scroll', () => {
-  //     this.scrollHandler(
-  //       window.pageYOffset,
-  //       window.innerHeight,
-  //       Math.max(
-  //         window.innerHeight,
-  //         document.body.offsetHeight,
-  //         document.documentElement.clientHeight
-  //       )
-  //     );
-  //   });
-  // }
-
-  // removeScrollHander() {
-  //   if (this.scrollListener) {
-  //     window.removeEventListener('scroll', this.scrollListener);
-  //   }
-  // }
-
-  // scrollHandler(scrollTop, windowHeight, realHeight) {
-  //   /* If not touch bottom, return */
-  //   if (scrollTop + windowHeight < realHeight || this.toDatasLimit || this.state.isLoading) {
-  //     return;
-  //   }
-
-  //   if ((this.query.page * (this.query.count + 1)) > this.props.candidateChannel.totalCount) {
-  //     this.toDatasLimit = true;
-  //     /* If the number of datas now eqaul to the total count, then just skip */
-  //     if (this.props.candidateChannel.candidateChannels.length === this.props.candidateChannel.totalCount) {
-  //       return;
-  //     }
-  //   }
-
-  //   this.query.page = this.query.page + 1;
-  //   this.props.getCandidateChannelsAsync(this.props.candidateChannel.candidateChannels, this.query);
-  //   this.setState({
-  //     isLoading: true,
-  //   });
-  // }
-
   /* remember to reset tha page */
   changeKeyword(event) {
     const keyword = event.target.value;

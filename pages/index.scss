@@ -1,103 +1,65 @@
 @import 'normalize.css';
-
-$primary-color: black;
+@import '../styles/variables.scss';
+@import '../styles/placeholders.scss';
 
 .Index-zone {
   position: relative;
   width: 100%;
+}
 
-  .Index-titleSection {
-    // display: absolute;
-    // transform: translate(-50%, 0);
-    margin: 15px 0;
-    padding: 15px 0;
-    // background-color: #4490de;
-    background: linear-gradient(#4490de, #4490de);
-    // border: 2px solid #45629e;
-    // border-radius: 10px;
-    .Index-title {
-      margin: 0;
-      // padding: 10px 0;
-      text-align: center;
-      color: white;
-    }
-    .Index-text {
-      padding: 0 50px;
-      // margin-bottom: 10px;
-      // text-align: center;
-      color: white;
-    }
+.Index-addChannelBar {
+  position: relative;
+  height: 40px;
+  padding: 0px 5px;
+
+  .Index-channelFuncButton {
+    padding: 2px 5px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 5px;
+    // right: 5px;
+    height: 30px;
+    line-height: 26px;
+    border-radius: 5px;
+    color: $white;
   }
 
-  .Index-addChannelBar {
-    position: relative;
-    height: 40px;
-    padding: 0px 5px;
+  .Index-search {
+    background-color: $red;
+    cursor: pointer;
+  }
 
-    .Index-channelFuncButton {
-      padding: 2px 5px;
-      display: inline-block;
-      margin-top: 5px;
-      margin-right: 5px;
-      // right: 5px;
+  .Index-search:hover {
+    color: $heavy-yellow;
+  }
+}
+
+.Index-contentZone {
+  background-color: white;
+}
+
+.Index-functionBar {
+  position: relative;
+  min-height: 40px;
+  padding: 0 5px 0 5px;
+  div {
+    display: inline-block;
+    padding-right: 10px;
+
+    input {
       height: 30px;
-      line-height: 26px;
-      border-radius: 5px;
-      color: white;
+      width: 100px;
+      padding: 0;
+      border-radius: 3px;
     }
 
-    .Index-search {
-      background-color: #ff4e4e;
-      cursor: pointer;
-    }
-
-    .Index-search:hover {
-      color: yellow;
+    select {
+      height: 30px;
+      width: 100px;
+      border: 1px solid $light-grey;
+      margin: 3px 0;
     }
   }
-
-  .Index-contentZone {
-    background-color: white;
-    // padding: 10px 0;
-  
-    .Index-loadingButton {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 0px;
-      svg {
-        height: 30px;
-        width: 30px;
-        color: #ff8a8a;
-        animation: spin 1s linear infinite;
-      }
-    }
-  }
-  
-  .Index-functionBar {
-    position: relative;
-    min-height: 40px;
-    padding: 0 5px 0 5px;
-    div {
-      display: inline-block;
-      padding-right: 10px;
-  
-      input {
-        height: 30px;
-        width: 100px;
-        padding: 0;
-        border-radius: 3px;
-      }
-  
-      select {
-        height: 30px;
-        width: 100px;
-        border: 1px solid #ccc;
-        margin: 3px 0;
-      }
-    }
-  }
-
 }
 
 @keyframes spin {

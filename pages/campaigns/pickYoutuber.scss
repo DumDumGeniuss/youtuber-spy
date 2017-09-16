@@ -1,40 +1,42 @@
 @import 'normalize.css';
-
-$primary-color: black;
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
 
 .PickYoutuber-zone {
   width: 100%;
+}
 
-  .PickYoutuber-titleSection {
-    background-color: white;
-    padding: 10px;
+.PickYoutuber-titleSection {
+  background-color: $white;
+  padding: 10px;
 
-    .PickYoutuber-title {
-      text-align: center;
-      font-size: 1.5em;
-      margin: 0;
-      word-break: break-all;
-    }
+  .PickYoutuber-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    word-break: break-all;
+  }
 
-    .PickYoutuber-channelTitle {
-      display: inline-block;
-      font-size: 1.5em;
-      margin-left: 50%;
-      transform: translate(-50%, 0);
-      word-break: break-all;
-    }
+  .PickYoutuber-channelTitle {
+    display: inline-block;
+    font-size: 1.5em;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    word-break: break-all;
+  }
 
-    .PickYoutuber-image {
-      margin-left: 50%;
-      transform: translate(-50%, 0);
-      padding: 0;
-      img {
-        width: 100%;
-      }
-    }
-
-    .PickYoutuber-description {
-      padding: 10px;
+  .PickYoutuber-image {
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    padding: 0;
+    img {
+      width: 100%;
     }
   }
+
+  .PickYoutuber-description {
+    padding: 10px;
+  }
 }
+

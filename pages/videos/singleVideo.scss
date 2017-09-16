@@ -1,74 +1,75 @@
-$medium-width: 800px;
+@import 'normalize.css';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
 
 .SingleVideo-zone {
   position: relative;
   width: 100%;
   background-color: white;
+}
 
-  .SingleVideo-playVideoZone {
-  	min-height: 200px;
-  	background-color: black;
-  }
+.SingleVideo-playVideoZone {
+	min-height: 200px;
+	background-color: black;
+}
 
-  .SingleVideo-title {
-    padding: 6px 0;
-    margin: 0;
-    text-align: center;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    color: white;
-    font-size: 1.4em;
-  }
+.SingleVideo-title {
+  padding: 6px 0;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  color: white;
+  font-size: 1.4em;
+}
 
-  .SingleVideo-smallTitle {
-    padding: 6px 0;
-    text-align: center;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    color: white;
-  }
+.SingleVideo-smallTitle {
+  padding: 6px 0;
+  text-align: center;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  color: white;
+}
 
-  .SingleVideo-zoneTitle {
-    padding: 10px 0;
-    margin: 0;
-    text-align: center;
-    background: linear-gradient(270deg, #767fe4, #4149a0);
-    color: white;
-    font-size: 1.2em;
-  }
+.SingleVideo-zoneTitle {
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(270deg, $blue, $heavy-blue);
+  color: white;
+  font-size: 1.2em;
+}
 
-  .SingleVideo-statisticZone {
-    display: block;
-    padding: 0;
-    background: linear-gradient(270deg, #ff716f, #f04d4c);
-    .SingleVideo-statistic {
-      display: inline-flex;
-      width: 25%;
+.SingleVideo-statisticZone {
+  display: block;
+  padding: 0;
+  background: linear-gradient(270deg, $red, $heavy-red);
+  .SingleVideo-statistic {
+    display: inline-flex;
+    width: 25%;
 
-      @media (max-width: $medium-width) {
-      	width: 50%;
-      }
-      span {
-        display: block;
-        width: 100%;
-        // background: #141b69;
-        padding: 6px;
-        color: white;
-        text-align: center;
-      	@media (max-width: $medium-width) {
-      		width: 100%;
-      	}
-      }
+    @media (max-width: $medium-screen) {
+    	width: 50%;
+    }
+    span {
+      display: block;
+      width: 100%;
+      // background: #141b69;
+      padding: 6px;
+      color: white;
+      text-align: center;
+    	@media (max-width: $medium-screen) {
+    		width: 100%;
+    	}
     }
   }
-  .SingleVideo-description {
-    display: block;
-    // background-color: #ff716f;
-    // background: linear-gradient(270deg, #ff716f, #f04d4c);
-    padding: 5px 15px;
-    white-space: pre-line;
-    color: black;
-  }
-  .SingleChannel-noDatasText {
-    padding: 10px 0;
-    text-align: center;
-  }
 }
+.SingleVideo-description {
+  display: block;
+  padding: 5px 15px;
+  white-space: pre-line;
+  color: black;
+}
+.SingleChannel-noDatasText {
+  padding: 10px 0;
+  text-align: center;
+}
+
