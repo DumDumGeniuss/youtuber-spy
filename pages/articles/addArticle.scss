@@ -1,4 +1,8 @@
 @import 'normalize.css';
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
 
 .AddArticle-zone {
   width: 100%;
@@ -10,7 +14,7 @@
 .AddArticle-lengthRestrictionError {
   display: block;
   text-align: right;
-  color: #ff7878;
+  color: $heavy-red;
   padding: 5px;
 }
 
@@ -32,10 +36,10 @@
     text-align: center;
     line-height: 20px;
     padding: 10px;
-    background-color: #bfbfbf;
+    background-color: $light-blue;
     color: black;
     border-radius: 10px;
-    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+    font-family: $classical-font-style;
   }
   .AddArticle-titleInput {
     display: inline-block;
@@ -52,7 +56,7 @@
 .AddArticle-errorMessage {
   display: block;
   text-align: center;
-  color: #ff7878;
+  color: $heavy-red;
   padding: 10px 0;
 }
 
@@ -62,39 +66,27 @@
   height: 60px;
 
   .AddArticle-switchButton {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    @include position(absolute, $top: 10px, $left: 10px);
     display: inline-block;
   }
 
   .AddArticle-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    @include position(absolute, $top: 10px, $right: 10px);
     display: inline-block;
     padding: 10px;
     height: 40px;
     color: white;
-    background-color: #ff8684;
+    background-color: $red;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-      color: yellow;
+      color: $heavy-yellow;
     }
 
     .AddArticle-spin {
       transform: rotate(0deg);
       animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
     }
   }
 }

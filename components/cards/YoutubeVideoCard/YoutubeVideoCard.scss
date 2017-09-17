@@ -1,42 +1,41 @@
-$medium-width: 800px;
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
 
 .YoutubeVideoCard-zone {
   position: relative;
   width: 100%;
-  // border: 1px solid #e9ebee;
 }
 
 .YoutubeVideoCard-imgDiv {
-  display: inline-flex;
+  @extend %inline-flex-center;
   width: 35%;
   height: 150px;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   vertical-align: text-top;
   padding: 0;
   margin: 0;
 
-  @media (max-width: $medium-width) {
+  @media (max-width: $medium-screen) {
     width: 100%;
     height: initial; 
   }
   img {
     height: 90%;
-    @media (max-width: $medium-width) {
+    @media (max-width: $medium-screen) {
       width: 100%;
     }
   }
 }
 
 .YoutubeVideoCard-infoDiv {
-  padding: 10px;
   display: inline-block;
+  padding: 10px;
   width: 65%;
   height: 150px;
   vertical-align: text-top;
 
-  @media (max-width: $medium-width) {
+  @media (max-width: $medium-screen) {
     width: 100%;
     height: initial;
   }

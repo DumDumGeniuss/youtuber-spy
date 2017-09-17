@@ -12,7 +12,6 @@ import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
 import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
-import ArticleInputModal from '../../components/modals/ArticleInputModal/ArticleInputModal';
 import ArticleCard from '../../components/cards/ArticleCard/ArticleCard';
 import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';

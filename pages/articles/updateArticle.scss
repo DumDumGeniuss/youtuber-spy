@@ -1,6 +1,8 @@
 @import 'normalize.css';
-
-$primary-color: black;
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
 
 .UpdateArticle-zone {
   width: 100%;
@@ -11,31 +13,22 @@ $primary-color: black;
   padding: 10px 0;
   height: 60px;
   .UpdateArticle-button {
-    position: absolute;
-    top: 10px;
+    @include position(absolute, $top: 10px);
     display: inline-block;
     padding: 10px;
     height: 40px;
-    color: white;
-    background-color: #ff8684;
+    color: $white;
+    background-color: $red;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-      color: yellow;
+      color: $heavy-yellow;
     }
 
     .UpdateArticle-spin {
       transform: rotate(0deg);
       animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
     }
   }
   .UpdateArticle-updateButton {
@@ -49,7 +42,7 @@ $primary-color: black;
 .UpdateArticle-errorMessage {
   display: block;
   text-align: center;
-  color: #ff7878;
+  color: $heavy-red;
   padding: 10px 0;
 }
 
@@ -64,10 +57,10 @@ $primary-color: black;
     text-align: center;
     line-height: 20px;
     padding: 10px;
-    background-color: #bfbfbf;
-    color: black;
+    background-color: $light-blue;
+    // color: $white;
     border-radius: 10px;
-    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+    font-family: $classical-font-style;
   }
   .UpdateArticle-titleInput {
     display: inline-block;
@@ -84,8 +77,8 @@ $primary-color: black;
 .UpdateArticle-infoZone {
   position: relative;
   padding: 10px;
-  background-color: #e45050;
-  border: 1px solid #ccc;
+  background-color: $red;
+  border: 1px solid $light-grey;
   margin-bottom: 10px;
 
   .UpdateArticle-userPicture {
@@ -99,14 +92,12 @@ $primary-color: black;
     line-height: 50px;
     vertical-align: middle;
     padding: 0 10px;
-    color: white;
+    color: $white;
   }
 
   .UpdateArticle-date {
-    position: absolute;
-    bottom: 3px;
-    right: 3px;
-    color: white;
+    @include position(absolute, $bottom: 3px, $right: 3px);
+    color: $white;
     font-size: 0.6em;
   }
 }
@@ -116,9 +107,9 @@ $primary-color: black;
   padding: 10px;
   margin: 0;
   font-size: 1em;
-  background-color: white;
-  border: 1px solid #ccc;
-  font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+  background-color: $white;
+  border: 1px solid $light-grey;
+  font-family: $classical-font-style;
 }
 
 .UpdateArticle-editor {

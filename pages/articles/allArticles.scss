@@ -1,17 +1,17 @@
 @import 'normalize.css';
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
 
-$primary-color: black;
 
 .AllArticles-zone {
   width: 100%;
 }
 
 .AllArticles-loadingZone {
-  display: flex;
+  @extend %flex-center;
   height: 40px;
-  justify-content: center;
-  align-items: center;
-  // background-color: white;
 
   svg {
     color: #777;
@@ -21,7 +21,7 @@ $primary-color: black;
 }
 
 .AllArticles-contentZone {
-  background-color: white;
+  background-color: $white;
   margin-bottom: 15px;
 }
 
@@ -39,24 +39,24 @@ $primary-color: black;
     height: 30px;
     line-height: 26px;
     border-radius: 5px;
-    color: white;
+    color: $white;
   }
 
   .AllArticles-add {
-    background-color: #ff8684;
+    background-color: $red;
     cursor: pointer;
   }
 
   .AllArticles-add:hover {
-    color: yellow;
+    color: $heavy-yellow;
   }
 
   .AllArticles-pleasLogin {
-    background-color: #ff7600;
+    background-color: $orange;
     cursor: pointer;
 
     &:hover {
-      background-color: #fb9944;
+      background-color: $light-orange;
     }
   }
 }
@@ -82,13 +82,3 @@ $primary-color: black;
     }
   }
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-

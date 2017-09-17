@@ -1,48 +1,51 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
+@import '../../../styles/keyframes.scss';
+
 .SwitchButton-zone {
 	position: relative;
-	background-color: #213684;
+	background-color: $heavy-blue;
 	cursor: pointer;
 
 	&:hover {
-		background-color: #3650b3;
-	}
-
-	.SwitchButton-circle {
-		position: absolute;
-		top: 50%;
-		transform: translate(0, -50%);
-		border-radius: 12px;
-		width: 24px;
-		height: 24px;
-		background-color: white;
-		transition: all 0.3s;
-	}
-
-	.SwitchButton-circleLeft {
-		left: 10px;
-	}
-
-	.SwitchButton-circleRight {
-		left: calc(100% - 34px);
-	}
-
-	.SwitchButton-text {
-		display: inline-block;
-		position: absolute;
-		top: 50%;
-		transform: translate(0, -50%);
-		color: white;
-		transition: all 0.3s;
-		width: 40px;
-		font-size: 1em;
-		text-align: center;
-	}
-
-	.SwitchButton-textLeft {
-		left: 10px;
-	}
-
-	.SwitchButton-textRight {
-		left: calc(100% - 50px);
+		background-color: $blue;
 	}
 }
+.SwitchButton-circle {
+	@include position(absolute, $top: 50%);
+	transform: translate(0, -50%);
+	border-radius: 12px;
+	width: 24px;
+	height: 24px;
+	background-color: white;
+	transition: all 0.3s;
+}
+
+.SwitchButton-circleLeft {
+	left: 10px;
+}
+
+.SwitchButton-circleRight {
+	left: calc(100% - 34px);
+}
+
+.SwitchButton-text {
+	@include position(absolute, $top: 50%);
+	display: inline-block;
+	transform: translate(0, -50%);
+	color: $white;
+	transition: all 0.3s;
+	width: 40px;
+	font-size: 1em;
+	text-align: center;
+}
+
+.SwitchButton-textLeft {
+	left: 10px;
+}
+
+.SwitchButton-textRight {
+	left: calc(100% - 50px);
+}
+

@@ -1,87 +1,79 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
+@import '../../../styles/keyframes.scss';
+
 .ChannelInputModal-zone {
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	left: 0;
-	top: 0;
-	z-index: 2;
-	background-color: rgba(0, 0, 0, 0.3);
-	.ChannelInputModal-contentZone {
-		position: absolute;
-		display: inline-block;
-		min-width: 300px;
-		padding: 15px;
-		left: 50%;
-		top: 50%;
-		border-radius: 10px;
-		transform: translate(-50%, -50%);
-		background-color: #475eb3;
-	
-		.ChannelInputModal-info {
-			// text-align: center;
-			color: white;
-			margin-bottom: 20px;
-		}
-	
-		.ChannelInputModal-inputZone {
-			// text-align: center;
-			margin: 20px 0;
-			.ChannelInputModal-itemTitle {
-				color: white;
-				text-align: center;
-			}
-			// text-align: center;
-			.ChannelInputModal-errorMessage {
-				color: #ff7878;
-				text-align: center;
-			}
-
-			.ChannelInputModal-itemInput {
-				padding: 5px 0;
-				input {
-					width: 80%;
-					margin-left: 10%;
-					border-radius: 5px;
-				}
-				textarea {
-					width: 80%;
-					margin-left: 10%;
-					border-radius: 5px;
-				}
-			}
-		}
-	
-		.ChannelInputModal-func {
-			display: flex;
-			justify-content: space-around;
-			span {
-				display: inline-flex;
-				justify-content: center;
-				align-items: center;
-				width: 60px;
-				border-radius: 5px;
-				border: 1px solid white;
-				padding: 5px;
-				color: white;
-				cursor: pointer;
-			}
-			span:hover {
-				color: yellow;
-			}
-
-			svg {
-				animation: spin 1s linear infinite;
-			}
-
-			@keyframes spin {
-			  0% {
-			    transform: rotate(0deg);
-			  }
-			  100% {
-			    transform: rotate(360deg);
-			  }
-			} 
-		}
-	}
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
 }
+.ChannelInputModal-contentZone {
+  @include position(absolute, $top: 50%, $left: 50%);
+  display: inline-block;
+  min-width: 300px;
+  padding: 15px;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  background-color: $blue;
+}
+.ChannelInputModal-info {
+  color: $white;
+  margin-bottom: 20px;
+}
+
+.ChannelInputModal-inputZone {
+  margin: 20px 0;
+
+  .ChannelInputModal-itemTitle {
+    color: $white;
+    text-align: center;
+  }
+  // text-align: center;
+  .ChannelInputModal-errorMessage {
+    color: $heavy-red;
+    text-align: center;
+  }
+
+  .ChannelInputModal-itemInput {
+    padding: 5px 0;
+    input {
+      width: 80%;
+      margin-left: 10%;
+      border-radius: 5px;
+    }
+    textarea {
+      width: 80%;
+      margin-left: 10%;
+      border-radius: 5px;
+    }
+  }
+}
+
+.ChannelInputModal-func {
+  display: flex;
+  justify-content: space-around;
+  span {
+    @extend %inline-flex-center;
+    width: 60px;
+    border-radius: 5px;
+    border: 1px solid $white;
+    padding: 5px;
+    color: $white;
+    cursor: pointer;
+  }
+  span:hover {
+    color: $heavy-yellow;
+  }
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
+}
+
+
 

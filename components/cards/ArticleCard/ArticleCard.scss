@@ -1,4 +1,7 @@
-$medium-width: 800px;
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
+@import '../../../styles/keyframes.scss';
 
 .ArticleCard-zone {
 	position: relative;
@@ -8,106 +11,100 @@ $medium-width: 800px;
 	// height: 80px;
   cursor: pointer;
   &:hover {
-    background-color: #ffc1c1;
+    background-color: $super-light-red;
+  }
+}
+
+.ArticleCard-imageZone {
+  @extend %inline-flex-center;
+  vertical-align: middle;
+	height: 100%;
+  width: 60px;
+
+  @media (max-width: $medium-screen) {
+    width: 30px;
   }
 
-
-	.ArticleCard-imageZone {
-		display: inline-flex;
-    vertical-align: middle;
-    align-items: center;
-    justify-content: center;
-		height: 100%;
-    width: 60px;
-
-    @media (max-width: $medium-width) {
-      width: 30px;
-    }
-
-		.ArticleCard-image {
-			height: 50px;
-      @media (max-width: $medium-width) {
-        width: 25px;
-      }
-		}
-	}
-
-  .ArticleCard-commentCountZone {
-    display: inline-flex;
-    vertical-align: middle;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 60px;
-
-    @media (max-width: $medium-width) {
-      width: 30px;
-    }
-
-    .ArticleCard-commentCount {
-      display: inline-block;
-      height: 50px;
-      width: 50px;
-      line-height: 50px;
-      text-align: center;
-      background-color: #6182bd;
-      border-radius: 25px;
-      color: white;
-
-      @media (max-width: $medium-width) {
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        border-radius: 12.5px;
-        font-size: 0.6em;
-      }
-    }
-  }
-
-	.ArticleCard-contentZone {
-    position: relative;
-		display: inline-block;
-		vertical-align: middle;
-    width: calc(100% - 120px);
-    padding: 5px 5px;
-
-    @media (max-width: $medium-width) {
-      width: calc(100% - 60px);
-    }
-
-    .ArticleCard-userName {
-      padding: 0;
-      margin: 0;
-      display: block;
-      height: 15px;
-      width: 100%;
-      line-height: 15px;
-      font-size: 0.6em;
-      color: black;
-    }
-
-		.ArticleCard-title {
-      padding: 0;
-      margin: 0;
-			display: block;
-      // height: 30px;
-      margin-bottom: 15px;
-      width: 100%;
-      line-height: 30px;
-			font-size: 1.6em;
-			color: black;
-      // white-space: nowrap;
-      @media (max-width: $medium-width) {
-
-      }
-		}
-
-    .ArticleCard-date {
-      position: absolute;
-      right: 5px;
-      bottom: 5px;
-      font-size: 0.6em;
-      color: #888;
+	.ArticleCard-image {
+    width: auto;
+		height: 50px;
+    @media (max-width: $medium-screen) {
+      width: 25px;
+      height: auto;
     }
 	}
 }
+
+.ArticleCard-commentCountZone {
+  @extend %inline-flex-center;
+  vertical-align: middle;
+  height: 100%;
+  width: 60px;
+
+  @media (max-width: $medium-screen) {
+    width: 30px;
+  }
+
+  .ArticleCard-commentCount {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: $blue;
+    border-radius: 25px;
+    color: white;
+
+    @media (max-width: $medium-screen) {
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      border-radius: 12.5px;
+      font-size: 0.6em;
+    }
+  }
+}
+
+.ArticleCard-contentZone {
+  position: relative;
+	display: inline-block;
+	vertical-align: middle;
+  width: calc(100% - 120px);
+  padding: 5px 5px;
+
+  @media (max-width: $medium-screen) {
+    width: calc(100% - 60px);
+  }
+
+  .ArticleCard-userName {
+    padding: 0;
+    margin: 0;
+    display: block;
+    height: 15px;
+    width: 100%;
+    line-height: 15px;
+    font-size: 0.6em;
+    color: black;
+  }
+
+	.ArticleCard-title {
+    padding: 0;
+    margin: 0;
+		display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    line-height: 30px;
+		font-size: 1.6em;
+    color: black;
+    @media (max-width: $medium-screen) {
+
+    }
+	}
+
+  .ArticleCard-date {
+    @include position(absolute, $right: 5px, $bottom: 5px);
+    font-size: 0.6em;
+    color: #888;
+  }
+}
+

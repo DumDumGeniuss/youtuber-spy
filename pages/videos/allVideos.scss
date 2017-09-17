@@ -1,6 +1,7 @@
 @import 'normalize.css';
 @import '../../styles/variables.scss';
 @import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
 
 .AllVideos-zone {
   width: 100%;
@@ -45,12 +46,3 @@
     }
   }
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} 

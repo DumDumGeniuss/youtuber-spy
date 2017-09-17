@@ -1,50 +1,49 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
+@import '../../../styles/keyframes.scss';
+
 .CommentCard-zone {
 	position: relative;
 	display: block;
 	background: white;
 	padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $light-grey;
+}
 
-  .CommentCard-pictureZone {
-    position: absolute;
-    left: 15px;
-    top: 15px;
+.CommentCard-pictureZone {
+  @include position(absolute, $top: 15px, $left: 15px);
 
-    .CommentCard-picture {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  .CommentCard-userName {
+  .CommentCard-picture {
     display: inline-block;
-    position: absolute;
-    left: 65px;
-    top: 15px;
-    color: #aaaaaa;
-  }
-
-  .CommentCard-date {
-    display: inline-block;
-    position: absolute;
-    left: 65px;
-    top: 33px;
-    color: #aaaaaa;
-    // color: #777;
-    font-size: 0.8em;
-  }
-
-  .CommentCard-contentZone {
-    display: inline-block;
-    width: calc(100% - 80px);
-    margin-left: 60px;
-    margin-top: 40px;
-
-    .CommentCard-content {
-      padding: 5px;
-      width: 100%;
-      white-space: pre-line;
-    }
+    width: 40px;
+    height: 40px;
   }
 }
+
+.CommentCard-userName {
+  @include position(absolute, $top: 15px, $left: 65px);
+  display: inline-block;
+  color: $heavy-grey;
+}
+
+.CommentCard-date {
+  @include position(absolute, $top: 33px, $left: 65px);
+  display: inline-block;
+  color: $heavy-grey;
+  font-size: 0.8em;
+}
+
+.CommentCard-contentZone {
+  display: inline-block;
+  width: calc(100% - 80px);
+  margin-left: 60px;
+  margin-top: 40px;
+
+  .CommentCard-content {
+    padding: 5px;
+    width: 100%;
+    white-space: pre-line;
+  }
+}
+

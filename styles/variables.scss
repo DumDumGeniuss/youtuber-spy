@@ -2,18 +2,28 @@
 $red: #ff5f5f;
 $heavy-red: #f04d4c;
 $light-red: #ff7d7d;
+$super-light-red: #ffd4d4;
 
 $heavy-blue: #213684;
-$blue: #4c72ff;
+$blue: #3f82e6;
+$light-blue: #83c0ff;
 
-$orange: #ff7600; 
+$orange: #ff7600;
+$light-orange: #fb9944;
 
 $light-grey: #ccc;
+$grey: #bfbfbf;
+$heavy-grey: #9a9a9a;
+
+$green: green;
 
 $white: #fff;
 
 $heavy-yellow: yellow;
 
 /* Screen size */
-$mimi-screen: 600;
-$medium-screen: 800;
+$mini-screen: 600px;
+$medium-screen: 800px;
+
+/* fonts */
+$classical-font-style: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;

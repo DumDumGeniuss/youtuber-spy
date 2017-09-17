@@ -166,7 +166,7 @@ class AddArticle extends React.Component {
             </div>
             <span className={this.state.rawContent.length < 30 || this.state.rawContent.length > 1000 ? 'AddArticle-lengthRestrictionError' : 'AddArticle-lengthRestriction'}>{ '30/' + this.state.rawContent.length } { this.state.rawContent.length + '/1000' }</span>
             <div className={'AddArticle-editor'} dangerouslySetInnerHTML={{__html: `
-              <div id="toolbar" style='background-color: #bfbfbf; border-top-left-radius: 10px; border-top-right-radius: 10px;'>
+              <div id="toolbar" style='background-color: #83c0ff; border-top-left-radius: 10px; border-top-right-radius: 10px;'>
                 <button class="ql-bold"></button>
                 <button class="ql-italic"></button>
                 <button class="ql-underline"></button>

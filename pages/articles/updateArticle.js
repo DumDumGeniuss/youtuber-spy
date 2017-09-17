@@ -254,7 +254,7 @@ class UpdateArticle extends React.Component {
               <input ref={'title-input'} className={'UpdateArticle-titleInput'} onChange={this.handleTitleChange.bind(this)}/>
             </div>
             <div className={'UpdateArticle-editor'} dangerouslySetInnerHTML={{__html: `
-              <div id="toolbar" style='background-color: #bfbfbf;'>
+              <div id="toolbar" style='background-color: #83c0ff;'>
                 <button class="ql-bold"></button>
                 <button class="ql-italic"></button>
                 <button class="ql-underline"></button>

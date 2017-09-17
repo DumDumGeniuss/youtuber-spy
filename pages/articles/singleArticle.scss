@@ -1,19 +1,19 @@
 @import 'normalize.css';
-
-$primary-color: black;
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
 
 .SingleArticle-zone {
   width: 100%;
 }
 
 .SingleArticle-loadingZone {
-  display: flex;
+  @extend %flex-center;
   height: 40px;
-  justify-content: center;
-  align-items: center;
 
   svg {
-    color: #777;
+    color: $grey;
     font-size: 2em;
     animation: spin 1s linear infinite;
   }
@@ -24,19 +24,17 @@ $primary-color: black;
   margin-top: 10px;
   height: 60px;
   .SingleArticle-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    @include position(absolute, $top: 10px, $right: 10px);
     display: inline-block;
     padding: 10px;
     height: 40px;
-    color: white;
-    background-color: #ff8684;
+    color: $white;
+    background-color: $red;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-      color: yellow;
+      color: $heavy-yellow;
     }
   }
 }
@@ -44,7 +42,7 @@ $primary-color: black;
 .SingleArticle-infoZone {
   position: relative;
   padding: 10px;
-  background-color: #e45050;
+  background-color: $heavy-red;
   // border: 1px solid #ccc;
 
   .SingleArticle-userPicture {
@@ -58,14 +56,12 @@ $primary-color: black;
     line-height: 50px;
     vertical-align: middle;
     padding: 0 10px;
-    color: white;
+    color: $white;
   }
 
   .SingleArticle-date {
-    position: absolute;
-    bottom: 3px;
-    right: 3px;
-    color: white;
+    @include position(absolute, $bottom: 3px, $right: 3px);
+    color: $white;
     font-size: 0.6em;
   }
 }
@@ -75,10 +71,10 @@ $primary-color: black;
   padding: 10px;
   margin-top: 10px;
   font-size: 1.8em;
-  background-color: #e45050;
-  color: white;
+  background-color: $heavy-red;
+  color: $white;
   // border: 1px solid #ccc;
-  font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","PingFang TC","Helvetica Neue","Helvetica","Arial","Microsoft JhengHei",wf_SegoeUI,"Segoe UI",Segoe,"Segoe WP",Tahoma,Verdana,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,微軟正黑體,"LiHei Pro","WenQuanYi Micro Hei","Droid Sans Fallback","AR PL UMing TW",Roboto,"Helvetica Neue","Hiragino Maru Gothic ProN",メイリオ,"ヒラギノ丸ゴ ProN W4",Meiryo,"Droid Sans",sans-serif;
+  font-family: $classical-font-style;
 }
 
 .SingleArticle-editor {
@@ -88,22 +84,20 @@ $primary-color: black;
 .SingleArticle-errorMessage {
   display: block;
   text-align: center;
-  color: #ff7878;
+  color: $heavy-red;
   padding: 10px 0;
 }
 
 .SingleArticle-addCommentZone {
   margin: 15px 0;
-  background-color: white;
+  background-color: $white;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid $light-grey;
   position: relative;
   height: 210px;
 
   .SingleArticle-pictureZone {
-    position: absolute;
-    left: 15px;
-    top: 15px;
+    @include position(absolute, $top: 15px, $left: 15px);
 
     .SingleArticle-picture {
       display: inline-block;
@@ -113,92 +107,72 @@ $primary-color: black;
   }
 
   .SingleArticle-userName {
+    @include position(absolute, $top: 15px, $left: 65px);
     display: inline-block;
-    position: absolute;
-    left: 65px;
-    top: 15px;
   }
 
   .SingleArticle-textAreaZone {
-    position: absolute;
+    @include position(absolute, $top: 40px, $left: 60px);
     display: inline-block;
     width: calc(100% - 80px);
-    left: 60px;
-    top: 40px;
+
     .SingleArticle-textArea {
       padding: 5px;
       width: 100%;
-      border: 1px solid #ccc;
+      border: 1px solid $light-grey;
     }
   }
 
   .SingleArticle-lengthRestriction {
-    position: absolute;
+    @include position(absolute, $bottom: 15px, $right: 70px);
     display: inline-block;
-    right: 70px;
-    bottom: 15px;
   }
 
   .SingleArticle-anonymousButton {
-    position: absolute;
+    @include position(absolute, $bottom: 5px, $right: 140px);
     display: inline-block;
-    right: 140px;
-    bottom: 5px;
   }
 
   .SingleArticle-addCommentButton {
-    position: absolute;
+    @include position(absolute, $bottom: 10px, $right: 20px);
     display: inline-block;
-    right: 20px;
-    bottom: 10px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #e45050;
-    color: white;
+    background-color: $red;
+    color: $white;
     cursor: pointer;
 
     &:hover {
-      color: yellow;
+      color: $heavy-yellow;
     }
 
     svg {
       animation: spin 1s linear infinite;
     }
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
   }
 }
 
 .SingleArticle-pleaseLoginZone {
-  display: flex;
+  @extend %flex-center;
   height: 50px;
-  justify-content: center;
-  align-items: center;
-
   .SingleArticle-pleaseLogin {
     display: inline-block;
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #ff7600;
-    color: white;
+    border: 1px solid $light-grey;
+    background-color: $orange;
+    color: $white;
     cursor: pointer;
 
     &:hover {
-      background-color: #fb9944;
+      background-color: $light-orange;
     }
   }
 }
 
 .SingleArticle-commentsZone {
   margin: 15px 0;
-  border: 1px solid #ccc;
+  border: 1px solid $light-grey;
   border-radius: 10px;
   overflow: hidden;
 }

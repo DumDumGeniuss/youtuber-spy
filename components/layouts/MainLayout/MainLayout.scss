@@ -1,4 +1,7 @@
-$medium-width: 800px;
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/placeholders.scss';
+@import '../../../styles/keyframes.scss';
 
 .MainLayout-invisible {
   display: none;
@@ -9,258 +12,230 @@ $medium-width: 800px;
   width: 100%;
   padding-top: 50px;
   overflow: hidden;
+}
 
-  .MainLayout-socialZone {
-    position: fixed;
-    display: inline-block;
-    left: 0;
-    top: 50%;
-    transform: translate(0, -50%);
-    z-index: 3;
-  
-    .MainLayout-socialIcon {
-      display: flex;
-      width: 35px;
-      height: 35px;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      cursor: pointer;
-      background-color: #3b5998;
-      color: white;
-    }
-  
-    .MainLayout-socialIcon:hover {
-      color: yellow;
-    }
+.MainLayout-socialZone {
+  position: fixed;
+  display: inline-block;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 3;
+
+  .MainLayout-socialIcon {
+    @extend %flex-center;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #3b5998;
+    color: $white;
   }
 
-  .MainLayout-loadingZone {
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    height: 5px;
+  .MainLayout-socialIcon:hover {
+    color: $heavy-yellow;
+  }
+}
+
+.MainLayout-loadingZone {
+  @include position(fixed, $top: 0, $left: 0);
+  display: block;
+  height: 5px;
+  width: 100%;
+  z-index: 5;
+  box-shadow: 10px 0 3px $grey;
+  animation: loading 3s  linear infinite;
+}
+
+.MainLayout-navbar {
+  @include position(fixed, $top: 0, $left: 0);
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: $heavy-blue;
+  z-index: 5;
+
+  .MainLayout-content {
     width: 100%;
-    z-index: 5;
-    box-shadow: 10px 0 3px grey;
-    animation: loading 3s  linear infinite;
-  }
+    max-width: 1000px;
+    margin-left: 50%;
+    transform: translate(-50%, 0%);
 
-  @keyframes loading {
-    0% {
-      background-color: #eca400;
-    }
-    50% {
-      background-color: #d00000;
-    }
-    100% {
-      background-color: #eca400;
-    }
-  }
+    .MainLayout-mobileFunctionZone {
+      @include position(absolute, $right: 10px);
+      height: 50px;
+      display: none;
+      padding: 10px;
 
-  .MainLayout-navbar {
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: #213684;
-    z-index: 5;
+      @media (max-width: $medium-screen) {
+        display: inline-block;
+      }
+
+      .MainLayout-bars {
+        color: $white;
+        font-size: 30px;
+        cursor: pointer;
+        vertical-align: middle;
+        display: inline-block;
+        &:hover {
+          color: $heavy-yellow;
+        }
+      }
+      .MainLayout-image {
+        display: inline-block;
+        vertical-align: middle;
+        height: 30px;
+        border-radius: 15px;
+        margin-right: 15px;
+      }
+    }
+
+    .MainLayout-logo {
+      @include position(absolute, $left: 10px);
+      height: 50px;
+      width: 250px;
   
-    .MainLayout-content {
-      width: 100%;
-      max-width: 1000px;
-      margin-left: 50%;
-      transform: translate(-50%, 0%);
+      .MainLayout-logoImg {
+        margin-top: 5px;
+        display: inline-block;
+        height: 40px;
+        vertical-align: middle;
+      }
+  
+      .MainLayout-logoTitle {
+        display: inline-block;
+        color: $white;
+        font-size: 1em;
+        line-height: 50px;
+        vertical-align: middle;
+        padding: 0 10px;
+        margin: 0;
+      }
+    }
+  
+    .MainLayout-linksZone {
+      @include position(absolute, $left: 50%);
+      transform: translate(-50%, 0);
+      height: 50px;
 
-      .MainLayout-mobileFunctionZone {
-        position: absolute;
-        right: 10px;
-        height: 50px;
+      @media (max-width: $medium-screen) {
         display: none;
-        padding: 10px;
-
-        @media (max-width: $medium-width) {
-          display: inline-block;
-        }
-  
-        .MainLayout-bars {
-          color: white;
-          font-size: 30px;
-          cursor: pointer;
-          vertical-align: middle;
-          display: inline-block;
-          &:hover {
-            color: yellow;
-          }
-        }
-        .MainLayout-image {
-          display: inline-block;
-          vertical-align: middle;
-          height: 30px;
-          border-radius: 15px;
-          margin-right: 15px;
-        }
-      }
-  
-      .MainLayout-logo {
-        position: absolute;
-        left: 10px;
-        height: 50px;
-        width: 250px;
-    
-        .MainLayout-logoImg {
-          margin-top: 5px;
-          display: inline-block;
-          height: 40px;
-          vertical-align: middle;
-        }
-    
-        .MainLayout-logoTitle {
-          display: inline-block;
-          color: white;
-          font-size: 1em;
-          line-height: 50px;
-          vertical-align: middle;
-          padding: 0 10px;
-          margin: 0;
-        }
-      }
-    
-      .MainLayout-linksZone {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-        height: 50px;
-
-        @media (max-width: $medium-width) {
-          display: none;
-        }
-
-        .MainLayout-link {
-          display: inline-block;
-          font-family: 'Avenir W01';
-          vertical-align: middle;
-          color: white;
-          padding: 0 15px;
-          line-height: 50px;
-
-          &:hover {
-            color: yellow;
-          }
-        }
       }
 
-      .MainLayout-functionZone {
-        position: absolute;
-        height: 50px;
-        right: 10px;
+      .MainLayout-link {
+        display: inline-block;
+        font-family: 'Avenir W01';
+        vertical-align: middle;
+        color: $white;
+        padding: 0 15px;
+        line-height: 50px;
 
-        @media (max-width: $medium-width) {
-          display: none;
-        }
-
-        .MainLayout-item {
-          display: inline-block;
-          font-family: 'Avenir W01';
-          vertical-align: middle;
-          color: white;
-          padding: 0 15px;
-          line-height: 50px;
-          cursor: pointer;
-
-          &:hover {
-            color: yellow;
-          }
-        }
-
-        .MainLayout-image {
-          display: inline-block;
-          vertical-align: middle;
-          height: 100%;
+        &:hover {
+          color: $heavy-yellow;
         }
       }
     }
-  }
 
-  .MainLayout-mobileZone {
-    position: fixed;
-    top: 50px;
-    display: none;
-    z-index: 5;
-    background-color: #213684;
-    width: 100%;
+    .MainLayout-functionZone {
+      @include position(absolute, $right: 10px);
+      height: 50px;
 
-    @media (max-width: $medium-width) {
-      display: block;
-    }
-
-    .MainLayout-mobileLink {
-      display: block;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-      cursor: pointer;
-      &:hover {
-        color: yellow;
+      @media (max-width: $medium-screen) {
+        display: none;
       }
-    }
-  }
 
-  .MainLayout-rightSideZone {
-    position: fixed;
-    display: inline-block;
-    width: 340px;
-    left: calc(50% + 150px);
-    top: 60px;
+      .MainLayout-item {
+        display: inline-block;
+        font-family: 'Avenir W01';
+        vertical-align: middle;
+        color: $white;
+        padding: 0 15px;
+        line-height: 50px;
+        cursor: pointer;
 
-    @media (max-width: $medium-width) {
-      position: relative;
-      left: 0;
-      top: 0;
-      display: block;
-      width: 340px;
-      margin-left: calc(50% - 170px);
-      margin-top: 20px;
-    }
+        &:hover {
+          color: $heavy-yellow;
+        }
+      }
 
-    .MainLayout-fbLikeZone {
-      display: block;
-      overflow: hidden;
-    }
-  }
-
-  .MainLayout-pageContent {
-    display: inline-block;
-    vertical-align: top;
-    width: 640px;
-    min-height: 100vh;
-    margin-left: calc(50% - 500px);
-    overflow: hidden;
-
-    @media (max-width: $medium-width) {
-      display: block;
-      width: 100%;
-      margin-left: 0;
-    }
-  }
-
-  .MainLayout-footer {
-    position: relative;
-    background-color: #213684;
-    width: 100%;
-    height: 50px;
-  
-    .MainLayout-center {
-      position: absolute;
-      display: inline-block;
-      color: white;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      .MainLayout-image {
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
     }
   }
 }
+
+.MainLayout-mobileZone {
+  @include position(fixed, $top: 50px);
+  display: none;
+  z-index: 5;
+  background-color: $heavy-blue;
+  width: 100%;
+
+  @media (max-width: $medium-screen) {
+    display: block;
+  }
+
+  .MainLayout-mobileLink {
+    display: block;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      color: yellow;
+    }
+  }
+}
+
+.MainLayout-rightSideZone {
+  @include position(fixed, $top: 60px, $left: calc(50% + 150px));
+  display: inline-block;
+  width: 340px;
+
+  @media (max-width: $medium-screen) {
+    @include position(relative, $top: 0, $left: 0);
+    display: block;
+    width: 340px;
+    margin-left: calc(50% - 170px);
+    margin-top: 20px;
+  }
+
+  .MainLayout-fbLikeZone {
+    display: block;
+    overflow: hidden;
+  }
+}
+
+.MainLayout-pageContent {
+  display: inline-block;
+  vertical-align: top;
+  width: 640px;
+  min-height: 100vh;
+  margin-left: calc(50% - 500px);
+  overflow: hidden;
+
+  @media (max-width: $medium-screen) {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.MainLayout-footer {
+  position: relative;
+  background-color: $heavy-blue;
+  width: 100%;
+  height: 50px;
+
+  .MainLayout-center {
+    @include position(absolute, $top: 50%, $left: 50%);
+    display: inline-block;
+    color: $white;
+    transform: translate(-50%, -50%);
+  }
+}
+
 
