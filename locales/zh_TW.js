@@ -43,5 +43,7 @@ export default {
     'Germany': '德國',
     'Singapore': '新加坡',
     'Spain': '西班牙',
+    'Australia': '澳洲',
+    'France': '法國',
   }
 };
