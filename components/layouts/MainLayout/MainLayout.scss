@@ -67,7 +67,7 @@
       display: none;
       padding: 10px;
 
-      @media (max-width: $medium-screen) {
+      @media (max-width: $large-screen) {
         display: inline-block;
       }
 
@@ -118,7 +118,7 @@
       transform: translate(-50%, 0);
       height: 50px;
 
-      @media (max-width: $medium-screen) {
+      @media (max-width: $large-screen) {
         display: none;
       }
 
@@ -140,7 +140,7 @@
       @include position(absolute, $right: 10px);
       height: 50px;
 
-      @media (max-width: $medium-screen) {
+      @media (max-width: $large-screen) {
         display: none;
       }
 
@@ -174,7 +174,7 @@
   background-color: $heavy-blue;
   width: 100%;
 
-  @media (max-width: $medium-screen) {
+  @media (max-width: $large-screen) {
     display: block;
   }
 
@@ -195,7 +195,7 @@
   display: inline-block;
   width: 340px;
 
-  @media (max-width: $medium-screen) {
+  @media (max-width: $large-screen) {
     @include position(relative, $top: 0, $left: 0);
     display: block;
     width: 340px;
@@ -217,7 +217,7 @@
   margin-left: calc(50% - 500px);
   overflow: hidden;
 
-  @media (max-width: $medium-screen) {
+  @media (max-width: $large-screen) {
     display: block;
     width: 100%;
     margin-left: 0;
