@@ -10,7 +10,8 @@
     "import/prefer-default-export": 0,
     "import/first": 0,
     "no-underscore-dangle": 0,
-    "jsx-quotes": ["error", "prefer-single"]
+    "jsx-quotes": ["error", "prefer-single"],
+    "dot-notation": 0
   },
   "env": {
     "jest": true,

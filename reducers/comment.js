@@ -7,7 +7,12 @@ const initState = {
 const article = (state = initState, action) => {
   switch (action.type) {
     case 'GET_COMMENTS':
-      return { ...state, comments: action.comments, totalCount: action.totalCount, token: action.token };
+      return {
+        ...state,
+        comments: action.comments,
+        totalCount: action.totalCount,
+        token: action.token,
+      };
     default:
       return state;
   }

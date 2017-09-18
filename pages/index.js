@@ -1,13 +1,12 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 
 import HeadWrapper from '../components/tags/HeadWrapper/HeadWrapper';
 import * as tinyHelper from '../libs/tinyHelper';
-import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Search from 'react-icons/lib/fa/search';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 import YoutuberChannelCard from '../components/cards/YoutuberChannelCard/YoutuberChannelCard';
@@ -16,8 +15,6 @@ import { initStore } from '../store/initStore';
 import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
-import * as candidateChannelApi from '../apis/candidateChannel';
-import * as youtubeApi from '../apis/youtube';
 import * as browserAttributeAction from '../actions/browserAttribute';
 
 import stylesheet from './index.scss';
@@ -40,12 +37,20 @@ class Index extends React.Component {
       if (key === 'count') {
         newQuery[key] = defaultQuery[key];
       } else {
-        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+        newQuery[key] = valueFromQuery || defaultQuery[key];
       }
     });
 
     const result = await channelApi.getAllChannels(newQuery);
-    store.dispatch(channelAction.getChannels(result.datas, result.totalCount, result.channelCategories, result.countryCategories, result.token));
+    store.dispatch(
+      channelAction.getChannels(
+        result.datas,
+        result.totalCount,
+        result.channelCategories,
+        result.countryCategories,
+        result.token,
+      ),
+    );
 
     return {
       newQuery,
@@ -65,11 +70,11 @@ class Index extends React.Component {
       page: this.props.newQuery.page,
       count: this.props.newQuery.count,
     };
-  }
 
-  componentWillMount() {}
-
-  componentDidMount() {
+    this.changeCountry = this.changeCountry.bind(this);
+    this.changeOrder = this.changeOrder.bind(this);
+    this.changeCategory = this.changeCategory.bind(this);
+    this.changeKeyword = this.changeKeyword.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -85,6 +90,12 @@ class Index extends React.Component {
         this.query[key] = newProps.query[key];
       }
     });
+  }
+
+  componentWillUnmount() {
+    if (this.searchKeyword) {
+      clearTimeout(this.searchKeyword);
+    }
   }
 
   /* remember to reset tha page */
@@ -136,22 +147,15 @@ class Index extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    if (this.searchKeyword) {
-      clearTimeout(this.searchKeyword);
-    }
-  }
-
   render() {
     const channels = this.props.channel.channels;
     const channelCategories = this.props.channel.channelCategories;
     const countryCategories = this.props.channel.countryCategories;
     const totalCount = this.props.channel.totalCount;
-    const user = this.props.user;
     const dataPage = parseInt((totalCount - 1) / this.query.count, 10) + 1;
     const i18nWords = this.props.i18n.words;
     let queryParam = tinyHelper.getQueryString(this.query, ['startTime', 'endTime'], ['count']);
-    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
+    queryParam = queryParam.replace(`page=${this.query.page}`, 'page=$1');
 
     return (
       <div>
@@ -182,37 +186,33 @@ class Index extends React.Component {
             <div className={'Index-functionBar'}>
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
               </div>
               <div>
                 <span>分類：</span>
-                <select onChange={this.changeCategory.bind(this)} defaultValue={this.query.category}>
+                <select onChange={this.changeCategory} defaultValue={this.query.category}>
                   {
-                    channelCategories.map((item) => {
-                      return (
-                        <option key={item} value={item}>{i18nWords.channelCategory[item]}</option>
-                      );
-                    })
+                    channelCategories.map(item => (
+                      <option key={item} value={item}>{i18nWords.channelCategory[item]}</option>
+                    ))
                   }
                   <option value={''}>所有</option>
                 </select>
               </div>
               <div>
                 <span>國家：</span>
-                <select onChange={this.changeCountry.bind(this)} defaultValue={this.query.country}>
+                <select onChange={this.changeCountry} defaultValue={this.query.country}>
                   {
-                    countryCategories.map((item) => {
-                      return (
-                        <option key={item} value={item}>{i18nWords.country[item]}</option>
-                      );
-                    })
+                    countryCategories.map(item => (
+                      <option key={item} value={item}>{i18nWords.country[item]}</option>
+                    ))
                   }
                   <option value={''}>所有</option>
                 </select>
               </div>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={this.query.sort}>
+                <select onChange={this.changeOrder} defaultValue={this.query.sort}>
                   <option value={'subscriberCount'}>訂閱</option>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'videoCount'}>影片</option>
@@ -224,7 +224,7 @@ class Index extends React.Component {
             <div className={'Index-contentZone'}>
               {
                 channels.map((item, index) => {
-                  let channelInfo = {
+                  const channelInfo = {
                     _id: item._id,
                     defaultThumbnails: item.defaultThumbnails,
                     title: item.title,
@@ -234,10 +234,10 @@ class Index extends React.Component {
                     category: i18nWords.channelCategory[item.category],
                     country: i18nWords.country[item.country],
                     publishedAt: item.publishedAt,
-                    rank: this.query.count * (this.query.page - 1) + index + 1,
-                  }
+                    rank: (this.query.count * (this.query.page - 1)) + index + 1,
+                  };
                   return (
-                    <YoutuberChannelCard 
+                    <YoutuberChannelCard
                       key={item._id}
                       channelInfo={channelInfo}
                     />
@@ -256,7 +256,7 @@ class Index extends React.Component {
                 }
                 initPage={this.query.page}
                 pageNumber={dataPage}
-                url={'/' + queryParam}
+                url={`/${queryParam}`}
               />
             </div>
           </div>
@@ -266,19 +266,29 @@ class Index extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+Index.propTypes = {
+  newQuery: PropTypes.object.isRequired,
+  channel: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  setRouterChangingStatus: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => (
+  {
     user: state.user,
     channel: state.channel,
     i18n: state.i18n,
-  };
-};
+  }
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
+const mapDispatchToProps = dispatch => (
+  {
+    setRouterChangingStatus: bindActionCreators(
+      browserAttributeAction.setRouterChangingStatus,
+      dispatch,
+    ),
     getUser: bindActionCreators(userAction.getUser, dispatch),
   }
-}
+);
 
 export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index);

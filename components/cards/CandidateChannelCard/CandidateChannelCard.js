@@ -1,55 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import stylesheet from './CandidateChannelCard.scss';
 
-import Search from 'react-icons/lib/fa/search';
-
 class YoutuberChannelCard extends React.Component {
-  static getInitialProps({ isServer }) {
-    return {
-      isServer,
-    };
-  }
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
+    this.onVerifyClick = this.onVerifyClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
   onVerifyClick(channelId) {
-    this.props.clickVerify(channelId);
+    return () => {
+      this.props.clickVerify(channelId);
+    };
   }
 
   onDeleteClick(channelId) {
-    this.props.clickDelete(channelId);
-  }
-
-  componentWillUnmount() {
+    return () => {
+      this.props.clickDelete(channelId);
+    };
   }
 
   render() {
     const candidateChannelInfo = this.props.candidateChannelInfo;
-    const addTime = new Date(this.props.candidateChannelInfo.addTime);
-    const hours = moment().diff(addTime, 'hours');
 
     return (
       <div className={'CandidateChannelCard-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <div className={'CandidateChannelCard-authInfoZone'}>
-          {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onVerifyClick.bind(this, candidateChannelInfo._id)}>確認</button> : null}
-          {this.props.isSuperUser && !candidateChannelInfo.isVerified ? <button onClick={this.onDeleteClick.bind(this, candidateChannelInfo._id)}>刪除</button> : null}
-          {candidateChannelInfo.isVerified ? 
-            <span className={'CandidateChannelCard-authVerify'}>通過</span>
-            :
-            <span className={'CandidateChannelCard-authWait'}>等待</span>
+          {
+            this.props.isSuperUser && !candidateChannelInfo.isVerified ?
+              <button onClick={this.onVerifyClick(candidateChannelInfo._id)}>確認</button>
+              :
+              null
+          }
+          {
+            this.props.isSuperUser && !candidateChannelInfo.isVerified ?
+              <button onClick={this.onDeleteClick(candidateChannelInfo._id)}>刪除</button>
+              :
+              null
+          }
+          {
+            candidateChannelInfo.isVerified ?
+              <span className={'CandidateChannelCard-authVerify'}>通過</span>
+              :
+              <span className={'CandidateChannelCard-authWait'}>等待</span>
           }
         </div>
         <div className={'CandidateChannelCard-channelZone'}>
-          <a href={'https://www.youtube.com/channel/' + candidateChannelInfo._id} target={'_blank'}>
+          <a href={`https://www.youtube.com/channel/${candidateChannelInfo._id}`} target={'_blank'}>
             <h3 className={'CandidateChannelCard-channelZoneTitle'}>{candidateChannelInfo.title}</h3>
           </a>
           <figure className={'CandidateChannelCard-channelImg'}>
-            <img src={candidateChannelInfo.defaultThumbnails} className={'CandidateChannelCard-userPicture'}/>
+            <img alt={`youtuberspy channel ${candidateChannelInfo.title}`} src={candidateChannelInfo.defaultThumbnails} className={'CandidateChannelCard-userPicture'} />
           </figure>
           <p>{candidateChannelInfo.description || '此頻道沒有介紹...'}</p>
           <div className={'CandidateChannelCard-statisticZone'}>
@@ -68,9 +73,11 @@ class YoutuberChannelCard extends React.Component {
   }
 }
 
-YoutuberChannelCard.PropTypes = {
-  channelInfo: PropTypes.object,
-  rank: PropTypes.number,
+YoutuberChannelCard.propTypes = {
+  candidateChannelInfo: PropTypes.object.isRequired,
+  isSuperUser: PropTypes.bool.isRequired,
+  clickVerify: PropTypes.func.isRequired,
+  clickDelete: PropTypes.func.isRequired,
 };
 
 export default YoutuberChannelCard;

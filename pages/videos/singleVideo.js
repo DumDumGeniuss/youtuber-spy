@@ -1,10 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+// import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import moment from 'moment';
-import Router from 'next/router';
 
 import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
@@ -31,7 +30,7 @@ class SingleVideo extends React.Component {
           status: 404,
           message: e.message,
         },
-      }
+      };
     }
 
     try {
@@ -40,8 +39,9 @@ class SingleVideo extends React.Component {
         count: 5,
         random: true,
       };
-  
-      const randomSameCategoryVideosResult = await videoApi.getAllVideos(randomSameCategoryVideosQuery);
+
+      const randomSameCategoryVideosResult =
+        await videoApi.getAllVideos(randomSameCategoryVideosQuery);
       const randomSameCategoryVideos = randomSameCategoryVideosResult.datas;
 
       /* Success */
@@ -55,23 +55,10 @@ class SingleVideo extends React.Component {
           status: 500,
           message: 'server error',
         },
-      }
+      };
     }
   }
 
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {
-  }
-
-  componentWillReceiveProps(newProps) {
-  }
-
-// <div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>
   render() {
     if (this.props.error) {
       return (
@@ -93,11 +80,11 @@ class SingleVideo extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
-          title={'Youtuber看門狗-' + videoInfo.title}
+          title={`Youtuber看門狗-${videoInfo.title}`}
           description={videoInfo.description}
           type={'website'}
           image={videoInfo.highThumbnails}
-          url={'https://www.youtuberspy.com/videos/singleVideo?videoId=' + this.props.query.videoId} 
+          url={`https://www.youtuberspy.com/videos/singleVideo?videoId=${this.props.query.videoId}`}
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
         />
@@ -106,13 +93,25 @@ class SingleVideo extends React.Component {
             <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
             <div className={'SingleVideo-playVideoZone'}>
               <iframe
-                frameBorder="0" allowFullScreen
-                width={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth : 640}
-                height={browserAttribute.windowWidth < 800 ? browserAttribute.windowWidth * 4.5 / 8 : 360}
-                src={'https://www.youtube.com/embed/' + videoInfo._id}>
-              </iframe>
+                title={videoInfo._id}
+                frameBorder={'0'}
+                allowFullScreen
+                width={
+                  browserAttribute.windowWidth < 800 ?
+                    browserAttribute.windowWidth
+                    :
+                    640
+                }
+                height={
+                  browserAttribute.windowWidth < 800 ?
+                    (browserAttribute.windowWidth * 4.5) / 8
+                    :
+                    360
+                }
+                src={`https://www.youtube.com/embed/${videoInfo._id}`}
+              />
             </div>
-            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}><a>
+            <Link href={`/channels/singleChannel?channelId=${videoInfo.channelId}`}><a>
               <h2 className={'SingleVideo-smallTitle'}>
                 {videoInfo.channelTitle}
               </h2>
@@ -141,15 +140,13 @@ class SingleVideo extends React.Component {
                 randomSameCategoryVideos.length === 0 ?
                   <h3 className={'SingleVideo-noDatasText'}>由於此頻道最近新增，目前沒有熱門影片數據</h3>
                   :
-                  randomSameCategoryVideos.map((item) => {
-                    return (
-                      <YoutubeVideoCard
-                        key={item._id}
-                        videoInfo={item}
-                      />
-                    );
-                  })
-              }
+                  randomSameCategoryVideos.map(item => (
+                    <YoutubeVideoCard
+                      key={item._id}
+                      videoInfo={item}
+                    />
+                  ))
+                }
             </div>
           </div>
         </MainLayoutContainer>
@@ -158,18 +155,23 @@ class SingleVideo extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+SingleVideo.propTypes = {
+  error: PropTypes.object.isRequired,
+  video: PropTypes.object.isRequired,
+  browserAttribute: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  query: PropTypes.object.isRequired,
+  randomSameCategoryVideos: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => (
+  {
     video: state.video,
     i18n: state.i18n,
     browserAttribute: state.browserAttribute,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // getVideosAsync: bindActionCreators(videoAction.getVideosAsync, dispatch),
   }
-}
+);
+
+const mapDispatchToProps = () => {};
 
 export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(SingleVideo);

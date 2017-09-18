@@ -11,7 +11,7 @@ test('Test add user', () => {
     user: {
       id: 'abbccd',
       name: 'Messi',
-    }
+    },
   };
   const newState = userReducer(state, action);
 
