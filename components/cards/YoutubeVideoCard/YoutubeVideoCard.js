@@ -6,12 +6,6 @@ import Link from 'next/link';
 import stylesheet from './YoutubeVideoCard.scss';
 
 class YoutubeVideoCard extends React.Component {
-  static getInitialProps({ isServer }) {
-    return {
-      isServer,
-    };
-  }
-
   componentDidMount() {
   }
 
@@ -28,30 +22,30 @@ class YoutubeVideoCard extends React.Component {
         <style jsx>{`
         `}</style>
         <figure className={'YoutubeVideoCard-imgDiv'}>
-            <img src={videoInfo.mediumThumbnails} />
+          <img alt={`youtuberspy video ${videoInfo.title}`} src={videoInfo.mediumThumbnails} />
         </figure>
         <section className={'YoutubeVideoCard-infoDiv'}>
           <h3>
-            <Link href={'/videos/singleVideo?videoId=' + videoInfo._id}><a>
+            <Link href={`/videos/singleVideo?videoId=${videoInfo._id}`}><a>
               {videoInfo.title}
             </a></Link>
           </h3>
           <h4>
-            <Link href={'/channels/singleChannel?channelId=' + videoInfo.channelId}><a>
+            <Link href={`/channels/singleChannel?channelId=${videoInfo.channelId}`}><a>
               {videoInfo.channelTitle}
             </a></Link>
           </h4>
           <h4>觀看 {videoInfo.viewCount.toLocaleString()}</h4>
           <h4>時間 {publishedAt}</h4>
-          <p className={'YoutubeVideoCard-description'}>{videoInfo.description.substring(0, 50) + '...'}</p>
+          <p className={'YoutubeVideoCard-description'}>{`${videoInfo.description.substring(0, 50)}...`}</p>
         </section>
       </div>
     );
   }
 }
 
-YoutubeVideoCard.PropTypes = {
-  videoInfo: PropTypes.object,
+YoutubeVideoCard.propTypes = {
+  videoInfo: PropTypes.object.isRequired,
 };
 
 export default YoutubeVideoCard;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import stylesheet from './ChannelInputModal.scss';
 
@@ -12,6 +13,10 @@ class ChannelInputModal extends React.Component {
   constructor(props) {
     super(props);
     this.link = '';
+
+    this.handleLinkChange = this.handleLinkChange.bind(this);
+    this._onClickYes = this._onClickYes.bind(this);
+    this._onClickNo = this._onClickNo.bind(this);
   }
 
   componentDidMount() {
@@ -49,20 +54,32 @@ class ChannelInputModal extends React.Component {
           </div>
           <div className={'ChannelInputModal-inputZone'}>
             <div className={'ChannelInputModal-itemTitle'}>連結</div>
-            {this.props.errorMessage ? 
+            {this.props.errorMessage ?
               <div className={'ChannelInputModal-errorMessage'}>{this.props.errorMessage}</div> : null}
             <div className={'ChannelInputModal-itemInput'}>
-              <input onChange={this.handleLinkChange.bind(this)}/>
+              <input onChange={this.handleLinkChange} />
             </div>
           </div>
           <div className={'ChannelInputModal-func'}>
-            <span onClick={this._onClickYes.bind(this)}>{this.props.isLoading ? <FaCircleONotch/> : '繼續'}</span>
-            <span onClick={this._onClickNo.bind(this)}>{this.props.isLoading ? <FaCircleONotch/> : '取消'}</span>
+            <span onClick={this._onClickYes} role={'button'} tabIndex={0}>{this.props.isLoading ? <FaCircleONotch /> : '繼續'}</span>
+            <span onClick={this._onClickNo} role={'button'} tabIndex={0}>{this.props.isLoading ? <FaCircleONotch /> : '取消'}</span>
           </div>
         </div>
       </div>
     );
   }
 }
+
+ChannelInputModal.propTypes = {
+  message: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
+  clickYes: PropTypes.func.isRequired,
+  clickNo: PropTypes.func.isRequired,
+};
+
+ChannelInputModal.defaultProps = {
+  errorMessage: '',
+};
 
 export default ChannelInputModal;

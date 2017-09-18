@@ -10,13 +10,13 @@ export const getQueryString = (query, noEncodeParams, noWrapParams) => {
   }
   const paramsString = keys.map((key) => {
     if (theNoEncodeParams.indexOf(key) >= 0) {
-      return encodeURIComponent(key) + '=' + query[key];
+      return `${encodeURIComponent(key)}=${query[key]}`;
     }
-    return encodeURIComponent(key) + '=' + encodeURIComponent(query[key]);
+    return `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`;
   })
     .join('&')
     .replace(/%20/g, '+');
-  return '?' + paramsString;
+  return `?${paramsString}`;
 };
 
 export const removeDuplicated = (array) => {

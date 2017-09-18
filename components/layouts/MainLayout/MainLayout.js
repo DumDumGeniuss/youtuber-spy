@@ -1,6 +1,6 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 import Facebook from 'react-icons/lib/fa/facebook';
 import GooglePlus from 'react-icons/lib/fa/google-plus';
@@ -18,26 +18,30 @@ class MainLayout extends React.Component {
     this.state = {
       showMobileZone: false,
     };
+
     this.scrollHandler = this.scrollHandler.bind(this);
     this.addScrollHandler = this.addScrollHandler.bind(this);
+    this.onLoginClick = this.onLoginClick.bind(this);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.changeMoibleZoneShow = this.changeMoibleZoneShow.bind(this);
   }
 
   componentDidMount() {
     this.addScrollHandler();
   }
 
-  addScrollHandler() {
-    this.scrollListener = window.addEventListener('scroll', () => {
-      this.scrollHandler(
-        window.pageYOffset,
-        window.innerHeight,
-        Math.max(
-          window.innerHeight,
-          document.body.offsetHeight,
-          document.documentElement.clientHeight
-        )
-      );
-    });
+  componentWillUnmount() {
+    if (this.scrollListener) {
+      window.removeEventListener('scroll', this.scrollListener);
+    }
+  }
+
+  onLoginClick() {
+    this.props.doLogin();
+  }
+
+  onLogoutClick() {
+    this.props.doLogout();
   }
 
   scrollHandler(scrollTop, windowHeight, realHeight) {
@@ -50,24 +54,24 @@ class MainLayout extends React.Component {
     }
   }
 
-  onLoginClick() {
-    this.props.doLogin();
-  }
-
-  onLogoutClick() {
-    this.props.doLogout();
+  addScrollHandler() {
+    this.scrollListener = window.addEventListener('scroll', () => {
+      this.scrollHandler(
+        window.pageYOffset,
+        window.innerHeight,
+        Math.max(
+          window.innerHeight,
+          document.body.offsetHeight,
+          document.documentElement.clientHeight,
+        ),
+      );
+    });
   }
 
   changeMoibleZoneShow() {
     this.setState({
       showMobileZone: !this.state.showMobileZone,
     });
-  }
-
-  componentWillUnmount() {
-    if (this.scrollListener) {
-      window.removeEventListener('scroll', this.scrollListener);
-    }
   }
 
               // <div className={'MainLayout-link'}>
@@ -83,46 +87,44 @@ class MainLayout extends React.Component {
     return (
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Head>
-        </Head>
         <nav className={'MainLayout-navbar'}>
           <div className={'MainLayout-content'}>
             <div className={'MainLayout-logo'}>
               <Link href='/'><a>
-                <img className={'MainLayout-logoImg'} src={'/static/logo.png'}/>
+                <img alt={'youtuberspy logo'} className={'MainLayout-logoImg'} src={'/static/logo.png'} />
                 <h1 className={'MainLayout-logoTitle'}>Youtuber看門狗</h1>
               </a></Link>
             </div>
             <div className={'MainLayout-linksZone'}>
-              <Link href='/'><a>
+              <Link href={'/'}><a>
                 <span className={'MainLayout-link'}>頻道</span>
               </a></Link>
-              <Link href='/videos/allVideos'><a>
+              <Link href={'/videos/allVideos'}><a>
                 <span className={'MainLayout-link'}>影片</span>
               </a></Link>
-              <Link href='/articles/allArticles'><a>
+              <Link href={'/articles/allArticles'}><a>
                 <span className={'MainLayout-link'}>討論區</span>
               </a></Link>
             </div>
             <div className={'MainLayout-functionZone'}>
               {
-                this.props.userInfo ? <img src={this.props.userInfo.picture} className={'MainLayout-image'}/> : null
+                this.props.userInfo ? <img alt={'youtuber user'} src={this.props.userInfo.picture} className={'MainLayout-image'} /> : null
               }
               {
-                this.props.userInfo ? 
-                  <span onClick={this.onLogoutClick.bind(this)} className={'MainLayout-item'}>登出</span>
+                this.props.userInfo ?
+                  <span onClick={this.onLogoutClick} className={'MainLayout-item'} role={'button'} tabIndex={0}>登出</span>
                   :
-                  <span onClick={this.onLoginClick.bind(this)}  className={'MainLayout-item'}>
-                    <GooglePlus/>
+                  <span onClick={this.onLoginClick} className={'MainLayout-item'} role={'button'} tabIndex={0}>
+                    <GooglePlus />
                     登入
                   </span>
               }
             </div>
             <div className={'MainLayout-mobileFunctionZone'}>
               {
-                this.props.userInfo ? <img src={this.props.userInfo.picture} className={'MainLayout-image'}/>  : null
+                this.props.userInfo ? <img alt={'youtuber user'} src={this.props.userInfo.picture} className={'MainLayout-image'} /> : null
               }
-              <Bars onClick={this.changeMoibleZoneShow.bind(this)} className={'MainLayout-bars'}/>
+              <Bars onClick={this.changeMoibleZoneShow} className={'MainLayout-bars'} />
             </div>
           </div>
         </nav>
@@ -137,21 +139,21 @@ class MainLayout extends React.Component {
             <span className={'MainLayout-mobileLink'}>討論區</span>
           </a></Link>
           {
-            this.props.userInfo ? 
-              <span onClick={this.onLogoutClick.bind(this)} className={'MainLayout-mobileLink'}>登出</span>
+            this.props.userInfo ?
+              <span onClick={this.onLogoutClick} className={'MainLayout-mobileLink'} role={'button'} tabIndex={0}>登出</span>
               :
 
-              <span onClick={this.onLoginClick.bind(this)}  className={'MainLayout-mobileLink'}>
-                <GooglePlus/>
+              <span onClick={this.onLoginClick} className={'MainLayout-mobileLink'} role={'button'} tabIndex={0}>
+                <GooglePlus />
                 登入
               </span>
           }
         </div>
-        { this.props.isRouterChanging ? <div className={'MainLayout-loadingZone'}></div> : null }
+        { this.props.isRouterChanging ? <div className={'MainLayout-loadingZone'} /> : null }
         <div className={'MainLayout-socialZone'}>
           <a target={'_blank'} href={'https://www.facebook.com/Youtuber-Spy-%E5%B0%8F%E9%A0%BB%E9%81%93%E5%A4%A7%E4%B8%96%E7%95%8C-1929847743924108/'}>
             <div className={'MainLayout-socialIcon'}>
-             <Facebook />
+              <Facebook />
             </div>
           </a>
         </div>
@@ -160,17 +162,16 @@ class MainLayout extends React.Component {
         </div>
         <div className={'MainLayout-rightSideZone'}>
           <div className={'MainLayout-fbLikeZone'}>
-            <div className='fb-page'
+            <div
+              className={'fb-page'}
               data-height={600}
-              data-href='https://www.facebook.com/U2berSpy/'
+              data-href={'https://www.facebook.com/U2berSpy/'}
               data-small-header={false}
-              data-adapt-container-width={false}
               data-hide-cover={false}
-              data-show-facepile={true}
-              data-adapt-container-width={true}
+              data-show-facepile
+              data-adapt-container-width
               data-tabs={'timeline'}
-            >
-            </div>
+            />
           </div>
         </div>
         <footer className={'MainLayout-footer'}>
@@ -182,5 +183,19 @@ class MainLayout extends React.Component {
     );
   }
 }
+
+MainLayout.propTypes = {
+  userInfo: PropTypes.object,
+  children: PropTypes.object.isRequired,
+  isRouterChanging: PropTypes.bool.isRequired,
+  doLogin: PropTypes.func.isRequired,
+  doLogout: PropTypes.func.isRequired,
+  doTouchBottom: PropTypes.func,
+};
+
+MainLayout.defaultProps = {
+  userInfo: null,
+  doTouchBottom: null,
+};
 
 export default MainLayout;

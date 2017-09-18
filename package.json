@@ -28,6 +28,7 @@
     "now": "^6.3.1",
     "postcss-easy-import": "^2.1.0",
     "postcss-loader": "^2.0.5",
+    "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
