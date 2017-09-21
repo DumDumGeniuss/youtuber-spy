@@ -73,9 +73,13 @@ class YoutuberChannelCard extends React.Component {
   }
 }
 
+YoutuberChannelCard.defaultProps = {
+  isSuperUser: null,
+};
+
 YoutuberChannelCard.propTypes = {
   candidateChannelInfo: PropTypes.object.isRequired,
-  isSuperUser: PropTypes.bool.isRequired,
+  isSuperUser: PropTypes.bool,
   clickVerify: PropTypes.func.isRequired,
   clickDelete: PropTypes.func.isRequired,
 };

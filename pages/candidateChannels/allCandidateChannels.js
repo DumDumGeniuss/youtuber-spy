@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
@@ -13,7 +13,7 @@ import CandidateChannelCard from '../../components/cards/CandidateChannelCard/Ca
 import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
 import ChannelInputModal from '../../components/modals/ChannelInputModal/ChannelInputModal';
 import TitleSection from '../../components/sections/TitleSection/TitleSection';
-import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import { initStore } from '../../store/initStore';
 import * as candidateChannelAction from '../../actions/candidateChannel';
 import * as candidateChannelApi from '../../apis/candidateChannel';
 import * as browserAttributeAction from '../../actions/browserAttribute';
@@ -36,11 +36,13 @@ class AllCandidateChannels extends React.Component {
       if (key === 'count') {
         newQuery[key] = defaultQuery[key];
       } else {
-        newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+        newQuery[key] = valueFromQuery || defaultQuery[key];
       }
     });
     const result = await candidateChannelApi.getCandidateChannels(newQuery);
-    store.dispatch(candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token));
+    store.dispatch(
+      candidateChannelAction.getCandidateChannels(result.datas, result.totalCount, result.token),
+    );
 
     return {
       newQuery,
@@ -66,16 +68,12 @@ class AllCandidateChannels extends React.Component {
       page: this.props.newQuery.page,
       count: this.props.newQuery.count,
     };
-
-    // this.scrollHandler = this.scrollHandler.bind(this);
-    // this.addScrollHandler = this.addScrollHandler.bind(this);
-    // this.removeScrollHander = this.removeScrollHander.bind(this);
-  }
-
-  componentWillMount() {}
-
-  componentDidMount() {
-    // this.addScrollHandler();
+    this.sendAddChannel = this.sendAddChannel.bind(this);
+    this.changeKeyword = this.changeKeyword.bind(this);
+    this.verifyChannel = this.verifyChannel.bind(this);
+    this.deleteChannel = this.deleteChannel.bind(this);
+    this.changeOrder = this.changeOrder.bind(this);
+    this.showAddChannel = this.showAddChannel.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -93,11 +91,17 @@ class AllCandidateChannels extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    if (this.searchKeyword) {
+      clearTimeout(this.searchKeyword);
+    }
+    // this.removeScrollHander();
+  }
+
   changeAddChannelErrorMessage(msg) {
     this.setState({
       addChannelErrorMsg: msg,
     });
-
   }
 
   /* Switch the add channel loading icon */
@@ -109,9 +113,11 @@ class AllCandidateChannels extends React.Component {
 
   /* Switch the add channel view */
   showAddChannel(isOpen) {
-    this.setState({
-      showAddChannel: isOpen,
-    });
+    return () => {
+      this.setState({
+        showAddChannel: isOpen,
+      });
+    };
   }
 
   sendAddChannel(link) {
@@ -121,7 +127,7 @@ class AllCandidateChannels extends React.Component {
       access_token: localStorage.getItem('youtubeToken'),
     };
     const data = {
-      link: link,
+      link,
     };
     candidateChannelApi.addCandidateChannel(query, data)
       .then((result) => {
@@ -137,7 +143,7 @@ class AllCandidateChannels extends React.Component {
             this.changeAddChannelErrorMessage('此頻道已經登入或正在申請了。');
           }
         } else {
-          this.showAddChannel(false);
+          this.showAddChannel(false)();
           this.isAddChannelLoading(false);
           /* Reload again*/
           Router.push({
@@ -188,45 +194,37 @@ class AllCandidateChannels extends React.Component {
   deleteChannel(channelId) {
     this.props.deleteCandidateChannelAsync(
       channelId,
-      localStorage.getItem('youtubeToken')
+      localStorage.getItem('youtubeToken'),
     );
   }
-
-  componentWillUnmount() {
-    if (this.searchKeyword) {
-      clearTimeout(this.searchKeyword);
-    }
-    // this.removeScrollHander();
-  }
-
   render() {
     const candidateChannels = this.props.candidateChannel.candidateChannels;
     const totalCount = this.props.candidateChannel.totalCount;
     const user = this.props.user;
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
     let queryParam = tinyHelper.getQueryString(this.query, [], ['count']);
-    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
+    queryParam = queryParam.replace(`page=${this.query.page}`, 'page=$1');
 
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
           title={'Youtuber看門狗-頻道新增'}
-          description={`我們致力於搜集所有熱門的中文Youtuber頻道，不論是來自馬來西亞、香港、新加坡、台灣、澳門等等的頻道都歡迎加入！`}
+          description={'我們致力於搜集所有熱門的中文Youtuber頻道，不論是來自馬來西亞、香港、新加坡、台灣、澳門等等的頻道都歡迎加入！'}
           type={'website'}
           image={'https://www.youtuberspy.com/static/logo-facebook.png'}
-          url={'https://www.youtuberspy.com/candidateChannels/allCandidateChannels'} 
+          url={'https://www.youtuberspy.com/candidateChannels/allCandidateChannels'}
           site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fb_app_id={'158925374651334'}
         />
-        {this.state.showAddChannel?
+        {this.state.showAddChannel ?
           <ChannelInputModal
             errorMessage={this.state.addChannelErrorMsg}
             message={`
               請將你想加入的頻道首頁或任一影片連結複製貼到連結欄位讓我們取得頻道資訊。
             `}
-            clickYes={this.sendAddChannel.bind(this)}
-            clickNo={this.showAddChannel.bind(this, false)}
+            clickYes={this.sendAddChannel}
+            clickNo={this.showAddChannel(false)}
             isLoading={this.state.isAddChannelLoading}
           /> : null}
         <MainLayoutContainer>
@@ -239,19 +237,27 @@ class AllCandidateChannels extends React.Component {
               `}
             />
             <div className={'AllCandidateChannels-addChannelBar'}>
-              {user.userInfo ? 
-                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'} onClick={this.showAddChannel.bind(this, true)}>新增頻道<Plus /></span>
-                : <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>登入以新增頻道</span>}
+              {user.userInfo ?
+                <span
+                  role={'button'}
+                  tabIndex={0}
+                  className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'}
+                  onClick={this.showAddChannel(true)}
+                >
+                  新增頻道<Plus />
+                </span>
+                :
+                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>登入以新增頻道</span>}
             </div>
             <div className={'AllCandidateChannels-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)}/>
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
               </div>
               <div>
                 <span>排序：</span>
-                <select onChange={this.changeOrder.bind(this)} defaultValue={'addTime'}>
+                <select onChange={this.changeOrder} defaultValue={'addTime'}>
                   <option value={'subscriberCount'}>訂閱</option>
                   <option value={'viewCount'}>觀看</option>
                   <option value={'videoCount'}>影片</option>
@@ -269,22 +275,20 @@ class AllCandidateChannels extends React.Component {
                 }
                 initPage={this.query.page}
                 pageNumber={dataPage}
-                url={'/candidateChannels/allCandidateChannels' + queryParam}
+                url={`/candidateChannels/allCandidateChannels${queryParam}`}
               />
               {
-                candidateChannels.map((item, index) => {
-                  return (
-                    <CandidateChannelCard 
-                      key={item._id}
-                      candidateChannelInfo={item}
-                      isSuperUser={user.isSuperUser}
-                      clickVerify={this.verifyChannel.bind(this)}
-                      clickDelete={this.deleteChannel.bind(this)}
-                    />
-                  );
-                })
+                candidateChannels.map(item => (
+                  <CandidateChannelCard
+                    key={item._id}
+                    candidateChannelInfo={item}
+                    isSuperUser={user.isSuperUser}
+                    clickVerify={this.verifyChannel}
+                    clickDelete={this.deleteChannel}
+                  />
+                ))
               }
-              {this.state.isLoading ? <div className={'AllCandidateChannels-loadingButton'}><FaCircleONotch /></div>: null}
+              {this.state.isLoading ? <div className={'AllCandidateChannels-loadingButton'}><FaCircleONotch /></div> : null}
             </div>
           </div>
         </MainLayoutContainer>
@@ -293,20 +297,33 @@ class AllCandidateChannels extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    candidateChannel: state.candidateChannel,
-    user: state.user,
-  };
+AllCandidateChannels.propTypes = {
+  user: PropTypes.object.isRequired,
+  newQuery: PropTypes.object.isRequired,
+  candidateChannel: PropTypes.object.isRequired,
+  setRouterChangingStatus: PropTypes.func.isRequired,
+  verifyCandidateChannelAsync: PropTypes.func.isRequired,
+  deleteCandidateChannelAsync: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
-    getCandidateChannelsAsync: bindActionCreators(candidateChannelAction.getCandidateChannelsAsync, dispatch),
-    verifyCandidateChannelAsync: bindActionCreators(candidateChannelAction.verifyCandidateChannelAsync, dispatch),
-    deleteCandidateChannelAsync: bindActionCreators(candidateChannelAction.deleteCandidateChannelAsync, dispatch),
+const mapStateToProps = state => (
+  {
+    candidateChannel: state.candidateChannel,
+    user: state.user,
   }
-}
+);
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllCandidateChannels)
+const mapDispatchToProps = dispatch => (
+  {
+    setRouterChangingStatus:
+      bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
+    getCandidateChannelsAsync:
+      bindActionCreators(candidateChannelAction.getCandidateChannelsAsync, dispatch),
+    verifyCandidateChannelAsync:
+      bindActionCreators(candidateChannelAction.verifyCandidateChannelAsync, dispatch),
+    deleteCandidateChannelAsync:
+      bindActionCreators(candidateChannelAction.deleteCandidateChannelAsync, dispatch),
+  }
+);
+
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllCandidateChannels);

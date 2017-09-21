@@ -1,14 +1,16 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import ErrorBox from '../components/boxes/ErrorBox/ErrorBox';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 
 export default class Error extends React.Component {
-  static getInitialProps ({ res, jsonPageRes }) {
-    const statusCode = res ? res.statusCode : (jsonPageRes ? jsonPageRes.status : null)
-    return { statusCode }
+  static getInitialProps ({res, jsonPageRes}) {
+    const statusFromJsonPage = jsonPageRes ? jsonPageRes.status : null;
+    const statusCode = res ? res.statusCode : statusFromJsonPage;
+    return { statusCode };
   }
 
-  render () {
+  render() {
     return (
       <MainLayoutContainer>
         <ErrorBox
@@ -16,6 +18,10 @@ export default class Error extends React.Component {
           message={'An error occurred on client'}
         />
       </MainLayoutContainer>
-    )
+    );
   }
 }
+
+Error.propTypes = {
+  statusCode: PropTypes.number.isRequired,
+};

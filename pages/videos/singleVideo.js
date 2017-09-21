@@ -155,8 +155,12 @@ class SingleVideo extends React.Component {
   }
 }
 
+SingleVideo.defaultProps = {
+  error: null,
+};
+
 SingleVideo.propTypes = {
-  error: PropTypes.object.isRequired,
+  error: PropTypes.object,
   video: PropTypes.object.isRequired,
   browserAttribute: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,

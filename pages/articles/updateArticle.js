@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
@@ -11,7 +11,7 @@ import Plus from 'react-icons/lib/fa/plus';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
-import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import { initStore } from '../../store/initStore';
 
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
@@ -33,7 +33,7 @@ class UpdateArticle extends React.Component {
           status: 404,
           message: e.message,
         },
-      }
+      };
     }
   }
 
@@ -296,6 +296,13 @@ class UpdateArticle extends React.Component {
     );
   }
 }
+
+UpdateArticle.propTypes = {
+  article: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  error: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {
