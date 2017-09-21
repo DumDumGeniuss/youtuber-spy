@@ -16,5 +16,8 @@
   "env": {
     "jest": true,
     "browser": true,
+  },
+  "globals": {
+    "Quill": true
   }
 }
