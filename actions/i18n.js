@@ -1,4 +1,4 @@
-import { languageRanking, languageMap } from '../locales/config';
+import { languageRanking, languageMap } from '../locales/default';
 import acceptLanguage from 'accept-language';
 
 acceptLanguage.languages(languageRanking);
