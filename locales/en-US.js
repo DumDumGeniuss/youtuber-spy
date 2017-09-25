@@ -8,6 +8,7 @@ export default {
     view: 'view',
     subscriber: 'subscriber',
     createTime: 'createTime',
+    publishTime: 'publish time',
     recommendation: 'recommendation',
     all: 'all',
     video: 'video',
@@ -16,6 +17,7 @@ export default {
     youtuberspy: 'Youtuberspy',
     login: 'login',
     logout: 'logout',
+    days: 'days',
   },
   sentences: {
     checkNewChannels: 'New channels',

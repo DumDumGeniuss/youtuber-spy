@@ -8,6 +8,7 @@ export default {
     view: '觀看',
     subscriber: '訂閱',
     createTime: '成立時間',
+    publishTime: '發布時間',
     recommendation: '推薦',
     all: '所有',
     video: '影片',
@@ -16,6 +17,7 @@ export default {
     youtuberspy: 'Youtuber看門狗',
     login: '登入',
     logout: '登出',
+    days: '天',
   },
   sentences: {
     checkNewChannels: '查看新增頻道',
