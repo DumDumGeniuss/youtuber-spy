@@ -84,6 +84,7 @@ class MainLayout extends React.Component {
           //   <span className={'MainLayout-mobileLink'}>討論區</span>
           // </a></Link>
   render() {
+    const i18nWords = this.props.i18nWords;
     return (
       <div className={'MainLayout-zone'}>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -92,18 +93,18 @@ class MainLayout extends React.Component {
             <div className={'MainLayout-logo'}>
               <Link href='/'><a>
                 <img alt={'youtuberspy logo'} className={'MainLayout-logoImg'} src={'/static/logo.png'} />
-                <h1 className={'MainLayout-logoTitle'}>Youtuber看門狗</h1>
+                <h1 className={'MainLayout-logoTitle'}>{i18nWords.words.youtuberspy}</h1>
               </a></Link>
             </div>
             <div className={'MainLayout-linksZone'}>
               <Link href={'/'}><a>
-                <span className={'MainLayout-link'}>頻道</span>
+                <span className={'MainLayout-link'}>{i18nWords.words.channel}</span>
               </a></Link>
               <Link href={'/videos/allVideos'}><a>
-                <span className={'MainLayout-link'}>影片</span>
+                <span className={'MainLayout-link'}>{i18nWords.words.video}</span>
               </a></Link>
               <Link href={'/articles/allArticles'}><a>
-                <span className={'MainLayout-link'}>討論區</span>
+                <span className={'MainLayout-link'}>{i18nWords.words.forum}</span>
               </a></Link>
             </div>
             <div className={'MainLayout-functionZone'}>
@@ -112,11 +113,11 @@ class MainLayout extends React.Component {
               }
               {
                 this.props.userInfo ?
-                  <span onClick={this.onLogoutClick} className={'MainLayout-item'} role={'button'} tabIndex={0}>登出</span>
+                  <span onClick={this.onLogoutClick} className={'MainLayout-item'} role={'button'} tabIndex={0}>{i18nWords.words.logout}</span>
                   :
                   <span onClick={this.onLoginClick} className={'MainLayout-item'} role={'button'} tabIndex={0}>
                     <GooglePlus />
-                    登入
+                    {i18nWords.words.login}
                   </span>
               }
             </div>
@@ -130,22 +131,22 @@ class MainLayout extends React.Component {
         </nav>
         <div className={this.state.showMobileZone ? 'MainLayout-mobileZone' : 'MainLayout-invisible'}>
           <Link href='/'><a>
-            <span className={'MainLayout-mobileLink'}>頻道</span>
+            <span className={'MainLayout-mobileLink'}>{i18nWords.words.channel}</span>
           </a></Link>
           <Link href='/videos/allVideos'><a>
-            <span className={'MainLayout-mobileLink'}>影片</span>
+            <span className={'MainLayout-mobileLink'}>{i18nWords.words.video}</span>
           </a></Link>
           <Link href='/articles/allArticles'><a>
-            <span className={'MainLayout-mobileLink'}>討論區</span>
+            <span className={'MainLayout-mobileLink'}>{i18nWords.words.forum}</span>
           </a></Link>
           {
             this.props.userInfo ?
-              <span onClick={this.onLogoutClick} className={'MainLayout-mobileLink'} role={'button'} tabIndex={0}>登出</span>
+              <span onClick={this.onLogoutClick} className={'MainLayout-mobileLink'} role={'button'} tabIndex={0}>{i18nWords.words.logout}</span>
               :
 
               <span onClick={this.onLoginClick} className={'MainLayout-mobileLink'} role={'button'} tabIndex={0}>
                 <GooglePlus />
-                登入
+                {i18nWords.words.login}
               </span>
           }
         </div>
@@ -191,6 +192,7 @@ MainLayout.propTypes = {
   doLogin: PropTypes.func.isRequired,
   doLogout: PropTypes.func.isRequired,
   doTouchBottom: PropTypes.func,
+  i18nWords: PropTypes.object.isRequired,
 };
 
 MainLayout.defaultProps = {

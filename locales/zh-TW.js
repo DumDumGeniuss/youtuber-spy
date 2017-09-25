@@ -1,5 +1,26 @@
 export default {
   anonymous: '匿名',
+  words: {
+    keyword: '關鍵字',
+    category: '種類',
+    country: '國家',
+    order: '排序',
+    view: '觀看',
+    subscriber: '訂閱',
+    createTime: '成立時間',
+    recommendation: '推薦',
+    all: '所有',
+    video: '影片',
+    channel: '頻道',
+    forum: '討論區',
+    youtuberspy: 'Youtuber看門狗',
+    login: '登入',
+    logout: '登出',
+  },
+  sentences: {
+    checkNewChannels: '查看新增頻道',
+    enterKeyword: '輸入關鍵字',
+  },
   channelCategory: {
     "People & Blogs": '人物 & 網誌',
     "Comedy": '喜劇',
@@ -46,5 +67,5 @@ export default {
     'Australia': '澳洲',
     'France': '法國',
     'SouthKorea': '南韓',
-  }
+  },
 };

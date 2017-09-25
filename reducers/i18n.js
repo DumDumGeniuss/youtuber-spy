@@ -1,14 +1,14 @@
 import locales from '../locales/index';
 
 const initState = {
-  language: 'zh_TW',
-  words: locales['zh_TW'],
+  language: 'zh-TW',
+  words: locales['zh-TW'],
 };
 
 const i18n = (state = initState, action) => {
   switch (action.type) {
     case 'CHANGE_LANGUAGE':
-      return state;
+      return { ...state, language: action.language, words: locales[action.language] };
     default:
       return state;
   }

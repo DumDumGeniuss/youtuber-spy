@@ -108,6 +108,7 @@ class MainLayoutContainer extends React.Component {
         windowWidth={this.props.browserAttribute.windowWidth}
         windowHeight={this.props.browserAttribute.windowHeight}
         doTouchBottom={this.props.doTouchBottom}
+        i18nWords={this.props.i18n.words}
       />
     );
   }
@@ -117,6 +118,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     browserAttribute: state.browserAttribute,
+    i18n: state.i18n,
   };
 };
 

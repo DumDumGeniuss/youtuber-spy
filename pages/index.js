@@ -16,6 +16,7 @@ import * as userAction from '../actions/user';
 import * as channelAction from '../actions/channel';
 import * as channelApi from '../apis/channel';
 import * as browserAttributeAction from '../actions/browserAttribute';
+import * as i18nAction from '../actions/i18n';
 
 import stylesheet from './index.scss';
 
@@ -30,7 +31,11 @@ const defaultQuery = {
 };
 // localStorage.setItem('state', 'off');
 class Index extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
@@ -179,45 +184,45 @@ class Index extends React.Component {
             <div className={'Index-addChannelBar'}>
               <Link href='/candidateChannels/allCandidateChannels'><a>
                 <span className={'Index-channelFuncButton Index-search'}>
-                  查看新增頻道<Search />
+                  {i18nWords.sentences.checkNewChannels}<Search />
                 </span>
               </a></Link>
             </div>
             <div className={'Index-functionBar'}>
               <div>
-                <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
+                <span>{i18nWords.words.keyword}：</span>
+                <input placeholder={this.query.keyword || i18nWords.sentences.enterKeyword} onChange={this.changeKeyword} />
               </div>
               <div>
-                <span>分類：</span>
+                <span>{i18nWords.words.category}</span>
                 <select onChange={this.changeCategory} defaultValue={this.query.category}>
                   {
                     channelCategories.map(item => (
                       <option key={item} value={item}>{i18nWords.channelCategory[item]}</option>
                     ))
                   }
-                  <option value={''}>所有</option>
+                  <option value={''}>{i18nWords.words.all}</option>
                 </select>
               </div>
               <div>
-                <span>國家：</span>
+                <span>{i18nWords.words.country}</span>
                 <select onChange={this.changeCountry} defaultValue={this.query.country}>
                   {
                     countryCategories.map(item => (
                       <option key={item} value={item}>{i18nWords.country[item]}</option>
                     ))
                   }
-                  <option value={''}>所有</option>
+                  <option value={''}>{i18nWords.words.all}</option>
                 </select>
               </div>
               <div>
-                <span>排序：</span>
+                <span>{i18nWords.words.order}</span>
                 <select onChange={this.changeOrder} defaultValue={this.query.sort}>
-                  <option value={'subscriberCount'}>訂閱</option>
-                  <option value={'viewCount'}>觀看</option>
-                  <option value={'videoCount'}>影片</option>
-                  <option value={'publishedAt'}>成立時間</option>
-                  <option value={'randomNumber'}>推薦(每小時更新)</option>
+                  <option value={'subscriberCount'}>{i18nWords.words.subscriber}</option>
+                  <option value={'viewCount'}>{i18nWords.words.view}</option>
+                  <option value={'videoCount'}>{i18nWords.words.video}</option>
+                  <option value={'publishedAt'}>{i18nWords.words.createTime}</option>
+                  <option value={'randomNumber'}>{i18nWords.words.recommendation}</option>
                 </select>
               </div>
             </div>
