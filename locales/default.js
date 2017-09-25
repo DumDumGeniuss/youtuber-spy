@@ -1,7 +1,6 @@
-export const languageRanking = ['zh-TW', 'en-US'];
+export const languageRanking = ['en', 'zh'];
 
 export const languageMap = {
-  'en-US': 'en-US',
-  'zh-TW': 'zh-TW',
-  'zh-CN': 'zh-TW',
+  'en': 'en-US',
+  'zh': 'zh-TW',
 };
