@@ -6,3 +6,4 @@ services:
      - "3000:3000"
     command:
         ['yarn', 'run', 'start']
+    restart: always
