@@ -45,5 +45,6 @@ export default {
     'Spain': '西班牙',
     'Australia': '澳洲',
     'France': '法國',
+    'SouthKorea': '南韓',
   }
 };
