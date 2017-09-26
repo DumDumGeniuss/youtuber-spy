@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 
 const HeadWrapper = (props) => {
-  const { title, description, type, image, url, site_name, fb_app_id } = props;
+  const { title, description, type, image, url, siteName, fbAppId } = props;
   return (
     <Head>
       <title>{title}</title>
@@ -12,8 +12,8 @@ const HeadWrapper = (props) => {
       <meta property={'og:type'} content={type} />
       <meta property={'og:image'} content={image} />
       <meta property={'og:url'} content={url} />
-      <meta property={'og:site_name'} content={site_name} />
-      <meta property={'fb:app_id'} content={fb_app_id} />
+      <meta property={'og:site_name'} content={siteName} />
+      <meta property={'fb:app_id'} content={fbAppId} />
       <meta name={'twitter:title'} content={title} />
       <meta name={'twitter:description'} content={description} />
       <meta name={'twitter:image'} content={image} />
@@ -28,8 +28,8 @@ HeadWrapper.propTypes = {
   type: PropTypes.string,
   image: PropTypes.string,
   url: PropTypes.string,
-  site_name: PropTypes.string,
-  fb_app_id: PropTypes.string,
+  siteName: PropTypes.string,
+  fbAppId: PropTypes.string,
 };
 
 HeadWrapper.defaultProps = {
@@ -38,8 +38,8 @@ HeadWrapper.defaultProps = {
   type: '',
   image: '',
   url: '',
-  site_name: '',
-  fb_app_id: '',
+  siteName: '',
+  fbAppId: '',
 };
 
 export default HeadWrapper;

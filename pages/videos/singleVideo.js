@@ -85,8 +85,8 @@ class SingleVideo extends React.Component {
           type={'website'}
           image={videoInfo.highThumbnails}
           url={`https://www.youtuberspy.com/videos/singleVideo?videoId=${this.props.query.videoId}`}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <MainLayoutContainer>
           <div className={'SingleVideo-zone'}>

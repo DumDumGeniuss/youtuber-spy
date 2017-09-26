@@ -169,15 +169,18 @@ class AllVideos extends React.Component {
           type={'website'}
           image={'https://www.youtuberspy.com/static/logo-facebook.png'}
           url={'https://www.youtuberspy.com/videos/allVideos'}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <MainLayoutContainer>
           <div className={'AllVideos-zone'}>
             <div className={'AllVideos-functionBar'}>
               <div>
                 <span>{i18nWords.words.keyword}：</span>
-                <input placeholder={this.query.keyword || i18nWords.sentences.enterKeyword} onChange={this.changeKeyword} />
+                <input
+                  placeholder={this.query.keyword || i18nWords.sentences.enterKeyword}
+                  onChange={this.changeKeyword}
+                />
               </div>
               <div>
                 <span>{i18nWords.words.category}：</span>

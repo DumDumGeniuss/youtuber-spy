@@ -109,8 +109,8 @@ class SingleChannel extends React.Component {
           type={'website'}
           image={channelInfo.bannerTvImageUrl}
           url={`https://www.youtuberspy.com/channels/singleChannel?channelId=${this.props.query.channelId}`}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <Head>
           <script src='https://apis.google.com/js/platform.js' />

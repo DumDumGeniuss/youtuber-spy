@@ -176,8 +176,8 @@ class Index extends React.Component {
           type={'website'}
           image={'https://www.youtuberspy.com/static/logo-facebook.png'}
           url={'https://www.youtuberspy.com/'}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <MainLayoutContainer>
           <div className={'Index-zone'}>
@@ -191,10 +191,13 @@ class Index extends React.Component {
             <div className={'Index-functionBar'}>
               <div>
                 <span>{i18nWords.words.keyword}：</span>
-                <input placeholder={this.query.keyword || i18nWords.sentences.enterKeyword} onChange={this.changeKeyword} />
+                <input
+                  placeholder={this.query.keyword || i18nWords.sentences.enterKeyword}
+                  onChange={this.changeKeyword}
+                />
               </div>
               <div>
-                <span>{i18nWords.words.category}</span>
+                <span>{i18nWords.words.category}：</span>
                 <select onChange={this.changeCategory} defaultValue={this.query.category}>
                   {
                     channelCategories.map(item => (
@@ -205,7 +208,7 @@ class Index extends React.Component {
                 </select>
               </div>
               <div>
-                <span>{i18nWords.words.country}</span>
+                <span>{i18nWords.words.country}：</span>
                 <select onChange={this.changeCountry} defaultValue={this.query.country}>
                   {
                     countryCategories.map(item => (
@@ -216,7 +219,7 @@ class Index extends React.Component {
                 </select>
               </div>
               <div>
-                <span>{i18nWords.words.order}</span>
+                <span>{i18nWords.words.order}：</span>
                 <select onChange={this.changeOrder} defaultValue={this.query.sort}>
                   <option value={'subscriberCount'}>{i18nWords.words.subscriber}</option>
                   <option value={'viewCount'}>{i18nWords.words.view}</option>

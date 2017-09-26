@@ -214,8 +214,8 @@ class AllCandidateChannels extends React.Component {
           type={'website'}
           image={'https://www.youtuberspy.com/static/logo-facebook.png'}
           url={'https://www.youtuberspy.com/candidateChannels/allCandidateChannels'}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         {this.state.showAddChannel ?
           <ChannelInputModal

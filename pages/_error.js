@@ -4,7 +4,7 @@ import ErrorBox from '../components/boxes/ErrorBox/ErrorBox';
 import MainLayoutContainer from '../containers/layouts/MainLayout/MainLayoutContainer';
 
 export default class Error extends React.Component {
-  static getInitialProps ({res, jsonPageRes}) {
+  static getInitialProps({ res, jsonPageRes }) {
     const statusFromJsonPage = jsonPageRes ? jsonPageRes.status : null;
     const statusCode = res ? res.statusCode : statusFromJsonPage;
     return { statusCode };

@@ -1,17 +1,17 @@
 import React from 'react';
-import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
-import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox'
+import ErrorBox from '../../components/boxes/ErrorBox/ErrorBox';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import SwitchButton from '../../components/buttons/SwitchButton/SwitchButton';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import CommentCard from '../../components/cards/CommentCard/CommentCard';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
-import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import { initStore } from '../../store/initStore';
 
 import * as articleApi from '../../apis/article';
 import * as commentApi from '../../apis/comment';
@@ -23,7 +23,6 @@ import stylesheet from './singleArticle.scss';
 
 class SingleArticle extends React.Component {
   static async getInitialProps({ query, store }) {
-
     try {
       const articleId = query.articleId;
       const result = await articleApi.getArticle(articleId);
@@ -33,12 +32,18 @@ class SingleArticle extends React.Component {
       const commentDefaultQuery = {
         order: 'asc',
         sort: 'createdAt',
-        articleId: articleId,
+        articleId,
         count: 40,
       };
 
       const getCommentsResult = await commentApi.getAllComments(commentDefaultQuery);
-      store.dispatch(commentAction.getComments(getCommentsResult.datas, getCommentsResult.totalCount, getCommentsResult.token));
+      store.dispatch(
+        commentAction.getComments(
+          getCommentsResult.datas,
+          getCommentsResult.totalCount,
+          getCommentsResult.token,
+        ),
+      );
 
       let newestCommentCreatedDate;
       const comments = getCommentsResult.datas;
@@ -59,7 +64,7 @@ class SingleArticle extends React.Component {
           status: e.status,
           message: e.message,
         },
-      }
+      };
     }
   }
 
@@ -81,19 +86,26 @@ class SingleArticle extends React.Component {
     this.newestCommentCreatedDate = this.props.newestCommentCreatedDate;
     this.isNoMoreData = false;
     this.lockLoading = false;
+
+    this.doTouchBottom = this.doTouchBottom.bind(this);
+    this.handleCommentChange = this.handleCommentChange.bind(this);
+    this.changeIsAnonymous = this.changeIsAnonymous.bind(this);
+    this.login = this.login.bind(this);
+    this.addComment = this.addComment.bind(this);
   }
 
   componentWillMount() {}
 
   componentDidMount() {
-    if (!this.props.error) {
-      var editor = new Quill('#editor', {
-        modules: { toolbar: false },
-        theme: 'snow',
-        readOnly: true,
-      });
-      editor.setContents(this.props.article.article.deltaContent.ops);
+    if (this.props.error) {
+      return;
     }
+    const editor = new Quill('#editor', {
+      modules: { toolbar: false },
+      theme: 'snow',
+      readOnly: true,
+    });
+    editor.setContents(this.props.article.article.deltaContent.ops);
   }
 
   componentWillReceiveProps(newProps) {
@@ -127,7 +139,7 @@ class SingleArticle extends React.Component {
       errorMessage: '',
     });
     if (event.target.value.length > 100) {
-      this.refs.commentInput.value = event.target.value.substring(0, 100);
+      this.commentInput.value = event.target.value.substring(0, 100);
     }
   }
 
@@ -147,28 +159,28 @@ class SingleArticle extends React.Component {
       anonymous: this.state.anonymous,
     };
     commentApi.addComment(query, data)
-      .then((result) => {
+      .then(() => {
         this.setState({ isAdding: false });
         this.commentQuery.startTime = '';
         this.isNoMoreData = false;
         this.props.getCommentsAsync([], this.commentQuery);
-        this.refs.commentInput.value = '';
+        this.commentInput.value = '';
       })
       .catch((error) => {
         this.setState({ isAdding: false });
         if (error.status === 403) {
           this.setState({
-            errorMessage: '很抱歉您的登入已經過期。'
+            errorMessage: '很抱歉您的登入已經過期。',
           });
         }
         if (error.status === 404) {
           this.setState({
-            errorMessage: '您所要回覆的文章已不存在'
+            errorMessage: '您所要回覆的文章已不存在',
           });
         }
         if (error.status === 411) {
           this.setState({
-            errorMessage: '文章不可為空或超過150字'
+            errorMessage: '文章不可為空或超過150字',
           });
         }
       });
@@ -198,16 +210,12 @@ class SingleArticle extends React.Component {
   }
 
   login() {
-    const rootPath = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
-    const pagePath = rootPath + 'articles/singleArticle'
+    const rootPath = `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ''}/`;
+    const pagePath = `${rootPath}articles/singleArticle`;
     const oauthUrl = youtubeApi.generateOauthUrl(
-      rootPath, { pathname: pagePath, query: { articleId: this.props.query.articleId } }
+      rootPath, { pathname: pagePath, query: { articleId: this.props.query.articleId } },
     );
-    window.open(oauthUrl, "_self");
-    return;
-  }
-
-  componentWillUnmount() {
+    window.open(oauthUrl, '_self');
   }
 
   render() {
@@ -231,19 +239,19 @@ class SingleArticle extends React.Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
         <HeadWrapper
-          title={'Youtuber看門狗-' + articleInfo.title}
+          title={`Youtuber看門狗-${articleInfo.title}`}
           description={articleInfo.rawContent}
           type={'website'}
-          image={'https://www.youtuberspy.com/static/forum-image.jpg'} 
-          url={'https://www.youtuberspy.com/articles/singleArticle?articleId=' + articleInfo._id}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          image={'https://www.youtuberspy.com/static/forum-image.jpg'}
+          url={`https://www.youtuberspy.com/articles/singleArticle?articleId${articleInfo._id}`}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer doTouchBottom={this.doTouchBottom.bind(this)}>
+        <MainLayoutContainer doTouchBottom={this.doTouchBottom}>
           <div className={'SingleArticle-zone'}>
             {
               isArtilceOwner ?
-                <Link href={'/articles/updateArticle?articleId=' + articleInfo._id}><a>
+                <Link href={`/articles/updateArticle?articleId=${articleInfo._id}`}><a>
                   <div className={'SingleArticle-functionZone'}>
                     <span className={'SingleArticle-button'}>編輯</span>
                   </div>
@@ -253,14 +261,19 @@ class SingleArticle extends React.Component {
             }
             <h1 className={'SingleArticle-title'}>{articleInfo.title}</h1>
             <div className={'SingleArticle-infoZone'}>
-              <img className={'SingleArticle-userPicture'} src={articleInfo.userPicture} />
+              <img alt={`user ${articleInfo.userName}`} className={'SingleArticle-userPicture'} src={articleInfo.userPicture} />
               <span className={'SingleArticle-userName'}>{ articleInfo.anonymous ? i18nWords.anonymous : articleInfo.userName}</span>
               <span className={'SingleArticle-date'}>發佈於 {moment(articleInfo.createdAt).format('YYYY-MM-DD')}</span>
             </div>
-            <div className={'SingleArticle-editor'} dangerouslySetInnerHTML={{__html: `
-              <div id="editor" style='background-color: white; min-height: 400px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;'>
-              </div>
-            `}}/>
+            <div
+              className={'SingleArticle-editor'}
+              dangerouslySetInnerHTML={{
+                __html: `
+                  <div id="editor" style='background-color: white; min-height: 400px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;'>
+                  </div>
+                `,
+              }}
+            />
 
             {
               this.state.errorMessage ?
@@ -272,28 +285,51 @@ class SingleArticle extends React.Component {
               userInfo.id ?
                 <div className={'SingleArticle-addCommentZone'}>
                   <div className={'SingleArticle-pictureZone'}>
-                    <img className={'SingleArticle-picture'} src={ this.state.anonymous ? '/static/anonymous.jpg' : userInfo.picture }/>
+                    <img
+                      alt={'anonymous'}
+                      className={'SingleArticle-picture'}
+                      src={this.state.anonymous ? '/static/anonymous.jpg' : userInfo.picture}
+                    />
                   </div>
                   <span className={'SingleArticle-userName'}>{ this.state.anonymous ? i18nWords.anonymous : userInfo.name }</span>
                   <div className={'SingleArticle-textAreaZone'}>
-                    <textarea ref={'commentInput'} onChange={this.handleCommentChange.bind(this)} rows={6} className={'SingleArticle-textArea'}/>
+                    <textarea
+                      ref={(ref) => { this.commentInput = ref; }}
+                      onChange={this.handleCommentChange}
+                      rows={6}
+                      className={'SingleArticle-textArea'}
+                    />
                   </div>
-                  <span className={'SingleArticle-lengthRestriction'}>{this.state.comment.length + '/100'}</span>
+                  <span className={'SingleArticle-lengthRestriction'}>{`${this.state.comment.length}/100`}</span>
                   <div className={'SingleArticle-addCommentButton'}>
-                    {this.state.isAdding ? <FaCircleONotch/> : null}
-                    <span onClick={this.addComment.bind(this)} className={'SingleArticle-addCommentButtonText'}>送出</span>
+                    {this.state.isAdding ? <FaCircleONotch /> : null}
+                    <span
+                      role={'button'}
+                      tabIndex={0}
+                      onClick={this.addComment}
+                      className={'SingleArticle-addCommentButtonText'}
+                    >
+                      送出
+                    </span>
                   </div>
                   <div className={'SingleArticle-anonymousButton'}>
                     <SwitchButton
                       isOn={this.state.anonymous}
                       text={this.state.anonymous ? '匿名' : '實名'}
-                      onClick={this.changeIsAnonymous.bind(this)}
+                      onClick={this.changeIsAnonymous}
                     />
                   </div>
                 </div>
                 :
                 <div className={'SingleArticle-pleaseLoginZone'}>
-                  <span onClick={this.login.bind(this)} className={'SingleArticle-pleaseLogin'}>點此登入留言</span>
+                  <span
+                    role={'button'}
+                    tabIndex={0}
+                    onClick={this.login}
+                    className={'SingleArticle-pleaseLogin'}
+                  >
+                    點此登入留言
+                  </span>
                 </div>
             }
             {
@@ -307,7 +343,7 @@ class SingleArticle extends React.Component {
                         userPicture: item.userPicture,
                         content: item.content,
                         createdAt: item.createdAt,
-                      }
+                      };
                       return (
                         <CommentCard
                           key={item._id}
@@ -335,20 +371,36 @@ class SingleArticle extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+SingleArticle.defaultProps = {
+  error: null,
+};
+
+SingleArticle.propTypes = {
+  user: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  query: PropTypes.object.isRequired,
+  commentDefaultQuery: PropTypes.object.isRequired,
+  newestCommentCreatedDate: PropTypes.string.isRequired,
+  error: PropTypes.object,
+  article: PropTypes.object.isRequired,
+  comment: PropTypes.object.isRequired,
+  getCommentsAsync: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => (
+  {
     article: state.article,
     user: state.user,
     comment: state.comment,
     i18n: state.i18n,
-  };
-};
+  }
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = dispatch => (
+  {
     getArticle: bindActionCreators(articleAction.getArticle, dispatch),
     getCommentsAsync: bindActionCreators(commentAction.getCommentsAsync, dispatch),
   }
-}
+);
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(SingleArticle)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(SingleArticle);

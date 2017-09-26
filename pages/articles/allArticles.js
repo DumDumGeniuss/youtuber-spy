@@ -1,20 +1,16 @@
 import React from 'react';
-import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 import moment from 'moment';
-import Router from 'next/router';
 
-import * as tinyHelper from '../../libs/tinyHelper';
 import HeadWrapper from '../../components/tags/HeadWrapper/HeadWrapper';
 import FaCircleONotch from 'react-icons/lib/fa/circle-o-notch';
 import Plus from 'react-icons/lib/fa/plus';
 import MainLayoutContainer from '../../containers/layouts/MainLayout/MainLayoutContainer';
-import PaginationBox from '../../components/boxes/PaginationBox/PaginationBox';
 import ArticleCard from '../../components/cards/ArticleCard/ArticleCard';
-import TitleSection from '../../components/sections/TitleSection/TitleSection';
-import { initStore, startClock, addCount, serverRenderClock } from '../../store/initStore';
+import { initStore } from '../../store/initStore';
 import * as browserAttributeAction from '../../actions/browserAttribute';
 
 import * as articleApi from '../../apis/article';
@@ -29,13 +25,23 @@ const defaultQuery = {
   keyword: '',
   count: 10,
 };
+
+const login = () => {
+  const rootPath = `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ''}/`;
+  const pagePath = `${rootPath}articles/allArticles`;
+  const oauthUrl = youtubeApi.generateOauthUrl(
+    rootPath, { pathname: pagePath },
+  );
+  window.open(oauthUrl, '_self');
+};
+
 // localStorage.setItem('state', 'off');
 class AllArticles extends React.Component {
   static async getInitialProps({ query, store }) {
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
-      newQuery[key] = valueFromQuery ? valueFromQuery : defaultQuery[key];
+      newQuery[key] = valueFromQuery || defaultQuery[key];
     });
     const result = await articleApi.getAllArticles(newQuery);
     store.dispatch(articleAction.getArticles(result.datas, result.totalCount, result.token));
@@ -71,11 +77,9 @@ class AllArticles extends React.Component {
     this.oldestArticleCreatedDate = this.props.oldestArticleCreatedDate;
     this.isNoMoreData = false;
     this.lockLoading = false;
-  }
 
-  componentWillMount() {}
-
-  componentDidMount() {
+    this.changeKeyword = this.changeKeyword.bind(this);
+    this.doTouchBottom = this.doTouchBottom.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -101,6 +105,12 @@ class AllArticles extends React.Component {
       } else {
         this.oldestArticleCreatedDate = new Date();
       }
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.searchKeyword) {
+      clearTimeout(this.searchKeyword);
     }
   }
 
@@ -135,26 +145,9 @@ class AllArticles extends React.Component {
     this.props.getArticlesAsync(this.props.article.articles, this.query);
   }
 
-  login() {
-    const rootPath = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/';
-    const oauthUrl = youtubeApi.generateOauthUrl(rootPath, { pathname: location.href });
-    window.open(oauthUrl, "_self");
-    return;
-  }
-
-  componentWillUnmount() {
-    if (this.searchKeyword) {
-      clearTimeout(this.searchKeyword);
-    }
-  }
-
   render() {
     const articles = this.props.article.articles;
-    const totalCount = this.props.article.totalCount;
     const user = this.props.user;
-    const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
-    let queryParam = tinyHelper.getQueryString(this.query, ['createdAt', 'updatedAt'], ['count']);
-    queryParam = queryParam.replace('page=' + this.query.page, 'page=$1');
     const i18nWords = this.props.i18n.words;
 
     return (
@@ -166,21 +159,26 @@ class AllArticles extends React.Component {
             全台第一個專屬Youtuber的討論平台「Youtuber看門狗」正式上線，想知道大家在紅什麼嗎？想知道更多你不知道的Youtuber嗎？快來加入討論吧！
           `}
           type={'website'}
-          image={'https://www.youtuberspy.com/static/forum-image.jpg'} 
+          image={'https://www.youtuberspy.com/static/forum-image.jpg'}
           url={'https://www.youtuberspy.com/articles/allArticles'}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer doTouchBottom={this.doTouchBottom.bind(this)}>
+        <MainLayoutContainer doTouchBottom={this.doTouchBottom}>
           <div className={'AllArticles-zone'}>
             <div className={'AllArticles-addArticleBar'}>
               {
-                user.userInfo ? 
+                user.userInfo ?
                   <Link href='/articles/addArticle'><a>
                     <span className={'AllArticles-articleFuncButton AllArticles-add'}>新增文章<Plus /></span>
                   </a></Link>
                   :
-                  <span onClick={this.login.bind(this)} className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}>
+                  <span
+                    role={'button'}
+                    tabIndex={0}
+                    onClick={login}
+                    className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}
+                  >
                     點此登入
                   </span>
               }
@@ -188,7 +186,7 @@ class AllArticles extends React.Component {
             <div className={'AllArticles-functionBar'}>
               <div>
                 <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword.bind(this)} />
+                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
               </div>
             </div>
             <div className={'AllArticles-contentZone'}>
@@ -207,7 +205,7 @@ class AllArticles extends React.Component {
                 return (
                   <Link
                     key={article._id}
-                    href={'/articles/singleArticle?articleId=' + article._id}
+                    href={`/articles/singleArticle?articleId=${article._id}`}
                   ><a>
                     <ArticleCard
                       article={article}
@@ -231,19 +229,32 @@ class AllArticles extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+AllArticles.propTypes = {
+  user: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  query: PropTypes.object.isRequired,
+  article: PropTypes.object.isRequired,
+  newQuery: PropTypes.object.isRequired,
+  oldestArticleCreatedDate: PropTypes.string.isRequired,
+  setRouterChangingStatus: PropTypes.func.isRequired,
+  getArticlesAsync: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => (
+  {
     article: state.article,
     user: state.user,
     i18n: state.i18n,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setRouterChangingStatus: bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
-    getArticlesAsync: bindActionCreators(articleAction.getArticlesAsync, dispatch),
   }
-}
+);
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllArticles)
+const mapDispatchToProps = dispatch => (
+  {
+    setRouterChangingStatus:
+      bindActionCreators(browserAttributeAction.setRouterChangingStatus, dispatch),
+    getArticlesAsync:
+      bindActionCreators(articleAction.getArticlesAsync, dispatch),
+  }
+);
+
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(AllArticles);

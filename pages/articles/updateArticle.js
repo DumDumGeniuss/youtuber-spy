@@ -228,7 +228,8 @@ class UpdateArticle extends React.Component {
           type={'website'}
           image={'https://www.youtuberspy.com/static/forum-image.jpg'}
           url={`https://www.youtuberspy.com/articles/singleArticle?articleId=${articleInfo._id}`}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <MainLayoutContainer>
           <div className={'UpdateArticle-zone'}>
@@ -309,11 +310,15 @@ class UpdateArticle extends React.Component {
   }
 }
 
+UpdateArticle.defaultProps = {
+  error: null,
+};
+
 UpdateArticle.propTypes = {
   article: PropTypes.object.isRequired,
   query: PropTypes.object.isRequired,
   // user: PropTypes.object.isRequired,
-  error: PropTypes.object.isRequired,
+  error: PropTypes.object,
   // i18n: PropTypes.object.isRequired,
 };
 

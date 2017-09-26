@@ -37,8 +37,8 @@ class PickYoutuber extends React.Component {
           type={'website'}
           image={pickedYoutuber.mediumThumbnails}
           url={'https://www.youtuberspy.com/campaigns/pickYoutuber'}
-          site_name={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
-          fb_app_id={'158925374651334'}
+          siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
+          fbAppId={'158925374651334'}
         />
         <MainLayoutContainer>
           <div className={'PickYoutuber-zone'}>
