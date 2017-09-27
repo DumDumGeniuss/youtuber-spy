@@ -17,6 +17,7 @@ import { initStore } from '../../store/initStore';
 import * as candidateChannelAction from '../../actions/candidateChannel';
 import * as candidateChannelApi from '../../apis/candidateChannel';
 import * as browserAttributeAction from '../../actions/browserAttribute';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './allCandidateChannels.scss';
 
@@ -29,7 +30,11 @@ const defaultQuery = {
 };
 // localStorage.setItem('state', 'off');
 class AllCandidateChannels extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
@@ -204,6 +209,7 @@ class AllCandidateChannels extends React.Component {
     const dataPage = parseInt(totalCount / this.query.count, 10) + 1;
     let queryParam = tinyHelper.getQueryString(this.query, [], ['count']);
     queryParam = queryParam.replace(`page=${this.query.page}`, 'page=$1');
+    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -227,7 +233,7 @@ class AllCandidateChannels extends React.Component {
             clickNo={this.showAddChannel(false)}
             isLoading={this.state.isAddChannelLoading}
           /> : null}
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'AllCandidateChannels-zone'}>
             <TitleSection
               titleFonts={'新增頻道'}
@@ -298,6 +304,7 @@ class AllCandidateChannels extends React.Component {
 }
 
 AllCandidateChannels.propTypes = {
+  i18n: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   newQuery: PropTypes.object.isRequired,
   candidateChannel: PropTypes.object.isRequired,
@@ -310,6 +317,7 @@ const mapStateToProps = state => (
   {
     candidateChannel: state.candidateChannel,
     user: state.user,
+    i18n: state.i18n,
   }
 );
 

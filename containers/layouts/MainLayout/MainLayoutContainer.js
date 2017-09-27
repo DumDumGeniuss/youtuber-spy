@@ -69,15 +69,9 @@ class MainLayoutContainer extends React.Component {
 
   login() {
     const currentToken = localStorage.getItem('youtubeToken');
-    /* Get full site url */
-    // youtubeApi.getUserInfo(currentToken)
-    //   .then((result) => {
-    //     if (!result) {
-          const oauthUrl = youtubeApi.generateOauthUrl(this.rootPath, { pathname: this.rootPath, query: {} });
-          window.open(oauthUrl, "_self");
-          return;
-      //   }
-      // });
+    const oauthUrl = youtubeApi.generateOauthUrl(this.rootPath, { pathname: this.rootPath, query: {} });
+    window.open(oauthUrl, "_self");
+    return;
   }
 
   logout() {
@@ -98,6 +92,16 @@ class MainLayoutContainer extends React.Component {
   }
 
   render() {
+    const i18nWords = this.props.i18nWords;
+    const words = {
+      channel: i18nWords.words.channel,
+      video: i18nWords.words.video,
+      forum: i18nWords.words.forum,
+      login: i18nWords.words.login,
+      logout: i18nWords.words.logout,
+      youtuberspy: i18nWords.words.youtuberspy,
+    };
+
     return (
       <MainLayout
         userInfo={this.props.user.userInfo}
@@ -108,7 +112,7 @@ class MainLayoutContainer extends React.Component {
         windowWidth={this.props.browserAttribute.windowWidth}
         windowHeight={this.props.browserAttribute.windowHeight}
         doTouchBottom={this.props.doTouchBottom}
-        i18nWords={this.props.i18n.words}
+        words={words}
       />
     );
   }
@@ -118,7 +122,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     browserAttribute: state.browserAttribute,
-    i18n: state.i18n,
   };
 };
 

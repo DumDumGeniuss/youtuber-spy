@@ -172,7 +172,7 @@ class AllVideos extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'AllVideos-zone'}>
             <div className={'AllVideos-functionBar'}>
               <div>

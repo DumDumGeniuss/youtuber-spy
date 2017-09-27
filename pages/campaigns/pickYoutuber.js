@@ -9,11 +9,16 @@ import TitleSection from '../../components/sections/TitleSection/TitleSection';
 import { initStore } from '../../store/initStore';
 
 import * as channelApi from '../../apis/channel';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './pickYoutuber.scss';
 
 class PickYoutuber extends React.Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, req, store }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     const randomResult = await channelApi.getRandomChannel();
     const pickedYoutuber = randomResult.data;
     return {
@@ -27,6 +32,7 @@ class PickYoutuber extends React.Component {
     this.state = {};
   }
   render() {
+    const i18nWords = this.props.i18n.words;
     const pickedYoutuber = this.props.pickedYoutuber;
     return (
       <div>
@@ -40,7 +46,7 @@ class PickYoutuber extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'PickYoutuber-zone'}>
             <TitleSection
               titleFonts={'Youtuber許願池'}
@@ -70,6 +76,7 @@ class PickYoutuber extends React.Component {
 }
 
 PickYoutuber.propTypes = {
+  i18n: PropTypes.object.isRequired,
   query: PropTypes.object.isRequired,
   pickedYoutuber: PropTypes.object.isRequired,
 };
@@ -78,6 +85,7 @@ const mapStateToProps = state => (
   {
     channel: state.channel,
     user: state.user,
+    i18n: state.i18n,
   }
 );
 

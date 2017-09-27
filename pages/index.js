@@ -179,7 +179,7 @@ class Index extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'Index-zone'}>
             <div className={'Index-addChannelBar'}>
               <Link href='/candidateChannels/allCandidateChannels'><a>

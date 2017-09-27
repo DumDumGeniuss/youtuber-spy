@@ -15,11 +15,16 @@ import { initStore } from '../../store/initStore';
 
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './updateArticle.scss';
 
 class UpdateArticle extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     try {
       const articleId = query.articleId;
       const result = await articleApi.getArticle(articleId);
@@ -192,7 +197,7 @@ class UpdateArticle extends React.Component {
   render() {
     const articleInfo = this.props.article.article;
     // const userInfo = this.props.user.userInfo || {};
-    // const i18nWords = this.props.i18n.words;
+    const i18nWords = this.props.i18n.words;
 
     if (this.props.error) {
       return (
@@ -231,7 +236,7 @@ class UpdateArticle extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'UpdateArticle-zone'}>
             <div className={'UpdateArticle-functionZone'}>
               <span
@@ -319,7 +324,7 @@ UpdateArticle.propTypes = {
   query: PropTypes.object.isRequired,
   // user: PropTypes.object.isRequired,
   error: PropTypes.object,
-  // i18n: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => (

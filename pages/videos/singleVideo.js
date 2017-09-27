@@ -12,12 +12,17 @@ import YoutubeVideoCard from '../../components/cards/YoutubeVideoCard/YoutubeVid
 import { initStore } from '../../store/initStore';
 import * as videoAction from '../../actions/video';
 import * as videoApi from '../../apis/video';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './singleVideo.scss';
 
 // localStorage.setItem('state', 'off');
 class SingleVideo extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     let video;
 
     try {
@@ -88,7 +93,7 @@ class SingleVideo extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'SingleVideo-zone'}>
             <h1 className={'SingleVideo-title'}>{videoInfo.title}</h1>
             <div className={'SingleVideo-playVideoZone'}>
@@ -121,20 +126,20 @@ class SingleVideo extends React.Component {
             </h2>
             <div className={'SingleVideo-statisticZone'}>
               <div className={'SingleVideo-statistic'}>
-                <span>觀看 {videoInfo.viewCount.toLocaleString()}</span>
+                <span>{i18nWords.words.view} {videoInfo.viewCount.toLocaleString()}</span>
               </div>
               <div className={'SingleVideo-statistic'}>
-                <span>時間 {moment(new Date(videoInfo.publishedAt)).format('YYYY-MM-DD')}</span>
+                <span>{i18nWords.words.time} {moment(new Date(videoInfo.publishedAt)).format('YYYY-MM-DD')}</span>
               </div>
               <div className={'SingleVideo-statistic'}>
-                <span>喜歡 {videoInfo.likeCount.toLocaleString()}</span>
+                <span>{i18nWords.words.like} {videoInfo.likeCount.toLocaleString()}</span>
               </div>
               <div className={'SingleVideo-statistic'}>
-                <span>不喜歡 {videoInfo.dislikeCount.toLocaleString()}</span>
+                <span>{i18nWords.words.dislike} {videoInfo.dislikeCount.toLocaleString()}</span>
               </div>
             </div>
             <p className={'SingleVideo-description'}>{videoInfo.description || '這個影片沒有任何的介紹'}</p>
-            <h1 className={'SingleVideo-zoneTitle'}>相同類型影片</h1>
+            <h1 className={'SingleVideo-zoneTitle'}>{i18nWords.phrases.relativeVideos}</h1>
             <div className={'SingleVideo-videosZone'}>
               {
                 randomSameCategoryVideos.length === 0 ?

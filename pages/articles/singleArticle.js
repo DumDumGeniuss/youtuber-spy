@@ -18,11 +18,16 @@ import * as commentApi from '../../apis/comment';
 import * as youtubeApi from '../../apis/youtube';
 import * as articleAction from '../../actions/article';
 import * as commentAction from '../../actions/comment';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './singleArticle.scss';
 
 class SingleArticle extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     try {
       const articleId = query.articleId;
       const result = await articleApi.getArticle(articleId);
@@ -247,7 +252,7 @@ class SingleArticle extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer doTouchBottom={this.doTouchBottom}>
+        <MainLayoutContainer doTouchBottom={this.doTouchBottom} i18nWords={i18nWords}>
           <div className={'SingleArticle-zone'}>
             {
               isArtilceOwner ?

@@ -16,6 +16,7 @@ import * as browserAttributeAction from '../../actions/browserAttribute';
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
 import * as youtubeApi from '../../apis/youtube';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './allArticles.scss';
 
@@ -37,7 +38,11 @@ const login = () => {
 
 // localStorage.setItem('state', 'off');
 class AllArticles extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     const newQuery = {};
     Object.keys(defaultQuery).forEach((key) => {
       const valueFromQuery = query[key];
@@ -164,7 +169,7 @@ class AllArticles extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer doTouchBottom={this.doTouchBottom}>
+        <MainLayoutContainer doTouchBottom={this.doTouchBottom} i18nWords={i18nWords}>
           <div className={'AllArticles-zone'}>
             <div className={'AllArticles-addArticleBar'}>
               {

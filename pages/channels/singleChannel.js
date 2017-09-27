@@ -15,12 +15,17 @@ import * as channelAction from '../../actions/channel';
 import * as channelStatisticAction from '../../actions/channelStatistic';
 import * as channelApi from '../../apis/channel';
 import * as videoApi from '../../apis/video';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './singleChannel.scss';
 
 // localStorage.setItem('state', 'off');
 class SingleChannel extends React.Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, store, req }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     const videoQueryNewest = {
       page: 1,
       count: 5,
@@ -91,14 +96,14 @@ class SingleChannel extends React.Component {
       );
     }
 
+    const i18nWords = this.props.i18n.words;
     const channelInfo = this.props.channel.channel;
     const hottestVideos = this.props.hottestVideos;
     const newestVideos = this.props.newestVideos;
     const channelStatistics = this.props.channelStatistic.channelStatistics;
-    const viewCountsChartConfig = tinyHelper.generateDailyChartConfig(channelStatistics, '每日觀看數', 'date', 'viewCount', 10);
-    const subscriberCountsChartConfig = tinyHelper.generateDailyChartConfig(channelStatistics, '新增訂閱數', 'date', 'subscriberCount', 10);
+    const viewCountsChartConfig = tinyHelper.generateDailyChartConfig(channelStatistics, i18nWords.phrases.everydayView, 'date', 'viewCount', 10);
+    const subscriberCountsChartConfig = tinyHelper.generateDailyChartConfig(channelStatistics, i18nWords.phrases.everydaySubs, 'date', 'subscriberCount', 10);
     const socialInfos = channelInfo.socialInfos || [];
-    const i18nWords = this.props.i18n.words;
 
     return (
       <div>
@@ -115,7 +120,7 @@ class SingleChannel extends React.Component {
         <Head>
           <script src='https://apis.google.com/js/platform.js' />
         </Head>
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'SingleChannel-zone'}>
             <div className={'SingleChannel-titleZone'}>
               <figure className={'SingleChannel-backgroundImage'}>
@@ -126,7 +131,7 @@ class SingleChannel extends React.Component {
               </figure>
               <div className={'SingleChannel-decorateZone'} />
               <span className={'SingleChannel-countryName'}>
-                {channelInfo.country}
+                {i18nWords.country[channelInfo.country]}
               </span>
               <div className={'SingleChannel-subscriber'}>
                 <div
@@ -141,16 +146,18 @@ class SingleChannel extends React.Component {
             <h2 className={'SingleChannel-smallTitle'}>{i18nWords.channelCategory[channelInfo.category] || ''}</h2>
             <div className={'SingleChannel-statisticZone'}>
               <div className={'SingleChannel-statistic'}>
-                <span>訂閱 {channelInfo.subscriberCount.toLocaleString()}</span>
+                <span>
+                  {i18nWords.words.subscriber} {channelInfo.subscriberCount.toLocaleString()}
+                </span>
               </div>
               <div className={'SingleChannel-statistic'}>
-                <span>觀看 {channelInfo.viewCount.toLocaleString()}</span>
+                <span>{i18nWords.words.view} {channelInfo.viewCount.toLocaleString()}</span>
               </div>
               <div className={'SingleChannel-statistic'}>
-                <span>影片 {channelInfo.videoCount.toLocaleString()}</span>
+                <span>{i18nWords.words.video} {channelInfo.videoCount.toLocaleString()}</span>
               </div>
               <div className={'SingleChannel-statistic'}>
-                <span>評論 {channelInfo.commentCount.toLocaleString()}</span>
+                <span>{i18nWords.words.comment} {channelInfo.commentCount.toLocaleString()}</span>
               </div>
             </div>
             <p className={'SingleChannel-description'}>{channelInfo.description || '這個頻道沒有任何的介紹'}</p>
@@ -166,7 +173,7 @@ class SingleChannel extends React.Component {
                 ))
               }
             </div>
-            <h1 className={'SingleChannel-zoneTitle'}>頻道數據</h1>
+            <h1 className={'SingleChannel-zoneTitle'}>{i18nWords.phrases.channelStatistics}</h1>
             {viewCountsChartConfig.series[0].data.length === 0 ?
               <h3 className={'SingleChannel-noDatasText'}>由於此頻道最近新增，目前沒有歷史觀看數據</h3>
               :
@@ -181,7 +188,7 @@ class SingleChannel extends React.Component {
                 config={subscriberCountsChartConfig}
               />
             }
-            <h1 className={'SingleChannel-zoneTitle'}>最新影片</h1>
+            <h1 className={'SingleChannel-zoneTitle'}>{i18nWords.phrases.latestVideos}</h1>
             <div className={'SingleChannel-videosZone'}>
               {
                 newestVideos.length === 0 ?
@@ -195,7 +202,7 @@ class SingleChannel extends React.Component {
                   ))
               }
             </div>
-            <h1 className={'SingleChannel-zoneTitle'}>熱門影片</h1>
+            <h1 className={'SingleChannel-zoneTitle'}>{i18nWords.phrases.hottestVideos}</h1>
             <div className={'SingleChannel-videosZone'}>
               {
                 hottestVideos.length === 0 ?

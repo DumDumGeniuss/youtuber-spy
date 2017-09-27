@@ -6,7 +6,10 @@ export default {
     country: '國家',
     order: '排序',
     view: '觀看',
+    statistic: '數據',
+    comment: '評論',
     subscriber: '訂閱',
+    time: '時間',
     createTime: '成立時間',
     publishTime: '發布時間',
     recommendation: '推薦',
@@ -18,6 +21,17 @@ export default {
     login: '登入',
     logout: '登出',
     days: '天',
+    like: '喜歡',
+    dislike: '不喜歡',
+
+  },
+  phrases: {
+    everydayView: '每日觀看數',
+    everydaySubs: '每日訂閱數',
+    channelStatistics: '頻道數據',
+    latestVideos: '最新影片',
+    hottestVideos: '熱門影片',
+    relativeVideos: '相關影片',
   },
   sentences: {
     checkNewChannels: '查看新增頻道',

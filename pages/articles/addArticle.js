@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
@@ -14,11 +14,16 @@ import { initStore } from '../../store/initStore';
 
 import * as articleApi from '../../apis/article';
 import * as articleAction from '../../actions/article';
+import * as i18nAction from '../../actions/i18n';
 
 import stylesheet from './addArticle.scss';
 
 class AddArticle extends React.Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, req, store }) {
+    if (req) {
+      store.dispatch(i18nAction.changeLanguage(req.headers['accept-language']));
+    }
+
     return {
       query,
     };
@@ -122,6 +127,7 @@ class AddArticle extends React.Component {
   }
 
   render() {
+    const i18nWords = this.props.i18n.words;
     return (
       <div>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -134,7 +140,7 @@ class AddArticle extends React.Component {
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
-        <MainLayoutContainer>
+        <MainLayoutContainer i18nWords={i18nWords}>
           <div className={'AddArticle-zone'}>
             <TitleSection
               titleFonts={'發表文章'}
@@ -229,12 +235,15 @@ class AddArticle extends React.Component {
   }
 }
 
-AddArticle.propTypes = {};
+AddArticle.propTypes = {
+  i18n: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => (
   {
     article: state.article,
     user: state.user,
+    i18n: state.i18n,
   }
 );
 
