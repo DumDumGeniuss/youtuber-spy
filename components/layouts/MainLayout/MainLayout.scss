@@ -67,7 +67,7 @@
       display: none;
       padding: 10px;
 
-      @media (max-width: $large-screen) {
+      @media (max-width: $medium-screen) {
         display: inline-block;
       }
 
@@ -118,7 +118,7 @@
       transform: translate(-50%, 0);
       height: 50px;
 
-      @media (max-width: $large-screen) {
+      @media (max-width: $medium-screen) {
         display: none;
       }
 
@@ -140,7 +140,7 @@
       @include position(absolute, $right: 10px);
       height: 50px;
 
-      @media (max-width: $large-screen) {
+      @media (max-width: $medium-screen) {
         display: none;
       }
 
@@ -174,7 +174,7 @@
   background-color: $heavy-blue;
   width: 100%;
 
-  @media (max-width: $large-screen) {
+  @media (max-width: $medium-screen) {
     display: block;
   }
 
