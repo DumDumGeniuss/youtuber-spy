@@ -49,13 +49,13 @@ const setMessage = (score, questionCount) => {
 
 
 const defaultQuery = {
-  sort: 'subscriberCount',
+  sort: 'publishedAt',
   order: 'desc',
   keyword: '',
   category: '',
   country: '',
   page: 1,
-  count: 40,
+  count: 1000,
 };
 // localStorage.setItem('state', 'off');
 class GuessYoutuber extends React.Component {
