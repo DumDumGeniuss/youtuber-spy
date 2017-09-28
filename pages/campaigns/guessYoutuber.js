@@ -142,7 +142,7 @@ class GuessYoutuber extends React.Component {
             `}
           type={'website'}
           image={'https://www.youtuberspy.com/static/youtuber-select.jpg'}
-          url={'https://www.youtuberspy.com/'}
+          url={'https://www.youtuberspy.com/campaigns/guessYoutuber'}
           siteName={'Youtuber看門狗-在這裡發掘您喜歡的Youtubers！'}
           fbAppId={'158925374651334'}
         />
