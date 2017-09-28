@@ -4,7 +4,7 @@ import stylesheet from './TitleSection.scss';
 
 const TitleSection = props =>
   (
-    <section className={'TitleSection-titleSection'}>
+    <section className={'TitleSection-zone'}>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <h1 className={'TitleSection-title'}>{props.titleFonts}</h1>
       <p className={'TitleSection-text'}>

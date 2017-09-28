@@ -3,7 +3,7 @@ import * as videoApis from './video';
 jest.mock('../libs/tinyHelper');
 import * as tinyHelper from '../libs/tinyHelper';
 
-jest.mock('isomorphic-fetch');
+// jest.mock('isomorphic-fetch');
 import fetch from 'isomorphic-fetch';
 
 test('Test get all videos api', async function () {

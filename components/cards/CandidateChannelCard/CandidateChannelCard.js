@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import stylesheet from './CandidateChannelCard.scss';
 
-class YoutuberChannelCard extends React.Component {
+class CandidateChannelCard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -73,15 +73,15 @@ class YoutuberChannelCard extends React.Component {
   }
 }
 
-YoutuberChannelCard.defaultProps = {
+CandidateChannelCard.defaultProps = {
   isSuperUser: null,
 };
 
-YoutuberChannelCard.propTypes = {
+CandidateChannelCard.propTypes = {
   candidateChannelInfo: PropTypes.object.isRequired,
   isSuperUser: PropTypes.bool,
   clickVerify: PropTypes.func.isRequired,
   clickDelete: PropTypes.func.isRequired,
 };
 
-export default YoutuberChannelCard;
+export default CandidateChannelCard;

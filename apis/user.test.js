@@ -3,7 +3,7 @@ import * as userApis from './user';
 jest.mock('../libs/tinyHelper');
 import * as tinyHelper from '../libs/tinyHelper';
 
-jest.mock('isomorphic-fetch');
+// jest.mock('isomorphic-fetch');
 import fetch from 'isomorphic-fetch';
 
 test('Test add user api', async function () {

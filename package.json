@@ -4,8 +4,8 @@
   "description": "Collect youtuber's info",
   "author": "DumDumGeniuss",
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint pages reducers constants components store actions libs",
-    "test": "./node_modules/.bin/jest",
+    "eslint": "eslint pages reducers constants components store actions libs",
+    "test": "jest",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -18,7 +18,6 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "es6-promise": "^4.1.0",
-    "firebase": "^4.1.1",
     "glob": "^7.1.2",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
@@ -26,7 +25,6 @@
     "next-redux-wrapper": "^1.1.2",
     "node-sass": "^4.5.3",
     "normalize.css": "^7.0.0",
-    "now": "^6.3.1",
     "postcss-easy-import": "^2.1.0",
     "postcss-loader": "^2.0.5",
     "prop-types": "^15.5.10",
@@ -45,11 +43,21 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-15": "^1.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
-    "jest": "^21.0.2"
+    "jest": "^21.0.2",
+    "react-test-renderer": "^16.0.0"
+  },
+  "jest": {
+    "setupFiles": ["<rootDir>/setupTest.js"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }

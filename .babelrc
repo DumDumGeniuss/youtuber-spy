@@ -1,19 +1,38 @@
 {
-  "plugins": [
-    [
-      "wrap-in-js",
-      {
-        "extensions": ["css$", "scss$"]
-      }
-    ]
-  ],
-  "presets": [
-    "next/babel"
-  ],
-  "ignore": [],
   "env": {
+    "development": {
+      "plugins": [
+        [
+          "wrap-in-js",
+          {
+            "extensions": ["css$", "scss$"]
+          }
+        ]
+      ],
+      "presets": [
+        "next/babel"
+      ],
+      "ignore": [],
+    },
+    "production": {
+      "plugins": [
+        [
+          "wrap-in-js",
+          {
+            "extensions": ["css$", "scss$"]
+          }
+        ]
+      ],
+      "presets": [
+        "next/babel"
+      ],
+      "ignore": [],
+    },
     "test": {
-      "presets": [["es2015"], "react"]
+      "presets": [
+        ["env", { "modules": "commonjs" }],
+        "next/babel"
+      ]
     }
   }
 }
