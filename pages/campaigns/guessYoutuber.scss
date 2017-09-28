@@ -1,0 +1,65 @@
+@import 'normalize.css';
+@import '../../styles/variables.scss';
+@import '../../styles/placeholders.scss';
+@import '../../styles/keyframes.scss';
+
+.GuessYoutuber-zone {
+  position: relative;
+  width: 100%;
+  background-color: white;
+  margin-top: 10px;
+}
+
+.GuessYoutuber-zoneTitle {
+	padding: 10px;
+	text-align: center;
+}
+
+.GuessYoutuber-message {
+	@extend %flex-center;
+	padding: 10px;
+	color: $red;
+	font-size: 1.5em;
+}
+
+.GuessYoutuber-channelPictureZone {
+	@extend %flex-center;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.GuessYoutuber-zoneSubTitle {
+	text-align: center;
+	padding: 5px 0;
+}
+
+.GuessYoutuber-selectButtonZone {
+	@extend %inline-flex-center;
+	padding: 20px 0;
+	width: 50%;
+
+	.GuessYoutuber-selectButton {
+		width: 200px; 
+		padding: 10px;
+		text-align: center;
+		border-radius: 10px;
+		word-break: break-all;
+		background-color: $orange;
+		color: $white;
+		border: 3px solid $light-red;
+
+    	@media (max-width: $medium-screen) {
+    		width: 120px; 
+    	}
+
+		&:hover {
+			cursor: pointer;
+			background-color: $light-orange;
+			border: 3px solid $red
+		}
+
+		&:focus {
+    		outline: none;
+		}
+	}
+}
