@@ -18,7 +18,7 @@
   position: fixed;
   display: inline-block;
   left: 0;
-  top: 50%;
+  bottom: 20%;
   transform: translate(0, -50%);
   z-index: 3;
 
@@ -206,6 +206,31 @@
   .MainLayout-fbLikeZone {
     display: block;
     overflow: hidden;
+  }
+
+  .MainLayout-campaignBox {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: $blue;
+    border: 1px solid $heavy-blue;
+
+    &:hover {
+      background-color: $light-blue;
+      cursor: pointer;
+    }
+
+    .MainLayout-campaignTitle {
+      margin: 0;
+      padding: 0;
+      font-size: 1.5em;
+      color: $white;
+    }
+
+    .MainLayout-campaignSubTitle {
+      margin: 10px 0 0 0;
+      font-size: 1em;
+      color: $white;
+    }
   }
 }
 

@@ -171,9 +171,25 @@ class MainLayout extends React.Component {
               data-hide-cover={false}
               data-show-facepile
               data-adapt-container-width
-              data-tabs={'timeline'}
+              data-tabs={''}
             />
           </div>
+          <Link href={'/campaigns/pickYoutuber'}><a>
+            <div className={'MainLayout-campaignBox'}>
+              <h1 className={'MainLayout-campaignTitle'}>Youtuber抽抽樂</h1>
+              <p className={'MainLayout-campaignSubTitle'}>
+                看看您的本命Youtuber之誰吧～
+              </p>
+            </div>
+          </a></Link>
+          <Link href={'/campaigns/guessYoutuber'}><a>
+            <div className={'MainLayout-campaignBox'}>
+              <h1 className={'MainLayout-campaignTitle'}>Youtuber超級認識王</h1>
+              <p className={'MainLayout-campaignSubTitle'}>
+                挑戰看看你知道多少Youtuber吧！
+              </p>
+            </div>
+          </a></Link>
         </div>
         <footer className={'MainLayout-footer'}>
           <span className={'MainLayout-center'}>
