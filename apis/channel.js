@@ -15,6 +15,7 @@ export const getAllChannels = async function (query) {
     country: query.country || '',
     page: query.page || '',
     count: query.count || '',
+    dataSet: query.dataSet || '',
   };
   const queryString = tinyHelper.getQueryString(finalQuery);
   const result = await fetch(apiUrl + queryString, {

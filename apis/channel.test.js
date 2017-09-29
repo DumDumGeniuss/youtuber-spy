@@ -21,13 +21,14 @@ test('Test get all channels api', async function () {
     };  
   });
 
-  const result = await channelApis.getAllChannels({});
+  const result = await channelApis.getAllChannels({ dataSet: 'basic'});
 
   expect(fetch.mock.calls.length).toBe(1);
 
   expect(tinyHelper.getQueryString.mock.calls.length).toBe(1);
   expect(tinyHelper.getQueryString.mock.calls[0][0].sort).toBe('');
   expect(tinyHelper.getQueryString.mock.calls[0][0].order).toBe('');
+  expect(tinyHelper.getQueryString.mock.calls[0][0].dataSet).toBe('basic');
 
   expect(result.datas.length).toBe(3);
   expect(result.totalCount).toBe(100);

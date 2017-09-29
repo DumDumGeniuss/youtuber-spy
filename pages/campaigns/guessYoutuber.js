@@ -56,6 +56,7 @@ const defaultQuery = {
   country: '',
   page: 1,
   count: 1000,
+  dataSet: 'basic',
 };
 // localStorage.setItem('state', 'off');
 class GuessYoutuber extends React.Component {
