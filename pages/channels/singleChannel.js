@@ -199,7 +199,7 @@ class SingleChannel extends React.Component {
                       key={item._id}
                       videoInfo={item}
                       i18nWords={{
-                        video: i18nWords.words.video,
+                        time: i18nWords.words.time,
                         view: i18nWords.words.view,
                       }}
                     />
@@ -217,7 +217,7 @@ class SingleChannel extends React.Component {
                       key={item._id}
                       videoInfo={item}
                       i18nWords={{
-                        video: i18nWords.words.video,
+                        time: i18nWords.words.time,
                         view: i18nWords.words.view,
                       }}
                     />
