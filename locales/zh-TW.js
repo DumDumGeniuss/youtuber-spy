@@ -32,11 +32,15 @@ export default {
     days: '天',
     like: '喜歡',
     dislike: '不喜歡',
-
+    pass: '通過',
+    wait: '等待',
   },
   phrases: {
     everydayView: '每日觀看數',
     everydaySubs: '每日訂閱數',
+    clickToLogin: '點此登入',
+    addChannel: '新增頻道',
+    loginToAdd: '登入已新增頻道',
     channelStatistics: '頻道數據',
     latestVideos: '最新影片',
     hottestVideos: '熱門影片',

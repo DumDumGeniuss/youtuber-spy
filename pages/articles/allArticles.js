@@ -184,14 +184,17 @@ class AllArticles extends React.Component {
                     onClick={login}
                     className={'AllArticles-articleFuncButton AllArticles-pleasLogin'}
                   >
-                    點此登入
+                    {i18nWords.phrases.clickToLogin}
                   </span>
               }
             </div>
             <div className={'AllArticles-functionBar'}>
               <div>
-                <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
+                <span>{i18nWords.words.keyword}：</span>
+                <input
+                  placeholder={this.query.keyword || i18nWords.words.keyword}
+                  onChange={this.changeKeyword}
+                />
               </div>
             </div>
             <div className={'AllArticles-contentZone'}>

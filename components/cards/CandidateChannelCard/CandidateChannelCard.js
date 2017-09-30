@@ -25,6 +25,7 @@ class CandidateChannelCard extends React.Component {
 
   render() {
     const candidateChannelInfo = this.props.candidateChannelInfo;
+    const i18nWords = this.props.i18nWords;
 
     return (
       <div className={'CandidateChannelCard-zone'}>
@@ -44,9 +45,9 @@ class CandidateChannelCard extends React.Component {
           }
           {
             candidateChannelInfo.isVerified ?
-              <span className={'CandidateChannelCard-authVerify'}>通過</span>
+              <span className={'CandidateChannelCard-authVerify'}>{i18nWords.pass}</span>
               :
-              <span className={'CandidateChannelCard-authWait'}>等待</span>
+              <span className={'CandidateChannelCard-authWait'}>{i18nWords.wait}</span>
           }
         </div>
         <div className={'CandidateChannelCard-channelZone'}>
@@ -59,12 +60,12 @@ class CandidateChannelCard extends React.Component {
           <p>{candidateChannelInfo.description || '此頻道沒有介紹...'}</p>
           <div className={'CandidateChannelCard-statisticZone'}>
             <section className={'CandidateChannelCard-statistic'}>
-              <h3 className={'CandidateChannelCard-statItem'}>訂閱數 {candidateChannelInfo.subscriberCount.toLocaleString()}</h3>
-              <h3 className={'CandidateChannelCard-statItem'}>觀看數 {candidateChannelInfo.viewCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>{i18nWords.subscriber} {candidateChannelInfo.subscriberCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>{i18nWords.view} {candidateChannelInfo.viewCount.toLocaleString()}</h3>
             </section>
             <section className={'CandidateChannelCard-statistic'}>
-              <h3 className={'CandidateChannelCard-statItem'}>影片數 {candidateChannelInfo.videoCount.toLocaleString()}</h3>
-              <h3 className={'CandidateChannelCard-statItem'}>評論數 {candidateChannelInfo.commentCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>{i18nWords.video} {candidateChannelInfo.videoCount.toLocaleString()}</h3>
+              <h3 className={'CandidateChannelCard-statItem'}>{i18nWords.comment} {candidateChannelInfo.commentCount.toLocaleString()}</h3>
             </section>
           </div>
         </div>
@@ -82,6 +83,7 @@ CandidateChannelCard.propTypes = {
   isSuperUser: PropTypes.bool,
   clickVerify: PropTypes.func.isRequired,
   clickDelete: PropTypes.func.isRequired,
+  i18nWords: PropTypes.object.isRequired,
 };
 
 export default CandidateChannelCard;

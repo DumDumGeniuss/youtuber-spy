@@ -250,24 +250,27 @@ class AllCandidateChannels extends React.Component {
                   className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-add'}
                   onClick={this.showAddChannel(true)}
                 >
-                  新增頻道<Plus />
+                  {i18nWords.phrases.addChannel}<Plus />
                 </span>
                 :
-                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>登入以新增頻道</span>}
+                <span className={'AllCandidateChannels-channelFuncButton AllCandidateChannels-pleasLogin'}>{i18nWords.phrases.loginToAdd}</span>}
             </div>
             <div className={'AllCandidateChannels-functionBar'}>
               {this.state.isLoading ? <div><FaCircleONotch /></div> : null}
               <div>
-                <span>關鍵字：</span>
-                <input placeholder={this.query.keyword || '輸入關鍵字'} onChange={this.changeKeyword} />
+                <span>{i18nWords.words.keyword}：</span>
+                <input
+                  placeholder={this.query.keyword || i18nWords.words.keyword}
+                  onChange={this.changeKeyword}
+                />
               </div>
               <div>
-                <span>排序：</span>
+                <span>{i18nWords.words.order}：</span>
                 <select onChange={this.changeOrder} defaultValue={'addTime'}>
-                  <option value={'subscriberCount'}>訂閱</option>
-                  <option value={'viewCount'}>觀看</option>
-                  <option value={'videoCount'}>影片</option>
-                  <option value={'addTime'}>申請時間</option>
+                  <option value={'subscriberCount'}>{i18nWords.words.subscriber}</option>
+                  <option value={'viewCount'}>{i18nWords.words.view}</option>
+                  <option value={'videoCount'}>{i18nWords.words.video}</option>
+                  <option value={'addTime'}>{i18nWords.words.time}</option>
                 </select>
               </div>
             </div>
@@ -291,6 +294,14 @@ class AllCandidateChannels extends React.Component {
                     isSuperUser={user.isSuperUser}
                     clickVerify={this.verifyChannel}
                     clickDelete={this.deleteChannel}
+                    i18nWords={{
+                      subscriber: i18nWords.abbreWords.subscriber,
+                      video: i18nWords.words.video,
+                      view: i18nWords.words.view,
+                      comment: i18nWords.words.comment,
+                      pass: i18nWords.words.pass,
+                      wait: i18nWords.words.wait,
+                    }}
                   />
                 ))
               }
