@@ -8,6 +8,7 @@ const setup = (propOverrides) => {
       description: 'aaaaaaaaaaaa',
       publishedAt: '2017-01-01',
     },
+    i18nWords: {},
   }, propOverrides);
 
   const wrapper = mount(<YoutubeVideoCard {...props} />);

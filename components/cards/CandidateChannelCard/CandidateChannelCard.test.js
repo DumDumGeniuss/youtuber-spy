@@ -9,6 +9,7 @@ const setup = (propOverrides) => {
       videoCount: 100,
       commentCount: 100,
     },
+    i18nWords: {},
     isSuperUser: false,
     clickVerify: jest.fn(),
     clickDelete: jest.fn(),

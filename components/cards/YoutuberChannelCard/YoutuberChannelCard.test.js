@@ -10,6 +10,7 @@ const setup = (propOverrides) => {
       commentCount: 100,
       publishedAt: '2017-01-01',
     },
+    i18nWords: {},
   }, propOverrides);
 
   const wrapper = mount(<YoutuberChannelCard {...props} />);
