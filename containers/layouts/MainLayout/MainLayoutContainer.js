@@ -100,6 +100,10 @@ class MainLayoutContainer extends React.Component {
       login: i18nWords.words.login,
       logout: i18nWords.words.logout,
       youtuberspy: i18nWords.words.youtuberspy,
+      pickYoutuberTitle: i18nWords.phrases.pickYoutuber,
+      guessYoutuberTitle: i18nWords.phrases.guessYoutuber,
+      pickYoutuberSubTitle: i18nWords.sentences.pickYoutuber,
+      guessYoutuberSubTitle: i18nWords.sentences.guessYoutuber,
     };
 
     return (

@@ -198,6 +198,10 @@ class SingleChannel extends React.Component {
                     <YoutubeVideoCard
                       key={item._id}
                       videoInfo={item}
+                      i18nWords={{
+                        video: i18nWords.words.video,
+                        view: i18nWords.words.view,
+                      }}
                     />
                   ))
               }
@@ -212,6 +216,10 @@ class SingleChannel extends React.Component {
                     <YoutubeVideoCard
                       key={item._id}
                       videoInfo={item}
+                      i18nWords={{
+                        video: i18nWords.words.video,
+                        view: i18nWords.words.view,
+                      }}
                     />
                   ))
               }

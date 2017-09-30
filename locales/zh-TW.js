@@ -1,5 +1,11 @@
 export default {
   anonymous: '匿名',
+  abbreWords: {
+    category: '種類',
+    subscriber: '訂閱',
+    years: '年',
+    months: '月',
+  },
   words: {
     keyword: '關鍵字',
     category: '種類',
@@ -10,6 +16,7 @@ export default {
     comment: '評論',
     subscriber: '訂閱',
     time: '時間',
+    age: '歲數',
     createTime: '成立時間',
     publishTime: '發布時間',
     recommendation: '推薦',
@@ -20,6 +27,8 @@ export default {
     youtuberspy: 'Youtuber看門狗',
     login: '登入',
     logout: '登出',
+    years: '年',
+    months: '月',
     days: '天',
     like: '喜歡',
     dislike: '不喜歡',
@@ -32,10 +41,14 @@ export default {
     latestVideos: '最新影片',
     hottestVideos: '熱門影片',
     relativeVideos: '相關影片',
+    pickYoutuber: 'Youtuber許願池',
+    guessYoutuber: 'Youtuber認識王',
   },
   sentences: {
     checkNewChannels: '查看新增頻道',
     enterKeyword: '輸入關鍵字',
+    pickYoutuber: '看看你的本命Youtuber是誰吧！',
+    guessYoutuber: '挑戰看看你認識多少Youtuber吧',
   },
   channelCategory: {
     "People & Blogs": '人物 & 網誌',

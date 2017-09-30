@@ -1,5 +1,11 @@
 export default {
   anonymous: 'anonymous',
+  abbreWords: {
+    category: 'categ',
+    subscriber: 'subsc',
+    years: 'y',
+    months: 'm',
+  },
   words: {
     keyword: 'keyword',
     category: 'category',
@@ -10,6 +16,7 @@ export default {
     comment: 'comment',
     subscriber: 'subscriber',
     time: 'time',
+    age: 'age',
     createTime: 'createTime',
     publishTime: 'publish time',
     recommendation: 'recommendation',
@@ -20,6 +27,8 @@ export default {
     youtuberspy: 'Youtuberspy',
     login: 'login',
     logout: 'logout',
+    years: 'years',
+    months: 'months',
     days: 'days',
     like: 'like',
     dislike: 'dislike',
@@ -31,10 +40,14 @@ export default {
     latestVideos: 'Latest Videos',
     hottestVideos: 'Hottest Videos',
     relativeVideos: 'Relative Videos',
+    pickYoutuber: 'Pick Youtuber',
+    guessYoutuber: 'Guess Youtuber',
   },
   sentences: {
     checkNewChannels: 'New channels',
     enterKeyword: 'keyword',
+    pickYoutuber: 'Who is your meant to be Youtuber?',
+    guessYoutuber: 'How many youtubers you can recognize?',
   },
   channelCategory: {
     "People & Blogs": 'People & Blogs',

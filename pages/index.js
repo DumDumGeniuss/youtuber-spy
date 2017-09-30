@@ -248,6 +248,16 @@ class Index extends React.Component {
                     <YoutuberChannelCard
                       key={item._id}
                       channelInfo={channelInfo}
+                      i18nWords={{
+                        subscriber: i18nWords.abbreWords.subscriber,
+                        video: i18nWords.words.video,
+                        view: i18nWords.words.view,
+                        category: i18nWords.abbreWords.category,
+                        country: i18nWords.words.country,
+                        createTime: i18nWords.words.age,
+                        years: i18nWords.abbreWords.years,
+                        months: i18nWords.abbreWords.months,
+                      }}
                     />
                   );
                 })

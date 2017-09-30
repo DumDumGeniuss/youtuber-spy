@@ -176,17 +176,17 @@ class MainLayout extends React.Component {
           </div>
           <Link href={'/campaigns/pickYoutuber'}><a>
             <div className={'MainLayout-campaignBox'}>
-              <h1 className={'MainLayout-campaignTitle'}>Youtuber抽抽樂</h1>
+              <h1 className={'MainLayout-campaignTitle'}>{words.pickYoutuberTitle}</h1>
               <p className={'MainLayout-campaignSubTitle'}>
-                看看您的本命Youtuber之誰吧～
+                {words.pickYoutuberSubTitle}
               </p>
             </div>
           </a></Link>
           <Link href={'/campaigns/guessYoutuber'}><a>
             <div className={'MainLayout-campaignBox'}>
-              <h1 className={'MainLayout-campaignTitle'}>Youtuber超級認識王</h1>
+              <h1 className={'MainLayout-campaignTitle'}>{words.guessYoutuberTitle}</h1>
               <p className={'MainLayout-campaignSubTitle'}>
-                挑戰看看你知道多少Youtuber吧！
+                {words.guessYoutuberSubTitle}
               </p>
             </div>
           </a></Link>
